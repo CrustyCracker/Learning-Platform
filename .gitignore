@@ -3,4 +3,3 @@
 api/src/main/resources/application.properties
 api/build/*
 api/gradle/*
-api/gradlew*
