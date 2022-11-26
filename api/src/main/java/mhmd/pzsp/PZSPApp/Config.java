@@ -1,4 +1,4 @@
-package mhmd.pzsp.PZSPApp.configuration;
+package mhmd.pzsp.PZSPApp;
 
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
 import mhmd.pzsp.PZSPApp.services.CardService;
@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
                 "mhmd.pzsp.PZSPApp.repositories"
         }
 )
-public class CardConfig {
+public class Config {
     @Bean
     public ICardService getCardService(){
         return new CardService();
