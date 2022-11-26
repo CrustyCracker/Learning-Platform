@@ -15,8 +15,10 @@ class TestComponent extends React.Component<IProps, IState> {
             msg: 'empty'
         };
     }
+    // pzsp2 obrzydliwy ten komponent jest, trzeba przepisać na funkcyjny i ładniejszy
 
     componentDidMount(): void {
+        debugger;
         fetch("http://localhost:8080/start")
             .then(response => response.json())
             .then(data => this.setState({
