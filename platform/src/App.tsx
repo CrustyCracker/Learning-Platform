@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import TestComponent from './TestComponent';
 import './App.css';
+import {FirstCard} from "./FirstCard";
 
 function App() {
   return (
@@ -11,9 +12,9 @@ function App() {
         <p>
           Wiadomość z backendu:
         </p>
-        <TestComponent>
-          
-        </TestComponent>
+        <TestComponent></TestComponent>
+        <br/>
+        <FirstCard></FirstCard>
       </header>
     </div>
   );

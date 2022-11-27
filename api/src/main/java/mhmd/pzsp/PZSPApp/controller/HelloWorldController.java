@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController {
     @GetMapping("/start")
     public String helloWorld() {
+        // pzsp2 no poużywać tych JsonObjectów a nie takie brzydkie stringi
         return "{\"msg\": \"Dzień dobry\" }";
     }
 }
