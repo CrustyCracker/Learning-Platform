@@ -1,7 +1,7 @@
 package mhmd.pzsp.PZSPApp.controller;
 
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
-import mhmd.pzsp.PZSPApp.models.CardSimple;
+import mhmd.pzsp.PZSPApp.models.api.CardSimple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

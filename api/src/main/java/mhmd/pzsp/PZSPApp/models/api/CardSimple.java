@@ -1,5 +1,7 @@
-package mhmd.pzsp.PZSPApp.models;
+package mhmd.pzsp.PZSPApp.models.api;
 
+
+import mhmd.pzsp.PZSPApp.models.Card;
 
 public class CardSimple {
 

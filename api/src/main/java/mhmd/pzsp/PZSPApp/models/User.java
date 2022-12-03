@@ -1,6 +1,7 @@
 package mhmd.pzsp.PZSPApp.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,9 @@ public class User {
     @Column(name = "HASLO", nullable = false)
     private String password;
 
+    @Column(name = "SALT", nullable = false)
+    private String salt;
+
     @Column(name = "EMAIL", nullable = false)
     private String email;
 
@@ -27,13 +31,29 @@ public class User {
     @Column(name = "DATA_DOLACZENIA")
     private Date dateJoined;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_FISZKI")
-    private List<Card> cards;
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "ID_UZYTKOWNIKA")
+    public List<Card> cards;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_GRUPY")
-    private List<Group> groups;
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "ID_UZYTKOWNIKA")
+    public List<Group> groups;
+
+    public User(String login, String password, String email, String salt){
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.salt = salt;
+
+        this.admin = '0';
+        this.dateJoined = new Date();
+        this.cards = new ArrayList<Card>();
+        this.groups = new ArrayList<Group>();
+    }
+
+    public User() {
+
+    }
 
     public Long getId() {
         return id;
@@ -81,5 +101,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

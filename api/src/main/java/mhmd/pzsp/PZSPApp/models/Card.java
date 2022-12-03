@@ -25,10 +25,21 @@ public class Card {
     private User user;
 
     @ManyToMany(mappedBy = "cards")
-    private List<Group> groups;
+    public List<Group> groups;
 
     @ManyToMany(mappedBy = "cards")
-    private List<Tag> tags;
+    public List<Tag> tags;
+
+    public Card(String question, String answer, String source, User user){
+        this.question = question;
+        this.answer = answer;
+        this.source = source;
+        this.user = user;
+    }
+
+    public Card() {
+
+    }
 
     public Long getId() {
         return id;

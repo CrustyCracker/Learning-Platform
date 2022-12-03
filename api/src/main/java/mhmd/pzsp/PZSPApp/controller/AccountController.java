@@ -1,7 +1,10 @@
 package mhmd.pzsp.PZSPApp.controller;
 
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
-import mhmd.pzsp.PZSPApp.models.Login;
+import mhmd.pzsp.PZSPApp.models.api.LoginRequest;
+import mhmd.pzsp.PZSPApp.models.api.LoginResponse;
+import mhmd.pzsp.PZSPApp.models.api.RegisterRequest;
+import mhmd.pzsp.PZSPApp.models.api.RegisterResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +20,12 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public void login(@RequestBody Login login) {
-        var isSuccess = accountService.login(login);
-        // pzsp2 no to jest nieskończone trochę
+    public LoginResponse login(@RequestBody LoginRequest login) {
+        return new LoginResponse(accountService.login(login));
+    }
+
+    @PostMapping("/register")
+    public RegisterResponse register(@RequestBody RegisterRequest register){
+        return new RegisterResponse(accountService.register(register));
     }
 }
