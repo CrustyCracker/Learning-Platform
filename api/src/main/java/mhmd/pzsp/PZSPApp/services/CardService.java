@@ -1,9 +1,8 @@
 package mhmd.pzsp.PZSPApp.services;
 
-import mhmd.pzsp.PZSPApp.repositories.ICardRepository;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
 import mhmd.pzsp.PZSPApp.models.Card;
-import mhmd.pzsp.PZSPApp.models.User;
+import mhmd.pzsp.PZSPApp.repositories.ICardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +12,6 @@ import java.util.List;
 public class CardService implements ICardService {
     @Autowired
     private ICardRepository cardRepository;
-
-    @Override
-    public List<Card> findByUser(User user) {
-        return cardRepository.findByUser(user);
-    }
 
     @Override
     public List<Card> findAll(){
