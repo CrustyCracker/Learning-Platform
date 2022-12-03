@@ -15,6 +15,9 @@ public class User {
     @Column(name = "LOGIN", nullable = false, unique = true)
     private String login;
 
+    @Column(name = "HASLO", nullable = false)
+    private String password;
+
     @Column(name = "EMAIL", nullable = false)
     private String email;
 
@@ -70,5 +73,13 @@ public class User {
 
     public void setDateJoined(Date dateJoined) {
         this.dateJoined = dateJoined;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

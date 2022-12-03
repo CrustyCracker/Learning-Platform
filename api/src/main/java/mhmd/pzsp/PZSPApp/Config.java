@@ -1,6 +1,8 @@
 package mhmd.pzsp.PZSPApp;
 
+import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
+import mhmd.pzsp.PZSPApp.services.AccountService;
 import mhmd.pzsp.PZSPApp.services.CardService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +20,11 @@ public class Config {
     @Bean
     public ICardService getCardService(){
         return new CardService();
+    }
+
+    @Bean
+    public IAccountService getAccountService(){
+        return new AccountService();
     }
 
     @Bean

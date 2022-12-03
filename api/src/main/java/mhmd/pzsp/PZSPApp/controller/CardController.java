@@ -1,12 +1,9 @@
 package mhmd.pzsp.PZSPApp.controller;
 
+import mhmd.pzsp.PZSPApp.interfaces.ICardService;
 import mhmd.pzsp.PZSPApp.models.CardSimple;
-import mhmd.pzsp.PZSPApp.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +12,10 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/cards")
 public class CardController {
-    private final CardService cardService;
+    private final ICardService cardService;
 
     @Autowired
-    public CardController(CardService cardService) {
+    public CardController(ICardService cardService) {
         this.cardService = cardService;
     }
 
@@ -28,10 +25,10 @@ public class CardController {
         return new CardSimple(cards.get(0));
     }
 
-    @GetMapping("/forUser")
-    public List<CardSimple> forUser(Long userId){
+    @GetMapping("/forUser/{id}")
+    public List<CardSimple> forUser(@PathVariable Long id){
         var simpleCards = new ArrayList<CardSimple>();
-        var cards = cardService.findCardsByUser(userId);
+        var cards = cardService.findCardsByUser(id);
         cards.forEach(card -> simpleCards.add(new CardSimple(card)));
         return simpleCards;
     }
