@@ -20,6 +20,9 @@ public class Card {
     @Column(name = "ZRODLO", nullable = false)
     private String source;
 
+    @Column(name = "WIDOCZNOSC", nullable = false)
+    private Character visibility;
+
     @ManyToOne
     @JoinColumn(name = "ID_UZYTKOWNIKA", nullable = false)
     private User user;
@@ -30,11 +33,12 @@ public class Card {
     @ManyToMany(mappedBy = "cards")
     public List<Tag> tags;
 
-    public Card(String question, String answer, String source, User user){
+    public Card(String question, String answer, String source, User user, boolean isPublic){
         this.question = question;
         this.answer = answer;
         this.source = source;
         this.user = user;
+        setIsPublic(isPublic);
     }
 
     public Card() {
@@ -75,5 +79,13 @@ public class Card {
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+    public boolean IsPublic(){
+        return visibility == 'G'; // G jak Global, Private i Public trochę by mieszało
+    }
+
+    public void setIsPublic(boolean isPublic){
+        visibility = isPublic ? 'G' : 'P';
     }
 }

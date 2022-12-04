@@ -1,7 +1,6 @@
 package mhmd.pzsp.PZSPApp.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +38,10 @@ public class User {
     @JoinColumn(name = "ID_UZYTKOWNIKA")
     public List<Group> groups;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_UZYTKOWNIKA")
+    public List<Tag> tags;
+
     public User(String login, String password, String email, String salt){
         this.login = login;
         this.password = password;
@@ -47,8 +50,6 @@ public class User {
 
         this.admin = '0';
         this.dateJoined = new Date();
-        this.cards = new ArrayList<Card>();
-        this.groups = new ArrayList<Group>();
     }
 
     public User() {

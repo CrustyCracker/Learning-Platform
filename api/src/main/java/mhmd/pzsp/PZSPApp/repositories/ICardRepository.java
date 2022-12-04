@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ICardRepository extends JpaRepository<Card, Long> {
     List<Card> findByUserId(Long userId);
+
+    List<Card> findByQuestion(String question);
 }

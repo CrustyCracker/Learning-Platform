@@ -21,7 +21,11 @@ public class Tag {
     @JoinTable(name = "OTAGOWANIA",
             joinColumns = @JoinColumn(name = "ID_TAGU"),
             inverseJoinColumns = @JoinColumn(name = "ID_FISZKI"))
-    List<Card> cards;
+    public List<Card> cards;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_UZYTKOWNIKA", nullable = false)
+    private User user;
 
     public Long getId() {
         return id;
@@ -45,5 +49,13 @@ public class Tag {
 
     public void setColour(String colour) {
         this.colour = colour;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

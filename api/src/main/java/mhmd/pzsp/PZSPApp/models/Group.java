@@ -21,6 +21,9 @@ public class Group {
     @Column(name = "TRUDNOSC", nullable = false)
     private Integer difficulty;
 
+    @Column(name = "WIDOCZNOSC", nullable = false)
+    private Character visibility;
+
     @Column(name = "OPIS")
     private String description;
 
@@ -28,7 +31,28 @@ public class Group {
     @JoinTable(name = "ZGRUPOWANIA",
             joinColumns = @JoinColumn(name = "ID_GRUPY"),
             inverseJoinColumns = @JoinColumn(name = "ID_FISZKI"))
-    List<Card> cards;
+    public List<Card> cards;
+
+    public Group(String name, User user, Integer diff, boolean isPublic, String description){
+        this.name = name;
+        this.difficulty = diff;
+        this.setIsPublic(isPublic);
+        this.user = user;
+        this.description = description;
+    }
+
+    public Group(String name, User user, Integer diff, boolean isPublic, String description, List<Card> cards){
+        this.name = name;
+        this.difficulty = diff;
+        this.setIsPublic(isPublic);
+        this.description = description;
+        this.cards = cards;
+        this.user = user;
+    }
+
+    public Group() {
+
+    }
 
     public Long getId() {
         return id;
@@ -68,5 +92,13 @@ public class Group {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean IsPublic(){
+        return visibility == 'G'; // G jak Global, Private i Public trochę by mieszało
+    }
+
+    public void setIsPublic(boolean isPublic){
+        visibility = isPublic ? 'G' : 'P';
     }
 }
