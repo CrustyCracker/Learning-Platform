@@ -1,5 +1,6 @@
 package mhmd.pzsp.PZSPApp.controller;
 
+import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.models.api.LoginRequest;
 import mhmd.pzsp.PZSPApp.models.api.LoginResponse;
@@ -20,12 +21,12 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest login) {
+    public LoginResponse login(@RequestBody LoginRequest login) throws BackendException {
         return new LoginResponse(accountService.login(login));
     }
 
     @PostMapping("/register")
-    public RegisterResponse register(@RequestBody RegisterRequest register){
+    public RegisterResponse register(@RequestBody RegisterRequest register) throws BackendException {
         return new RegisterResponse(accountService.register(register));
     }
 }

@@ -1,5 +1,6 @@
 package mhmd.pzsp.PZSPApp.services;
 
+import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.models.User;
 import mhmd.pzsp.PZSPApp.models.api.LoginRequest;
@@ -20,10 +21,10 @@ public class AccountService implements IAccountService {
     private IUserRepository userRepository;
 
     @Override
-    public boolean login(LoginRequest login) {
+    public boolean login(LoginRequest login) throws BackendException {
         var user =  userRepository.findByLogin(login.login);
         if (user.isEmpty())
-            return false;
+            throw new BackendException("No user in database with this login.");
 
         var DBHash = user.get().getPassword().getBytes();
         var DBSalt = user.get().getSalt().getBytes();
@@ -33,15 +34,15 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public boolean register(RegisterRequest register) {
-        if (Objects.equals(register.confirmPassword, register.password))
-            return false;
+    public boolean register(RegisterRequest register) throws BackendException {
+        if (!Objects.equals(register.confirmPassword, register.password))
+            throw new BackendException("Passwords do not match.");
         if (register.email.isEmpty())
-            return false;
+            throw new BackendException("No email is given.");
         if (!validatePassword(register.password))
-            return false;
+            throw new BackendException("Password is too weak");
         if (userRepository.findByLogin(register.login).isPresent())
-            return false;
+            throw new BackendException("No user in database with this login.");
 
         var random = new SecureRandom();
         var salt = new byte[16];
@@ -55,15 +56,17 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public boolean validatePassword(String password) {
-        if (password.length() >= 64 || password.length() < 3)
-            return false;
+    public boolean validatePassword(String password) throws BackendException {
+        if (password.length() >= 64)
+            throw new BackendException("Password is too long.");
+        if (password.length() < 3)
+            throw new BackendException("Password is too short.");
         if (password.strip().length() == 0)
-            return false;
+            throw new BackendException("Password does not contain any non-white characters.");
         return !password.isBlank();
     }
 
-    private byte[] hashPassword(String password, byte[] salt){
+    private byte[] hashPassword(String password, byte[] salt) throws BackendException {
         try {
             var spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 64);
             var factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
@@ -71,7 +74,7 @@ public class AccountService implements IAccountService {
             return factory.generateSecret(spec).getEncoded();
         }
         catch (Exception e){
-            return new byte[]{};
+            throw new BackendException("Password is invalid.");
         }
     }
 }
