@@ -84,6 +84,8 @@ public class User {
         return admin;
     }
 
+    public boolean isAdmin() {return admin == '1';}
+
     public void setAdmin(Character admin) {
         this.admin = admin;
     }

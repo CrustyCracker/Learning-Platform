@@ -26,6 +26,8 @@ public class AccountService implements IAccountService {
         if (user.isEmpty())
             throw new BackendException("No user in database with this login.");
 
+        //return Objects.equals(user.get().getLogin(), login.login); // pzsp2 odkomentować do testowania z pominięciem loginu
+
         var DBHash = user.get().getPassword().getBytes();
         var DBSalt = user.get().getSalt().getBytes();
         var newHash = hashPassword(login.password, DBSalt);
