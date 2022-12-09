@@ -1,8 +1,9 @@
 import React, {FormEvent, useState} from 'react';
-import {Credentials, Requests} from "../requests/Requests";
+import {Requests} from "../requests/Requests";
+import {Credentials} from "../types/Credentials";
 
 interface LoginFormProps {
-    setToken: (token: string) => void
+    onSuccess: (token: string) => void
 }
 
 export function LoginForm(props: LoginFormProps) {
@@ -14,9 +15,11 @@ export function LoginForm(props: LoginFormProps) {
             Requests.login(credentials)
                 .then(r => {
                     if(r.success && r.token)
-                        props.setToken(r.token)
+                        props.onSuccess(r.token)
                 });
     }
+
+    // pzsp2 error handling i walidacja
 
     return <div>
         <h1>Zaloguj się</h1>
