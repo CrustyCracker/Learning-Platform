@@ -1,7 +1,6 @@
-package mhmd.pzsp.PZSPApp.controller;
+package mhmd.pzsp.PZSPApp.handlers;
 
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
-import mhmd.pzsp.PZSPApp.models.api.ApiError;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -15,11 +14,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BackendException.class)
     protected ResponseEntity<Object> handleBackendException(BackendException ex) {
-        String error = "Appilation logic error.";
-        return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, error, ex));
-    }
-
-    private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
-        return new ResponseEntity<>(apiError, apiError.getStatus());
+        var error = "Application logic error. Exception type: " + ex.getClass().getName();
+        var status = HttpStatus.I_AM_A_TEAPOT;
+        //pzsp2 to ostatecznie nie jest dobre rozwiązanie, trzeba więcej errorów i zależnie od nich kod odpowiedzi
+        return new ResponseEntity<>( new ApiError(status, error, ex), status);
     }
 }

@@ -1,16 +1,17 @@
-package mhmd.pzsp.PZSPApp.models.api;
+package mhmd.pzsp.PZSPApp.models.api.responses;
 
 
 import mhmd.pzsp.PZSPApp.models.Card;
 
-public class CardSimple {
+public class CardResponse {
+    // nie zwracamy Card bo nie chcemy zwracać danych usera przy każdej karcie
 
-    public CardSimple(Card card){
+    public CardResponse(Card card){
         id = card.getId();
         question = card.getQuestion();
         answer = card.getAnswer();
         source = card.getSource();
-        userLogin = card.getUser().getLogin();
+        username = card.getUser().getUsername();
     }
     private final Long id;
 
@@ -20,18 +21,18 @@ public class CardSimple {
 
     private String source;
 
-    private String userLogin;
+    private String username;
 
     public Long getId() {
         return id;
     }
 
     public String getUser() {
-        return userLogin;
+        return username;
     }
 
     public void setUser(String username) {
-        this.userLogin = username;
+        this.username = username;
     }
 
     public String getQuestion() {

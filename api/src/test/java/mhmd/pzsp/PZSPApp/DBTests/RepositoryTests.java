@@ -1,4 +1,4 @@
-package mhmd.pzsp.PZSPApp;
+package mhmd.pzsp.PZSPApp.DBTests;
 
 import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.Group;
@@ -32,8 +32,11 @@ class RepositoryTests {
     private static final String testQuestion = "Pytanie";
     private static final String tagName = "pzsp2";
     private static final String groupName = "grupaTestowa";
+    private static final String hash = "12345678";
+    private static final String salt = "90123456";
 
 	@BeforeEach
+    @AfterEach
 	void ensureNoTestData(){
         if (!groupRepository.findByName(groupName).isEmpty())
             groupRepository.deleteAll(groupRepository.findByName(groupName));
@@ -41,23 +44,8 @@ class RepositoryTests {
             tagRepository.deleteAll(tagRepository.findByName(tagName));
         if (!cardRepository.findByQuestion(testQuestion).isEmpty())
             cardRepository.deleteAll(cardRepository.findByQuestion(testQuestion));
-		if (userRepository.findByLogin(testName).isPresent()){
-			var id = userRepository.findByLogin(testName).get().getId();
-			userRepository.deleteById(id);
-		}
-        userRepository.flush();
-	}
-
-	@AfterEach
-	void deleteTestData(){
-        if (!groupRepository.findByName(groupName).isEmpty())
-            groupRepository.deleteAll(groupRepository.findByName(groupName));
-        if (!tagRepository.findByName(tagName).isEmpty())
-            tagRepository.deleteAll(tagRepository.findByName(tagName));
-        if (!cardRepository.findByQuestion(testQuestion).isEmpty())
-            cardRepository.deleteAll(cardRepository.findByQuestion(testQuestion));
-		if (userRepository.findByLogin(testName).isPresent()){
-			var id = userRepository.findByLogin(testName).get().getId();
+		if (userRepository.findByUsername(testName).isPresent()){
+			var id = userRepository.findByUsername(testName).get().getId();
 			userRepository.deleteById(id);
 		}
         userRepository.flush();
@@ -65,14 +53,14 @@ class RepositoryTests {
 
 	@Test
 	void testUserRepository_add(){
-		var newUser = new User(testName, "123456789", "test@gmail.com", "1234567890123456");
-		assertTrue(userRepository.findByLogin(testName).isEmpty());
+		var newUser = new User(testName, hash, "test@gmail.com", salt);
+		assertTrue(userRepository.findByUsername(testName).isEmpty());
 
 		userRepository.save(newUser);
-		assertTrue(userRepository.findByLogin(testName).isPresent());
+		assertTrue(userRepository.findByUsername(testName).isPresent());
 
-		var addedUser = userRepository.findByLogin(testName).get();
-		assertEquals(addedUser.getPassword().strip(), newUser.getPassword());
+		var addedUser = userRepository.findByUsername(testName).get();
+		assertEquals(addedUser.getPassword(), newUser.getPassword());
 		assertEquals(addedUser.getSalt(), newUser.getSalt());
 		assertEquals('0', (char) addedUser.getAdmin());
 		assertEquals(addedUser.getEmail(), newUser.getEmail());
@@ -80,39 +68,39 @@ class RepositoryTests {
 
     @Test
     void testUserRepository_remove(){
-        var newUser = new User(testName, "123456789", "test@gmail.com", "1234567890123456");
+        var newUser = new User(testName, hash, "test@gmail.com", salt);
         userRepository.save(newUser);
-        assertTrue(userRepository.findByLogin(testName).isPresent());
+        assertTrue(userRepository.findByUsername(testName).isPresent());
 
         userRepository.delete(newUser);
-        assertTrue(userRepository.findByLogin(testName).isEmpty());
+        assertTrue(userRepository.findByUsername(testName).isEmpty());
     }
 
     @Test
     void testUserRepository_update(){
-        var newUser = new User(testName, "123456789", "test@gmail.com", "1234567890123456");
+        var newUser = new User(testName, hash, "test@gmail.com", salt);
         userRepository.save(newUser);
-        var DBUser = userRepository.findByLogin(testName);
+        var DBUser = userRepository.findByUsername(testName);
         assertTrue(DBUser.isPresent());
 
         DBUser.get().setEmail("zupełnie inny mail");
         userRepository.save(DBUser.get());
 
-        assertTrue(userRepository.findByLogin(testName).isPresent());
-        assertEquals(userRepository.findByLogin(testName).get().getEmail(), DBUser.get().getEmail());
-        assertEquals(userRepository.findByLogin(testName).get().getEmail(), "zupełnie inny mail");
+        assertTrue(userRepository.findByUsername(testName).isPresent());
+        assertEquals(userRepository.findByUsername(testName).get().getEmail(), DBUser.get().getEmail());
+        assertEquals(userRepository.findByUsername(testName).get().getEmail(), "zupełnie inny mail");
     }
 
     @Test
     void testUserRepository_withCard(){
-        var newUser = new User(testName, "123456789", "test@gmail.com", "1234567890123456");
+        var newUser = new User(testName, hash, "test@gmail.com", salt);
         var newCard = new Card(testQuestion, "Odpowiedź", "Źródło", newUser, true);
         assertTrue(cardRepository.findByQuestion(testQuestion).isEmpty());
 
         userRepository.save(newUser);
         cardRepository.save(newCard);
 
-        var DBUser = userRepository.findByLogin(testName);
+        var DBUser = userRepository.findByUsername(testName);
         assertTrue(DBUser.isPresent());
 
         assertFalse(DBUser.get().cards.isEmpty());
@@ -127,15 +115,15 @@ class RepositoryTests {
 
     @Test
     void testGroupRepository_withCardAndUser(){
-        var newUser = new User(testName, "123456789", "test@gmail.com", "1234567890123456");
+        var newUser = new User(testName, hash, "test@gmail.com", salt);
         var newCard = new Card(testQuestion, "Odpowiedź", "Źródło", newUser, true);
         var newGroup = new Group(groupName, newUser, 1, true, "Testowa grupa", List.of(newCard));
 
         assertTrue(groupRepository.findByName(groupName).isEmpty());
 
         userRepository.save(newUser);
-        assertTrue(userRepository.findByLogin(testName).isPresent());
-        var DBUser = userRepository.findByLogin(testName).get();
+        assertTrue(userRepository.findByUsername(testName).isPresent());
+        var DBUser = userRepository.findByUsername(testName).get();
 
         cardRepository.save(newCard);
         assertFalse(cardRepository.findByUserId(DBUser.getId()).isEmpty());
