@@ -2,6 +2,7 @@ package mhmd.pzsp.PZSPApp.DBTests;
 
 import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.Group;
+import mhmd.pzsp.PZSPApp.models.Tag;
 import mhmd.pzsp.PZSPApp.models.User;
 import mhmd.pzsp.PZSPApp.repositories.ICardRepository;
 import mhmd.pzsp.PZSPApp.repositories.IGroupRepository;
@@ -142,5 +143,57 @@ class RepositoryTests {
         assertEquals(DBGroup.getDifficulty(), newGroup.getDifficulty());
         assertEquals(DBGroup.getDescription(), newGroup.getDescription());
         assertEquals(DBGroup.getUser().getId(), DBUser.getId());
+    }
+
+    @Test
+    public void testTagRepository_withCardAndUser() {
+        var newUser = new User(testName, hash, "test@gmail.com", salt);
+        var newCard = new Card(testQuestion, "Odpowiedź", "Źródło", newUser, true);
+        var newTag = new Tag(tagName, "123456", List.of(newCard), newUser);
+
+        userRepository.save(newUser);
+        assertTrue(userRepository.findByUsername(testName).isPresent());
+        var DBUser = userRepository.findByUsername(testName).get();
+
+        cardRepository.save(newCard);
+        assertFalse(cardRepository.findByUserId(DBUser.getId()).isEmpty());
+        var DBCard = cardRepository.findByUserId(DBUser.getId()).get(0);
+
+        tagRepository.save(newTag);
+        assertFalse(tagRepository.findByUserId(DBUser.getId()).isEmpty());
+        var DBTag = tagRepository.findByUserId(DBUser.getId()).get(0);
+
+        assertEquals(DBTag.getName(), newTag.getName());
+        assertEquals(1, DBTag.cards.size());
+        assertEquals(DBTag.getUser().getUsername(), DBUser.getUsername());
+        assertEquals(DBTag.cards.get(0).getAnswer(), DBCard.getAnswer());
+        assertEquals(DBTag.cards.get(0).getUser().getEmail(), DBUser.getEmail());
+        assertEquals(1, DBCard.tags.size());
+        assertEquals(DBCard.tags.get(0).getName(), DBTag.getName());
+        assertEquals(DBTag.getColour(), newTag.getColour());
+        assertEquals(1, DBUser.tags.size());
+        assertEquals(DBUser.tags.get(0).getName(), newTag.getName());
+    }
+
+    @Test
+    public void testUserRepository_addCard() {
+        var newUser = new User(testName, hash, "test@gmail.com", salt);
+        var newCard = new Card(testQuestion, "Odpowiedź", "Źródło", newUser, true);
+
+        userRepository.save(newUser);
+        assertTrue(userRepository.findByUsername(testName).isPresent());
+        var DBUser = userRepository.findByUsername(testName).get();
+
+        assertEquals(0, DBUser.cards.size());
+
+        DBUser.cards.add(newCard);
+        userRepository.save(DBUser);
+
+        assertFalse(cardRepository.findByUserId(DBUser.getId()).isEmpty());
+        var DBCard = cardRepository.findByUserId(DBUser.getId()).get(0);
+
+        assertEquals(1, DBUser.cards.size());
+        assertEquals(DBUser.cards.get(0).getAnswer(), DBCard.getAnswer());
+        assertEquals(DBCard.getUser().getId(), DBUser.getId());
     }
 }

@@ -27,6 +27,17 @@ public class Tag {
     @JoinColumn(name = "ID_UZYTKOWNIKA", nullable = false)
     private User user;
 
+    public Tag(String name, String colour, List<Card> cards, User user) {
+        this.name = name;
+        this.colour = colour;
+        this.cards = cards;
+        this.user = user;
+    }
+
+    public Tag() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -37,5 +48,9 @@ public class Tag {
 
     public User getUser() {
         return user;
+    }
+
+    public String getColour() {
+        return colour;
     }
 }

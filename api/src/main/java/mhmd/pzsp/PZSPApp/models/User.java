@@ -32,7 +32,7 @@ public class User {
     @Column(name = "DATA_DOLACZENIA")
     private Date dateJoined;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinColumn(name = "ID_UZYTKOWNIKA")
     public List<Card> cards;
 
