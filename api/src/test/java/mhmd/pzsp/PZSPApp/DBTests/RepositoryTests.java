@@ -41,8 +41,8 @@ class RepositoryTests {
 	void ensureNoTestData(){
         if (!groupRepository.findByName(groupName).isEmpty())
             groupRepository.deleteAll(groupRepository.findByName(groupName));
-        if (!tagRepository.findByName(tagName).isEmpty())
-            tagRepository.deleteAll(tagRepository.findByName(tagName));
+        if (tagRepository.findByName(tagName).isPresent())
+            tagRepository.deleteById(tagRepository.findByName(tagName).get().getId());
         if (!cardRepository.findByQuestion(testQuestion).isEmpty())
             cardRepository.deleteAll(cardRepository.findByQuestion(testQuestion));
 		if (userRepository.findByUsername(testName).isPresent()){
