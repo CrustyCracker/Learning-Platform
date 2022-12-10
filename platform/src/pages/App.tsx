@@ -4,6 +4,7 @@ import {FirstCard} from "../components/FirstCard";
 import {LoginForm} from "../components/LoginForm";
 import {RegisterForm} from "../components/RegisterForm";
 import {NewCardForm} from "../components/NewCardForm";
+import {NewGroupForm} from "../components/NewGroupForm";
 
 export default function App() {
     return (
@@ -17,6 +18,7 @@ export default function App() {
                     console.log(s); //pzsp2 no tu oczywiście powinno być zapamiętanie w sesji
                 }} />
                 <NewCardForm onSuccess={(response) => console.log(response)}/>
+                <NewGroupForm onSuccess={(response) => console.log(response)}/>
             </header>
         </div>
     );

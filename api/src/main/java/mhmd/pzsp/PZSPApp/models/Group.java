@@ -1,5 +1,7 @@
 package mhmd.pzsp.PZSPApp.models;
 
+import mhmd.pzsp.PZSPApp.models.api.requests.NewGroupRequest;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -33,12 +35,13 @@ public class Group {
             inverseJoinColumns = @JoinColumn(name = "ID_FISZKI"))
     public List<Card> cards;
 
-    public Group(String name, User user, Integer diff, boolean isPublic, String description){
-        this.name = name;
-        this.difficulty = diff;
-        this.setIsPublic(isPublic);
+    public Group(NewGroupRequest request, User user, List<Card> cards){
+        this.name = request.name;
+        this.difficulty = request.difficulty;
+        this.setIsPublic(request.isPublic);
         this.user = user;
-        this.description = description;
+        this.description =  request.description;
+        this.cards = cards;
     }
 
     public Group(String name, User user, Integer diff, boolean isPublic, String description, List<Card> cards){

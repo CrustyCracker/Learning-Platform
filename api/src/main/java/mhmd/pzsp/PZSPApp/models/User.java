@@ -3,6 +3,7 @@ package mhmd.pzsp.PZSPApp.models;
 import org.apache.commons.codec.binary.Hex;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -52,6 +53,9 @@ public class User {
 
         this.admin = '0';
         this.dateJoined = new Date();
+        this.cards = new ArrayList<>();
+        this.tags = new ArrayList<>();
+        this.groups = new ArrayList<>();
     }
 
     public User(String username, byte[] password, String email, byte[] salt){
@@ -62,6 +66,9 @@ public class User {
 
         this.admin = '0';
         this.dateJoined = new Date();
+        this.cards = new ArrayList<>();
+        this.tags = new ArrayList<>();
+        this.groups = new ArrayList<>();
     }
 
     public User() {

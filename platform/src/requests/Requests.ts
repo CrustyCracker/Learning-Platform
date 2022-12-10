@@ -1,6 +1,7 @@
 import {Global} from "../Config";
 import {Credentials, RegisterCredentials } from "../types/Credentials";
 import {NewCard} from "../types/Cards";
+import {NewGroup} from "../types/Groups";
 
 
 function fetchPost(body: any, url: string){
@@ -15,7 +16,7 @@ function fetchPost(body: any, url: string){
 export class Requests {
     static firstCard() {
         return fetch( Global.backendUrl + "/cards/first")
-            .then(res => res.json());
+            .then(res => res.json())
     }
 
     static login(cred: Credentials){
@@ -30,6 +31,11 @@ export class Requests {
 
     static createCard(cardData: NewCard){
         return fetchPost(cardData, "/cards/create")
+            .then(res => res.json())
+    }
+
+    static createGroup(groupData: NewGroup){
+        return fetchPost(groupData, "/groups/create")
             .then(res => res.json())
     }
 }

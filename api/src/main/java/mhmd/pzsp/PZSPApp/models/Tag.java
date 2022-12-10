@@ -24,7 +24,7 @@ public class Tag {
     public List<Card> cards;
 
     @ManyToOne
-    @JoinColumn(name = "ID_UZYTKOWNIKA", nullable = false)
+    @JoinColumn(name = "ID_UZYTKOWNIKA")
     private User user;
 
     public Tag(String name, String colour, List<Card> cards, User user) {

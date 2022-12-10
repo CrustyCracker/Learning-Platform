@@ -13,4 +13,5 @@ export type CardResponse = {
     source : string
     username : string
     id : number
+    isPublic : boolean
 }

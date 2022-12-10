@@ -2,8 +2,10 @@ package mhmd.pzsp.PZSPApp;
 
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
+import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
 import mhmd.pzsp.PZSPApp.services.AccountService;
 import mhmd.pzsp.PZSPApp.services.CardService;
+import mhmd.pzsp.PZSPApp.services.GroupService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -28,12 +30,8 @@ public class Config {
     }
 
     @Bean
-    public DataSource dataSource(){
-        var ds = new DriverManagerDataSource();
-        ds.setUrl("jdbc:oracle:thin:@ora2.ia.pw.edu.pl:1521:iais");
-        ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-        ds.setUsername(""); // pzsp2 tutaj wpisać credentiale
-        ds.setPassword("");
-        return ds;
+    public IGroupService getGroupService() {
+        return new GroupService();
     }
+
 }
