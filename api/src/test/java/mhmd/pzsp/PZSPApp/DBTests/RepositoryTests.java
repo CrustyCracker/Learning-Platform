@@ -60,8 +60,8 @@ class RepositoryTests {
 		assertTrue(userRepository.findByUsername(testName).isPresent());
 
 		var addedUser = userRepository.findByUsername(testName).get();
-		assertEquals(addedUser.getPassword(), newUser.getPassword());
-		assertEquals(addedUser.getSalt(), newUser.getSalt());
+		assertEquals(addedUser.getPassword().strip(), newUser.getPassword());
+		assertEquals(addedUser.getSalt().strip(), newUser.getSalt());
 		assertEquals('0', (char) addedUser.getAdmin());
 		assertEquals(addedUser.getEmail(), newUser.getEmail());
 	}
