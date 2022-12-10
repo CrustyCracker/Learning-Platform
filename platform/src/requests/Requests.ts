@@ -1,5 +1,6 @@
 import {Global} from "../Config";
 import {Credentials, RegisterCredentials } from "../types/Credentials";
+import {NewCard} from "../types/Cards";
 
 
 function fetchPost(body: any, url: string){
@@ -12,7 +13,7 @@ function fetchPost(body: any, url: string){
 // pzsp2 tu nie ma żadnego error handlingu, a coś uniwersalnego typu zwracanie 'czy się udało' ma sens
 
 export class Requests {
-    static firstCard(){
+    static firstCard() {
         return fetch( Global.backendUrl + "/cards/first")
             .then(res => res.json());
     }
@@ -24,6 +25,11 @@ export class Requests {
 
     static register(cred: RegisterCredentials){
         return fetchPost(cred, "/account/register")
+            .then(res => res.json())
+    }
+
+    static createCard(cardData: NewCard){
+        return fetchPost(cardData, "/cards/create")
             .then(res => res.json())
     }
 }

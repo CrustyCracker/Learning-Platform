@@ -97,7 +97,15 @@ public class AccountService implements IAccountService {
             return factory.generateSecret(spec).getEncoded();
         }
         catch (Exception e){
-            throw new BackendException("Password is invalid.");
+            throw new BackendException("Password is invalid for hashing.");
         }
+    }
+
+    @Override
+    public User defaultAdmin() throws BackendException {
+        var admin = userRepository.getTopByAdminIsOrderById('1');
+        if (admin.isEmpty())
+            throw new BackendException("No admin account in database.");
+        return admin.get();
     }
 }

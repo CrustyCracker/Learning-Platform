@@ -14,6 +14,7 @@ export function FirstCard() {
     }, [])
 
     return <>
+        <p>Pierwsza fiszka z bazy:</p>
         <div>
             Pytanie: {question}
         </div>
