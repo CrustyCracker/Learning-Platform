@@ -8,5 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface IUserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByLogin(String login);
+    Optional<User> findByUsername(String login);
+
+    Optional<User> getTopByAdminIsOrderById(Character admin);
 }

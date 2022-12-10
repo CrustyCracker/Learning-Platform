@@ -1,5 +1,7 @@
 package mhmd.pzsp.PZSPApp.models;
 
+import org.apache.commons.codec.binary.Hex;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +15,7 @@ public class User {
     private Long id;
 
     @Column(name = "LOGIN", nullable = false, unique = true)
-    private String login;
+    private String username;
 
     @Column(name = "HASLO", nullable = false)
     private String password;
@@ -42,11 +44,21 @@ public class User {
     @JoinColumn(name = "ID_UZYTKOWNIKA")
     public List<Tag> tags;
 
-    public User(String login, String password, String email, String salt){
-        this.login = login;
+    public User(String username, String password, String email, String salt){
+        this.username = username;
         this.password = password;
         this.email = email;
         this.salt = salt;
+
+        this.admin = '0';
+        this.dateJoined = new Date();
+    }
+
+    public User(String username, byte[] password, String email, byte[] salt){
+        this.username = username;
+        this.password = Hex.encodeHexString(password);
+        this.email = email;
+        this.salt = Hex.encodeHexString(salt);
 
         this.admin = '0';
         this.dateJoined = new Date();
@@ -64,12 +76,12 @@ public class User {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -83,6 +95,8 @@ public class User {
     public Character getAdmin() {
         return admin;
     }
+
+    public boolean isAdmin() {return admin == '1';}
 
     public void setAdmin(Character admin) {
         this.admin = admin;

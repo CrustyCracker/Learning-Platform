@@ -1,5 +1,7 @@
 package mhmd.pzsp.PZSPApp.models;
 
+import mhmd.pzsp.PZSPApp.models.api.requests.NewCardRequest;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -32,6 +34,17 @@ public class Card {
 
     @ManyToMany(mappedBy = "cards")
     public List<Tag> tags;
+
+    public Card(NewCardRequest request, User user, List<Group> groups, List<Tag> tags){
+        this.question = request.question;
+        this.answer = request.answer;
+        this.source = request.source;
+        this.user = user;
+        setIsPublic(request.isPublic);
+
+        this.groups = groups;
+        this.tags = tags;
+    }
 
     public Card(String question, String answer, String source, User user, boolean isPublic){
         this.question = question;
