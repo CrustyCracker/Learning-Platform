@@ -35,26 +35,15 @@ public class CardService implements ICardService {
     }
 
     @Override
-    public List<Group> findGroupsByUser(Long userId) {
-        return groupRepository.findByUserId(userId);
-    }
-
-    @Override
     public Card create(NewCardRequest request, User user){
-        var tags = new ArrayList<Tag>();
-        var groups = new ArrayList<Group>();
+        List<Tag> tags = new ArrayList<>();
+        List<Group> groups = new ArrayList<>();
 
         if (!request.tagIds.isEmpty())
-            request.tagIds.forEach(id -> {
-                var tag = tagRepository.findById(id);
-                tag.ifPresent(tags::add);
-            });
+            tags = tagRepository.findByIdIn(request.tagIds);
 
         if (!request.groupIds.isEmpty())
-            request.groupIds.forEach(id -> {
-                var tag = groupRepository.findById(id);
-                tag.ifPresent(groups::add);
-            });
+            groups = groupRepository.findByIdIn(request.groupIds);
 
         var card = new Card(request, user, groups, tags);
         return cardRepository.save(card);
