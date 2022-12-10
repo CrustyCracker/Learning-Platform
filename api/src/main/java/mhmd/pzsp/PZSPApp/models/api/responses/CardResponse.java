@@ -1,20 +1,22 @@
 package mhmd.pzsp.PZSPApp.models.api.responses;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import mhmd.pzsp.PZSPApp.models.Card;
 
 public class CardResponse {
     // nie zwracamy Card bo nie chcemy zwracać danych usera przy każdej karcie
-    private final Long id;
+    public Long id;
 
-    private final String question;
+    public String question;
 
-    private final String answer;
+    public String answer;
 
-    private final String source;
+    public String source;
 
-    private final String username;
+    public String username;
 
+    @JsonIgnore
     public CardResponse(Card card){
         id = card.getId();
         question = card.getQuestion();

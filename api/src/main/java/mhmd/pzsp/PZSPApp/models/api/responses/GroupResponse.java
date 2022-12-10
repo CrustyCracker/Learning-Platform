@@ -1,18 +1,20 @@
 package mhmd.pzsp.PZSPApp.models.api.responses;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import mhmd.pzsp.PZSPApp.models.Group;
 
 public class GroupResponse {
-    private final Long id;
+    public Long id;
 
-    private final String name;
+    public String name;
 
-    private final Integer difficulty;
+    public Integer difficulty;
 
-    private final String description;
+    public String description;
 
-    private final String username;
+    public String username;
 
+    @JsonIgnore
     public GroupResponse(Group group){
         id = group.getId();
         name = group.getName();
