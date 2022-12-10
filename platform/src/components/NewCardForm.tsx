@@ -25,22 +25,19 @@ export function NewCardForm(props: NewCardFormProps) {
             <label>
                 <p>Pytanie</p>
                 <input type="text" name="question" required onChange={(e) => {
-                    if (e.target.value)
-                        setNewCard({...newCard, question: e.target.value})
+                    setNewCard({...newCard, question: e.target.value})
                 }} />
             </label>
             <label>
                 <p>Odpowiedź</p>
                 <input type="text" name="answer" required onChange={(e) => {
-                    if (e.target.value)
-                        setNewCard({...newCard, answer: e.target.value})
+                    setNewCard({...newCard, answer: e.target.value})
                 }} />
             </label>
             <label>
                 <p>Źródła</p>
                 <input type="text" name="source" onChange={(e) => {
-                    if (e.target.value)
-                        setNewCard({...newCard, source: e.target.value})
+                    setNewCard({...newCard, source: e.target.value})
                 }} />
             </label>
             <div>
