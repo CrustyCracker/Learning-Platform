@@ -28,7 +28,7 @@ public class CardController {
     public CardResponse first() throws BackendException {
         var cards = cardService.findAllCards();
         if (cards.isEmpty())
-            throw new BackendException("No cards is database.");
+            throw new BackendException("Brak kart w bazie danych");
         return new CardResponse(cards.get(0));
     }
 

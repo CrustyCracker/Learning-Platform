@@ -10,9 +10,9 @@ public interface IAccountService {
 
     boolean register(RegisterRequest register) throws BackendException;
 
-    boolean validatePassword(String password) throws BackendException;
+    void validatePassword(String password) throws BackendException;
 
-    boolean validateMail(String mail) throws BackendException;
+    void validateMail(String mail) throws BackendException;
 
     byte[] hashPassword(String password, byte[] salt) throws BackendException;
 

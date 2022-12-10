@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.util.AssertionErrors.fail;
 
 @SpringBootTest
@@ -21,25 +19,67 @@ public class AccountServiceTests {
     @Test
     public void testValidation_Simple() {
         try {
-            assertTrue(accountService.validatePassword(password));
-            assertTrue(accountService.validateMail(mail));
+            accountService.validatePassword(password);
+            accountService.validateMail(mail);
         } catch (Exception ex) {
             fail(ex.getMessage());
         }
     }
 
     @Test
-    public void testValidation_Failed(){
+    public void testValidation_Password_Failed(){
         var longString = new StringBuilder();
         longString.append("123abc".repeat(1000));
 
         try {
-            assertFalse(accountService.validatePassword("1"));
-            assertFalse(accountService.validatePassword(""));
-            assertFalse(accountService.validatePassword(longString.toString()));
+            accountService.validatePassword("12");
         }
-        catch (BackendException ignored){
+        catch (BackendException e1){
+            try {
+                accountService.validatePassword("");
+            } catch (BackendException e2) {
+                try {
+                    accountService.validatePassword(longString.toString());
+                } catch (BackendException e3) {
+                    try {
+                        accountService.validatePassword("    ");
+                    } catch (BackendException ignored) {
 
+                    }
+                }
+            }
+        }
+        catch (Exception ex){
+            fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testValidation_Mail_Failed(){
+        var longString = new StringBuilder();
+        longString.append("123abc".repeat(1000));
+
+        try {
+            accountService.validateMail("12");
+        }
+        catch (BackendException e1){
+            try {
+                accountService.validateMail("");
+            } catch (BackendException e2) {
+                try {
+                    accountService.validateMail(longString.toString());
+                } catch (BackendException e3) {
+                    try {
+                        accountService.validateMail("    ");
+                    } catch (BackendException e4) {
+                        try {
+                            accountService.validateMail("123$5574$*(&^@gmail.com");
+                        } catch (BackendException ignored) {
+
+                        }
+                    }
+                }
+            }
         }
         catch (Exception ex){
             fail(ex.getMessage());
