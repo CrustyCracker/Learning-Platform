@@ -12,4 +12,5 @@ export type GroupResponse = {
     difficulty : number
     description : string
     username : string
+    isPublic : boolean
 }

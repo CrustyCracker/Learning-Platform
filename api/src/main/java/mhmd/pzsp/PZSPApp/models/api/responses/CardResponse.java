@@ -16,6 +16,8 @@ public class CardResponse {
 
     public String username;
 
+    public boolean isPublic;
+
     @JsonIgnore
     public CardResponse(Card card){
         id = card.getId();
@@ -23,5 +25,6 @@ public class CardResponse {
         answer = card.getAnswer();
         source = card.getSource();
         username = card.getUser().getUsername();
+        isPublic = card.IsPublic();
     }
 }
