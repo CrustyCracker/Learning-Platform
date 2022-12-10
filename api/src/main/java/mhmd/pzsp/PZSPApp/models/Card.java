@@ -22,8 +22,8 @@ public class Card {
     @Column(name = "ZRODLO", nullable = false)
     private String source;
 
-    @Column(name = "WIDOCZNOSC", nullable = false)
-    private Character visibility;
+    @Column(name = "PUBLICZNE", nullable = false)
+    private boolean isPublic;
 
     @ManyToOne
     @JoinColumn(name = "ID_UZYTKOWNIKA", nullable = false)
@@ -74,12 +74,12 @@ public class Card {
         return source;
     }
 
-    public boolean IsPublic(){
-        return visibility == 'G'; // G jak Global, Private i Public trochę by mieszało
+    public boolean IsPublic() {
+        return isPublic;
     }
 
-    public void setIsPublic(boolean isPublic){
-        visibility = isPublic ? 'G' : 'P';
+    public void setIsPublic(boolean isPublic) {
+        this.isPublic = isPublic;
     }
 
     public Long getId() {

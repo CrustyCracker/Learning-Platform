@@ -34,13 +34,4 @@ public class Config {
         return new GroupService();
     }
 
-    @Bean
-    public DataSource dataSource(){
-        var ds = new DriverManagerDataSource();
-        ds.setUrl("jdbc:oracle:thin:@ora2.ia.pw.edu.pl:1521:iais");
-        ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-        ds.setUsername(""); // pzsp2 tutaj wpisać credentiale
-        ds.setPassword("");
-        return ds;
-    }
 }
