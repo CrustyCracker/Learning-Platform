@@ -93,14 +93,5 @@ public class CardServiceTests {
         assertEquals(created.tags.get(0).getId(), tag.getId());
         assertEquals(0, created.groups.size());
         assertEquals(created.IsPublic(), request.isPublic);
-        //pzsp2 czemu to nie działa?
-/*        var updatedTag = tagRepository.findById(tag.getId());
-        if (updatedTag.isEmpty())
-            fail();
-
-        assertTrue(tag.cards.isEmpty());
-        assertEquals(1, updatedTag.get().cards.size());
-        assertEquals(updatedTag.get().cards.get(0).getAnswer(), request.answer);
-        assertEquals(updatedTag.get().cards.get(0).getUser().getId(), user.getId());*/
     }
 }
