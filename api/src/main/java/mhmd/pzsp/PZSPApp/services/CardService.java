@@ -39,10 +39,10 @@ public class CardService implements ICardService {
         List<Tag> tags = new ArrayList<>();
         List<Group> groups = new ArrayList<>();
 
-        if (!request.tagIds.isEmpty())
+        if (request.tagIds != null && !request.tagIds.isEmpty())
             tags = tagRepository.findByIdIn(request.tagIds);
 
-        if (!request.groupIds.isEmpty())
+        if (request.groupIds != null && !request.groupIds.isEmpty())
             groups = groupRepository.findByIdIn(request.groupIds);
 
         var card = new Card(request, user, groups, tags);

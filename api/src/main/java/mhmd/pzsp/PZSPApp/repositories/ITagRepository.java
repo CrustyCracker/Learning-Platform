@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface ITagRepository extends JpaRepository<Tag, Long> {
     List<Tag> findByUserId(Long userId);
 
-    List<Tag> findByName(String name);
+    Optional<Tag> findByName(String name);
 
     Optional<Tag> findById(Long id);
 

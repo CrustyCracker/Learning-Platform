@@ -24,7 +24,7 @@ public class GroupService implements IGroupService {
     public Group create(NewGroupRequest request, User user) {
         List<Card> cards = new ArrayList<>();
 
-        if (!request.cardIds.isEmpty())
+        if (request.cardIds != null && !request.cardIds.isEmpty())
             cards = cardRepository.findByIdIn(request.cardIds);
 
         var group = new Group(request, user, cards);
