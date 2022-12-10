@@ -1,22 +1,30 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
-import { RegisterCredentials } from '../types/Credentials';
+import {RegisterCredentials, RegisterResponse} from '../types/Credentials';
 import {Requests} from "../requests/Requests";
+import {ErrorResponse} from "../types/ErrorResponse";
 
 interface RegisterFormProps {
-    onSuccess: (token: string) => void
+    onSuccess: (response: RegisterResponse) => void,
+    onError: (err: ErrorResponse) => void
 }
 
 export function RegisterForm(props: RegisterFormProps) {
     const [credentials, setCredentials] = useState<RegisterCredentials>({confirmPassword: "", password: "", username: "", email: ""});
+    const [isConfirmedPassword, setConfirmedPassword] = useState(true);
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        if (credentials)
-            Requests.register(credentials)
-                .then(r => {
-                    if(r.success && r.token)
-                        props.onSuccess(r.token)
-                });
+        if (!credentials)
+            return;
+
+        Requests.register(credentials).then(res => {
+            if (res.err) {
+                props.onError(res.err);
+            }
+            else if (res.res){
+                props.onSuccess(res.res)
+            }
+        })
     }
 
     // pzsp2 error handling i walidacja
@@ -25,7 +33,10 @@ export function RegisterForm(props: RegisterFormProps) {
         if (e.target.value)
             setCredentials({...credentials, confirmPassword: e.target.value})
 
-        // pzsp2 walidacja w real time czy zgodne z password
+        if (e.target.value !== credentials.password)
+            setConfirmedPassword(false);
+        else
+            setConfirmedPassword(true);
     }
 
     return <div>
@@ -55,6 +66,9 @@ export function RegisterForm(props: RegisterFormProps) {
             <label>
                 <p>Powtórz Hasło</p>
                 <input type="password" name="password" required onChange={confirmPasswordOnChange} />
+                {!isConfirmedPassword &&
+                    <div>Hasła się różnią</div>
+                }
             </label>
             <div>
                 <button type="submit">Zarejestruj</button>

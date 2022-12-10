@@ -1,7 +1,8 @@
 import {Global} from "../Config";
-import {Credentials, RegisterCredentials } from "../types/Credentials";
-import {NewCard} from "../types/Cards";
-import {NewGroup} from "../types/Groups";
+import {Credentials, LoginResponse, RegisterCredentials} from "../types/Credentials";
+import {CardResponse, NewCard} from "../types/Cards";
+import {GroupResponse, NewGroup} from "../types/Groups";
+import {ErrorResponse} from "../types/ErrorResponse";
 
 
 function fetchPost(body: any, url: string){
@@ -11,31 +12,50 @@ function fetchPost(body: any, url: string){
         body: JSON.stringify(body)
     })
 }
-// pzsp2 tu nie ma żadnego error handlingu, a coś uniwersalnego typu zwracanie 'czy się udało' ma sens
+
+class GenericResponse <T>{
+    res?: T = undefined
+    err?: ErrorResponse = undefined
+}
 
 export class Requests {
-    static firstCard() {
-        return fetch( Global.backendUrl + "/cards/first")
+    static async firstCard(): Promise<GenericResponse<CardResponse>> {
+        const response = await fetch(Global.backendUrl + "/cards/first")
             .then(res => res.json())
+        if (response.status !== 200)
+            return {err: response};
+        return {res: response};
     }
 
-    static login(cred: Credentials){
-        return fetchPost(cred, "/account/login")
+    static async login(cred: Credentials): Promise<GenericResponse<LoginResponse>> {
+        const response = await fetchPost(cred, "/account/login")
             .then(res => res.json())
+        if (response.status !== 200)
+            return {err: response};
+        return {res: response};
     }
 
-    static register(cred: RegisterCredentials){
-        return fetchPost(cred, "/account/register")
+    static async register(cred: RegisterCredentials): Promise<GenericResponse<LoginResponse>> {
+        const response = await fetchPost(cred, "/account/register")
             .then(res => res.json())
+        if (response.status !== 200)
+            return {err: response};
+        return {res: response};
     }
 
-    static createCard(cardData: NewCard){
-        return fetchPost(cardData, "/cards/create")
+    static async createCard(cardData: NewCard): Promise<GenericResponse<CardResponse>> {
+        const response = await fetchPost(cardData, "/cards/create")
             .then(res => res.json())
+        if (response.status !== 200)
+            return {err: response};
+        return {res: response};
     }
 
-    static createGroup(groupData: NewGroup){
-        return fetchPost(groupData, "/groups/create")
+    static async createGroup(groupData: NewGroup): Promise<GenericResponse<GroupResponse>> {
+        const response = await fetchPost(groupData, "/groups/create")
             .then(res => res.json())
+        if (response.status !== 200)
+            return {err: response};
+        return {res: response};
     }
 }

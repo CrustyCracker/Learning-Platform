@@ -1,9 +1,11 @@
 import React, {FormEvent, useState} from "react";
 import {Requests} from "../requests/Requests";
 import {GroupResponse, NewGroup} from "../types/Groups";
+import {ErrorResponse} from "../types/ErrorResponse";
 
 interface NewCardFormProps {
     onSuccess: (response: GroupResponse) => void
+    onError: (err: ErrorResponse) => void
 }
 
 export function NewGroupForm(props: NewCardFormProps) {
@@ -17,8 +19,16 @@ export function NewGroupForm(props: NewCardFormProps) {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        if (newGroup)
-            Requests.createGroup(newGroup).then(r => props.onSuccess(r));
+        if (!newGroup)
+            return;
+        Requests.createGroup(newGroup).then(res => {
+            if (res.err) {
+                props.onError(res.err);
+            }
+            else if (res.res){
+                props.onSuccess(res.res)
+            }
+        });
     }
 
     // pzsp2 error handling i walidacja

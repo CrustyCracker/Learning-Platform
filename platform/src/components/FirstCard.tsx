@@ -6,11 +6,16 @@ export function FirstCard() {
     const [answer, setAnswer] = useState("ERROR");
 
     useEffect(() => {
-        Requests.firstCard()
-            .then(r => {
-                setQuestion(r.question);
-                setAnswer(r.answer);
-            })
+        Requests.firstCard().then(res => {
+            if (res.err) {
+                setQuestion(res.err.message)
+                setAnswer(res.err.debugMessage)
+            }
+            else if (res.res){
+                setQuestion(res.res.question);
+                setAnswer(res.res.answer);
+            }
+        });
     }, [])
 
     return <>

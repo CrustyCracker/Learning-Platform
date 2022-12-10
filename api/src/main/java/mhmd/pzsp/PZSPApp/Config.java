@@ -39,8 +39,8 @@ public class Config {
         var ds = new DriverManagerDataSource();
         ds.setUrl("jdbc:oracle:thin:@ora2.ia.pw.edu.pl:1521:iais");
         ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-        ds.setUsername(""); // pzsp2 tutaj wpisać credentiale
-        ds.setPassword("");
+        ds.setUsername("PZSP07"); // pzsp2 tutaj wpisać credentiale
+        ds.setPassword("PZSP07");
         return ds;
     }
 }
