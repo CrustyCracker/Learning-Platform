@@ -12,11 +12,11 @@ export default function App() {
     const [info, setInfo] = useState("");
     const logToConsoleErr = (o: any) => {
         console.log(o);
-        setError(o.toString())
+        setError(o)
     }
     const logToConsoleInfo = (o: any) => {
         console.log(o);
-        setInfo(o.toString())
+        setInfo(o)
     }
 
     return (

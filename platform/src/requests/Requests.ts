@@ -18,44 +18,40 @@ class GenericResponse <T>{
     err?: ErrorResponse = undefined
 }
 
+function setResponseOrError(response: any) {
+    if (response.status && response.status !== 200)
+        return {err: response};
+    return {res: response};
+}
+
 export class Requests {
     static async firstCard(): Promise<GenericResponse<CardResponse>> {
         const response = await fetch(Global.backendUrl + "/cards/first")
             .then(res => res.json())
-        if (response.status !== 200)
-            return {err: response};
-        return {res: response};
+        return setResponseOrError(response);
     }
 
     static async login(cred: Credentials): Promise<GenericResponse<LoginResponse>> {
         const response = await fetchPost(cred, "/account/login")
             .then(res => res.json())
-        if (response.status !== 200)
-            return {err: response};
-        return {res: response};
+        return setResponseOrError(response);
     }
 
     static async register(cred: RegisterCredentials): Promise<GenericResponse<LoginResponse>> {
         const response = await fetchPost(cred, "/account/register")
             .then(res => res.json())
-        if (response.status !== 200)
-            return {err: response};
-        return {res: response};
+        return setResponseOrError(response);
     }
 
     static async createCard(cardData: NewCard): Promise<GenericResponse<CardResponse>> {
         const response = await fetchPost(cardData, "/cards/create")
             .then(res => res.json())
-        if (response.status !== 200)
-            return {err: response};
-        return {res: response};
+        return setResponseOrError(response);
     }
 
     static async createGroup(groupData: NewGroup): Promise<GenericResponse<GroupResponse>> {
         const response = await fetchPost(groupData, "/groups/create")
             .then(res => res.json())
-        if (response.status !== 200)
-            return {err: response};
-        return {res: response};
+        return setResponseOrError(response);
     }
 }
