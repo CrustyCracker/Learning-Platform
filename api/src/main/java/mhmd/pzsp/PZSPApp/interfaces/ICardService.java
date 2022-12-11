@@ -10,6 +10,8 @@ import java.util.List;
 public interface ICardService {
     List<Card> findAllCards();
 
+    List<Card> findPublicOrUsers(Long userId);
+
     List<Card> findCardsByUser(Long userId);
 
     Card create(NewCardRequest request, User user) throws BackendException;

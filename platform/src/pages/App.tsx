@@ -6,17 +6,19 @@ import {RegisterForm} from "../components/RegisterForm";
 import {NewCardForm} from "../components/NewCardForm";
 import {NewGroupForm} from "../components/NewGroupForm";
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
+import {ErrorResponse} from "../types/ErrorResponse";
+import {CardList} from "../components/CardList";
 
 export default function App() {
     const [error, setError] = useState("");
     const [info, setInfo] = useState("");
-    const logToConsoleErr = (o: any) => {
+    const logToConsoleErr = (o: ErrorResponse) => {
         console.log(o);
-        setError(o)
+        setError(o.message)
     }
     const logToConsoleInfo = (o: any) => {
         console.log(o);
-        setInfo(o)
+        setInfo(o.toString())
     }
 
     return (
@@ -28,6 +30,7 @@ export default function App() {
                 <RegisterForm onSuccess={logToConsoleInfo} onError={logToConsoleErr}/>
                 <NewCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr}/>
                 <NewGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr}/>
+                <CardList onSuccess={logToConsoleInfo} onError={logToConsoleErr}/>
             </header>
         </div>
     );

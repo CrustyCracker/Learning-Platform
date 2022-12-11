@@ -54,4 +54,24 @@ export class Requests {
             .then(res => res.json())
         return setResponseOrError(response);
     }
+
+    static async myCards(id: number = 1): Promise<GenericResponse<CardResponse[]>> {
+        // pzsp2 tutaj powinno być branie id zalogowanego usera a nie sztywne id=1
+        const response = await fetch(Global.backendUrl + "/cards/forUser/" + id)
+            .then(res => res.json())
+        return setResponseOrError(response);
+    }
+
+    static async myGroups(id: number = 1): Promise<GenericResponse<GroupResponse[]>>{
+        // pzsp2 to samo co wyżej
+        const response = await fetch(Global.backendUrl + "/groups/forUser/" + id)
+            .then(res => res.json())
+        return setResponseOrError(response);
+    }
+
+    static async allCards(): Promise<GenericResponse<CardResponse[]>> {
+        const response = await fetch(Global.backendUrl + "/cards/all")
+            .then(res => res.json())
+        return setResponseOrError(response);
+    }
 }

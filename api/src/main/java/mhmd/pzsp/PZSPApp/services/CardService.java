@@ -31,6 +31,11 @@ public class CardService implements ICardService {
     }
 
     @Override
+    public List<Card> findPublicOrUsers(Long userId) {
+        return cardRepository.findByUserIdOrPublic(userId, true);
+    }
+
+    @Override
     public List<Card> findCardsByUser(Long userId) {
         return cardRepository.findByUserId(userId);
     }

@@ -6,10 +6,10 @@ type ErrorAndInfoProps = {
 export function ErrorAndInfo(props: ErrorAndInfoProps) {
     // pzsp2 to jest bardzo proste i brzydkie, trzeba zrobić coś na kształt bootstrapowych alertów
     return <div>
-        {props.errorMsg.trim() &&
+        {props.errorMsg &&
             <div>Błąd: {props.errorMsg}</div>
         }
-        {props.infoMsg.trim() &&
+        {props.infoMsg &&
             <div>Informacja: {props.infoMsg}</div>
         }
     </div>;

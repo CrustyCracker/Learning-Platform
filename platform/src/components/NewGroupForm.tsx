@@ -52,7 +52,7 @@ export function NewGroupForm(props: NewCardFormProps) {
                 <p>Trudność</p>
                 <select>
                     {options.map((o) => (
-                        <option onSelect={() =>
+                        <option key={o.value} onSelect={() =>
                             setNewGroup({...newGroup, difficulty: o.value})
                         } value={o.value}>{o.label}</option>
                     ))}
