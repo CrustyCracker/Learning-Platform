@@ -23,6 +23,6 @@ public class GroupResponse {
         difficulty = group.getDifficulty();
         description = group.getDescription();
         username = group.getUser().getUsername();
-        isPublic = group.IsPublic();
+        isPublic = group.isPublic();
     }
 }

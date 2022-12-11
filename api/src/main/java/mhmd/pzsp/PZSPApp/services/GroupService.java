@@ -1,5 +1,6 @@
 package mhmd.pzsp.PZSPApp.services;
 
+import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
 import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.Group;
@@ -21,11 +22,17 @@ public class GroupService implements IGroupService {
     private ICardRepository cardRepository;
 
     @Override
-    public Group create(NewGroupRequest request, User user) {
+    public Group create(NewGroupRequest request, User user) throws BackendException {
         List<Card> cards = new ArrayList<>();
 
         if (request.cardIds != null && !request.cardIds.isEmpty())
             cards = cardRepository.findByIdIn(request.cardIds);
+
+        if (request.isPublic)
+            for (var card : cards)
+                if (!card.IsPublic())
+                    throw new BackendException("Próba utworzenia publicznej grupy z prywatną fiszką");
+
 
         var group = new Group(request, user, cards);
         return groupRepository.save(group);

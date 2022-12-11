@@ -1,9 +1,11 @@
 import React, {FormEvent, useState} from "react";
 import {Requests} from "../requests/Requests";
 import {CardResponse, NewCard} from "../types/Cards";
+import {ErrorResponse} from "../types/ErrorResponse";
 
 interface NewCardFormProps {
-    onSuccess: (response: CardResponse) => void
+    onSuccess: (response: CardResponse) => void,
+    onError: (err: ErrorResponse) => void
 }
 
 export function NewCardForm(props: NewCardFormProps) {
@@ -13,8 +15,16 @@ export function NewCardForm(props: NewCardFormProps) {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        if (newCard)
-            Requests.createCard(newCard).then(r => props.onSuccess(r));
+        if (!newCard)
+            return;
+        Requests.createCard(newCard).then(res => {
+            if (res.err) {
+                props.onError(res.err);
+            }
+            else if (res.res){
+                props.onSuccess(res.res)
+            }
+        });
     }
 
     // pzsp2 error handling i walidacja

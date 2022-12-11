@@ -7,18 +7,14 @@ import java.time.LocalDateTime;
 
 public class ApiError {
     // to jest używane tylko przy nieosbłużonych wyjątkach przy kontrolerze, jest zrobione na wyrost
-    private HttpStatus status;
+    public HttpStatus status;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-    private final LocalDateTime timestamp;
-    private String message;
-    private String debugMessage;
-
-    private ApiError() {
-        timestamp = LocalDateTime.now();
-    }
+    public final LocalDateTime timestamp;
+    public String message;
+    public String debugMessage;
 
     public ApiError(HttpStatus status, String message, Throwable ex) {
-        this();
+        timestamp = LocalDateTime.now();
         this.status = status;
         this.message = message;
         this.debugMessage = ex.getLocalizedMessage();

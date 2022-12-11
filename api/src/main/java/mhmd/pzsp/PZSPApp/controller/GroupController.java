@@ -25,7 +25,7 @@ public class GroupController {
     }
 
     @GetMapping("/forUser/{id}")
-    public List<GroupResponse> forUser(Long id){
+    public List<GroupResponse> forUser(@PathVariable Long id){
         var response = new ArrayList<GroupResponse>();
         groupService.findGroupsByUser(id).forEach(group ->  response.add(new GroupResponse(group)));
         return response;

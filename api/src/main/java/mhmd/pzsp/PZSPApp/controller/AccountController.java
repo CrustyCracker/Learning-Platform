@@ -25,12 +25,16 @@ public class AccountController {
 
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest login) throws BackendException {
-        return new LoginResponse(accountService.login(login), "udane logowanie");
+        if (accountService.login(login))
+            return new LoginResponse(true, "this is supposed to be token", "Zalogowano");
+        return new LoginResponse(false, null, "Niepoprawne hasło");
         // pzsp2 te tokeny będą z jwt czy podobnego, to jest od bezpieczeństwa, narazie są testowe
     }
 
     @PostMapping("/register")
     public RegisterResponse register(@RequestBody RegisterRequest register) throws BackendException {
-        return new RegisterResponse(accountService.register(register), "udana rejestracja");
+        if (accountService.register(register))
+            return new RegisterResponse(true, null, "Utworzono konto");
+        return new RegisterResponse(false, null, "Nieudana rejestracja");
     }
 }

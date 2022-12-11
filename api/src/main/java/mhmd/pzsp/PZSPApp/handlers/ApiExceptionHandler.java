@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BackendException.class)
     protected ResponseEntity<Object> handleBackendException(BackendException ex) {
-        var error = "Application logic error. Exception type: " + ex.getClass().getName();
+        var error = "Błąd logiki aplikacji. Wyjątek: " + ex.getClass().getName();
         var status = HttpStatus.I_AM_A_TEAPOT;
         //pzsp2 to ostatecznie nie jest dobre rozwiązanie, trzeba więcej errorów i zależnie od nich kod odpowiedzi
         return new ResponseEntity<>( new ApiError(status, error, ex), status);

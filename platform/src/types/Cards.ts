@@ -14,4 +14,6 @@ export type CardResponse = {
     username : string
     id : number
     isPublic : boolean
+    groups : string[]
+    tags : string[]
 }

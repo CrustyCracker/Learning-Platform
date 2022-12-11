@@ -1,5 +1,6 @@
 package mhmd.pzsp.PZSPApp.services;
 
+import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
 import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.Group;
@@ -30,12 +31,17 @@ public class CardService implements ICardService {
     }
 
     @Override
+    public List<Card> findPublicOrUsers(Long userId) {
+        return cardRepository.findByUserIdOrPublic(userId, true);
+    }
+
+    @Override
     public List<Card> findCardsByUser(Long userId) {
         return cardRepository.findByUserId(userId);
     }
 
     @Override
-    public Card create(NewCardRequest request, User user){
+    public Card create(NewCardRequest request, User user) throws BackendException {
         List<Tag> tags = new ArrayList<>();
         List<Group> groups = new ArrayList<>();
 
@@ -44,6 +50,11 @@ public class CardService implements ICardService {
 
         if (request.groupIds != null && !request.groupIds.isEmpty())
             groups = groupRepository.findByIdIn(request.groupIds);
+
+        for (Group group : groups) {
+            if (group.isPublic() && !request.isPublic)
+                throw new BackendException(String.format("Próba dodania prywatnej fiszki do niepublicznej grupy %s", group.getName()));
+        }
 
         var card = new Card(request, user, groups, tags);
         return cardRepository.save(card);

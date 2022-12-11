@@ -77,7 +77,7 @@ public class Group {
         return description;
     }
 
-    public boolean IsPublic(){
+    public boolean isPublic(){
         return visibility == 'G'; // G jak Global, Private i Public trochę by mieszało
     }
 

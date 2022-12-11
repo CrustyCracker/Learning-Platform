@@ -15,6 +15,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.SecureRandom;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 @Service
 public class AccountService implements IAccountService {
@@ -23,11 +24,13 @@ public class AccountService implements IAccountService {
 
     @Override
     public boolean login(LoginRequest login) throws BackendException {
+        if (login.password == null || login.password.isBlank())
+            throw new BackendException("Hasło nie jest podane lub jest puste");
+        if (login.username == null || login.username.isBlank())
+            throw new BackendException("Login nie jest podany lub jest pusty");
         var user =  userRepository.findByUsername(login.username);
         if (user.isEmpty())
-            throw new BackendException("No user in database with this username.");
-
-        //return Objects.equals(user.get().getUsername(), login.username); // pzsp2 odkomentować do testowania z pominięciem loginu
+            throw new BackendException("Brak użytkownika o tej nazwie");
 
         try {
             var DBHash = user.get().getPassword();
@@ -37,20 +40,26 @@ public class AccountService implements IAccountService {
             return newHash.equals(DBHash);
         }
         catch (DecoderException e){
-            throw new BackendException(e.getMessage());
+            throw new BackendException("Błąd podczas kodowania/dekodowania hasła");
         }
     }
 
     @Override
     public boolean register(RegisterRequest register) throws BackendException {
+        if (register.password == null || register.password.isBlank())
+            throw new BackendException("Hasło nie jest podane lub jest puste");
+        if (register.email == null || register.email.isBlank())
+            throw new BackendException("Email nie jest podany lub jest pusty");
+        if (register.username == null || register.username.isBlank())
+            throw new BackendException("Login inie jest podany lub jest pusty");
         if (!Objects.equals(register.confirmPassword, register.password))
-            throw new BackendException("Passwords do not match.");
-        if (!validateMail(register.email))
-            throw new BackendException("");
-        if (!validatePassword(register.password))
-            throw new BackendException("Password is too weak");
+            throw new BackendException("Hasła się nie zgadzają");
+        if (register.username.length() > 30)
+            throw new BackendException("Zbyt długa nazwa użytkownika");
+        validateMail(register.email);
+        validatePassword(register.password);
         if (userRepository.findByUsername(register.username).isPresent())
-            throw new BackendException("There is already a user in database with this username.");
+            throw new BackendException("Istnieje już użytkownik o tej nazwie w bazie danych");
 
         var random = new SecureRandom();
         var salt = new byte[16];
@@ -60,32 +69,36 @@ public class AccountService implements IAccountService {
         var newUser = new User(register.username, hash, register.email, salt);
 
         userRepository.save(newUser);
-        userRepository.flush();
         return true;
     }
 
     @Override
-    public boolean validatePassword(String password) throws BackendException {
+    public void validatePassword(String password) throws BackendException {
+        if (password == null)
+            throw new BackendException("Brak hasła");
         if (password.length() >= 64)
-            throw new BackendException("Password is too long.");
-        if (password.length() < 3)
-            throw new BackendException("Password is too short.");
-        if (password.strip().length() == 0)
-            throw new BackendException("Password does not contain any non-white characters.");
-        // pzsp2 więcej walidacji i na fronta też ją dodać, nawet skróconą
-        return !password.isBlank();
+            throw new BackendException("Hasło jest zbyt długie");
+        if (password.length() < 4)
+            throw new BackendException("Hasło jest zbyt krótkie");
+        if (password.isBlank())
+            throw new BackendException("Hasło zawiera same białe znaki");
     }
 
     @Override
-    public boolean validateMail(String mail) throws BackendException{
+    public void validateMail(String mail) throws BackendException{
+        var regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+
+        if (mail == null)
+            throw new BackendException("Brak emaila");
         if (mail.length() >= 64)
-            throw new BackendException("Password is too long.");
-        if (mail.length() < 3)
-            throw new BackendException("Password is too short.");
-        if (mail.strip().length() == 0)
-            throw new BackendException("Password does not contain any non-white characters.");
-        // pzsp2 więcej walidacji i na fronta też ją dodać, nawet skróconą
-        return !mail.isBlank();
+            throw new BackendException("Email jest zbyt długi");
+        if (mail.length() < 4)
+            throw new BackendException("Email jest zbyt krótki");
+        if (mail.isBlank())
+            throw new BackendException("Email zawiera same białe znaki");
+        if (!Pattern.compile(regexPattern).matcher(mail).matches())
+            throw new BackendException("Niewłaściwy adres email");
     }
 
     @Override
@@ -97,7 +110,7 @@ public class AccountService implements IAccountService {
             return factory.generateSecret(spec).getEncoded();
         }
         catch (Exception e){
-            throw new BackendException("Password is invalid for hashing.");
+            throw new BackendException("Błąd skracania hasła, użyj innego");
         }
     }
 
@@ -105,7 +118,7 @@ public class AccountService implements IAccountService {
     public User defaultAdmin() throws BackendException {
         var admin = userRepository.getTopByAdminIsOrderById('1');
         if (admin.isEmpty())
-            throw new BackendException("No admin account in database.");
+            throw new BackendException("Brak konta administratora w bazie danych");
         return admin.get();
     }
 }
