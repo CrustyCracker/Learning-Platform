@@ -5,6 +5,8 @@ import mhmd.pzsp.PZSPApp.models.User;
 import mhmd.pzsp.PZSPApp.models.api.requests.LoginRequest;
 import mhmd.pzsp.PZSPApp.models.api.requests.RegisterRequest;
 
+import org.springframework.security.core.Authentication;
+
 public interface IAccountService {
     boolean login(LoginRequest login) throws BackendException;
 
@@ -17,4 +19,6 @@ public interface IAccountService {
     byte[] hashPassword(String password, byte[] salt) throws BackendException;
 
     User defaultAdmin() throws BackendException;
+
+    String generateToken(Authentication authentication);
 }

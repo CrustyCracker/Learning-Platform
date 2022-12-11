@@ -7,6 +7,7 @@ import mhmd.pzsp.PZSPApp.models.api.responses.LoginResponse;
 import mhmd.pzsp.PZSPApp.models.api.requests.RegisterRequest;
 import mhmd.pzsp.PZSPApp.models.api.responses.RegisterResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,7 +25,7 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest login) throws BackendException {
+    public LoginResponse login(@RequestBody LoginRequest login, Authentication authentication) throws BackendException {
         if (accountService.login(login))
             return new LoginResponse(true, "this is supposed to be token", "Zalogowano");
         return new LoginResponse(false, null, "Niepoprawne hasło");
@@ -32,9 +33,10 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public RegisterResponse register(@RequestBody RegisterRequest register) throws BackendException {
+    public RegisterResponse register(@RequestBody RegisterRequest register, Authentication authentication)
+            throws BackendException {
         if (accountService.register(register))
-            return new RegisterResponse(true, null, "Utworzono konto");
+            return new RegisterResponse(true, accountService.generateToken(authentication), "Utworzono konto");
         return new RegisterResponse(false, null, "Nieudana rejestracja");
     }
 }

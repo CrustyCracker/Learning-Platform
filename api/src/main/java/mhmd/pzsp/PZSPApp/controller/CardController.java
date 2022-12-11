@@ -6,6 +6,7 @@ import mhmd.pzsp.PZSPApp.interfaces.ICardService;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewCardRequest;
 import mhmd.pzsp.PZSPApp.models.api.responses.CardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class CardController {
     }
 
     @GetMapping("/first")
-    public CardResponse first() throws BackendException {
+    public CardResponse first(Authentication authentication) throws BackendException {
         var cards = cardService.findAllCards();
         if (cards.isEmpty())
             throw new BackendException("Brak kart w bazie danych");
@@ -34,7 +35,7 @@ public class CardController {
 
     @GetMapping("/all")
     // zwraca karty publiczne lub prywatne zalogowanego użytkownika
-    public List<CardResponse> all() throws BackendException {
+    public List<CardResponse> all(Authentication authentication) throws BackendException {
         var simpleCards = new ArrayList<CardResponse>();
         var user = accountService.defaultAdmin();
         var cards = cardService.findPublicOrUsers(user.getId());
@@ -45,7 +46,7 @@ public class CardController {
 
     @GetMapping("/forUser/{id}")
     // zwraca karty danego użytkownika (można przenieść id na stronę backendu, pobierane z contextu)
-    public List<CardResponse> forUser(@PathVariable Long id){
+    public List<CardResponse> forUser(@PathVariable Long id, Authentication authentication){
         // pzsp2 tu powinno być spradzenie czy id się zgadza z zalogowanym userem
         var simpleCards = new ArrayList<CardResponse>();
         var cards = cardService.findCardsByUser(id);
@@ -54,7 +55,7 @@ public class CardController {
     }
 
     @PostMapping("/create")
-    public CardResponse create(@RequestBody NewCardRequest request) throws BackendException {
+    public CardResponse create(@RequestBody NewCardRequest request, Authentication authentication) throws BackendException {
         // pzsp2 tu się powinno brać obecnie zalogowanego usera z security contextu, a nie pierwszego admina
         var user = accountService.defaultAdmin();
         return new CardResponse(cardService.create(request, user));
