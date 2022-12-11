@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../style/App.css';
-import {FirstCard} from "../components/FirstCard";
-import {LoginForm} from "../components/LoginForm";
-import {RegisterForm} from "../components/RegisterForm";
-import {NewCardForm} from "../components/NewCardForm";
-import {NewGroupForm} from "../components/NewGroupForm";
-import {ErrorAndInfo} from "../components/ErrorAndInfo";
-import {ErrorResponse} from "../types/ErrorResponse";
-import {CardList} from "../components/CardList";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { FirstCard } from "../components/FirstCard";
+import { LoginForm } from "../components/LoginForm";
+import { RegisterForm } from "../components/RegisterForm";
+import { NewCardForm } from "../components/NewCardForm";
+import { NewGroupForm } from "../components/NewGroupForm";
+import { ErrorAndInfo } from "../components/ErrorAndInfo";
+import { ErrorResponse } from "../types/ErrorResponse";
+import { CardList } from "../components/CardList";
 
 export default function App() {
     const [error, setError] = useState("");
@@ -24,13 +25,16 @@ export default function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <ErrorAndInfo errorMsg={error} infoMsg={info}/>
-                <FirstCard></FirstCard>
-                <LoginForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />
-                <RegisterForm onSuccess={logToConsoleInfo} onError={logToConsoleErr}/>
-                <NewCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr}/>
-                <NewGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr}/>
-                <CardList onSuccess={logToConsoleInfo} onError={logToConsoleErr}/>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<CardList onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/cards" element={<CardList onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/cards/new" element={<NewCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/groups/new" element={<NewGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/login" element={<LoginForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/register" element={<RegisterForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                    </Routes>
+                </BrowserRouter>
             </header>
         </div>
     );

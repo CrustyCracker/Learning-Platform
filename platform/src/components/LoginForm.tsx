@@ -2,6 +2,7 @@ import React, {FormEvent, useState} from 'react';
 import {Requests} from "../requests/Requests";
 import {Credentials, LoginResponse} from "../types/Credentials";
 import {ErrorResponse} from "../types/ErrorResponse";
+import { Link } from "react-router-dom";
 
 interface LoginFormProps {
     onSuccess: (response: LoginResponse) => void,
@@ -46,6 +47,7 @@ export function LoginForm(props: LoginFormProps) {
             <div>
                 <button type="submit">Zaloguj</button>
             </div>
+            <Link to="/register">Nie masz konta? Załóż</Link>
         </form>
     </div>
 }
