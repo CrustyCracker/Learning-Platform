@@ -1,5 +1,6 @@
 package mhmd.pzsp.PZSPApp.interfaces;
 
+import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.User;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewCardRequest;
@@ -11,5 +12,5 @@ public interface ICardService {
 
     List<Card> findCardsByUser(Long userId);
 
-    Card create(NewCardRequest request, User user);
+    Card create(NewCardRequest request, User user) throws BackendException;
 }

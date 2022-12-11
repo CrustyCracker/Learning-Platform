@@ -137,7 +137,7 @@ class RepositoryTests {
         assertFalse(DBCard.groups.isEmpty());
         assertEquals(DBCard.groups.get(0).getId(), DBGroup.getId());
 
-        assertTrue(DBGroup.IsPublic());
+        assertTrue(DBGroup.isPublic());
         assertFalse(DBGroup.cards.isEmpty());
         assertEquals(DBGroup.cards.get(0).getId(), DBCard.getId());
         assertEquals(DBGroup.getDifficulty(), newGroup.getDifficulty());

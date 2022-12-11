@@ -1,6 +1,8 @@
 package mhmd.pzsp.PZSPApp.DBTests;
 
+import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
+import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.Tag;
 import mhmd.pzsp.PZSPApp.models.User;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewCardRequest;
@@ -61,7 +63,12 @@ public class CardServiceTests {
         var user = addUser();
         var request = new NewCardRequest(question, "b", true, "c", null, null);
 
-        var created = cardService.create(request, user);
+        Card created = null;
+        try {
+            created = cardService.create(request, user);
+        } catch (BackendException e) {
+            fail();
+        }
         assertEquals(created.getQuestion(), question);
         assertEquals(created.getAnswer(), request.answer);
         assertEquals(created.getUser().getId(), user.getId());
@@ -84,7 +91,12 @@ public class CardServiceTests {
 
         var request = new NewCardRequest(question, "b", false, "c", null, List.of(tag.getId()));
 
-        var created = cardService.create(request, user);
+        Card created = null;
+        try {
+            created = cardService.create(request, user);
+        } catch (BackendException e) {
+            fail();
+        }
         assertEquals(created.getQuestion(), question);
         assertEquals(created.getAnswer(), request.answer);
         assertEquals(created.getUser().getId(), user.getId());

@@ -49,15 +49,17 @@ public class AccountService implements IAccountService {
         if (register.password == null || register.password.isBlank())
             throw new BackendException("Hasło nie jest podane lub jest puste");
         if (register.email == null || register.email.isBlank())
-            throw new BackendException("Email nie jest podane lub jest puste");
+            throw new BackendException("Email nie jest podany lub jest pusty");
         if (register.username == null || register.username.isBlank())
-            throw new BackendException("Username is not given or empty");
+            throw new BackendException("Login inie jest podany lub jest pusty");
         if (!Objects.equals(register.confirmPassword, register.password))
-            throw new BackendException("Passwords do not match");
+            throw new BackendException("Hasła się nie zgadzają");
+        if (register.username.length() > 30)
+            throw new BackendException("Zbyt długa nazwa użytkownika");
         validateMail(register.email);
         validatePassword(register.password);
         if (userRepository.findByUsername(register.username).isPresent())
-            throw new BackendException("There is already a user in database with this username");
+            throw new BackendException("Istnieje już użytkownik o tej nazwie w bazie danych");
 
         var random = new SecureRandom();
         var salt = new byte[16];
@@ -73,13 +75,13 @@ public class AccountService implements IAccountService {
     @Override
     public void validatePassword(String password) throws BackendException {
         if (password == null)
-            throw new BackendException("Password is empty");
+            throw new BackendException("Brak hasła");
         if (password.length() >= 64)
-            throw new BackendException("Password is too long");
+            throw new BackendException("Hasło jest zbyt długie");
         if (password.length() < 4)
-            throw new BackendException("Password is too short");
+            throw new BackendException("Hasło jest zbyt krótkie");
         if (password.isBlank())
-            throw new BackendException("Password does not contain any non-white characters");
+            throw new BackendException("Hasło zawiera same białe znaki");
     }
 
     @Override
@@ -88,13 +90,13 @@ public class AccountService implements IAccountService {
                 + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 
         if (mail == null)
-            throw new BackendException("Email address is empty");
+            throw new BackendException("Brak emaila");
         if (mail.length() >= 64)
-            throw new BackendException("Password is too long");
+            throw new BackendException("Email jest zbyt długi");
         if (mail.length() < 4)
-            throw new BackendException("Password is too short");
+            throw new BackendException("Email jest zbyt krótki");
         if (mail.isBlank())
-            throw new BackendException("Password does not contain any non-white characters");
+            throw new BackendException("Email zawiera same białe znaki");
         if (!Pattern.compile(regexPattern).matcher(mail).matches())
             throw new BackendException("Niewłaściwy adres email");
     }
@@ -108,7 +110,7 @@ public class AccountService implements IAccountService {
             return factory.generateSecret(spec).getEncoded();
         }
         catch (Exception e){
-            throw new BackendException("Password is invalid for hashing");
+            throw new BackendException("Błąd skracania hasła, użyj innego");
         }
     }
 
