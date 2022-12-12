@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="UZT_FISZ" directorySegmentName="seg_0" id="A6296F82-A1DC-4D75-D20B-7147A8B0A1DF">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 11:54:15 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<targetTransferable>false</targetTransferable>
+<sourcePk>90A15BD6-686E-FE9E-DD08-4E43CB22D6AD</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>POSIADA</nameOnSource>
+<nameOnTarget>NALEZY DO</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>BEC600B3-E09D-21E3-1396-858C7D783371</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>AF006EAB-715A-A315-545E-6027C93B02F6</targetEntity>
+<transferable>true</transferable>
+<deleteRule>CASCADE</deleteRule>
+</Relation>

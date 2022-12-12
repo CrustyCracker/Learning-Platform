@@ -1,0 +1,137 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FB05EC48-A23E-A75E-857C-A59836133524" name="GRUPY">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>98616693-5F4D-E9AC-6ED5-55619CD44F86</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<abbreviation>GR</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_GRUPY" id="E41C2570-34CC-569D-8806-B64785E8EDC8">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>DF48C56E-0FA8-5A32-1CEE-8B77EADDE6D7</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID_UZYTKOWNIKA" id="3EF695D1-CFDD-ED8D-1DC5-93DB15F4C7EE">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>A121387D-93D3-2134-AED3-589434B1BD68</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A2EBE93C-43A2-6F9C-AE9B-2295804E51B8" referredColumn="0A8D8BAA-617F-74A0-B8DF-9A84ECFAF85A"/>
+</associations>
+</Column>
+<Column name="NAZWA" id="332E3755-FC90-FA66-22F2-85466D3CCB28">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>59FD3CF3-62FE-7A04-1B65-6A57CB9F9CF7</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TRUDNOSC" id="0F93C5F4-FCF2-C138-3864-410BF0B40F53">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>63A26BD0-DC82-C0C8-6EEC-2B5D33F7ABDA</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PUBLICZNE" id="0ACEFE85-A227-5B9E-DA7D-FCEA54553C49">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 21:43:11 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>1 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="OPIS" id="9E8CA87A-3235-F26E-169E-FFB337C62E31">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>5C82223F-5420-DF31-01CD-87C7C20B00AD</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="C31C20F0-CFC8-F5AC-9403-933992A45A24" name="GR_PK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>17AA3797-3380-B46D-E3B7-1EC194FF66F3</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E41C2570-34CC-569D-8806-B64785E8EDC8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9CAD3B9B-EA89-0E5D-3840-79025921994C" name="GR_UZYT_FK_IDX">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 12:07:44 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3EF695D1-CFDD-ED8D-1DC5-93DB15F4C7EE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="556CC06E-894F-71BE-FC81-3CB5FF53512A" name="GR_UZYT_FK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>B6BC67AA-AB81-726A-EE72-A866A4AA00F0</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3EF695D1-CFDD-ED8D-1DC5-93DB15F4C7EE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+<tableCheckConstraints itemClass="oracle.dbtools.crest.model.design.constraint.TableLevelConstraint">
+<tableCheckConstraint name="GR_TRUDNOSC_CHECK" directorySegmentName="seg_0" id="D812840F-DEC3-C806-7D12-501EB0FA2AF2">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 12:50:30 UTC</createdTime>
+<ownerDesignName>PZSP2 ERD 3.0</ownerDesignName>
+<rule><![CDATA[CHECK(TRUDNOSC IN (1, 2, 3))]]></rule>
+</tableCheckConstraint>
+<tableCheckConstraint name="GR_PUBL_CHECK" directorySegmentName="seg_0" id="196AEFFE-1943-E6B5-05FD-E2D542133319">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 21:45:44 UTC</createdTime>
+<ownerDesignName>PZSP2 ERD 3.0</ownerDesignName>
+<rule><![CDATA[PUBLICZNOSC IN ('0', '1')]]></rule>
+</tableCheckConstraint>
+</tableCheckConstraints>
+</Table>

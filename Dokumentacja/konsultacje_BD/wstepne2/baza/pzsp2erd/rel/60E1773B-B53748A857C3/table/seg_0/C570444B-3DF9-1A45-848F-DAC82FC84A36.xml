@@ -1,0 +1,91 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C570444B-3DF9-1A45-848F-DAC82FC84A36" name="ZGRUPOWANIA">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>55630F5D-1E03-8352-2044-3043E314C1D8</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<abbreviation>ZGR</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_GRUPY" id="2522323C-F898-1E53-1637-4EE91DD4DC2B">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>12A63F7D-BFD3-A4E1-17BE-83B86F3F7EFC</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3EA70817-CFB5-6C43-05C6-BD048691824A" referredColumn="E41C2570-34CC-569D-8806-B64785E8EDC8"/>
+</associations>
+</Column>
+<Column name="ID_FISZKI" id="472624E4-1E2E-B46E-4F41-489644161D86">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>4EA1A321-97FA-2079-C5CA-316BB9F0EA6C</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2DFD4BCA-0701-B65C-6AD6-9BE8C98D7EB9" referredColumn="954A39A4-CF0A-2276-37E3-DBB5C9B98B55"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="69E621D6-1AF3-B430-5DC4-7720EB01A739" name="ZGR_PK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>E71C858D-C6D3-E359-DB17-56C16F074AB6</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2522323C-F898-1E53-1637-4EE91DD4DC2B"/>
+<colUsage columnID="472624E4-1E2E-B46E-4F41-489644161D86"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3F8CABF3-F58D-1CD5-0C1A-CA823A457959" name="ZGR_FISZ_FK_IDX">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 12:11:37 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="472624E4-1E2E-B46E-4F41-489644161D86"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="05BA9475-BDC9-1D24-E7E0-DDC8CEACBD1C" name="ZGR_FISZ_FK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>BAC56A05-0515-1093-81F1-8B0F3C4E5CFF</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="472624E4-1E2E-B46E-4F41-489644161D86"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F52B302C-392C-F76D-5E8C-083945D5ABDC" name="ZGR_GR_FK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>9833B766-0D4A-6622-E016-7653739623A4</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2522323C-F898-1E53-1637-4EE91DD4DC2B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

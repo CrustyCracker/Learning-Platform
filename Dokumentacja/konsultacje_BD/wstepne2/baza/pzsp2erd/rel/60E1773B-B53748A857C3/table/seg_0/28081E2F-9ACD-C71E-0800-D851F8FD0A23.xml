@@ -1,0 +1,98 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="28081E2F-9ACD-C71E-0800-D851F8FD0A23" name="TAGI">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>9F45DD2C-B227-DFBB-BA9C-6D123BC32544</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<abbreviation>TAG</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_TAGU" id="9EADB743-BE90-6D33-683E-CF4EB4B2DF41">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>67C6ACB2-3E9D-D19D-7A50-A466F1BAF430</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NAZWA" id="8456AE9F-75F9-A4B2-AEF1-617A79993C3E">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>2F586245-FE07-59DE-49A2-54EDF4E80A04</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="KOLOR" id="281B4DF7-F9C2-F752-F6C0-29858B731594">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>EF90501C-A557-63D5-543B-1FCFE3B31078</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>6 CHAR</dataTypeSize>
+<ownDataTypeParameters>6 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID_UZYTKOWNIKA" id="2D27CDE6-BE25-33BE-29B6-B27BDDBF0846">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-12-10 23:51:45 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A9AFF651-2D9A-7EE9-606E-38515288C6AD" referredColumn="0A8D8BAA-617F-74A0-B8DF-9A84ECFAF85A"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="505F4093-F17C-FB26-19CA-35012A7A953B" name="TAG_PK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>82007115-D10D-BDE1-F319-205A33D502A7</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9EADB743-BE90-6D33-683E-CF4EB4B2DF41"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="86C6FEE7-71C6-812D-31B0-7479341201F3" name="TAG_NAZWA_UK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-12-10 23:52:55 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8456AE9F-75F9-A4B2-AEF1-617A79993C3E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="831E46FF-2E35-EAAC-7179-B6374DE46931" name="TAG_UZYT_FK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-12-10 23:51:45 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2D27CDE6-BE25-33BE-29B6-B27BDDBF0846"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

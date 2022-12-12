@@ -1,0 +1,67 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="55630F5D-1E03-8352-2044-3043E314C1D8" name="ZGRUPOWANIE">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 12:54:36 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<preferredAbbreviation>ZGRUPOWANIA</preferredAbbreviation>
+<shortName>ZGR</shortName>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID_GRUPY" id="12A63F7D-BFD3-A4E1-17BE-83B86F3F7EFC">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:24:44 UTC</createdTime>
+<generatorID>9833B766-0D4A-6622-E016-7653739623A4</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<referedAttribute>DF48C56E-0FA8-5A32-1CEE-8B77EADDE6D7</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID_FISZKI" id="4EA1A321-97FA-2079-C5CA-316BB9F0EA6C">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 13:01:19 UTC</createdTime>
+<generatorID>BAC56A05-0515-1093-81F1-8B0F3C4E5CFF</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<referedAttribute>772E6CEB-FFD5-A277-7A8F-6EEDDD4F08D9</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="E71C858D-C6D3-E359-DB17-56C16F074AB6" name="ZGRUPOWANIE PK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:27:00 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>12A63F7D-BFD3-A4E1-17BE-83B86F3F7EFC</attributeRef>
+<attributeRef>4EA1A321-97FA-2079-C5CA-316BB9F0EA6C</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

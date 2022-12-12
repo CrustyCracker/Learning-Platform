@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="2892A3B5-5F83-D1CE-8919-371020B522DD" containerWithKeyObject="96ED607C-8CE9-578C-E92C-3A2C0E5791FB" localFKIndex="466AAFE8-2A5F-57FE-6077-F08E249CA67F" name="OTAG_FISZ_FK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>31F575D2-0F56-40AF-C38C-97E9D123B9B4</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<referredTableLongName>FISZKI</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>3B2419C6-FCFF-F4B7-E14E-786321AE6E3E</referredTableID>
+<keyObject>3885DA9C-9EC3-5C30-6DED-B9B0965134E2</keyObject>
+<referredKeyID>3885DA9C-9EC3-5C30-6DED-B9B0965134E2</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>ID_FISZKI</refColNames>
+<transferable>false</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="UZT_GR" directorySegmentName="seg_0" id="B6BC67AA-AB81-726A-EE72-A866A4AA00F0">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 13:12:33 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<sourcePk>90A15BD6-686E-FE9E-DD08-4E43CB22D6AD</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>TWORZY</nameOnSource>
+<nameOnTarget>JEST STWORZONA PRZEZ</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>BEC600B3-E09D-21E3-1396-858C7D783371</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>98616693-5F4D-E9AC-6ED5-55619CD44F86</targetEntity>
+<transferable>true</transferable>
+<deleteRule>CASCADE</deleteRule>
+</Relation>
