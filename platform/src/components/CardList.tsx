@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Requests} from "../requests/Requests";
 import {CardResponse} from "../types/Cards";
 import {ErrorResponse} from "../types/ErrorResponse";
+import '../style/cardList.css';
 
 interface CardListProps {
     onSuccess: (response: CardResponse[]) => void,
@@ -29,14 +30,17 @@ export function CardList(props: CardListProps) {
     };
 
     return <div>
-        <h1>Wszystkie karty</h1>
-        <table>
+        <p>
+            <h1>Wszystkie fiszki</h1>
+        </p>
+        <table className={"table table-dark center"}>
             <thead>
                 <tr>
-                    <th>Pytanie</th>
-                    <th>Grupy</th>
-                    <th>Tagi</th>
-                    <th>Widoczność</th>
+                    <th style={{ width: "40%" }}>Pytanie</th>
+                    <th style={{ width: "15%" }}>Grupy</th>
+                    <th style={{ width: "10%" }}>Tagi</th>
+                    <th style={{ width: "10%" }}>Widoczność</th>
+                    <th style={{ width: "5%" }}> </th>
                 </tr>
             </thead>
             <tbody>
@@ -46,9 +50,10 @@ export function CardList(props: CardListProps) {
                         <td>{card.groups}</td>
                         <td>{card.tags}</td>
                         <td>{isPublicToString(card.isPublic)}</td>
+                        <td>{">"}</td>
                     </tr>
                 })}
             </tbody>
         </table>
-    </div>;
+    </div>
 }
