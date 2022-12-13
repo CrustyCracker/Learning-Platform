@@ -13,7 +13,7 @@ interface CardListProps {
 
 export function CardList(props: CardListProps) {
     const [cards, setCards] = useState<CardResponse[]>([]);
-    const [tags, setTags] = useState(["papaya"]);
+    const [tags, setTags] = useState([]);
 
     useEffect(() => {
         Requests.allCards().then(res => {
@@ -32,8 +32,6 @@ export function CardList(props: CardListProps) {
         return isPublic ? "Publiczna" : "Prywatna";
     };
 
-    const handleTagSubmit = (e: FormEvent) => {}
-
     const tableStyle = {
         width: "80%",
         marginLeft: "auto",
@@ -44,6 +42,7 @@ export function CardList(props: CardListProps) {
     const tdStyleWrap = {
         wordWrap: "break-word" as unknown as undefined
     }
+
 
     return <html>
     <link
@@ -63,6 +62,8 @@ export function CardList(props: CardListProps) {
 
         <TagsInput
             value={tags}
+            // @ts-ignore
+            // pzsp2 - znaleźć sposób jak ładniej pozbyć się tego błędu niż @ts-ignore
             onChange={setTags}
             name="tagi"
             placeHolder="Dodaj tag..."
