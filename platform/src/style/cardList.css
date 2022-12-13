@@ -1,10 +1,38 @@
-table {
+.table {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
     table-layout: fixed;
 }
 
-td {
+.td {
     word-wrap: break-word;
+}
+
+.tag button {
+    display: flex;
+    padding: 6px;
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+    color: white;
+}
+.rti--container {
+    max-width: 20%;
+    font-size: 15px;
+    margin: 2% 0% 0% 10%;
+    --rti-border: #ccc;
+    --rti-tag-remove: #e53e3e;
+    --rti-bg: #fff;
+    --rti-tag: #636363;
+
+}
+
+.rti--tag button {
+    padding-left: 0.5rem;
+    padding-right: 0.1rem;
+}
+
+.rti--input {
+    width: 100%;
 }
