@@ -1,4 +1,4 @@
-import React, {FormEvent, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Requests} from "../requests/Requests";
 import {CardResponse} from "../types/Cards";
 import {ErrorResponse} from "../types/ErrorResponse";
@@ -38,19 +38,21 @@ export function CardList(props: CardListProps) {
 
     const filterByTags = (tags: string[]) => {
         if(tags.length){
-            console.log(tags);
-            setTags(tags);
             let newCards:CardResponse[] = [];
 
             cards.forEach((card) => {
                 tags.forEach((tag) => {
-                    if(card.tags.includes(tag)){
+                    if(card.tags.some(x => x.toLowerCase() == tag.toLowerCase())){
                         newCards.push(card)
                     }
                 })
             })
             setCurrCards(newCards);
         }
+        else{
+            setCurrCards(cards);
+        }
+
     };
 
     const tableStyle = {
@@ -66,7 +68,9 @@ export function CardList(props: CardListProps) {
 
 
     return <html>
+
     <link
+        //pzsp2 -> zrobić ładne importy bootstrapa
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
@@ -83,15 +87,13 @@ export function CardList(props: CardListProps) {
 
         <TagsInput
             value={tags}
-            onChange={e => filterByTags(e)}
+            onChange={e => filterByTags(e || [])}
             name="tagi"
             placeHolder="Dodaj tag..."
         />
         <p style={{ margin: "0% 0% 2% 10%" ,textAlign: "left", fontSize: "12px"}}>
         <em>Wyszukaj po tagu... Kilknij ENTER, aby dodać nowy tag.</em>
         </p>
-
-
 
         <table style={tableStyle} className={"table table-dark center"}>
             <thead>
@@ -111,7 +113,7 @@ export function CardList(props: CardListProps) {
                         <td style={tdStyleWrap}>{card.tags}</td>
                         <td>{isPublicToString(card.isPublic)}</td>
 
-                        <td><Link to={""} style={{ textDecoration: 'none' }}>{">"}</Link></td>
+                        <td><Link to={"card/"+card.id} style={{ textDecoration: 'none' }}>{">"}</Link></td>
                     </tr>
                 })}
             </tbody>
