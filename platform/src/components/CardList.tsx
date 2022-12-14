@@ -13,16 +13,19 @@ interface CardListProps {
 
 export function CardList(props: CardListProps) {
     const [cards, setCards] = useState<CardResponse[]>([]);
-    const [tags, setTags] = useState([]);
+    const [currCards, setCurrCards] = useState<CardResponse[]>([]);
+    const [tags, setTags] = useState<string[]>([]);
 
     useEffect(() => {
         Requests.allCards().then(res => {
             if (res.err) {
                 setCards([]);
+                setCurrCards([])
                 props.onError(res.err);
             }
             else if (res.res){
                 setCards(res.res);
+                setCurrCards(res.res);
                 props.onSuccess(res.res);
             }
         });
@@ -30,6 +33,24 @@ export function CardList(props: CardListProps) {
 
     const isPublicToString = (isPublic: boolean) : string => {
         return isPublic ? "Publiczna" : "Prywatna";
+    };
+
+
+    const filterByTags = (tags: string[]) => {
+        if(tags.length){
+            console.log(tags);
+            setTags(tags);
+            let newCards:CardResponse[] = [];
+
+            cards.forEach((card) => {
+                tags.forEach((tag) => {
+                    if(card.tags.includes(tag)){
+                        newCards.push(card)
+                    }
+                })
+            })
+            setCurrCards(newCards);
+        }
     };
 
     const tableStyle = {
@@ -62,9 +83,7 @@ export function CardList(props: CardListProps) {
 
         <TagsInput
             value={tags}
-            // @ts-ignore
-            // pzsp2 - znaleźć sposób jak ładniej pozbyć się tego błędu niż @ts-ignore
-            onChange={setTags}
+            onChange={e => filterByTags(e)}
             name="tagi"
             placeHolder="Dodaj tag..."
         />
@@ -85,7 +104,7 @@ export function CardList(props: CardListProps) {
                 </tr>
             </thead>
             <tbody>
-                {cards && cards.map(card => {
+                {currCards && currCards.map(card => {
                     return <tr key={card.id}>
                         <td style={tdStyleWrap}>{card.question}</td>
                         <td style={tdStyleWrap}>{card.groups}</td>
