@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {FormEvent, useEffect, useState} from "react";
 import {Requests} from "../requests/Requests";
 import {CardResponse} from "../types/Cards";
 import {ErrorResponse} from "../types/ErrorResponse";
@@ -55,6 +55,12 @@ export function CardList(props: CardListProps) {
 
     };
 
+    const Learn = (e: FormEvent) => {
+    }
+
+    const Test = (e: FormEvent) => {
+    }
+
     const tableStyle = {
         width: "80%",
         marginLeft: "auto",
@@ -94,6 +100,18 @@ export function CardList(props: CardListProps) {
         <p style={{ margin: "0% 0% 2% 10%" ,textAlign: "left", fontSize: "12px"}}>
         <em>Wyszukaj po tagu... Kilknij ENTER, aby dodać nowy tag.</em>
         </p>
+    <div className="container-fluid" style={{width: "80%", padding: "0"}}>
+        <div className="row" style={{ marginBottom: "1%"}}>
+            <div>
+                <form onSubmit={Learn} style={{float: "left"}}>
+                    <button type="submit" className="btn btn-outline-warning">Ucz się</button>
+                </form>
+                <form onSubmit={Test} style={{float: "left", marginLeft: "1%"}}>
+                    <button type="submit" className="btn btn-outline-danger">Test</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
         <table style={tableStyle} className={"table table-dark center"}>
             <thead>

@@ -20,7 +20,7 @@
 .rti--container {
     max-width: 20%;
     font-size: 15px;
-    margin: 2% 0% 0% 10%;
+    margin: 2% 0 0 10%;
     --rti-border: #ccc;
     --rti-tag-remove: #e53e3e;
     --rti-bg: #fff;
@@ -35,4 +35,8 @@
 
 .rti--input {
     width: 100%;
+}
+
+.container-fluid{
+    width: 80%;
 }
