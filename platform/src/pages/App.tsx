@@ -9,6 +9,7 @@ import { NewGroupForm } from "../components/NewGroupForm";
 import { ErrorAndInfo } from "../components/ErrorAndInfo";
 import { ErrorResponse } from "../types/ErrorResponse";
 import { CardList } from "../components/CardList";
+import { Card } from "../components/Card";
 
 export default function App() {
     const [error, setError] = useState("");
@@ -29,6 +30,7 @@ export default function App() {
                     <Routes>
                         <Route path="/" element={<CardList onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/cards" element={<CardList onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/card/:id" element={<Card onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/cards/new" element={<NewCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/groups/new" element={<NewGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/login" element={<LoginForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />

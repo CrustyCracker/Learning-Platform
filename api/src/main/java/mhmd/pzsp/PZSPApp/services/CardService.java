@@ -59,4 +59,7 @@ public class CardService implements ICardService {
         var card = new Card(request, user, groups, tags);
         return cardRepository.save(card);
     }
+
+    @Override
+    public Card findCardById(Long cardId) { return cardRepository.findCardById(cardId); }
 }

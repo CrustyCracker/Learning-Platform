@@ -18,4 +18,6 @@ public interface ICardRepository extends JpaRepository<Card, Long> {
 
     @Query("select c from Card c where c.user.id in ?1 or c.isPublic in ?2")
     List<Card> findByUserIdOrPublic(Long userId, boolean isPublic);
+
+    Card findCardById(Long cardId);
 }

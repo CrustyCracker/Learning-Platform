@@ -59,4 +59,12 @@ public class CardController {
         var user = accountService.defaultAdmin();
         return new CardResponse(cardService.create(request, user));
     }
+
+    @GetMapping("{id}")
+    public CardResponse cardById(@PathVariable Long id) throws BackendException {
+        var card = cardService.findCardById(id);
+        if (card == null)
+            throw new BackendException("Brak karty o danym id w bazie danych");
+        return new CardResponse(card);
+    }
 }

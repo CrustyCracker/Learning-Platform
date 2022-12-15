@@ -74,4 +74,10 @@ export class Requests {
             .then(res => res.json())
         return setResponseOrError(response);
     }
+
+    static async CardId(id: number): Promise<GenericResponse<CardResponse>> {
+        const response = await fetch(Global.backendUrl + "/cards/" + id)
+            .then(res => res.json())
+        return setResponseOrError(response);
+    }
 }

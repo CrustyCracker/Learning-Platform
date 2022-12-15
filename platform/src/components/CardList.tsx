@@ -113,7 +113,7 @@ export function CardList(props: CardListProps) {
                         <td style={tdStyleWrap}>{card.tags}</td>
                         <td>{isPublicToString(card.isPublic)}</td>
 
-                        <td><Link to={"card/"+card.id} style={{ textDecoration: 'none' }}>{">"}</Link></td>
+                        <td><Link to={`card/${card.id}`} style={{ textDecoration: 'none' }}>{">"}</Link></td>
                     </tr>
                 })}
             </tbody>
