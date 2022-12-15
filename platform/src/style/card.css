@@ -1,0 +1,15 @@
+.card-header{
+    text-align: left
+}
+
+.card-body{
+}
+
+.card{
+    margin: 5% 0;
+    min-height: 50%;
+
+}
+.container-fluid{
+    width: 80%;
+}
