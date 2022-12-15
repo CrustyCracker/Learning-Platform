@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../style/App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { FirstCard } from "../components/FirstCard";
 import { LoginForm } from "../components/LoginForm";
 import { RegisterForm } from "../components/RegisterForm";
 import { NewCardForm } from "../components/NewCardForm";
@@ -10,6 +9,7 @@ import { ErrorAndInfo } from "../components/ErrorAndInfo";
 import { ErrorResponse } from "../types/ErrorResponse";
 import { CardList } from "../components/CardList";
 import { Card } from "../components/Card";
+import {MainPage} from "../components/MainPage"
 
 export default function App() {
     const [error, setError] = useState("");
@@ -28,9 +28,9 @@ export default function App() {
             <header className="App-header">
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/" element={<CardList onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/" element={<MainPage />} />
                         <Route path="/cards" element={<CardList onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
-                        <Route path="/card/:id" element={<Card onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/cards/:id" element={<Card onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/cards/new" element={<NewCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/groups/new" element={<NewGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/login" element={<LoginForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />

@@ -2,6 +2,7 @@ import React, {FormEvent, useState} from "react";
 import {Requests} from "../requests/Requests";
 import {CardResponse, NewCard} from "../types/Cards";
 import {ErrorResponse} from "../types/ErrorResponse";
+import {useNavigate} from 'react-router-dom';
 
 interface NewCardFormProps {
     onSuccess: (response: CardResponse) => void,
@@ -12,6 +13,8 @@ export function NewCardForm(props: NewCardFormProps) {
     const [newCard, setNewCard] = useState<NewCard>(
         {question: "", answer: "", source: "",isPublic: false, groupIds: [], tagIds: []}
     );
+
+    const navigate = useNavigate();
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -24,6 +27,7 @@ export function NewCardForm(props: NewCardFormProps) {
             else if (res.res){
                 props.onSuccess(res.res)
             }
+            navigate('/')
         });
     }
 

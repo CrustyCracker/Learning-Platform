@@ -2,6 +2,7 @@ import React, {FormEvent, useState} from "react";
 import {Requests} from "../requests/Requests";
 import {GroupResponse, NewGroup} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
+import {useNavigate} from "react-router-dom";
 
 interface NewCardFormProps {
     onSuccess: (response: GroupResponse) => void
@@ -12,6 +13,8 @@ export function NewGroupForm(props: NewCardFormProps) {
     const [newGroup, setNewGroup] = useState<NewGroup>(
         {name: "", difficulty: 1, description: "",isPublic: false, cardIds: []}
     );
+
+    const navigate = useNavigate();
 
     let options = []
     for (let i=1; i <= 10; i++)
@@ -28,6 +31,7 @@ export function NewGroupForm(props: NewCardFormProps) {
             else if (res.res){
                 props.onSuccess(res.res)
             }
+            navigate('/')
         });
     }
 
