@@ -8,6 +8,7 @@ import { NewGroupForm } from "../components/NewGroupForm";
 import { ErrorAndInfo } from "../components/ErrorAndInfo";
 import { ErrorResponse } from "../types/ErrorResponse";
 import { CardList } from "../components/CardList";
+import { GroupList } from "../components/GroupList";
 import { Card } from "../components/Card";
 import {MainPage} from "../components/MainPage"
 
@@ -32,6 +33,7 @@ export default function App() {
                         <Route path="/cards" element={<CardList onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/cards/:id" element={<Card onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/cards/new" element={<NewCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/groups" element={< GroupList onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/groups/new" element={<NewGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/login" element={<LoginForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/register" element={<RegisterForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />

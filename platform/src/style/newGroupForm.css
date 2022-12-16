@@ -2,7 +2,6 @@ textarea.form-control {
     min-height: 200px;
     color: #4a4a4a;
     border-color: #000;
-    margin-bottom: 10%;
 }
 
 textarea.form-control:focus {
@@ -13,10 +12,17 @@ textarea.form-control:focus {
     border: 1px solid #555;
 }
 
+
+select.form-select:focus {
+    color: black;
+    box-shadow: 0 5px 10px 0 black;
+    outline-color: black;
+    border: 1px solid #555;
+}
+
 input.form-control {
     color: #4a4a4a;
     border-color: #000;
-    margin-bottom: 10%;
 }
 
 input.form-control:focus {

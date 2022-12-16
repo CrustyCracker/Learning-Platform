@@ -3,6 +3,7 @@ import {Requests} from "../requests/Requests";
 import {GroupResponse, NewGroup} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
 import {useNavigate} from "react-router-dom";
+import '../style/newGroupForm.css';
 
 interface NewCardFormProps {
     onSuccess: (response: GroupResponse) => void

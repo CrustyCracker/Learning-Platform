@@ -41,7 +41,7 @@ export function MainPage() {
                 </div>
                 <div className="col-lg-6 col-md-12 col-sm-12 p-3">
                     <div className="card h-100 text-white bg-dark" >
-                        <Link className="stretched-link" to={"/"} style={{ textDecoration: 'none', color: "white"}}>
+                        <Link className="stretched-link" to={"groups"} style={{ textDecoration: 'none', color: "white"}}>
                             <i className="bi bi-list text-white"> </i> Moje grupy
                         </Link>
                     </div>
