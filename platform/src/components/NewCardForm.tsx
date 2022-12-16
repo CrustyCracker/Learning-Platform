@@ -11,9 +11,7 @@ interface NewCardFormProps {
 }
 
 export function NewCardForm(props: NewCardFormProps) {
-    const [newCard, setNewCard] = useState<NewCard>(
-        {question: "", answer: "", source: "",isPublic: false, groupIds: [], tagIds: []}
-    );
+    const [newCard, setNewCard] = useState({} as NewCard);
 
     const navigate = useNavigate();
 
@@ -49,8 +47,7 @@ export function NewCardForm(props: NewCardFormProps) {
 
     // pzsp2 error handling i walidacja
 
-    return (
-    <div className="container-fluid" style={{width: "80%"}}>
+    return (<div className="container-fluid" style={{width: "80%"}}>
         <form>
         <div className="row gy-3">
             <div className="col-lg-4 col-md-12 col-sm-12">
@@ -107,43 +104,4 @@ export function NewCardForm(props: NewCardFormProps) {
         </div>
         </form>
     </div>)
-
 }
-
-
-
-    // return <div>
-    //     <h1>Nowa fiszka</h1>
-    //     <form onSubmit={handleSubmit}>
-    //         <label>
-    //             <p>Pytanie</p>
-    //             <input type="text" name="question" required onChange={(e) => {
-    //                 setNewCard({...newCard, question: e.target.value})
-    //             }} />
-    //         </label>
-    //         <label>
-    //             <p>Odpowiedź</p>
-    //             <input type="text" name="answer" required onChange={(e) => {
-    //                 setNewCard({...newCard, answer: e.target.value})
-    //             }} />
-    //         </label>
-    //         <label>
-    //             <p>Źródła</p>
-    //             <input type="text" name="source" onChange={(e) => {
-    //                 setNewCard({...newCard, source: e.target.value})
-    //             }} />
-    //         </label>
-    //         <div>
-    //             <label>
-    //                 <input type="checkbox" name="isPublic" checked={newCard.isPublic} onChange={(e) => {
-    //                     if (e.target.value) setNewCard({...newCard, isPublic: e.target.checked})
-    //                 }}/>
-    //                 Publiczna
-    //             </label>
-    //         </div>
-    //         <div>
-    //             <button type="submit">Zapisz</button>
-    //         </div>
-    //     </form>
-    // </div>
-// }

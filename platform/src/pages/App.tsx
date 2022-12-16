@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, {useCallback, useState} from 'react';
 import '../style/App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LoginForm } from "../components/LoginForm";
 import { RegisterForm } from "../components/RegisterForm";
 import { NewCardForm } from "../components/NewCardForm";
 import { NewGroupForm } from "../components/NewGroupForm";
-import { ErrorAndInfo } from "../components/ErrorAndInfo";
 import { ErrorResponse } from "../types/ErrorResponse";
 import { CardList } from "../components/CardList";
 import { GroupList } from "../components/GroupList";
@@ -14,16 +13,18 @@ import {MainPage} from "../components/MainPage"
 import {Group} from "../components/Group";
 
 export default function App() {
-    const [error, setError] = useState("");
-    const [info, setInfo] = useState("");
-    const logToConsoleErr = (o: ErrorResponse) => {
+    const [, setError] = useState("");
+    const [, setInfo] = useState("");
+    const logToConsoleErr = useCallback((o: ErrorResponse) => {
+        console.log("error");
         console.log(o);
         setError(o.message)
-    }
-    const logToConsoleInfo = (o: any) => {
+    }, [])
+    const logToConsoleInfo = useCallback((o: any) => {
+        console.log("info");
         console.log(o);
         setInfo(o.toString())
-    }
+    },[])
 
     return (
         <div className="App">

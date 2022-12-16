@@ -10,21 +10,20 @@ interface LoginFormProps {
 }
 
 export function LoginForm(props: LoginFormProps) {
-    const [credentials, setCredentials] = useState<Credentials>({username: "", password: ""});
+    const [credentials, setCredentials] = useState<Credentials>({} as Credentials);
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         if (!credentials)
             return;
-        Requests.login(credentials)
-            .then(res => {
-                if (res.err) {
-                    props.onError(res.err);
-                }
-                else if (res.res){
-                    props.onSuccess(res.res);
-                }
-            });
+        Requests.login(credentials).then(res => {
+            if (res.err) {
+                props.onError(res.err);
+            }
+            else if (res.res){
+                props.onSuccess(res.res);
+            }
+        });
     }
 
     // pzsp2 error handling i walidacja

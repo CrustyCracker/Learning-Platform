@@ -5,6 +5,7 @@ import {ErrorResponse} from "../types/ErrorResponse";
 import { TagsInput } from "react-tag-input-component";
 import '../style/cardList.css';
 import {Link} from "react-router-dom";
+import { isPublicToString } from "../helpers/NameHelpers";
 
 interface CardListProps {
     onSuccess: (response: CardResponse[]) => void,
@@ -14,7 +15,7 @@ interface CardListProps {
 export function CardList(props: CardListProps) {
     const [cards, setCards] = useState<CardResponse[]>([]);
     const [currCards, setCurrCards] = useState<CardResponse[]>([]);
-    const [tags, setTags] = useState<string[]>([]);
+    const [tags, ] = useState<string[]>([]);
 
     useEffect(() => {
         Requests.allCards().then(res => {
@@ -29,36 +30,33 @@ export function CardList(props: CardListProps) {
                 props.onSuccess(res.res);
             }
         });
-    }, [props])
-
-    const isPublicToString = (isPublic: boolean) : string => {
-        return isPublic ? "Publiczna" : "Prywatna";
-    };
-
+    }, [])
 
     const filterByTags = (tags: string[]) => {
-        if(tags.length){
+        if(tags.length) {
             let newCards:CardResponse[] = [];
 
             cards.forEach((card) => {
                 tags.forEach((tag) => {
-                    if(card.tags.some(x => x.toLowerCase() == tag.toLowerCase())){
+                    if(card.tags.some(x => x.toLowerCase() === tag.toLowerCase())){
                         newCards.push(card)
                     }
                 })
             })
+
             setCurrCards(newCards);
         }
         else{
             setCurrCards(cards);
         }
-
     };
 
     const Learn = (e: FormEvent) => {
+        e.preventDefault();
     }
 
     const Test = (e: FormEvent) => {
+        e.preventDefault();
     }
 
     const tableStyle = {
@@ -72,18 +70,15 @@ export function CardList(props: CardListProps) {
         wordWrap: "break-word" as unknown as undefined
     }
 
-
-    return <html>
-        <link
+    return <>
+{/*        <link
             //pzsp2 -> zrobić ładny import bootstrapa
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossOrigin="anonymous"
-        />
-        <p>
-            <h1>Moje fiszki</h1>
-        </p>
+        />*/}
+        <h1>Moje fiszki</h1>
 
         <TagsInput
             value={tags}
@@ -92,20 +87,20 @@ export function CardList(props: CardListProps) {
             placeHolder="Dodaj tag..."
         />
         <p style={{ margin: "0% 0% 2% 10%" ,textAlign: "left", fontSize: "12px"}}>
-        <em>Wyszukaj po tagu... Kilknij ENTER, aby dodać nowy tag.</em>
+            <em>Wyszukaj po tagu... Kilknij ENTER, aby dodać nowy tag.</em>
         </p>
-    <div className="container-fluid" style={{width: "80%", padding: "0"}}>
-        <div className="row" style={{ marginBottom: "1%"}}>
-            <div>
-                <form onSubmit={Learn} style={{float: "left"}}>
-                    <button type="submit" className="btn btn-outline-warning">Ucz się</button>
-                </form>
-                <form onSubmit={Test} style={{float: "left", marginLeft: "1%"}}>
-                    <button type="submit" className="btn btn-outline-danger">Test</button>
-                </form>
+        <div className="container-fluid" style={{width: "80%", padding: "0"}}>
+            <div className="row" style={{ marginBottom: "1%"}}>
+                <div>
+                    <form onSubmit={Learn} style={{float: "left"}}>
+                        <button type="submit" className="btn btn-outline-warning">Ucz się</button>
+                    </form>
+                    <form onSubmit={Test} style={{float: "left", marginLeft: "1%"}}>
+                        <button type="submit" className="btn btn-outline-danger">Test</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
         <table style={tableStyle} className={"table table-dark center"}>
             <thead>
@@ -130,5 +125,5 @@ export function CardList(props: CardListProps) {
                 })}
             </tbody>
         </table>
-    </html>;
+    </>;
 }

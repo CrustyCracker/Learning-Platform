@@ -9,7 +9,7 @@ interface RegisterFormProps {
 }
 
 export function RegisterForm(props: RegisterFormProps) {
-    const [credentials, setCredentials] = useState<RegisterCredentials>({confirmPassword: "", password: "", username: "", email: ""});
+    const [credentials, setCredentials] = useState({} as RegisterCredentials);
     const [isConfirmedPassword, setConfirmedPassword] = useState(true);
 
     const handleSubmit = (e: FormEvent) => {

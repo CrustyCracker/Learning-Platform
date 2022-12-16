@@ -9,12 +9,9 @@ interface GroupProps {
     onSuccess: (response: GroupResponse) => void,
     onError: (err: ErrorResponse) => void
 }
-// pzsp2 - przerobić useState na [card, setCard] zamiast rozbicia na mniejsze elementy
+
 export function Group(props: GroupProps) {
-    const [name, setName] = useState("");
-    const [description, setDesctription] = useState("");
-    const [difficulty, setDifficulty] = useState(-1);
-    const [user, setUser] = useState("");
+    const [group, setGroup] = useState({} as GroupResponse);
     //pzsp2 - zaimplementować wczytywanie listy fiszek
     const [cards, setCards] = useState<CardResponse[]>([]);
     const {id} = useParams();
@@ -22,40 +19,39 @@ export function Group(props: GroupProps) {
     useEffect(() => {
         Requests.GroupId(Number(id)).then(res => {
             if (res.err) {
-                setName(res.err.message)
-                setDesctription(res.err.debugMessage)
+                setGroup({...{} as GroupResponse, name: res.err.message})
+                setGroup({...{} as GroupResponse, description: res.err.debugMessage})
                 props.onError(res.err);
             }
             else if (res.res){
-                setName(res.res.name);
-                setDesctription(res.res.description);
-                setDifficulty(res.res.difficulty);
-                setUser(res.res.username);
+                setGroup(res.res);
                 props.onSuccess(res.res);
             }
-        }
-        );
+        });
         Requests.CardsByGroupsId(Number(id)).then(res => {
-                if (res.err) {
-                    props.onError(res.err);
-                }
-                else if (res.res){
-                    setCards(res.res);
-                }
+            if (res.err) {
+                props.onError(res.err);
             }
-        );
-    }, [props])
+            else if (res.res){
+                setCards(res.res);
+            }
+        });
+    }, [id])
 
     const EditGroup = (e: FormEvent) => {
+        e.preventDefault()
     }
 
     const DeleteGroup= (e: FormEvent) => {
+        e.preventDefault()
     }
 
     const Learn = (e: FormEvent) => {
+        e.preventDefault()
     }
 
     const Test = (e: FormEvent) => {
+        e.preventDefault()
     }
 
     const tableStyle = {
@@ -81,9 +77,9 @@ export function Group(props: GroupProps) {
         <div className="container-fluid" style={{width: "80%"}}>
             <div className="row">
                 <div className="col-lg-6 col-md-12 col-sm-12" style={{textAlign: "start"}}>
-                    <h1> {name} </h1>
-                    <h4> Właściciel: {user} </h4>
-                    <h4> Trudność: {difficulty} </h4>
+                    <h1> {group.name} </h1>
+                    <h4> Właściciel: {group.username} </h4>
+                    <h4> Trudność: {group.difficulty} </h4>
                     <div>
                         <form onSubmit={Learn} style={{float: "left"}}>
                             <button type="submit" className="btn btn-outline-warning">Ucz się</button>
@@ -101,7 +97,7 @@ export function Group(props: GroupProps) {
                             </small>
                         </div>
                         <div className="card-body">
-                            {description}
+                            {group.description}
                         </div>
                     </div>
                 </div>
@@ -139,5 +135,5 @@ export function Group(props: GroupProps) {
                 </div>
             </div>
         </div>
-        </>)
+    </>)
 }
