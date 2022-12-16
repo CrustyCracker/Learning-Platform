@@ -37,42 +37,49 @@ export function NewGroupForm(props: NewCardFormProps) {
 
     // pzsp2 error handling i walidacja
 
-    return <div>
-        <h1>Nowa grupa</h1>
-        <form onSubmit={handleSubmit}>
-            <label>
-                <p>Nazwa</p>
-                <input type="text" name="name" required onChange={(e) => {
-                    setNewGroup({...newGroup, name: e.target.value})
-                }} />
-            </label>
-            <label>
-                <p>Opis</p>
-                <input type="text" name="description" onChange={(e) => {
-                    setNewGroup({...newGroup, description: e.target.value})
-                }} />
-            </label>
-            <label>
-                <p>Trudność</p>
-                <select>
-                    {options.map((o) => (
-                        <option key={o.value} onSelect={() =>
-                            setNewGroup({...newGroup, difficulty: o.value})
-                        } value={o.value}>{o.label}</option>
-                    ))}
-                </select>
-            </label>
-            <div>
-                <label>
-                    <input type="checkbox" name="isPublic" checked={newGroup.isPublic} onChange={(e) => {
-                        setNewGroup({...newGroup, isPublic: e.target.checked})
-                    }}/>
-                    Publiczna
-                </label>
-            </div>
-            <div>
-                <button type="submit">Zapisz</button>
-            </div>
-        </form>
-    </div>
-}
+
+    const cardStyle = {
+        margin: "5% 0",
+        minHeight: '600px',
+        minWidth: '400px',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '5%'
+    }
+
+    return (
+        <>
+            <link rel="stylesheet" href="../style/newGroupForm.css"/>
+
+            <form>
+                <div className="card text-white bg-dark" style={cardStyle}>
+                    <label style={{margin: 0, textAlign: 'start'}}>
+                        <small> Nazwa </small>
+                        <input className="form-control" type="text" name="name" style={{marginBottom: "10%"}} onChange={(e) => {
+                        setNewGroup({...newGroup, name: e.target.value})}} />
+                    </label>
+                    <div className="form">
+                        <label style={{margin: 0, textAlign: 'start'}}>
+                            <small> Opis </small>
+                            <textarea className="form-control" id="description" name="description" value={newGroup.description} style={{marginBottom: "10%"}}
+                                      maxLength={500} spellCheck="false" required onChange={(e) => {
+                                setNewGroup({...newGroup, description: e.target.value})}}>
+                            </textarea>
+                        </label>
+                    </div>
+                    <label >
+                        <small> Trudność </small>
+                        <select className="form-select form-select-sm">
+                             {options.map((o) => (
+                                 <option key={o.value} onSelect={() =>
+                                    setNewGroup({...newGroup, difficulty: o.value})
+                                 } value={o.value}>{o.label}</option>))}
+                        </select>
+                    </label>
+                    <div style={{justifyContent: "center", marginTop: "10%"}}>
+                        <button type="submit" onClick={handleSubmit} className="btn btn-outline-info">Dodaj grupę</button>
+                    </div>
+                </div>
+            </form>
+        </>)
+    }

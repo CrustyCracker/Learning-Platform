@@ -57,7 +57,7 @@ export function NewCardForm(props: NewCardFormProps) {
                 <div className="card text-white bg-dark" style={{paddingBottom: 0}}>
                     <div className="card-header">Pytanie</div>
                         <div className="form w-100 h-100">
-                            <textarea className="form-control" id="question" name="question" value={newCard.question}
+                            <textarea className="form-control" id="question" name="question"
                                       maxLength={500} spellCheck="false" required onChange={(e) => {
                                 setNewCard({...newCard, question: e.target.value})}}>
                             </textarea>
@@ -68,7 +68,7 @@ export function NewCardForm(props: NewCardFormProps) {
                 <div className="card text-white bg-dark" >
                     <div className="card-header">Odpowiedź</div>
                     <div className="form w-100 h-100">
-                        <textarea className="form-control" id="answer" name="answer" value={newCard.answer}
+                        <textarea className="form-control" id="answer" name="answer"
                                   maxLength={500} spellCheck="false" required onChange={(e) => {
                             setNewCard({...newCard, answer: e.target.value})}}>
                         </textarea>
@@ -79,7 +79,7 @@ export function NewCardForm(props: NewCardFormProps) {
                 <div className="card text-white bg-dark" >
                     <div className="card-header">Źródło</div>
                     <div className="form w-100 h-100">
-                        <textarea className="form-control" id="source" name="source" value={newCard.source}
+                        <textarea className="form-control" id="source" name="source"
                                   maxLength={500} spellCheck="false" required onChange={(e) => {
                                              setNewCard({...newCard, source: e.target.value})}}>
                         </textarea>
