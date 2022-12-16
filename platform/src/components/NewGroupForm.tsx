@@ -68,15 +68,25 @@ export function NewGroupForm(props: NewCardFormProps) {
                             </textarea>
                         </label>
                     </div>
-                    <label >
+                    <label>
                         <small> Trudność </small>
-                        <select className="form-select form-select-sm">
+                        <select className="form-select form-select-sm" id="difficulty" name="difficulty" value={newGroup.difficulty}
+                                onChange={(e) =>
+                                    setNewGroup({...newGroup, difficulty: Number(e.target.value)})}  style={{marginBottom: "30%"}}>
                              {options.map((o) => (
-                                 <option key={o.value} onSelect={() =>
-                                    setNewGroup({...newGroup, difficulty: o.value})
-                                 } value={o.value}>{o.label}</option>))}
+                                 <option key={o.value} value={o.value}>{o.label}</option>))}
                         </select>
                     </label>
+
+                    <div className="form-check" style={{textAlign: "start"}}>
+                        <input className="form-check-input" type="checkbox" name="isPublic" checked={newGroup.isPublic} id="isPublic" onChange={(e) => {
+                            if (e.target.value) setNewGroup({...newGroup, isPublic: e.target.checked})
+                        }}/>
+                        <label className="form-check-label" htmlFor="isPublic" >
+                            Publiczna
+                        </label>
+                    </div>
+
                     <div style={{justifyContent: "center", marginTop: "10%"}}>
                         <button type="submit" onClick={handleSubmit} className="btn btn-outline-info">Dodaj grupę</button>
                     </div>
