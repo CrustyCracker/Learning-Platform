@@ -15,6 +15,7 @@ export function Group(props: GroupProps) {
     const [description, setDesctription] = useState("");
     const [difficulty, setDifficulty] = useState(-1);
     const [user, setUser] = useState("");
+    //pzsp2 - zaimplementować wczytywanie listy fiszek
     const [cards, setCards] = useState<CardResponse[]>([]);
     const {id} = useParams();
 
@@ -97,26 +98,26 @@ export function Group(props: GroupProps) {
                 </div>
             </div>
         </div>
-                <table style={tableStyle} className={"table table-dark center"}>
-                    <thead>
-                    <tr>
-                        <th style={{ width: "25%" }}>Pytanie</th>
-                        <th style={{ width: "25%" }}>Odpowiedź</th>
-                        <th style={{ width: "25%" }}>Źródło</th>
-                        <th style={{ width: "5%" }}> </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {cards && cards.map(card => {
-                        return <tr key={card.id}>
-                            <td style={tdStyleWrap}>{card.question}</td>
-                            <td style={tdStyleWrap}>{card.answer}</td>
-                            <td style={tdStyleWrap}>{card.source}</td>
-                            <td><Link to={`/cards/${card.id}`} style={{ textDecoration: 'none' }}>{">"}</Link></td>
-                        </tr>
-                    })}
-                    </tbody>
-                </table>
+        <table style={tableStyle} className={"table table-dark center"}>
+            <thead>
+            <tr>
+                <th style={{ width: "25%" }}>Pytanie</th>
+                <th style={{ width: "25%" }}>Odpowiedź</th>
+                <th style={{ width: "25%" }}>Źródło</th>
+                <th style={{ width: "5%" }}> </th>
+            </tr>
+            </thead>
+            <tbody>
+            {cards && cards.map(card => {
+                return <tr key={card.id}>
+                    <td style={tdStyleWrap}>{card.question}</td>
+                    <td style={tdStyleWrap}>{card.answer}</td>
+                    <td style={tdStyleWrap}>{card.source}</td>
+                    <td><Link to={`/cards/${card.id}`} style={{ textDecoration: 'none' }}>{">"}</Link></td>
+                </tr>
+            })}
+            </tbody>
+        </table>
         <div className="container-fluid" style={{width: "80%"}}>
             <div className="row" style={{ marginTop: "5%"}}>
                 <div className="col-lg-12 col-md-12 col-sm-12" style={{textAlign: "end"}}>
