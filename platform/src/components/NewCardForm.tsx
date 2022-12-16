@@ -80,7 +80,7 @@ export function NewCardForm(props: NewCardFormProps) {
                     <div className="card-header">Źródło</div>
                     <div className="form w-100 h-100">
                         <textarea className="form-control" id="source" name="source"
-                                  maxLength={500} spellCheck="false" required onChange={(e) => {
+                                  maxLength={2000} spellCheck="false" required onChange={(e) => {
                                              setNewCard({...newCard, source: e.target.value})}}>
                         </textarea>
                     </div>

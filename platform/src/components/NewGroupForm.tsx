@@ -56,14 +56,14 @@ export function NewGroupForm(props: NewCardFormProps) {
                 <div className="card text-white bg-dark" style={cardStyle}>
                     <label style={{margin: 0, textAlign: 'start'}}>
                         <small> Nazwa </small>
-                        <input className="form-control" type="text" name="name" style={{marginBottom: "10%"}} onChange={(e) => {
+                        <input className="form-control" type="text" name="name" style={{marginBottom: "10%"}} maxLength={100} onChange={(e) => {
                         setNewGroup({...newGroup, name: e.target.value})}} />
                     </label>
                     <div className="form">
                         <label style={{margin: 0, textAlign: 'start'}}>
                             <small> Opis </small>
                             <textarea className="form-control" id="description" name="description" value={newGroup.description} style={{marginBottom: "10%"}}
-                                      maxLength={500} spellCheck="false" required onChange={(e) => {
+                                      maxLength={1000} spellCheck="false" required onChange={(e) => {
                                 setNewGroup({...newGroup, description: e.target.value})}}>
                             </textarea>
                         </label>
