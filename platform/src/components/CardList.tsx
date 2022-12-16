@@ -59,17 +59,6 @@ export function CardList(props: CardListProps) {
         e.preventDefault();
     }
 
-    const tableStyle = {
-        width: "80%",
-        marginLeft: "auto",
-        marginRight: "auto",
-        tableLayout: "fixed" as unknown as undefined
-    }
-
-    const tdStyleWrap = {
-        wordWrap: "break-word" as unknown as undefined
-    }
-
     return <>
 {/*        <link
             //pzsp2 -> zrobić ładny import bootstrapa
@@ -102,7 +91,7 @@ export function CardList(props: CardListProps) {
             </div>
         </div>
 
-        <table style={tableStyle} className={"table table-dark center"}>
+        <table className={"table table-dark center pzsp-table"}>
             <thead>
                 <tr>
                     <th style={{ width: "40%" }}>Pytanie</th>
@@ -115,9 +104,9 @@ export function CardList(props: CardListProps) {
             <tbody>
                 {currCards && currCards.map(card => {
                     return <tr key={card.id}>
-                        <td style={tdStyleWrap}>{card.question}</td>
-                        <td style={tdStyleWrap}>{card.groups}</td>
-                        <td style={tdStyleWrap}>{card.tags}</td>
+                        <td className="pzsp-td">{card.question}</td>
+                        <td className="pzsp-td">{card.groups}</td>
+                        <td className="pzsp-td">{card.tags}</td>
                         <td>{isPublicToString(card.isPublic)}</td>
 
                         <td><Link to={`${card.id}`} style={{ textDecoration: 'none' }}>{">"}</Link></td>

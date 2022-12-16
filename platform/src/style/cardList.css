@@ -40,3 +40,14 @@
 .container-fluid{
     width: 80%;
 }
+
+.pzsp-table{
+    width: 80%;
+    marginLeft: "auto";
+    marginRight: "auto";
+    tableLayout: "fixed"
+}
+
+.pzsp-td{
+    wordWrap: "break-word"
+}
