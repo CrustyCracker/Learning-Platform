@@ -82,10 +82,10 @@ export function Card(props: CardProps) {
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-6" style={{textAlign: "end"}}>
                     <form onSubmit={EditCard} style={{float: "right"}}>
-                        <button type="submit" className="btn btn-danger">Usuń</button>
+                        <button type="submit" className="btn btn-outline-danger">Usuń</button>
                     </form>
                     <form onSubmit={DeleteCard} style={{float: "right", marginRight: "2%"}}>
-                        <button type="submit" className="btn btn-info">Edytuj</button>
+                        <button type="submit" className="btn btn-outline-info">Edytuj</button>
                     </form>
                 </div>
 
