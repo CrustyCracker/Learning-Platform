@@ -62,4 +62,9 @@ public class CardService implements ICardService {
 
     @Override
     public Card findCardById(Long cardId) { return cardRepository.findCardById(cardId); }
+
+    @Override
+    public List<Card> findCardsByGroupsId(Long groupId) {
+        return cardRepository.findCardsByGroupsId(groupId);
+    }
 }

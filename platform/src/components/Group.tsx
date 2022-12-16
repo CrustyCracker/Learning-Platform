@@ -33,7 +33,17 @@ export function Group(props: GroupProps) {
                 setUser(res.res.username);
                 props.onSuccess(res.res);
             }
-        });
+        }
+        );
+        Requests.CardsByGroupsId(Number(id)).then(res => {
+                if (res.err) {
+                    props.onError(res.err);
+                }
+                else if (res.res){
+                    setCards(res.res);
+                }
+            }
+        );
     }, [props])
 
     const EditGroup = (e: FormEvent) => {
@@ -82,7 +92,6 @@ export function Group(props: GroupProps) {
                             <button type="submit" className="btn btn-outline-danger">Test</button>
                         </form>
                     </div>
-
                 </div>
                 <div className="col-lg-6 col-md-12 col-sm-12">
                     <div className="card text-white bg-dark" style={{marginTop: "2%"}}>

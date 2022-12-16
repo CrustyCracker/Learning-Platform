@@ -20,4 +20,6 @@ public interface ICardRepository extends JpaRepository<Card, Long> {
     List<Card> findByUserIdOrPublic(Long userId, boolean isPublic);
 
     Card findCardById(Long cardId);
+
+    List<Card> findCardsByGroupsId(Long groupId);
 }
