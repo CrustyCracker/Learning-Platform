@@ -11,4 +11,7 @@ public interface IGroupService {
     Group create(NewGroupRequest request, User user) throws BackendException;
 
     List<Group> findGroupsByUser(Long userId);
+
+    Group findGroupById(Long groupId);
+
 }

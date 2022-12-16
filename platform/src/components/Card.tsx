@@ -9,7 +9,7 @@ interface CardProps {
     onSuccess: (response: CardResponse) => void,
     onError: (err: ErrorResponse) => void
 }
-
+// pzsp2 - przerobić useState na [card, setCard] zamiast rozbicia na mniejsze elementy
 export function Card(props: CardProps) {
     const [question, setQuestion] = useState("");
     const [answer, setAnswer] = useState("");
