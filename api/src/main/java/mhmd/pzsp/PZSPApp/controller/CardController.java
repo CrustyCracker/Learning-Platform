@@ -59,4 +59,21 @@ public class CardController {
         var user = accountService.defaultAdmin();
         return new CardResponse(cardService.create(request, user));
     }
+
+    @GetMapping("{id}")
+    public CardResponse cardById(@PathVariable Long id) throws BackendException {
+        var card = cardService.findCardById(id);
+        if (card == null)
+            throw new BackendException("Brak karty o danym id w bazie danych");
+        return new CardResponse(card);
+    }
+
+    @GetMapping("group/{id}")
+    public List<CardResponse> cardsByGroupId(@PathVariable Long id) {
+        // pzsp2 dodać sprawdzenie czy grupa publiczna. Jeśli nie, to sprawdzanie czy user zgadza się z zalogowanym
+        var groupCards = new ArrayList<CardResponse>();
+        var cards = cardService.findCardsByGroupsId(id);
+        cards.forEach(card -> groupCards.add(new CardResponse(card)));
+        return groupCards;
+    }
 }
