@@ -4,6 +4,7 @@ import {ErrorResponse} from "../types/ErrorResponse";
 import {Link, useParams} from "react-router-dom";
 import {GroupResponse} from "../types/Groups";
 import {CardResponse} from "../types/Cards";
+import '../style/group.css';
 
 interface GroupProps {
     onSuccess: (response: GroupResponse) => void,
@@ -74,34 +75,30 @@ export function Group(props: GroupProps) {
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossOrigin="anonymous"
         />
-        <div className="container-fluid" style={{width: "80%"}}>
-            <div className="row">
-                <div className="col-lg-6 col-md-12 col-sm-12" style={{textAlign: "start"}}>
-                    <h1> {group.name} </h1>
-                    <h4> Właściciel: {group.username} </h4>
-                    <h4> Trudność: {group.difficulty} </h4>
-                    <div>
-                        <form onSubmit={Learn} style={{float: "left"}}>
-                            <button type="submit" className="btn btn-outline-warning">Ucz się</button>
-                        </form>
-                        <form onSubmit={Test} style={{float: "left", marginLeft: "2%"}}>
-                            <button type="submit" className="btn btn-outline-danger">Test</button>
-                        </form>
-                    </div>
+        <div className="container-fluid" style={{width: "80%", padding: "0"}}>
+            <div className="row" >
+                <div className="col-lg-6 col-md-12 col-sm-12" >
+                    <h1 style={{wordWrap: "break-word", textAlign: "center"}}> {group.name} </h1>
+                    <h4 style={{textAlign: "center"}}> Właściciel: {group.username} </h4>
+                    <h4 style={{textAlign: "center"}}> Trudność: {group.difficulty} </h4>
                 </div>
                 <div className="col-lg-6 col-md-12 col-sm-12">
                     <div className="card text-white bg-dark" style={{marginTop: "2%"}}>
-                        <div className="card-header">
-                            <small style={{textAlign: "start"}}>
-                                Opis
+                        <div className="card-header">Opis</div>
+                        <div className="card-body" style={{maxWidth: "90%", lineHeight: 1}}>
+                            <small className="card-text" style={{wordWrap: "break-word", fontSize: "15px"}}>
+                                {group.description}
                             </small>
-                        </div>
-                        <div className="card-body">
-                            {group.description}
                         </div>
                     </div>
                 </div>
             </div>
+            <form onSubmit={Learn} style={{float: "left", margin: "0%, 0%, 0%, 0%"}}>
+                <button type="submit" className="btn btn-outline-warning">Ucz się</button>
+            </form>
+            <form onSubmit={Test} style={{float: "left", marginLeft: "1%"}}>
+                <button type="submit" className="btn btn-outline-danger">Test</button>
+            </form>
         </div>
         <table style={tableStyle} className={"table table-dark center"}>
             <thead>

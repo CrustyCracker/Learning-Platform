@@ -35,10 +35,6 @@ export function GroupList(props: GroupListProps) {
         tableLayout: "fixed" as unknown as undefined
     }
 
-    const tdStyleWrap = {
-        wordWrap: "break-word" as unknown as undefined
-    }
-
     return <>
     <link
         //pzsp2 -> zrobić ładny import bootstrapa
@@ -62,9 +58,9 @@ export function GroupList(props: GroupListProps) {
         <tbody>
             {groups && groups.map(group => {
                 return <tr key={group.id}>
-                    <td style={tdStyleWrap}>{group.name}</td>
-                    <td style={tdStyleWrap}>{group.description}</td>
-                    <td style={tdStyleWrap}>{group.difficulty}</td>
+                    <td className="pzsp-td-ellipsis">{group.name}</td>
+                    <td className="pzsp-td-ellipsis">{group.description}</td>
+                    <td className="pzsp-td-wrap">{group.difficulty}</td>
                     <td>{isPublicToString(group.isPublic)}</td>
 
                     <td><Link to={`${group.id}`} style={{ textDecoration: 'none' }}>{">"}</Link></td>

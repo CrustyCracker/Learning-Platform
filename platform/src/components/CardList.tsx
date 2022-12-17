@@ -60,24 +60,25 @@ export function CardList(props: CardListProps) {
     }
 
     return <>
-{/*        <link
+        <link
             //pzsp2 -> zrobić ładny import bootstrapa
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossOrigin="anonymous"
-        />*/}
+        />
         <h1>Moje fiszki</h1>
-
+        <div className="container-fluid" style={{width: "80%", padding: "0"}}>
         <TagsInput
             value={tags}
             onChange={e => filterByTags(e || [])}
             name="tagi"
             placeHolder="Dodaj tag..."
         />
-        <p style={{ margin: "0% 0% 2% 10%" ,textAlign: "left", fontSize: "12px"}}>
+        <p style={{ marginTop: "0.5%", textAlign: "left", fontSize: "12px"}}>
             <em>Wyszukaj po tagu... Kilknij ENTER, aby dodać nowy tag.</em>
         </p>
+        </div>
         <div className="container-fluid" style={{width: "80%", padding: "0"}}>
             <div className="row" style={{ marginBottom: "1%"}}>
                 <div>
@@ -91,7 +92,7 @@ export function CardList(props: CardListProps) {
             </div>
         </div>
 
-        <table className={"table table-dark center pzsp-table"}>
+        <table className={"table table-dark center pzsp-table"} style={{ width: "80%" }}>
             <thead>
                 <tr>
                     <th style={{ width: "40%" }}>Pytanie</th>
@@ -104,9 +105,9 @@ export function CardList(props: CardListProps) {
             <tbody>
                 {currCards && currCards.map(card => {
                     return <tr key={card.id}>
-                        <td className="pzsp-td">{card.question}</td>
-                        <td className="pzsp-td">{card.groups}</td>
-                        <td className="pzsp-td">{card.tags}</td>
+                        <td className="pzsp-td-wrap">{card.question}</td>
+                        <td className="pzsp-td-wrap">{card.groups}</td>
+                        <td className="pzsp-td-wrap">{card.tags}</td>
                         <td>{isPublicToString(card.isPublic)}</td>
 
                         <td><Link to={`${card.id}`} style={{ textDecoration: 'none' }}>{">"}</Link></td>

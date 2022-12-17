@@ -48,24 +48,30 @@ export function Card(props: CardProps) {
             <div className="col-lg-4 col-md-12 col-sm-12">
                 <div className="card h-100 text-white bg-dark" >
                     <div className="card-header">Pytanie</div>
-                    <div className="card-body">
-                        {card.question}
+                    <div className="card-body" style={{maxWidth: "90%"}}>
+                        <small className="card-text" style={{wordWrap: "break-word"}}>
+                            {card.question}
+                        </small>
                     </div>
                 </div>
             </div>
             <div className="col-lg-4 col-md-12 col-sm-12">
                 <div className="card h-100 text-white bg-dark" >
                     <div className="card-header">Odpowiedź</div>
-                    <div className="card-body">
-                        {card.answer}
+                    <div className="card-body" style={{maxWidth: "90%"}}>
+                        <small className="card-text" style={{wordWrap: "break-word"}}>
+                            {card.answer}
+                        </small>
                     </div>
                 </div>
             </div>
             <div className="col-lg-4 col-md-12 col-sm-12">
                 <div className="card h-100 text-white bg-dark" >
                     <div className="card-header">Źródło</div>
-                    <div className="card-body">
-                        {card.source}
+                    <div className="card-body" style={{maxWidth: "90%"}}>
+                        <small className="card-text" style={{wordWrap: "break-word"}}>
+                            {card.source}
+                        </small>
                     </div>
                 </div>
             </div>
