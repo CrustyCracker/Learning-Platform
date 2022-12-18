@@ -13,7 +13,6 @@ interface GroupProps {
 
 export function Group(props: GroupProps) {
     const [group, setGroup] = useState({} as GroupResponse);
-    //pzsp2 - zaimplementować wczytywanie listy fiszek
     const [cards, setCards] = useState<CardResponse[]>([]);
     const {id} = useParams();
     const navigate = useNavigate();

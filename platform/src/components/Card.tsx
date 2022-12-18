@@ -36,7 +36,14 @@ export function Card(props: CardProps) {
 
     const DeleteCard = (e: FormEvent) => {
         e.preventDefault()
-        // pzsp2 dorobić to
+        Requests.deleteCard(card.id).then(res => {
+            if (res.err) {
+                props.onError(res.err)
+            }
+            else if (res.res){
+                navigate(-1)
+            }
+        })
     }
 
     return <div className="container-fluid" style={{width: "80%"}}>
