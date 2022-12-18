@@ -92,4 +92,22 @@ export class Requests {
             .then(res => res.json())
         return setResponseOrError(response);
     }
+
+    static async editGroup(groupData: GroupResponse): Promise<GenericResponse<GroupResponse>> {
+        const response = await fetchPost(groupData, "/groups/edit")
+            .then(res => res.json())
+        return setResponseOrError(response);
+    }
+
+    static async editCard(cardData: CardResponse): Promise<GenericResponse<CardResponse>> {
+        const response = await fetchPost(cardData, "/cards/edit")
+            .then(res => res.json())
+        return setResponseOrError(response);
+    }
+
+    static async deleteCard(id: number):  Promise<GenericResponse<boolean>> {
+        const response = await fetch(Global.backendUrl + "/cards/delete/" + id)
+            .then(res => res.json())
+        return setResponseOrError(response);
+    }
 }

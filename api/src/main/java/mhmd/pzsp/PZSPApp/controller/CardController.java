@@ -76,4 +76,9 @@ public class CardController {
         cards.forEach(card -> groupCards.add(new CardResponse(card)));
         return groupCards;
     }
+
+    @GetMapping("delete/{id}")
+    public boolean delete(@PathVariable Long id) throws BackendException {
+        return cardService.delete(id);
+    }
 }

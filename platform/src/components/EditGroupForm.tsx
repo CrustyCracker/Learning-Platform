@@ -1,19 +1,34 @@
-import React, {FormEvent, useState} from "react";
+import React, {FormEvent, useEffect, useState} from "react";
 import {Requests} from "../requests/Requests";
-import {GroupResponse, NewGroup} from "../types/Groups";
+import {GroupResponse} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
-import {useNavigate} from "react-router-dom";
-import '../style/newGroupForm.css';
+import {useNavigate, useParams} from "react-router-dom";
+import '../style/editGroupForm.css';
 
-interface NewGroupFormProps {
+interface EditGroupFormProps {
     onSuccess: (response: GroupResponse) => void
     onError: (err: ErrorResponse) => void
 }
 
-export function NewGroupForm(props: NewGroupFormProps) {
-    const [newGroup, setNewGroup] = useState({} as NewGroup);
-
+export function EditGroupForm(props: EditGroupFormProps) {
+    const [group, setGroup] = useState({} as GroupResponse);
+    const {id} = useParams();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        Requests.GroupId(Number(id)).then(res => {
+            if (res.err) {
+                setGroup({...{} as GroupResponse, name: res.err.message})
+                setGroup({...{} as GroupResponse, description: res.err.debugMessage})
+                props.onError(res.err);
+            }
+            else if (res.res){
+                setGroup(res.res);
+                props.onSuccess(res.res);
+            }
+        });
+    }, [id])
+
 
     let options = []
     for (let i=1; i <= 10; i++)
@@ -21,16 +36,16 @@ export function NewGroupForm(props: NewGroupFormProps) {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        if (!newGroup)
+        if (!group)
             return;
-        Requests.createGroup(newGroup).then(res => {
+        Requests.editGroup(group).then(res => {
             if (res.err) {
                 props.onError(res.err);
             }
             else if (res.res){
                 props.onSuccess(res.res)
             }
-            navigate('/')
+            navigate('/groups/'+ group.id)
         });
     }
 
@@ -51,31 +66,31 @@ export function NewGroupForm(props: NewGroupFormProps) {
         <div className="card text-white bg-dark" style={cardStyle}>
             <label style={{margin: 0, textAlign: 'start'}}>
                 <small> Nazwa </small>
-                <input className="form-control" type="text" name="name" style={{marginBottom: "10%"}} maxLength={100} onChange={(e) => {
-                    setNewGroup({...newGroup, name: e.target.value})}} />
+                <input className="form-control" type="text" name="name" value={group.name} style={{marginBottom: "10%"}} maxLength={100} onChange={(e) => {
+                    setGroup({...group, name: e.target.value})}} />
             </label>
             <div className="form">
                 <label style={{margin: 0, textAlign: 'start'}}>
                     <small> Opis </small>
-                    <textarea className="form-control" id="description" name="description" value={newGroup.description} style={{marginBottom: "10%"}}
+                    <textarea className="form-control" id="description" name="description" value={group.description} style={{marginBottom: "10%"}}
                               maxLength={1000} spellCheck="false" required onChange={(e) => {
-                        setNewGroup({...newGroup, description: e.target.value})}}>
+                        setGroup({...group, description: e.target.value})}}>
                     </textarea>
                 </label>
             </div>
             <label>
                 <small> Trudność </small>
-                <select className="form-select form-select-sm" id="difficulty" name="difficulty" value={newGroup.difficulty}
+                <select className="form-select form-select-sm" id="difficulty" name="difficulty" value={group.difficulty}
                         onChange={(e) =>
-                            setNewGroup({...newGroup, difficulty: Number(e.target.value)})}  style={{marginBottom: "30%"}}>
+                            setGroup({...group, difficulty: Number(e.target.value)})}  style={{marginBottom: "30%"}}>
                      {options.map((o) => (
                          <option key={o.value} value={o.value}>{o.label}</option>))}
                 </select>
             </label>
 
             <div className="form-check" style={{textAlign: "start"}}>
-                <input className="form-check-input" type="checkbox" name="isPublic" checked={newGroup.isPublic} id="isPublic" onChange={(e) => {
-                    if (e.target.value) setNewGroup({...newGroup, isPublic: e.target.checked})
+                <input className="form-check-input" type="checkbox" name="isPublic" checked={group.isPublic} id="isPublic" onChange={(e) => {
+                    if (e.target.value) setGroup({...group, isPublic: e.target.checked})
                 }}/>
                 <label className="form-check-label" htmlFor="isPublic" >
                     Publiczna
@@ -83,7 +98,7 @@ export function NewGroupForm(props: NewGroupFormProps) {
             </div>
 
             <div style={{justifyContent: "center", marginTop: "10%"}}>
-                <button type="submit" onClick={handleSubmit} className="btn btn-outline-info">Dodaj grupę</button>
+                <button type="submit" onClick={handleSubmit} className="btn btn-outline-success">Edytuj grupę</button>
             </div>
         </div>
     </form>

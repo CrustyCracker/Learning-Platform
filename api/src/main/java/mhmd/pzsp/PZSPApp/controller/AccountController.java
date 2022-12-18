@@ -16,7 +16,6 @@ public class AccountController {
     private final IAccountService accountService;
 
     // pzsp2 przy endpointach jakieś sensowniejsze sprawdzenia danych/error handling
-    // pzsp2 nie ma testów na kontrolery
 
     @Autowired
     public AccountController(IAccountService accountService){

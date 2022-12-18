@@ -19,4 +19,6 @@ public interface ICardService {
     Card create(NewCardRequest request, User user) throws BackendException;
 
     List<Card> findCardsByGroupsId(Long groupId);
+
+    boolean delete(Long cardId) throws BackendException;
 }

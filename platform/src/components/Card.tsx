@@ -2,7 +2,7 @@ import React, {FormEvent, useEffect, useState} from "react";
 import {Requests} from "../requests/Requests";
 import {CardResponse} from "../types/Cards";
 import {ErrorResponse} from "../types/ErrorResponse";
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import '../style/card.css';
 
 interface CardProps {
@@ -13,6 +13,7 @@ interface CardProps {
 export function Card(props: CardProps) {
     const [card, setCard] = useState({} as CardResponse)
     const {id} = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         Requests.CardId(Number(id)).then(res => {
@@ -30,12 +31,19 @@ export function Card(props: CardProps) {
 
     const EditCard = (e: FormEvent) => {
         e.preventDefault()
-        // pzsp2 dorobić to
+        navigate('/cards/'+ card.id + '/edit')
     }
 
     const DeleteCard = (e: FormEvent) => {
         e.preventDefault()
-        // pzsp2 dorobić to
+        Requests.deleteCard(card.id).then(res => {
+            if (res.err) {
+                props.onError(res.err)
+            }
+            else if (res.res){
+                navigate(-1)
+            }
+        })
     }
 
     return <div className="container-fluid" style={{width: "80%"}}>
@@ -81,10 +89,10 @@ export function Card(props: CardProps) {
                 Tagi: {card.tags}
             </div>
             <div className="col-lg-6 col-md-6 col-sm-6" style={{textAlign: "end"}}>
-                <form onSubmit={EditCard} style={{float: "right"}}>
+                <form onSubmit={DeleteCard} style={{float: "right"}}>
                     <button type="submit" className="btn btn-outline-danger">Usuń</button>
                 </form>
-                <form onSubmit={DeleteCard} style={{float: "right", marginRight: "2%"}}>
+                <form onSubmit={EditCard} style={{float: "right", marginRight: "2%"}}>
                     <button type="submit" className="btn btn-outline-info">Edytuj</button>
                 </form>
             </div>
