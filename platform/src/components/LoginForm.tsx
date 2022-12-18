@@ -2,7 +2,6 @@ import React, {FormEvent, useState} from 'react';
 import {Requests} from "../requests/Requests";
 import {Credentials, LoginResponse} from "../types/Credentials";
 import {ErrorResponse} from "../types/ErrorResponse";
-import { Link } from "react-router-dom";
 import '../style/login.css';
 
 interface LoginFormProps {
@@ -18,11 +17,17 @@ export function LoginForm(props: LoginFormProps) {
         if (!credentials)
             return;
         Requests.login(credentials).then(res => {
-            if (res.err) {
+            if (res?.res?.success){
+                props.onSuccess(res.res);
+            }
+            else if (!res?.res?.success){
+                props.onError({ message: "Niepoprawne hasło dla tego użytkownika.", debugMessage: "", status: 0, timestamp: new Date()})
+            }
+            else if (res.err) {
                 props.onError(res.err);
             }
-            else if (res.res){
-                props.onSuccess(res.res);
+            else {
+                props.onError({ message: "Błąd logowania.", debugMessage: "", status: 0, timestamp: new Date()})
             }
         });
     }
@@ -56,8 +61,6 @@ export function LoginForm(props: LoginFormProps) {
                 </label>
                 <div style={{justifyContent: "center", marginTop: "4%"}}></div>
                 <button type="submit" onClick={handleSubmit} className="btn btn-outline-info">Zaloguj się</button>
-                <div style={{justifyContent: "center", marginTop: "4%"}}></div>
-                <small>Nie masz konta? <Link to="/register">Załóż konto</Link></small> 
             </div>
         </form>
     </>)
