@@ -1,7 +1,7 @@
 import React, {FormEvent, useEffect, useState} from "react";
 import {Requests} from "../requests/Requests";
 import {ErrorResponse} from "../types/ErrorResponse";
-import {Link, useParams} from "react-router-dom";
+import {Link, useParams, useNavigate} from "react-router-dom";
 import {GroupResponse} from "../types/Groups";
 import {CardResponse} from "../types/Cards";
 import '../style/group.css';
@@ -16,6 +16,7 @@ export function Group(props: GroupProps) {
     //pzsp2 - zaimplementować wczytywanie listy fiszek
     const [cards, setCards] = useState<CardResponse[]>([]);
     const {id} = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         Requests.GroupId(Number(id)).then(res => {
@@ -41,6 +42,7 @@ export function Group(props: GroupProps) {
 
     const EditGroup = (e: FormEvent) => {
         e.preventDefault()
+        navigate('/groups/'+ group.id + '/edit')
     }
 
     const DeleteGroup= (e: FormEvent) => {
@@ -123,10 +125,10 @@ export function Group(props: GroupProps) {
         <div className="container-fluid" style={{width: "80%"}}>
             <div className="row" style={{ marginTop: "5%"}}>
                 <div className="col-lg-12 col-md-12 col-sm-12" style={{textAlign: "end"}}>
-                    <form onSubmit={EditGroup} style={{float: "right"}}>
+                    <form onSubmit={DeleteGroup} style={{float: "right"}}>
                         <button type="submit" className="btn btn-outline-danger">Usuń</button>
                     </form>
-                    <form onSubmit={DeleteGroup} style={{float: "right", marginRight: "2%"}}>
+                    <form onSubmit={EditGroup} style={{float: "right", marginRight: "2%"}}>
                         <button type="submit" className="btn btn-outline-info">Edytuj</button>
                     </form>
                 </div>

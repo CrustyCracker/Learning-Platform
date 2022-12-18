@@ -92,4 +92,10 @@ export class Requests {
             .then(res => res.json())
         return setResponseOrError(response);
     }
+
+    static async editGroup(groupData: GroupResponse): Promise<GenericResponse<GroupResponse>> {
+        const response = await fetchPost(groupData, "/groups/edit")
+            .then(res => res.json())
+        return setResponseOrError(response);
+    }
 }
