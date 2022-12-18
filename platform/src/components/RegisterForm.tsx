@@ -3,7 +3,6 @@ import {RegisterCredentials, RegisterResponse} from '../types/Credentials';
 import {Requests} from "../requests/Requests";
 import {ErrorResponse} from "../types/ErrorResponse";
 import '../style/register.css';
-import { Link } from 'react-router-dom';
 
 
 interface RegisterFormProps {
@@ -26,6 +25,7 @@ export function RegisterForm(props: RegisterFormProps) {
             }
             else if (res.res){
                 props.onSuccess(res.res)
+
             }
         })
     }
@@ -43,7 +43,7 @@ export function RegisterForm(props: RegisterFormProps) {
         // pzsp2 wywalić do css
         margin: "5% 0",
         minHeight: '420px',
-        minWidth: '420px',
+        minWidth: '600px',
         alignItems: 'center',
         justifyContent: 'center',
         padding: '5%'
@@ -52,25 +52,25 @@ export function RegisterForm(props: RegisterFormProps) {
     return <div>
         <form onSubmit={handleSubmit}>
             <div className="card text-white bg-dark" style={cardStyle}>
-                 <label style={{margin: 0, textAlign: 'start', minWidth: "80%"}}>
+                 <label style={{margin: 0, textAlign: 'start', width: "70%"}}>
                     <small>Nazwa użytkownika</small>
                     <input className="form-control" type="text" name="username" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
                         setCredentials({...credentials, username: e.target.value})
                     }} />
                 </label>
-                <label style={{margin: 0, textAlign: 'start', minWidth: "80%"}}>
+                <label style={{margin: 0, textAlign: 'start', width: "70%"}}>
                     <small>Email</small>
                     <input className="form-control" type="text" name="email" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
                         setCredentials({...credentials, email: e.target.value})
                     }} />
                 </label>
-                <label style={{margin: 0, textAlign: 'start', minWidth: "80%"}}>
+                <label style={{margin: 0, textAlign: 'start', width: "70%"}}>
                     <small>Hasło</small>
                     <input className="form-control" type="password" name="password" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
                         setCredentials({...credentials, password: e.target.value})
                     }} />
                 </label>
-                <label style={{margin: 0, textAlign: 'start', minWidth: "80%"}}>
+                <label style={{margin: 0, textAlign: 'start', width: "70%"}}>
                 <small>Powtórz hasło</small>
                     <input className="form-control" type="password" name="password" required onChange={confirmPasswordOnChange} />
                     {!isConfirmedPassword &&
@@ -79,9 +79,6 @@ export function RegisterForm(props: RegisterFormProps) {
                 </label>
                 <div style={{justifyContent: "center", marginTop: "4%"}}></div>
                 <button type="submit" onClick={handleSubmit} className="btn btn-outline-info">Zarejestruj się</button>
-                <div>
-                <small>Masz już konto? <Link to="/login">Zaloguj się</Link></small>
-                </div>
             </div>
         </form>
     </div>

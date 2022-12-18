@@ -13,6 +13,7 @@ import {Group} from "../components/Group";
 import {EditGroupForm} from "../components/EditGroupForm";
 import {EditCardForm} from "../components/EditCardForm";
 import LoginPage from "./LoginPage";
+import RegisterPage from './RegisterPage';
 
 export default function App() {
     const [, setError] = useState("");
@@ -43,7 +44,7 @@ export default function App() {
                         <Route path="/groups/:id/edit" element={<EditGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/groups/new" element={<NewGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/login" element={<LoginPage/>} />
-                        <Route path="/register" element={<RegisterForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/register" element={<RegisterPage />} />
                     </Routes>
                 </BrowserRouter>
             </header>
