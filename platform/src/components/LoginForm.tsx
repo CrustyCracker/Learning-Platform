@@ -50,7 +50,7 @@ export function LoginForm(props: LoginFormProps) {
                 </label>
                 <label style={{margin: 0, textAlign: 'start', minWidth: "80%"}}>
                     <small>Hasło</small>
-                    <input className="form-control" type="text" name="password" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
+                    <input className="form-control" type="password" name="password" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
                         setCredentials({...credentials, password: e.target.value})
                     }} />
                 </label>
