@@ -5,12 +5,12 @@ import {ErrorResponse} from "../types/ErrorResponse";
 import {useNavigate} from "react-router-dom";
 import '../style/newGroupForm.css';
 
-interface NewCardFormProps {
+interface NewGroupFormProps {
     onSuccess: (response: GroupResponse) => void
     onError: (err: ErrorResponse) => void
 }
 
-export function NewGroupForm(props: NewCardFormProps) {
+export function NewGroupForm(props: NewGroupFormProps) {
     const [newGroup, setNewGroup] = useState({} as NewGroup);
 
     const navigate = useNavigate();
