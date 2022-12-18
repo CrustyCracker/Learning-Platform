@@ -98,4 +98,10 @@ export class Requests {
             .then(res => res.json())
         return setResponseOrError(response);
     }
+
+    static async editCard(cardData: CardResponse): Promise<GenericResponse<CardResponse>> {
+        const response = await fetchPost(cardData, "/cards/edit")
+            .then(res => res.json())
+        return setResponseOrError(response);
+    }
 }
