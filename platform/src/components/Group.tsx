@@ -21,8 +21,7 @@ export function Group(props: GroupProps) {
         Requests.GroupId(Number(id)).then(res => {
             if (res.err) {
                 // pzsp2 bardzo zły pomysł ze wsadzaniem do GroupResponse komunikatów o błędzie
-                setGroup({...{} as GroupResponse, name: res.err.message})
-                setGroup({...{} as GroupResponse, description: res.err.debugMessage})
+                setGroup({} as GroupResponse);
                 props.onError(res.err);
             }
             else if (res.res){

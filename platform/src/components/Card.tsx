@@ -18,9 +18,7 @@ export function Card(props: CardProps) {
     useEffect(() => {
         Requests.CardId(Number(id)).then(res => {
             if (res.err) {
-                // pzsp2 bardzo zły pomysł ze wsadzaniem do CardResponse komunikatów o błędzie
-                setCard({...{} as CardResponse, question: res.err.message});
-                setCard({...{} as CardResponse, answer: res.err.debugMessage});
+                setCard({} as CardResponse);
                 props.onError(res.err);
             }
             else if (res.res){
