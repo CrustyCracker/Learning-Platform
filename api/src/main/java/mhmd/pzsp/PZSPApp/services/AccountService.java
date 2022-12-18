@@ -3,12 +3,16 @@ package mhmd.pzsp.PZSPApp.services;
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.models.User;
+import mhmd.pzsp.PZSPApp.models.api.BackendUserPrincipal;
 import mhmd.pzsp.PZSPApp.models.api.requests.LoginRequest;
 import mhmd.pzsp.PZSPApp.models.api.requests.RegisterRequest;
 import mhmd.pzsp.PZSPApp.repositories.IUserRepository;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKeyFactory;
@@ -18,7 +22,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 @Service
-public class AccountService implements IAccountService {
+public class AccountService implements IAccountService, UserDetailsService {
     @Autowired
     private IUserRepository userRepository;
 
@@ -120,5 +124,13 @@ public class AccountService implements IAccountService {
         if (admin.isEmpty())
             throw new BackendException("Brak konta administratora w bazie danych");
         return admin.get();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        var user = userRepository.findByUsername(username);
+        if (user.isPresent())
+            return new BackendUserPrincipal(user.get());
+        throw new UsernameNotFoundException("test");
     }
 }
