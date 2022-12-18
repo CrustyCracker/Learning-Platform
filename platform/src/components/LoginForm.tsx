@@ -35,8 +35,8 @@ export function LoginForm(props: LoginFormProps) {
 
     const cardStyle = {
         margin: "5% 0",
-        minHeight: '420px',
-        minWidth: '420px',
+        height: '420px',
+        width: '600px',
         alignItems: 'center',
         justifyContent: 'center',
         padding: '5%'
@@ -47,13 +47,13 @@ export function LoginForm(props: LoginFormProps) {
     
         <form onSubmit={handleSubmit}>
             <div className="card text-white bg-dark" style={cardStyle}>
-                <label style={{margin: 0, textAlign: 'start', minWidth: "80%"}}>
+                <label style={{margin: 0, textAlign: 'start', width: "70%"}}>
                     <small>Nazwa użytkownika</small>
                     <input className="form-control" type="text" name="username" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
                         setCredentials({...credentials, username: e.target.value})
                     }} />
                 </label>
-                <label style={{margin: 0, textAlign: 'start', minWidth: "80%"}}>
+                <label style={{margin: 0, textAlign: 'start', width: "70%"}}>
                     <small>Hasło</small>
                     <input className="form-control" type="password" name="password" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
                         setCredentials({...credentials, password: e.target.value})

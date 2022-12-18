@@ -41,7 +41,9 @@ export function NewCardForm(props: NewCardFormProps) {
             else if (res.res){
                 props.onSuccess(res.res)
             }
-            setNewCard({question: "", answer: "", source: "",isPublic: false, groupIds: [], tagIds: []})
+            if(newCard.isPublic == false){
+            setNewCard({question: "", answer: "", source: "",isPublic: false, groupIds: [], tagIds: []})}
+            else{setNewCard({question: "", answer: "", source: "",isPublic: true, groupIds: [], tagIds: []})}
         });
     }
 
@@ -54,7 +56,7 @@ export function NewCardForm(props: NewCardFormProps) {
                 <div className="card text-white bg-dark" style={{paddingBottom: 0}}>
                     <div className="card-header">Pytanie</div>
                         <div className="form w-100 h-100">
-                            <textarea className="form-control" id="question" name="question"
+                            <textarea value={newCard.question} className="form-control" id="question" name="question"
                                       maxLength={500} spellCheck="false" required onChange={(e) => {
                                 setNewCard({...newCard, question: e.target.value})}}>
                             </textarea>
@@ -65,7 +67,7 @@ export function NewCardForm(props: NewCardFormProps) {
                 <div className="card text-white bg-dark" >
                     <div className="card-header">Odpowiedź</div>
                     <div className="form w-100 h-100">
-                        <textarea className="form-control" id="answer" name="answer"
+                        <textarea value={newCard.answer}  className="form-control" id="answer" name="answer"
                                   maxLength={500} spellCheck="false" required onChange={(e) => {
                             setNewCard({...newCard, answer: e.target.value})}}>
                         </textarea>
@@ -76,7 +78,7 @@ export function NewCardForm(props: NewCardFormProps) {
                 <div className="card text-white bg-dark" >
                     <div className="card-header">Źródło</div>
                     <div className="form w-100 h-100">
-                        <textarea className="form-control" id="source" name="source"
+                        <textarea value={newCard.source} className="form-control" id="source" name="source"
                                   maxLength={2000} spellCheck="false" required onChange={(e) => {
                                              setNewCard({...newCard, source: e.target.value})}}>
                         </textarea>
