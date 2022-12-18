@@ -44,9 +44,9 @@ public class CardController {
     }
 
     @GetMapping("/forUser/{id}")
-    // zwraca karty danego użytkownika (można przenieść id na stronę backendu, pobierane z contextu)
+    // zwraca karty danego użytkownika
     public List<CardResponse> forUser(@PathVariable Long id){
-        // pzsp2 tu powinno być spradzenie czy id się zgadza z zalogowanym userem
+        // pzsp2 tu powinno być sprawdzenie czy id się zgadza z zalogowanym userem
         var simpleCards = new ArrayList<CardResponse>();
         var cards = cardService.findCardsByUser(id);
         cards.forEach(card -> simpleCards.add(new CardResponse(card)));

@@ -18,6 +18,7 @@ export function EditCardForm(props: EditCardFormProps) {
     useEffect(() => {
         Requests.CardId(Number(id)).then(res => {
             if (res.err) {
+                // pzsp2 bardzo zły pomysł ze wsadzaniem do CardResponse komunikatów o błędzie
                 setCard({...{} as CardResponse, question: res.err.message});
                 setCard({...{} as CardResponse, answer: res.err.debugMessage});
                 props.onError(res.err);
@@ -43,8 +44,6 @@ export function EditCardForm(props: EditCardFormProps) {
             navigate('/cards/'+ card.id)
         });
     }
-
-    // pzsp2 error handling i walidacja
 
     return (<div className="container-fluid" style={{width: "80%"}}>
         <form>

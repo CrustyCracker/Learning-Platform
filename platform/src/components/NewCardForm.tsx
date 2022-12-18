@@ -12,7 +12,6 @@ interface NewCardFormProps {
 
 export function NewCardForm(props: NewCardFormProps) {
     const [newCard, setNewCard] = useState({} as NewCard);
-
     const navigate = useNavigate();
 
     const AddCard = (e: FormEvent) => {

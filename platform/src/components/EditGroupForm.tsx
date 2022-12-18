@@ -18,6 +18,7 @@ export function EditGroupForm(props: EditGroupFormProps) {
     useEffect(() => {
         Requests.GroupId(Number(id)).then(res => {
             if (res.err) {
+                // pzsp2 bardzo zły pomysł ze wsadzaniem do GroupResponse komunikatów o błędzie
                 setGroup({...{} as GroupResponse, name: res.err.message})
                 setGroup({...{} as GroupResponse, description: res.err.debugMessage})
                 props.onError(res.err);
@@ -49,9 +50,8 @@ export function EditGroupForm(props: EditGroupFormProps) {
         });
     }
 
-    // pzsp2 error handling i walidacja
-
     const cardStyle = {
+        // pzsp2 wywalić do css
         margin: "5% 0",
         minHeight: '600px',
         minWidth: '400px',

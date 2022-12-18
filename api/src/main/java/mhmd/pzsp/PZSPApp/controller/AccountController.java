@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
     private final IAccountService accountService;
 
-    // pzsp2 przy endpointach jakieś sensowniejsze sprawdzenia danych/error handling
-
     @Autowired
     public AccountController(IAccountService accountService){
         this.accountService = accountService;
@@ -27,7 +25,7 @@ public class AccountController {
         if (accountService.login(login))
             return new LoginResponse(true, "this is supposed to be token", "Zalogowano");
         return new LoginResponse(false, null, "Niepoprawne hasło");
-        // pzsp2 te tokeny będą z jwt czy podobnego, to jest od bezpieczeństwa, narazie są testowe
+        // pzsp2 narazie tokeny są testowe
     }
 
     @PostMapping("/register")

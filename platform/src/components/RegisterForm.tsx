@@ -30,12 +30,9 @@ export function RegisterForm(props: RegisterFormProps) {
         })
     }
 
-    // pzsp2 error handling i walidacja
-
     const confirmPasswordOnChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.value)
             setCredentials({...credentials, confirmPassword: e.target.value})
-
         if (e.target.value !== credentials.password)
             setConfirmedPassword(false);
         else
@@ -43,6 +40,7 @@ export function RegisterForm(props: RegisterFormProps) {
     }
 
     const cardStyle = {
+        // pzsp2 wywalić do css
         margin: "5% 0",
         minHeight: '420px',
         minWidth: '420px',

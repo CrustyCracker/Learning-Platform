@@ -32,8 +32,8 @@ export function LoginForm(props: LoginFormProps) {
         });
     }
 
-
     const cardStyle = {
+        // pzsp2 wywalić do css
         margin: "5% 0",
         minHeight: '420px',
         minWidth: '420px',
@@ -41,10 +41,8 @@ export function LoginForm(props: LoginFormProps) {
         justifyContent: 'center',
         padding: '5%'
     }
-    // pzsp2 error handling i walidacja
     // pzsp2 max długość wpisywanego tesktu
     return (<> <link rel="stylesheet" href="../style/login.css"/>
-    
         <form onSubmit={handleSubmit}>
             <div className="card text-white bg-dark" style={cardStyle}>
                 <label style={{margin: 0, textAlign: 'start', minWidth: "80%"}}>

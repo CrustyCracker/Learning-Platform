@@ -12,7 +12,6 @@ interface NewGroupFormProps {
 
 export function NewGroupForm(props: NewGroupFormProps) {
     const [newGroup, setNewGroup] = useState({} as NewGroup);
-
     const navigate = useNavigate();
 
     let options = []
@@ -37,6 +36,7 @@ export function NewGroupForm(props: NewGroupFormProps) {
     // pzsp2 error handling i walidacja
 
     const cardStyle = {
+        // pzsp2 wywalić do css
         margin: "5% 0",
         minHeight: '600px',
         minWidth: '400px',

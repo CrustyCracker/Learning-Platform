@@ -18,6 +18,7 @@ export function Card(props: CardProps) {
     useEffect(() => {
         Requests.CardId(Number(id)).then(res => {
             if (res.err) {
+                // pzsp2 bardzo zły pomysł ze wsadzaniem do CardResponse komunikatów o błędzie
                 setCard({...{} as CardResponse, question: res.err.message});
                 setCard({...{} as CardResponse, answer: res.err.debugMessage});
                 props.onError(res.err);
@@ -41,7 +42,8 @@ export function Card(props: CardProps) {
                 props.onError(res.err)
             }
             else if (res.res){
-                navigate(-1)
+                navigate(-1);
+                // pzsp2 powinno jeszcze wyświetlić komunikat, że usunięto, ten navigate(-1) to może nie być idealne rozwiązanie
             }
         })
     }

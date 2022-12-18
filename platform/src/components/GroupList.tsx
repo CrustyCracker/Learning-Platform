@@ -14,7 +14,6 @@ interface GroupListProps {
 export function GroupList(props: GroupListProps) {
     const [groups, setGroups] = useState<GroupResponse[]>([]);
 
-
     useEffect(() => {
         Requests.myGroups().then(res => {
             if (res.err) {
@@ -29,6 +28,7 @@ export function GroupList(props: GroupListProps) {
     }, [])
 
     const tableStyle = {
+        // pzsp2 wywalić do css
         width: "80%",
         marginLeft: "auto",
         marginRight: "auto",
