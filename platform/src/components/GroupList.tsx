@@ -40,7 +40,7 @@ export function GroupList(props: GroupListProps) {
 
         {/*//pzsp2 - dodać działanie dla małych okien (patrz cardList)
         paginację i zaokrąglone kąty tabeli*/}
-        <table className={"table table-light pzsp2-grouplist-table"}>
+        <table className={"table table-hover table-light pzsp2-grouplist-table"}>
             <thead>
                 <tr>
                     <th className="pzsp2-grouplist-table-nam">Nazwa</th>
