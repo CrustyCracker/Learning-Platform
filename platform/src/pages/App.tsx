@@ -1,11 +1,13 @@
 import React, {useCallback, useState} from 'react';
 import '../style/App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { NewCardForm } from "../components/NewCardForm";
 import { NewGroupForm } from "../components/NewGroupForm";
 import { ErrorResponse } from "../types/ErrorResponse";
 import { GroupList } from "../components/GroupList";
-import {MainPage} from "../components/MainPage"
 import {Group} from "../components/Group";
 import {EditGroupForm} from "../components/EditGroupForm";
 import {EditCardForm} from "../components/EditCardForm";
@@ -13,6 +15,7 @@ import LoginPage from "./LoginPage";
 import RegisterPage from './RegisterPage';
 import CardPage from "./CardPage";
 import CardListPage from "./CardListPage";
+import MainMenuPage from "./MainMenuPage";
 
 export default function App() {
     const [, setError] = useState("");
@@ -33,7 +36,7 @@ export default function App() {
             <header className="App-header">
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/" element={<MainPage />} />
+                        <Route path="/" element={<MainMenuPage />} />
                         <Route path="/cards" element={<CardListPage />} />
                         <Route path="/cards/:id" element={<CardPage />} />
                         <Route path="/cards/new" element={<NewCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
