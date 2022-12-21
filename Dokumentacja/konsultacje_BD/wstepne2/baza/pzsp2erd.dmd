@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="pzsp2erd" id="1E534C95-7441-95CB-A10D-26718ECB2652" version="3.5">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 11:28:10 UTC</createdTime>
+<ownerDesignName>pzsp22</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>1E534C95-7441-95CB-A10D-26718ECB2652</designId>
+</OSDM_Design>

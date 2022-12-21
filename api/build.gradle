@@ -6,11 +6,14 @@ plugins {
 
 group = 'mhmd.pzsp'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()
 }
+
+ext['spring.version']='6.0.3'
+ext['spring-security.version']='6.0.1'
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
@@ -21,7 +24,7 @@ dependencies {
 	implementation 'com.oracle.database.jdbc:ojdbc11-production:21.7.0.0'
 	implementation 'org.json:json:20220924'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-
+	implementation 'org.springframework.boot:spring-boot-starter-security:3.0.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
 	testImplementation 'org.springframework.security:spring-security-test'

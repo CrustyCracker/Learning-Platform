@@ -1,0 +1,123 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="3B2419C6-FCFF-F4B7-E14E-786321AE6E3E" name="FISZKI">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>AF006EAB-715A-A315-545E-6027C93B02F6</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<abbreviation>FISZ</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_FISZKI" id="954A39A4-CF0A-2276-37E3-DBB5C9B98B55">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>772E6CEB-FFD5-A277-7A8F-6EEDDD4F08D9</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID_UZYTKOWNIKA" id="0A19127F-FA48-FA8E-F9C9-ADBCE60809AA">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>3AFBE9CC-77D2-A298-DD10-8873568468A9</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F7E527C9-E0AD-D12D-ED8B-7A09C125918C" referredColumn="0A8D8BAA-617F-74A0-B8DF-9A84ECFAF85A"/>
+</associations>
+</Column>
+<Column name="PYTANIE" id="5EC2F5FE-A058-AEA0-514A-12B63595EB43">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>EF8B1033-C5CA-1770-0103-50B0A83E8AC0</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500 CHAR</dataTypeSize>
+<ownDataTypeParameters>500 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ODPOWIEDZ" id="B764387B-AE9C-AA91-FA32-C671C00F254D">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>9E4839CB-AB9B-9804-A1C2-F03FA6631258</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500 CHAR</dataTypeSize>
+<ownDataTypeParameters>500 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PUBLICZNE" id="F804138E-10B4-BE98-BE2F-3E4B63985522">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-12-10 23:49:30 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>1 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ZRODLO" id="4CB84745-FB2E-EB50-1984-9AC9AE040EDC">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>1D282671-4456-871A-2965-22C8B40D0218</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>2000 CHAR</dataTypeSize>
+<ownDataTypeParameters>2000 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3885DA9C-9EC3-5C30-6DED-B9B0965134E2" name="FISZ_PK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>38193B33-890A-9725-A95F-EAD17C5A73D3</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="954A39A4-CF0A-2276-37E3-DBB5C9B98B55"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2AE9028C-CF02-F080-C0A7-D662E51B879D" name="FISZ_UZYT_FK_IDX">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 12:08:38 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0A19127F-FA48-FA8E-F9C9-ADBCE60809AA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2AA3AA71-B028-EFD1-60A7-9C23CD69F365" name="FISZ_UZYT_FK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>A6296F82-A1DC-4D75-D20B-7147A8B0A1DF</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0A19127F-FA48-FA8E-F9C9-ADBCE60809AA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

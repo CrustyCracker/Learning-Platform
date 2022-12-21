@@ -1,0 +1,103 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="9F45DD2C-B227-DFBB-BA9C-6D123BC32544" name="TAG">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 11:29:35 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<preferredAbbreviation>TAGI</preferredAbbreviation>
+<shortName>TAG</shortName>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID_TAGU" id="67C6ACB2-3E9D-D19D-7A50-A466F1BAF430">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:25:58 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="NAZWA" id="2F586245-FE07-59DE-49A2-54EDF4E80A04">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 11:35:01 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="KOLOR" id="EF90501C-A557-63D5-543B-1FCFE3B31078">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-08 17:36:17 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>6 CHAR</dataTypeSize>
+<ownDataTypeParameters>6 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID_UZYTKOWNIKA" id="C0C6F828-5272-2F93-DF6A-CDDE6764C3AE">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-12-11 00:31:55 UTC</createdTime>
+<generatorID>4980B72E-004B-2A4F-1725-9D6566EC59A1</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>5CC06CEE-44EE-C657-A30B-57A7BBBD57A1</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="82007115-D10D-BDE1-F319-205A33D502A7" name="TAG PK">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 11:35:13 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>67C6ACB2-3E9D-D19D-7A50-A466F1BAF430</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="DD075D70-6D6D-435D-4FB6-F18D2065A23B" name="Key_2">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-12-11 00:31:16 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<newElementsIDs>2F586245-FE07-59DE-49A2-54EDF4E80A04</newElementsIDs>
+<usedAttributes>
+<attributeRef>2F586245-FE07-59DE-49A2-54EDF4E80A04</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

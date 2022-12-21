@@ -1,0 +1,12 @@
+.card-header{
+    width: 100%
+}
+
+.card{
+    margin: 5% 0;
+    min-height: 50%;
+
+}
+.container-fluid{
+    width: 80%;
+}

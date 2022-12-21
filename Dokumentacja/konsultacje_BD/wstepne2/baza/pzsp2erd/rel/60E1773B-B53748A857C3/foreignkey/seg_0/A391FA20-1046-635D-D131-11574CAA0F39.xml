@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="A391FA20-1046-635D-D131-11574CAA0F39" containerWithKeyObject="96ED607C-8CE9-578C-E92C-3A2C0E5791FB" localFKIndex="4DCAF140-BCCA-7E72-F6C1-BEA3ECB15A21" name="OTAG_TAG_FK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>F213860B-1211-B3CB-5383-B594F1E0D02D</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<referredTableLongName>TAGI</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>28081E2F-9ACD-C71E-0800-D851F8FD0A23</referredTableID>
+<keyObject>505F4093-F17C-FB26-19CA-35012A7A953B</keyObject>
+<referredKeyID>505F4093-F17C-FB26-19CA-35012A7A953B</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>ID_TAGU</refColNames>
+<transferable>false</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

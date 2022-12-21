@@ -1,0 +1,140 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="BEC600B3-E09D-21E3-1396-858C7D783371" name="UZYTKOWNIK">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 11:30:33 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<preferredAbbreviation>UZYTKOWNICY</preferredAbbreviation>
+<shortName>UZYT</shortName>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID_UZYTKOWNIKA" id="5CC06CEE-44EE-C657-A30B-57A7BBBD57A1">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 11:40:23 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="LOGIN" id="5FAA1D41-B234-A202-3760-8B8392EA49A1">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 11:45:55 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="HASLO" id="94A57C0A-85AF-883A-BD33-9AAFCC4A72AA">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 11:46:21 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>64 CHAR</dataTypeSize>
+<ownDataTypeParameters>64 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="EMAIL" id="FC4FE859-7557-0466-FAA9-DCAA31C4F486">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-09 16:41:23 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ADMIN" id="9B218AC6-F1BF-9FD8-A5DC-B25D15F99C56">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 11:47:43 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>1 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="SALT" id="498E3CBD-AD76-2FFD-EA53-05E67D0A72BD">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-12-11 00:30:42 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>32 CHAR</dataTypeSize>
+<ownDataTypeParameters>32 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DATA_DOLACZENIA" id="0D954E22-0712-B45F-CF65-D5AB4CDA828B">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 11:48:23 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="90A15BD6-686E-FE9E-DD08-4E43CB22D6AD" name="UZYTKOWNIK PK">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 11:48:15 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>5CC06CEE-44EE-C657-A30B-57A7BBBD57A1</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="D70B794F-06DD-A216-6A4C-FCFBE9CF77FB" name="UZYTKOWNIK_LOGIN_UK">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 11:50:24 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="false"/>
+</engineerTo>
+<newElementsIDs>5FAA1D41-B234-A202-3760-8B8392EA49A1</newElementsIDs>
+<usedAttributes>
+<attributeRef>5FAA1D41-B234-A202-3760-8B8392EA49A1</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

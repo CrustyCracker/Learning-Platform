@@ -9,32 +9,31 @@ import com.nimbusds.jose.proc.SecurityContext;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
 import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
+import mhmd.pzsp.PZSPApp.security.CustomAuthenticationProvider;
+import mhmd.pzsp.PZSPApp.security.Roles;
 import mhmd.pzsp.PZSPApp.services.AccountService;
 import mhmd.pzsp.PZSPApp.services.CardService;
 import mhmd.pzsp.PZSPApp.services.GroupService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
-import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationEntryPoint;
-import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
 
 @Configuration
 @EnableJpaRepositories(
@@ -42,6 +41,7 @@ import java.security.interfaces.RSAPublicKey;
                 "mhmd.pzsp.PZSPApp.repositories"
         }
 )
+@EnableWebSecurity
 public class Config {
     @Value("${jwt.public.key}")
     RSAPublicKey key;
@@ -64,37 +64,47 @@ public class Config {
         return new GroupService();
     }
 
+    @Autowired
+    private CustomAuthenticationProvider authenticationProvider;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//            .authorizeHttpRequests((authorize) -> authorize
-//                .anyRequest().authenticated()
-//            )
-//            .csrf((csrf) -> csrf.ignoringRequestMatchers(new RequestMatcher() {
-//                @Override
-//                public boolean matches(HttpServletRequest request) {
-//                    return false;
-//                }
-//            }))
-//            .httpBasic(Customizer.withDefaults())
-//            .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-//            .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//            .exceptionHandling((exceptions) -> exceptions
-//                .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
-//                .accessDeniedHandler(new BearerTokenAccessDeniedHandler())
-//            );
-        return http.build();
+        return http.csrf().disable()
+                .cors().and()
+                .authorizeHttpRequests(authorize -> {
+                            authorize.requestMatchers("/login", "/login/", "/register", "/register/")
+                                    .permitAll();
+                            authorize.requestMatchers(
+                                    HttpMethod.POST,
+                                    "/cards/create",
+                                    "/cards/create/",
+                                    "/groups/create",
+                                    "/groups/create/"
+                            ).hasAuthority(Roles.ADMIN.toString());
+                            authorize.anyRequest().authenticated();
+                        }
+                )
+                .httpBasic(Customizer.withDefaults())
+                .build();
     }
 
     @Bean
-    UserDetailsService users() {
-        return new InMemoryUserDetailsManager(
-                User.withUsername("user")
-                        .password("{noop}password")
-                        .authorities("app")
-                        .build()
-        );
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.authenticationProvider(authenticationProvider);
+        return authenticationManagerBuilder.build();
     }
+
+//    @Bean
+//    UserDetailsService users() {
+//        return new InMemoryUserDetailsManager(
+//                User.withUsername("user")
+//                        .password("{noop}password")
+//                        .authorities("app")
+//                        .build()
+//        );
+//    }
 
     @Bean
     JwtDecoder jwtDecoder() {

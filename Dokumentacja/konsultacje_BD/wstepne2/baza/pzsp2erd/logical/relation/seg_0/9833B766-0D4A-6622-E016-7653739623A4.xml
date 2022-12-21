@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="GR_ZGR" directorySegmentName="seg_0" id="9833B766-0D4A-6622-E016-7653739623A4">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 13:01:55 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<targetTransferable>false</targetTransferable>
+<sourcePk>17AA3797-3380-B46D-E3B7-1EC194FF66F3</sourcePk>
+<identifying>true</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>98616693-5F4D-E9AC-6ED5-55619CD44F86</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>55630F5D-1E03-8352-2044-3043E314C1D8</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

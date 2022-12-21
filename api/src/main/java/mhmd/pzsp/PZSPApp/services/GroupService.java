@@ -42,4 +42,7 @@ public class GroupService implements IGroupService {
     public List<Group> findGroupsByUser(Long userId) {
         return groupRepository.findByUserId(userId);
     }
+
+    @Override
+    public Group findGroupById(Long groupId) { return groupRepository.findGroupById(groupId); }
 }

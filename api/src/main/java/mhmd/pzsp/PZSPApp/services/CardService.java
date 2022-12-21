@@ -59,4 +59,23 @@ public class CardService implements ICardService {
         var card = new Card(request, user, groups, tags);
         return cardRepository.save(card);
     }
+
+    @Override
+    public Card findCardById(Long cardId) { return cardRepository.findCardById(cardId); }
+
+    @Override
+    public List<Card> findCardsByGroupsId(Long groupId) {
+        return cardRepository.findCardsByGroupsId(groupId);
+    }
+
+    @Override
+    public boolean delete(Long id) throws BackendException {
+        if (cardRepository.existsById(id)) {
+            var card = cardRepository.findCardById(id);
+            // if (card.getUser() == weź obecnego usera)
+            cardRepository.deleteById(id);
+            return true;
+        }
+        throw new BackendException("Nie istnieje karta o podanym id");
+    }
 }

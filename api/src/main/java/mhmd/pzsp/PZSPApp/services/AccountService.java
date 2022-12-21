@@ -18,15 +18,15 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import javax.persistence.AttributeOverride;
 import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
-public class AccountService implements IAccountService {
+public class AccountService implements IAccountService/*, UserDetailsService */{
     @Autowired
     private IUserRepository userRepository;
 
@@ -150,5 +150,14 @@ public class AccountService implements IAccountService {
                 .build();
 
         return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+    }
+
+    @Override
+    public Optional<User> loadUserByUsername(String username) {
+        var user = userRepository.findByUsername(username);
+//        if (user.isPresent())
+//            return new BackendUserPrincipal(user.get());
+//        throw new UsernameNotFoundException("test");
+        return user;
     }
 }

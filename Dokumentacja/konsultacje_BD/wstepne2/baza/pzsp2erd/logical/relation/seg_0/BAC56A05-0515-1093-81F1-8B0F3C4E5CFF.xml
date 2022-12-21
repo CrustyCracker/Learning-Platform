@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="FISZ_ZGR" directorySegmentName="seg_0" id="BAC56A05-0515-1093-81F1-8B0F3C4E5CFF">
+<createdBy>User (english)</createdBy>
+<createdTime>2022-11-07 13:01:19 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<engineerTo>
+<item key="60E1773B-623E-1C5E-47B1-B53748A857C3" value="true"/>
+</engineerTo>
+<targetTransferable>false</targetTransferable>
+<sourcePk>38193B33-890A-9725-A95F-EAD17C5A73D3</sourcePk>
+<identifying>true</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>AF006EAB-715A-A315-545E-6027C93B02F6</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>55630F5D-1E03-8352-2044-3043E314C1D8</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

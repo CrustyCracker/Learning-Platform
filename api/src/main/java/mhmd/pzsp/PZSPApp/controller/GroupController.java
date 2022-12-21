@@ -39,4 +39,12 @@ public class GroupController {
         var user = accountService.defaultAdmin();
         return new GroupResponse(groupService.create(request, user));
     }
+
+    @GetMapping("{id}")
+    public GroupResponse groupById(@PathVariable Long id) throws BackendException {
+        var group = groupService.findGroupById(id);
+        if (group == null)
+            throw new BackendException("Brak grupy o danym id w bazie danych");
+        return new GroupResponse(group);
+    }
 }

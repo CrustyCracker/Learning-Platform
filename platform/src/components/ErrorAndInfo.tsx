@@ -1,16 +1,19 @@
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 type ErrorAndInfoProps = {
     errorMsg : string
     infoMsg : string
 }
 
 export function ErrorAndInfo(props: ErrorAndInfoProps) {
-    // pzsp2 to jest bardzo proste i brzydkie, trzeba zrobić coś na kształt bootstrapowych alertów
-    return <div>
+    // pzsp2 teraz to jest bootstrapowy alert pozdro
+    return<div>
         {props.errorMsg &&
-            <div>Błąd: {props.errorMsg}</div>
+            <div className="alert alert-danger" role="alert"><small>Błąd: {props.errorMsg}</small></div>
         }
         {props.infoMsg &&
-            <div>Informacja: {props.infoMsg}</div>
+            <div className="alert alert-info" role="alert"><small>Informacja: {props.infoMsg}</small></div>
         }
     </div>;
 }

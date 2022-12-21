@@ -1,0 +1,129 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="21D97D6D-7A92-0411-3F4E-4658B2CAD4BB" name="UZYTKOWNICY">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>BEC600B3-E09D-21E3-1396-858C7D783371</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<abbreviation>UZYT</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_UZYTKOWNIKA" id="0A8D8BAA-617F-74A0-B8DF-9A84ECFAF85A">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>5CC06CEE-44EE-C657-A30B-57A7BBBD57A1</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LOGIN" id="236E637A-5E36-93C4-7D7C-7E930A88EC03">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>5FAA1D41-B234-A202-3760-8B8392EA49A1</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="HASLO" id="D961C7BE-51AC-08D9-F195-157C67E3ADA9">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>94A57C0A-85AF-883A-BD33-9AAFCC4A72AA</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>32 CHAR</dataTypeSize>
+<ownDataTypeParameters>32 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EMAIL" id="4FCE836E-0512-D105-23D7-8F9A4C420A40">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>FC4FE859-7557-0466-FAA9-DCAA31C4F486</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ADMIN" id="1FB7848A-3374-3C57-B997-F0644B02C072">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>9B218AC6-F1BF-9FD8-A5DC-B25D15F99C56</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>1 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SALT" id="FC24C55A-8F24-5A51-E6CF-60B8E9B9D2ED">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-12-10 23:53:38 UTC</createdTime>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>32 BYTE</dataTypeSize>
+<ownDataTypeParameters>32 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DATA_DOLACZENIA" id="1B6392AB-0DCE-9085-7019-DFA1CEFA62F4">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>0D954E22-0712-B45F-CF65-D5AB4CDA828B</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E3A6DBD9-8617-6E75-D350-2F99BCC8436C" name="UZYT_PK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>90A15BD6-686E-FE9E-DD08-4E43CB22D6AD</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0A8D8BAA-617F-74A0-B8DF-9A84ECFAF85A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="BAADFFB5-FAE0-2BDB-814A-805B1D8B3447" name="UZYT_LOGIN_UK">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 11:34:35 UTC</createdTime>
+<generatorID>D70B794F-06DD-A216-6A4C-FCFBE9CF77FB</generatorID>
+<ownerDesignName>pzsp2erd</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="236E637A-5E36-93C4-7D7C-7E930A88EC03"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+<tableCheckConstraints itemClass="oracle.dbtools.crest.model.design.constraint.TableLevelConstraint">
+<tableCheckConstraint name="UZYT_ADMIN_CHECK" directorySegmentName="seg_0" id="EC7C3D3E-9993-DAA9-0DDE-44E006A08C06">
+<createdBy>mrsli</createdBy>
+<createdTime>2022-11-21 12:49:49 UTC</createdTime>
+<ownerDesignName>PZSP2 ERD 3.0</ownerDesignName>
+<rule><![CDATA[CHECK(ADMIN == "0" || ADMIN == "1")]]></rule>
+</tableCheckConstraint>
+</tableCheckConstraints>
+</Table>

@@ -47,7 +47,6 @@ public class CardController {
     @GetMapping("/forUser/{id}")
     // zwraca karty danego użytkownika (można przenieść id na stronę backendu, pobierane z contextu)
     public List<CardResponse> forUser(@PathVariable Long id, Authentication authentication){
-        // pzsp2 tu powinno być spradzenie czy id się zgadza z zalogowanym userem
         var simpleCards = new ArrayList<CardResponse>();
         var cards = cardService.findCardsByUser(id);
         cards.forEach(card -> simpleCards.add(new CardResponse(card)));
@@ -59,5 +58,27 @@ public class CardController {
         // pzsp2 tu się powinno brać obecnie zalogowanego usera z security contextu, a nie pierwszego admina
         var user = accountService.defaultAdmin();
         return new CardResponse(cardService.create(request, user));
+    }
+
+    @GetMapping("{id}")
+    public CardResponse cardById(@PathVariable Long id) throws BackendException {
+        var card = cardService.findCardById(id);
+        if (card == null)
+            throw new BackendException("Brak karty o danym id w bazie danych");
+        return new CardResponse(card);
+    }
+
+    @GetMapping("group/{id}")
+    public List<CardResponse> cardsByGroupId(@PathVariable Long id) {
+        // pzsp2 dodać sprawdzenie czy grupa publiczna. Jeśli nie, to sprawdzanie czy user zgadza się z zalogowanym
+        var groupCards = new ArrayList<CardResponse>();
+        var cards = cardService.findCardsByGroupsId(id);
+        cards.forEach(card -> groupCards.add(new CardResponse(card)));
+        return groupCards;
+    }
+
+    @GetMapping("delete/{id}")
+    public boolean delete(@PathVariable Long id) throws BackendException {
+        return cardService.delete(id);
     }
 }

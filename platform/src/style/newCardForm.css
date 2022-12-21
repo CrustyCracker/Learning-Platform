@@ -1,0 +1,13 @@
+textarea.form-control {
+    min-height: 200px;
+    color: #4a4a4a;
+    border-color: #000;
+}
+
+textarea.form-control:focus {
+    min-height: 200px;
+    color: black;
+    box-shadow: 0 5px 10px 0 black;
+    outline-color: black;
+    border: 1px solid #555;
+}
