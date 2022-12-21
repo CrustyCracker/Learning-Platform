@@ -16,6 +16,7 @@ import RegisterPage from './RegisterPage';
 import CardPage from "./CardPage";
 import CardListPage from "./CardListPage";
 import MainMenuPage from "./MainMenuPage";
+import GroupListPage from "./GroupListPage";
 
 export default function App() {
     const [, setError] = useState("");
@@ -41,7 +42,7 @@ export default function App() {
                         <Route path="/cards/:id" element={<CardPage />} />
                         <Route path="/cards/new" element={<NewCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/cards/:id/edit" element={<EditCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
-                        <Route path="/groups" element={< GroupList onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/groups" element={< GroupListPage />} />
                         <Route path="/groups/:id" element={<Group onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/groups/:id/edit" element={<EditGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/groups/new" element={<NewGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />

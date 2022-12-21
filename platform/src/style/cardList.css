@@ -34,7 +34,6 @@
     margin-right: auto;
     table-layout: fixed;
     display: block;
-    overflow-x: auto;
 }
 
 .pzsp2-cardlist-table-que{
@@ -64,6 +63,7 @@
 .pzsp2-cardlist-page-cont{
     width: 100%;
     margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .pzsp2-cardlist-link{
@@ -90,7 +90,7 @@
     --rti-border: #ccc;
     --rti-tag-remove: #e53e3e;
     --rti-bg: #fff;
-    --rti-tag: #636363;
+    --rti-tag: #ccd5ae;
 
 }
 
@@ -100,5 +100,5 @@
 }
 
 .container-fluid .rti--input {
-    width: 100%;
+    width: 50%;
 }

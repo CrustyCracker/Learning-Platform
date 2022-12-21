@@ -1,0 +1,50 @@
+.pzsp2-grouplist-td-ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pzsp2-grouplist-td-wrap{
+    word-wrap: break-word
+}
+.pzsp2-grouplist-title{
+    margin-top: 8vh;
+    margin-bottom: 2%;
+}
+.pzsp2-grouplist-table{
+    width: 80% !important;
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+}
+
+.pzsp2-grouplist-table-nam{
+    width: 40%;
+}
+
+.pzsp2-grouplist-table-des{
+    width: 15%;
+}
+
+.pzsp2-grouplist-table-dif{
+    width: 10%;
+}
+
+.pzsp2-grouplist-table-vis{
+    width: 10%;
+}
+
+.pzsp2-grouplist-table-lin{
+    width: 5%;
+}
+
+.pzsp2-grouplist-link{
+    text-decoration: none;
+    color: green;
+}
+
+.pzsp2-grouplist-page-cont{
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
