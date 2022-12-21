@@ -1,12 +1,78 @@
-.table {
+.pzsp2-cardlist-cont{
     width: 80%;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pzsp2-cardlist-title{
+    margin-top: 8vh;
+}
+
+.pzsp2-cardlist-tagsearch{
+    margin-top: 0.5%;
+    text-align: left;
+    font-size: 12px;
+}
+
+.pzsp2-cardlist-row-buttons{
+    margin-bottom: 1%;
+}
+
+.pzsp2-cardlist-learn-button{
+    float: left;
+}
+
+.pzsp2-cardlist-test-button{
+    float: left;
+    margin-left: 1%;
+}
+
+.pzsp2-cardlist-table{
+    width: 80% !important;
     margin-left: auto;
     margin-right: auto;
     table-layout: fixed;
+    display: block;
+    overflow-x: auto;
 }
 
-.td {
-    word-wrap: break-word;
+.pzsp2-cardlist-table-que{
+    width: 40%;
+}
+
+.pzsp2-cardlist-table-grp{
+    width: 15%;
+}
+
+.pzsp2-cardlist-table-tag{
+    width: 10%;
+}
+
+.pzsp2-cardlist-table-vis{
+    width: 10%;
+}
+
+.pzsp2-cardlist-table-lin{
+    width: 5%;
+}
+
+.pzsp2-cardlist-td-wrap{
+    word-wrap: break-word
+}
+
+.pzsp2-cardlist-page-cont{
+    width: 100%;
+    margin-top: 5%;
+}
+
+.pzsp2-cardlist-link{
+    text-decoration: none;
+    color: green;
+}
+
+.pzsp2-cardlist-link:hover {
+    color: black;
 }
 
 .container-fluid .tag button {
@@ -35,25 +101,4 @@
 
 .container-fluid .rti--input {
     width: 100%;
-}
-
-.container-fluid{
-    width: 80%;
-}
-
-.pzsp-table{
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    table-layout: fixed
-}
-
-.pzsp-td-wrap{
-    word-wrap: break-word
-}
-
-.pzsp-td-ellipsis{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }

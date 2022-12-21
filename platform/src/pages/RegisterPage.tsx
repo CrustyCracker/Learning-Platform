@@ -9,7 +9,7 @@ export default function RegisterPage() {
     const navigate = useNavigate()
 
     return (
-        <div className="App" style={{width: "100%"}}>
+        <div className="App">
             <ErrorAndInfo errorMsg={error} infoMsg={""}/>
             <RegisterForm onSuccess={() => navigate("/")} onError={(res) => setError(res.message)}/>
             <small>Masz już konto? <Link to="/login">Zaloguj się</Link></small>

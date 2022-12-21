@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { NewCardForm } from "../components/NewCardForm";
 import { NewGroupForm } from "../components/NewGroupForm";
 import { ErrorResponse } from "../types/ErrorResponse";
-import { CardList } from "../components/CardList";
 import { GroupList } from "../components/GroupList";
 import {MainPage} from "../components/MainPage"
 import {Group} from "../components/Group";
@@ -13,6 +12,7 @@ import {EditCardForm} from "../components/EditCardForm";
 import LoginPage from "./LoginPage";
 import RegisterPage from './RegisterPage';
 import CardPage from "./CardPage";
+import CardListPage from "./CardListPage";
 
 export default function App() {
     const [, setError] = useState("");
@@ -34,7 +34,7 @@ export default function App() {
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<MainPage />} />
-                        <Route path="/cards" element={<CardList onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/cards" element={<CardListPage />} />
                         <Route path="/cards/:id" element={<CardPage />} />
                         <Route path="/cards/new" element={<NewCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/cards/:id/edit" element={<EditCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />

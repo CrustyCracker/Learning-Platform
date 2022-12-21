@@ -67,53 +67,57 @@ export function CardList(props: CardListProps) {
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossOrigin="anonymous"
         />
-        <h1>Moje fiszki</h1>
-        <div className="container-fluid" style={{width: "80%", padding: "0"}}>
+
+        <h1 className="pzsp2-cardlist-title">Moje fiszki</h1>
+        <div className="pzsp2-cardlist-cont">
         <TagsInput
             value={tags}
             onChange={e => filterByTags(e || [])}
             name="tagi"
             placeHolder="Dodaj tag..."
         />
-        <p style={{ marginTop: "0.5%", textAlign: "left", fontSize: "12px"}}>
+        <p className="pzsp2-cardlist-tagsearch">
             <em>Wyszukaj po tagu... Kilknij ENTER, aby dodać nowy tag.</em>
         </p>
         </div>
-        <div className="container-fluid" style={{width: "80%", padding: "0"}}>
-            <div className="row" style={{ marginBottom: "1%"}}>
+        <div className="pzsp2-cardlist-cont">
+            <div className="row pzsp2-cardlist-row-buttons">
                 <div>
-                    <form onSubmit={Learn} style={{float: "left"}}>
+                    <form className="pzsp2-cardlist-learn-button" onSubmit={Learn}>
                         <button type="submit" className="btn btn-outline-warning">Ucz się</button>
                     </form>
-                    <form onSubmit={Test} style={{float: "left", marginLeft: "1%"}}>
+                    <form className="pzsp2-cardlist-test-button" onSubmit={Test}>
                         <button type="submit" className="btn btn-outline-danger">Test</button>
                     </form>
                 </div>
             </div>
         </div>
 
-        <table className={"table table-dark center pzsp-table"} style={{ width: "80%" }}>
+        {/*//pzsp2 - dodać paginację i zaokrąglone kąty tabeli*/}
+        <div style={{overflowX: "auto"}}>
+        <table className={"table table-hover table-light pzsp2-cardlist-table"}>
             <thead>
                 <tr>
-                    <th style={{ width: "40%" }}>Pytanie</th>
-                    <th style={{ width: "15%" }}>Grupy</th>
-                    <th style={{ width: "10%" }}>Tagi</th>
-                    <th style={{ width: "10%" }}>Widoczność</th>
-                    <th style={{ width: "5%" }}> </th>
+                    <th className="pzsp2-cardlist-table-que">Pytanie</th>
+                    <th className="pzsp2-cardlist-table-grp">Grupy</th>
+                    <th className="pzsp2-cardlist-table-tag">Tagi</th>
+                    <th className="pzsp2-cardlist-table-vis">Widoczność</th>
+                    <th className="pzsp2-cardlist-table-lin "> </th>
                 </tr>
             </thead>
             <tbody>
                 {currCards && currCards.map(card => {
                     return <tr key={card.id}>
-                        <td className="pzsp-td-wrap">{card.question}</td>
-                        <td className="pzsp-td-wrap">{card.groups}</td>
-                        <td className="pzsp-td-wrap">{card.tags}</td>
+                        <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
+                        <td className="pzsp2-cardlist-td-wrap">{card.groups}</td>
+                        <td className="pzsp2-cardlist-td-wrap">{card.tags}</td>
                         <td>{isPublicToString(card.isPublic)}</td>
 
-                        <td><Link to={`${card.id}`} style={{ textDecoration: 'none' }}>{">"}</Link></td>
+                        <td><Link className="pzsp2-cardlist-link" to={`${card.id}`}>{">"}</Link></td>
                     </tr>
                 })}
             </tbody>
         </table>
+        </div>
     </>;
 }
