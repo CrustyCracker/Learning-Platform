@@ -1,6 +1,6 @@
 package mhmd.pzsp.PZSPApp.models.api.requests;
 
-import com.sun.istack.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 public class LoginRequest {
     @NotNull

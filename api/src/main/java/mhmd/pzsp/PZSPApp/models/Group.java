@@ -2,7 +2,7 @@ package mhmd.pzsp.PZSPApp.models;
 
 import mhmd.pzsp.PZSPApp.models.api.requests.NewGroupRequest;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity

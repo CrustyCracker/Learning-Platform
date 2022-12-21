@@ -1,8 +1,8 @@
 package mhmd.pzsp.PZSPApp.models;
 
+import jakarta.persistence.*;
 import org.apache.commons.codec.binary.Hex;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

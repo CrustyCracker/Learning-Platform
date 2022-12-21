@@ -14,7 +14,6 @@ import mhmd.pzsp.PZSPApp.security.Roles;
 import mhmd.pzsp.PZSPApp.services.AccountService;
 import mhmd.pzsp.PZSPApp.services.CardService;
 import mhmd.pzsp.PZSPApp.services.GroupService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,6 +48,10 @@ public class Config {
     @Value("${jwt.private.key}")
     RSAPrivateKey priv;
 
+    public Config(CustomAuthenticationProvider authenticationProvider) {
+        this.authenticationProvider = authenticationProvider;
+    }
+
     @Bean
     public ICardService getCardService(){
         return new CardService();
@@ -64,7 +67,6 @@ public class Config {
         return new GroupService();
     }
 
-    @Autowired
     private CustomAuthenticationProvider authenticationProvider;
 
     @Bean
