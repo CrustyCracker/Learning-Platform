@@ -10,9 +10,8 @@ export default function LoginPage() {
 
     return (
         <div className="App">
-            <ErrorAndInfo errorMsg={error} infoMsg={""}></ErrorAndInfo>
+            <ErrorAndInfo errorMsg={error} infoMsg={""}/>
             <LoginForm onSuccess={() => navigate("/")} onError={(res) => setError(res.message)}/>
-            <div style={{justifyContent: "center", marginTop: "4%"}}></div>
             <small>Nie masz konta? <Link to="/register">Załóż konto</Link></small>
         </div>
     );

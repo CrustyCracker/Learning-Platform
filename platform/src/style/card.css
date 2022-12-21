@@ -2,11 +2,55 @@
     width: 100%
 }
 
-.card{
-    margin: 5% 0;
-    min-height: 50%;
-
-}
-.container-fluid{
+.pzsp2-card-cont{
     width: 80%;
+    padding-top: 7%;
+    padding-bottom: 7%
+}
+
+.pzsp2-card-owner-text{
+    text-align: start;
+}
+
+.pzsp2-card-card-body{
+    max-width: 90%;
+}
+
+.pzsp2-card-card-text{
+    word-wrap: break-word;
+}
+
+.pzsp2-card-row-tag{
+    margin-top: 5%;
+}
+
+.pzsp2-card-tag-text{
+    text-align: start;
+}
+
+.pzsp2-card-buttons{
+    text-align: end;
+}
+
+.pzsp2-card-edit-button{
+    float: right;
+    margin-right: 2%;
+}
+
+.pzsp2-card-delete-button{
+    float: right;
+}
+
+.pzsp2-card-row-grp{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.pzsp2-card-grp-text{
+    text-align: start;
+}
+
+.pzsp2-card-page-cont{
+    width: 100%;
+    margin-top: 5%;
 }

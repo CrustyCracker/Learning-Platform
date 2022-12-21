@@ -19,7 +19,8 @@ export function Card(props: CardProps) {
         Requests.CardId(Number(id)).then(res => {
             if (res.err) {
                 setCard({} as CardResponse);
-                props.onError(res.err);
+                props.onError({ message: "Nie udało się wyświetlić fiszki",
+                    debugMessage: "", status: 0, timestamp: new Date()});
             }
             else if (res.res){
                 setCard(res.res);
@@ -41,65 +42,75 @@ export function Card(props: CardProps) {
             }
             else if (res.res){
                 navigate(-1);
-                // pzsp2 powinno jeszcze wyświetlić komunikat, że usunięto, ten navigate(-1) to może nie być idealne rozwiązanie
+                // pzsp2 powinno jeszcze wyświetlić komunikat, że usunięto,
+                // ten navigate(-1) to może nie być idealne rozwiązanie
             }
         })
     }
 
-    return <div className="container-fluid" style={{width: "80%"}}>
+    return <div className="container-fluid pzsp2-card-cont">
         <div className="row">
-            <div className="col-lg-4 col-md-12 col-sm-12" style={{textAlign: "start"}}>
+            <div className="col-lg-4 col-md-12 col-sm-12 pzsp2-card-owner-text">
                 Właściciel: {card.username}
             </div>
         </div>
         <div className="row gy-3">
             <div className="col-lg-4 col-md-12 col-sm-12">
-                <div className="card h-100 text-white bg-dark" >
-                    <div className="card-header">Pytanie</div>
-                    <div className="card-body" style={{maxWidth: "90%"}}>
-                        <small className="card-text" style={{wordWrap: "break-word"}}>
+                <div className="card h-100 text-black bg-light" >
+                    <div className="card-header">
+                        Pytanie
+                    </div>
+                    <div className="card-body pzsp2-card-card-body">
+                        <small className="card-text pzsp2-card-card-text">
                             {card.question}
                         </small>
                     </div>
                 </div>
             </div>
             <div className="col-lg-4 col-md-12 col-sm-12">
-                <div className="card h-100 text-white bg-dark" >
-                    <div className="card-header">Odpowiedź</div>
-                    <div className="card-body" style={{maxWidth: "90%"}}>
-                        <small className="card-text" style={{wordWrap: "break-word"}}>
+                <div className="card h-100 text-black bg-light" >
+                    <div className="card-header">
+                        Odpowiedź
+                    </div>
+                    <div className="card-body pzsp2-card-card-body">
+                        <small className="card-text pzsp2-card-card-text">
                             {card.answer}
                         </small>
                     </div>
                 </div>
             </div>
             <div className="col-lg-4 col-md-12 col-sm-12">
-                <div className="card h-100 text-white bg-dark" >
-                    <div className="card-header">Źródło</div>
-                    <div className="card-body" style={{maxWidth: "90%"}}>
-                        <small className="card-text" style={{wordWrap: "break-word"}}>
+                <div className="card h-100 text-black bg-light" >
+                    <div className="card-header">
+                        Źródło
+                    </div>
+                    <div className="card-body pzsp2-card-card-body">
+                        <small className="card-text pzsp2-card-card-text">
                             {card.source}
                         </small>
                     </div>
                 </div>
             </div>
         </div>
-        <div className="row" style={{ marginTop: "5%"}}>
-            <div className="col-lg-6 col-md-6 col-sm-6" style={{textAlign: "start"}}>
+        <div className="row pzsp2-card-row-tag">
+            <div className="col-lg-6 col-md-6 col-sm-6 pzsp2-card-tag-text">
                 Tagi: {card.tags}
             </div>
-            <div className="col-lg-6 col-md-6 col-sm-6" style={{textAlign: "end"}}>
-                <form onSubmit={DeleteCard} style={{float: "right"}}>
-                    <button type="submit" className="btn btn-outline-danger">Usuń</button>
+            <div className="col-lg-6 col-md-6 col-sm-6 pzsp2-card-buttons">
+                <form  className ="pzsp2-card-delete-button"onSubmit={DeleteCard}>
+                    <button type="submit" className="btn btn-outline-danger">
+                        Usuń
+                    </button>
                 </form>
-                <form onSubmit={EditCard} style={{float: "right", marginRight: "2%"}}>
-                    <button type="submit" className="btn btn-outline-info">Edytuj</button>
+                <form className ="pzsp2-card-edit-button" onSubmit={EditCard}>
+                    <button type="submit" className="btn btn-outline-success">
+                        Edytuj
+                    </button>
                 </form>
             </div>
-
         </div>
-        <div className="row" style={{ marginTop: "2%", marginBottom: "2%"}}>
-            <div className="col-lg-6 col-md-12 col-sm-12" style={{textAlign: "start"}}>
+        <div className="row pzsp2-card-row-grp">
+            <div className="col-lg-6 col-md-12 col-sm-12 pzsp2-card-grp-text">
                 Grupy: {card.groups}
             </div>
         </div>

@@ -1,19 +1,18 @@
 import React, {useCallback, useState} from 'react';
 import '../style/App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { RegisterForm } from "../components/RegisterForm";
 import { NewCardForm } from "../components/NewCardForm";
 import { NewGroupForm } from "../components/NewGroupForm";
 import { ErrorResponse } from "../types/ErrorResponse";
 import { CardList } from "../components/CardList";
 import { GroupList } from "../components/GroupList";
-import { Card } from "../components/Card";
 import {MainPage} from "../components/MainPage"
 import {Group} from "../components/Group";
 import {EditGroupForm} from "../components/EditGroupForm";
 import {EditCardForm} from "../components/EditCardForm";
 import LoginPage from "./LoginPage";
 import RegisterPage from './RegisterPage';
+import CardPage from "./CardPage";
 
 export default function App() {
     const [, setError] = useState("");
@@ -36,7 +35,7 @@ export default function App() {
                     <Routes>
                         <Route path="/" element={<MainPage />} />
                         <Route path="/cards" element={<CardList onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
-                        <Route path="/cards/:id" element={<Card onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/cards/:id" element={<CardPage />} />
                         <Route path="/cards/new" element={<NewCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/cards/:id/edit" element={<EditCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/groups" element={< GroupList onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
