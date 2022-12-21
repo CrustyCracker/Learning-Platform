@@ -14,6 +14,7 @@ import mhmd.pzsp.PZSPApp.security.Roles;
 import mhmd.pzsp.PZSPApp.services.AccountService;
 import mhmd.pzsp.PZSPApp.services.CardService;
 import mhmd.pzsp.PZSPApp.services.GroupService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,15 +43,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 )
 @EnableWebSecurity
 public class Config {
-    @Value("${jwt.public.key}")
-    RSAPublicKey key;
-
-    @Value("${jwt.private.key}")
-    RSAPrivateKey priv;
-
-    public Config(CustomAuthenticationProvider authenticationProvider) {
-        this.authenticationProvider = authenticationProvider;
-    }
+//    @Value("${jwt.public.key}")
+//    RSAPublicKey key;
+//
+//    @Value("${jwt.private.key}")
+//    RSAPrivateKey priv;
 
     @Bean
     public ICardService getCardService(){
@@ -66,7 +63,7 @@ public class Config {
     public IGroupService getGroupService() {
         return new GroupService();
     }
-
+    @Autowired
     private CustomAuthenticationProvider authenticationProvider;
 
     @Bean
@@ -108,15 +105,15 @@ public class Config {
 //        );
 //    }
 
-    @Bean
-    JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withPublicKey(this.key).build();
-    }
-
-    @Bean
-    JwtEncoder jwtEncoder() {
-        JWK jwk = new RSAKey.Builder(this.key).privateKey(this.priv).build();
-        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
-        return new NimbusJwtEncoder(jwks);
-    }
+//    @Bean
+//    JwtDecoder jwtDecoder() {
+//        return NimbusJwtDecoder.withPublicKey(this.key).build();
+//    }
+//
+//    @Bean
+//    JwtEncoder jwtEncoder() {
+//        JWK jwk = new RSAKey.Builder(this.key).privateKey(this.priv).build();
+//        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
+//        return new NimbusJwtEncoder(jwks);
+//    }
 }

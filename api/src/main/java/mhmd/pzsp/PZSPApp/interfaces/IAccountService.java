@@ -24,7 +24,7 @@ public interface IAccountService {
 
     User defaultAdmin() throws BackendException;
 
-    String generateToken(Authentication authentication);
+//    String generateToken(Authentication authentication);
 
     Optional<User> loadUserByUsername(String username) throws UsernameNotFoundException;
 }

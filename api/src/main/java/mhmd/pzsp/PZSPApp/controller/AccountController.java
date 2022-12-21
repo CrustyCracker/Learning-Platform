@@ -33,7 +33,8 @@ public class AccountController {
     public RegisterResponse register(@RequestBody RegisterRequest register, Authentication authentication)
             throws BackendException {
         if (accountService.register(register))
-            return new RegisterResponse(true, accountService.generateToken(authentication), "Utworzono konto");
+//            return new RegisterResponse(true, accountService.generateToken(authentication), "Utworzono konto");
+            return new RegisterResponse(true, null, "Utworzono konto");
         return new RegisterResponse(false, null, "Nieudana rejestracja");
     }
 }
