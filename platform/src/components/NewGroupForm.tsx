@@ -42,7 +42,8 @@ export function NewGroupForm(props: NewGroupFormProps) {
                     <div className="card text-black bg-light pzsp2-groupform-card">
                         <label className="pzsp2-groupform-name">
                             <small> Nazwa </small>
-                            <input className="form-control" type="text" name="name" maxLength={100} onChange={(e) => {
+                            <input className="form-control" type="text" name="name" value={newGroup.name} maxLength={100}
+                                   onChange={(e) => {
                                 setNewGroup({...newGroup, name: e.target.value})}} />
                         </label>
                         <label className="pzsp2-groupform-desc">
