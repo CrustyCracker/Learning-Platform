@@ -5,6 +5,7 @@ import {Link, useParams, useNavigate} from "react-router-dom";
 import {GroupResponse} from "../types/Groups";
 import {CardResponse} from "../types/Cards";
 import '../style/group.css';
+import {isPublicToString} from "../helpers/NameHelpers";
 
 interface GroupProps {
     onSuccess: (response: GroupResponse) => void,
@@ -76,6 +77,9 @@ export function Group(props: GroupProps) {
                     <h4 className="pzsp2-group-diff">
                         Trudność: {group.difficulty}
                     </h4>
+                    <h5 className="pzsp2-group-diff">
+                    {isPublicToString(group.isPublic)}
+                    </h5>
                 </div>
                 <div className="col-lg-6 col-md-12 col-sm-12">
                     <div className="card text-black bg-light pzsp2-group-desc">

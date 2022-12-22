@@ -45,8 +45,8 @@ export function GroupList(props: GroupListProps) {
                 <tr>
                     <th className="pzsp2-grouplist-table-nam">Nazwa</th>
                     <th className="pzsp2-grouplist-table-des">Opis</th>
-                    <th className="pzsp2-grouplist-table-dif">Trudność</th>
-                    <th className="pzsp2-grouplist-table-vis">Widoczność</th>
+                    <th className="pzsp2-grouplist-table-dif hide-on-small">Trudność</th>
+                    <th className="pzsp2-grouplist-table-vis hide-on-medium">Widoczność</th>
                     <th className="pzsp2-grouplist-table-lin"> </th>
                 </tr>
             </thead>
@@ -55,8 +55,8 @@ export function GroupList(props: GroupListProps) {
                     return <tr key={group.id}>
                         <td className="pzsp2-grouplist-td-ellipsis">{group.name}</td>
                         <td className="pzsp2-grouplist-td-ellipsis">{group.description}</td>
-                        <td className="pzsp2-grouplist-td-wrap">{group.difficulty}</td>
-                        <td>{isPublicToString(group.isPublic)}</td>
+                        <td className="pzsp2-grouplist-td-wrap hide-on-small">{group.difficulty}</td>
+                        <td className="hide-on-medium">{isPublicToString(group.isPublic)}</td>
 
                         <td><Link className="pzsp2-grouplist-link" to={`${group.id}`}>{">"}</Link></td>
                     </tr>

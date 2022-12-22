@@ -94,14 +94,13 @@ export function CardList(props: CardListProps) {
         </div>
 
         {/*//pzsp2 - dodać paginację i zaokrąglone kąty tabeli*/}
-        <div style={{overflowX: "auto"}}>
         <table className={"table table-hover table-light pzsp2-cardlist-table"}>
             <thead>
                 <tr>
                     <th className="pzsp2-cardlist-table-que">Pytanie</th>
                     <th className="pzsp2-cardlist-table-grp">Grupy</th>
                     <th className="pzsp2-cardlist-table-tag">Tagi</th>
-                    <th className="pzsp2-cardlist-table-vis">Widoczność</th>
+                    <th className="pzsp2-cardlist-table-vis hide-on-small">Widoczność</th>
                     <th className="pzsp2-cardlist-table-lin "> </th>
                 </tr>
             </thead>
@@ -111,13 +110,12 @@ export function CardList(props: CardListProps) {
                         <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
                         <td className="pzsp2-cardlist-td-wrap">{card.groups}</td>
                         <td className="pzsp2-cardlist-td-wrap">{card.tags}</td>
-                        <td>{isPublicToString(card.isPublic)}</td>
+                        <td className="hide-on-small">{isPublicToString(card.isPublic)}</td>
 
                         <td><Link className="pzsp2-cardlist-link" to={`${card.id}`}>{">"}</Link></td>
                     </tr>
                 })}
             </tbody>
         </table>
-        </div>
     </>;
 }

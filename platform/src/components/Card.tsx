@@ -4,6 +4,7 @@ import {CardResponse} from "../types/Cards";
 import {ErrorResponse} from "../types/ErrorResponse";
 import {useNavigate, useParams} from "react-router-dom";
 import '../style/card.css';
+import {isPublicToString} from "../helpers/NameHelpers";
 
 interface CardProps {
     onSuccess: (response: CardResponse) => void,
@@ -51,7 +52,12 @@ export function Card(props: CardProps) {
     return <div className="container-fluid pzsp2-card-cont">
         <div className="row">
             <div className="col-lg-4 col-md-12 col-sm-12 pzsp2-card-owner-text">
+                <h1>
                 Właściciel: {card.username}
+                </h1>
+                <h4>
+                    {isPublicToString(card.isPublic)}
+                </h4>
             </div>
         </div>
         <div className="row gy-3">
@@ -94,10 +100,12 @@ export function Card(props: CardProps) {
         </div>
         <div className="row pzsp2-card-row-tag">
             <div className="col-lg-6 col-md-6 col-sm-6 pzsp2-card-tag-text">
+                <h3>
                 Tagi: {card.tags}
+                </h3>
             </div>
             <div className="col-lg-6 col-md-6 col-sm-6 pzsp2-card-buttons">
-                <form  className ="pzsp2-card-delete-button"onSubmit={DeleteCard}>
+                <form  className ="pzsp2-card-delete-button" onSubmit={DeleteCard}>
                     <button type="submit" className="btn btn-outline-danger">
                         Usuń
                     </button>
@@ -111,7 +119,9 @@ export function Card(props: CardProps) {
         </div>
         <div className="row pzsp2-card-row-grp">
             <div className="col-lg-6 col-md-12 col-sm-12 pzsp2-card-grp-text">
+            <h3>
                 Grupy: {card.groups}
+            </h3>
             </div>
         </div>
     </div>
