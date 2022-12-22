@@ -3,14 +3,14 @@ import {Requests} from "../requests/Requests";
 import {CardResponse, NewCard} from "../types/Cards";
 import {ErrorResponse} from "../types/ErrorResponse";
 import {useNavigate} from 'react-router-dom';
-import '../style/newCardForm.css';
+import '../style/cardForm.css';
 
-interface NewCardFormProps {
+interface CardFormProps {
     onSuccess: (response: CardResponse) => void,
     onError: (err: ErrorResponse) => void
 }
 
-export function NewCardForm(props: NewCardFormProps) {
+export function NewCardForm(props: CardFormProps) {
     const [newCard, setNewCard] = useState({} as NewCard);
     const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ export function NewCardForm(props: NewCardFormProps) {
             else if (res.res){
                 props.onSuccess(res.res)
             }
-            if(newCard.isPublic == false){
+            if(!newCard.isPublic){
             setNewCard({question: "", answer: "", source: "",isPublic: false, groupIds: [], tagIds: []})}
             else{setNewCard({question: "", answer: "", source: "",isPublic: true, groupIds: [], tagIds: []})}
         });
@@ -48,58 +48,65 @@ export function NewCardForm(props: NewCardFormProps) {
 
     // pzsp2 error handling i walidacja
 
-    return (<div className="container-fluid" style={{width: "80%"}}>
-        <form>
-        <div className="row gy-3">
-            <div className="col-lg-4 col-md-12 col-sm-12">
-                <div className="card text-white bg-dark" style={{paddingBottom: 0}}>
-                    <div className="card-header">Pytanie</div>
+    return (
+        <div className="container-fluid pzsp2-cardform-cont">
+            <div className="row gy-3">
+                <div className="col-lg-4 col-md-12 col-sm-12">
+                    <div className="card text-white bg-dark">
+                        <div className="card-header">
+                            Pytanie
+                        </div>
                         <div className="form w-100 h-100">
                             <textarea value={newCard.question} className="form-control" id="question" name="question"
                                       maxLength={500} spellCheck="false" required onChange={(e) => {
                                 setNewCard({...newCard, question: e.target.value})}}>
                             </textarea>
                         </div>
+                    </div>
                 </div>
-            </div>
-            <div className="col-lg-4 col-md-12 col-sm-12">
-                <div className="card text-white bg-dark" >
-                    <div className="card-header">Odpowiedź</div>
-                    <div className="form w-100 h-100">
-                        <textarea value={newCard.answer}  className="form-control" id="answer" name="answer"
-                                  maxLength={500} spellCheck="false" required onChange={(e) => {
-                            setNewCard({...newCard, answer: e.target.value})}}>
-                        </textarea>
+                <div className="col-lg-4 col-md-12 col-sm-12">
+                    <div className="card text-white bg-dark" >
+                        <div className="card-header">
+                            Odpowiedź
+                        </div>
+                        <div className="form w-100 h-100">
+                            <textarea value={newCard.answer}  className="form-control" id="answer" name="answer"
+                                      maxLength={500} spellCheck="false" required onChange={(e) => {
+                                setNewCard({...newCard, answer: e.target.value})}}>
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-lg-4 col-md-12 col-sm-12">
+                    <div className="card text-white bg-dark" >
+                        <div className="card-header">
+                            Źródło
+                        </div>
+                        <div className="form w-100 h-100">
+                            <textarea value={newCard.source} className="form-control" id="source" name="source"
+                                      maxLength={2000} spellCheck="false" required onChange={(e) => {
+                                                 setNewCard({...newCard, source: e.target.value})}}>
+                            </textarea>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className="col-lg-4 col-md-12 col-sm-12">
-                <div className="card text-white bg-dark" >
-                    <div className="card-header">Źródło</div>
-                    <div className="form w-100 h-100">
-                        <textarea value={newCard.source} className="form-control" id="source" name="source"
-                                  maxLength={2000} spellCheck="false" required onChange={(e) => {
-                                             setNewCard({...newCard, source: e.target.value})}}>
-                        </textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div className="form-check" style={{textAlign: "start"}}>
-            <input className="form-check-input" type="checkbox" name="isPublic" checked={newCard.isPublic} id="isPublic" onChange={(e) => {
-                                     if (e.target.value) setNewCard({...newCard, isPublic: e.target.checked})
-                                 }}/>
-                <label className="form-check-label" htmlFor="isPublic">
+        <div className="form-check pzsp2-cardform-pubcheck">
+            <input className="form-check-input pzsp2-cardform-pubcheck-input" type="checkbox" name="isPublic"
+                   checked={newCard.isPublic} id="isPublic" onChange={(e) => {
+                                     if (e.target.value) setNewCard({...newCard, isPublic: e.target.checked})}}/>
+                <label className="form-check-label pzsp2-cardform-pubcheck-label" htmlFor="isPublic">
                     Publiczna
                 </label>
         </div>
+        <form>
         <div className="row">
-            <div className="btn-group" role="group" aria-label="Basic example" style={{justifyContent: "center"}}>
-                <div style={{float: "left", marginRight: "2%"}}>
-                    <button type="submit" onClick={AddCard} className="btn btn-outline-info">Dodaj fiszkę</button>
+            <div className="btn-group pzsp2-cardform-buttons" role="group">
+                <div className="pzsp2-cardform-add-button">
+                    <button type="submit" onClick={AddCard} className="btn btn-outline-success">Dodaj fiszkę</button>
                 </div>
-                <div style={{float: "right", marginRight: "2%"}}>
-                    <button type="submit" onClick={AddCardAndNext} className="btn btn-outline-info">Dodaj fiszkę + kolejną</button>
+                <div className="pzsp2-cardform-addplus-button">
+                    <button type="submit" onClick={AddCardAndNext} className="btn btn-outline-success">Dodaj fiszkę + kolejną</button>
                 </div>
             </div>
         </div>
