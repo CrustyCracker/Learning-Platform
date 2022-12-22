@@ -80,3 +80,12 @@ input.form-control:focus {
   border-color: black;
 }
 
+.pzsp2-link{
+  text-decoration: none;
+  color: green;
+}
+
+.pzsp2-link:hover {
+  color: black;
+}
+

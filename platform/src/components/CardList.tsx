@@ -112,7 +112,7 @@ export function CardList(props: CardListProps) {
                         <td className="pzsp2-cardlist-td-wrap">{card.tags}</td>
                         <td className="hide-on-small">{isPublicToString(card.isPublic)}</td>
 
-                        <td><Link className="pzsp2-cardlist-link" to={`${card.id}`}>{">"}</Link></td>
+                        <td><Link className="pzsp2-link" to={`${card.id}`}>{">"}</Link></td>
                     </tr>
                 })}
             </tbody>

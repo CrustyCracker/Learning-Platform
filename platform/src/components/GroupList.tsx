@@ -58,7 +58,7 @@ export function GroupList(props: GroupListProps) {
                         <td className="pzsp2-grouplist-td-wrap hide-on-small">{group.difficulty}</td>
                         <td className="hide-on-medium">{isPublicToString(group.isPublic)}</td>
 
-                        <td><Link className="pzsp2-grouplist-link" to={`${group.id}`}>{">"}</Link></td>
+                        <td><Link className="pzsp2-link" to={`${group.id}`}>{">"}</Link></td>
                     </tr>
                 })}
             </tbody>
