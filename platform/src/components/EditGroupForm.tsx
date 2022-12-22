@@ -3,7 +3,6 @@ import {Requests} from "../requests/Requests";
 import {GroupResponse} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
 import {useNavigate, useParams} from "react-router-dom";
-import '../style/editGroupForm.css';
 
 interface EditGroupFormProps {
     onSuccess: (response: GroupResponse) => void
@@ -59,7 +58,6 @@ export function EditGroupForm(props: EditGroupFormProps) {
     }
 
     return (<>
-    <link rel="stylesheet" href="../style/newGroupForm.css"/>
     <form>
         <div className="card text-white bg-dark" style={cardStyle}>
             <label style={{margin: 0, textAlign: 'start'}}>

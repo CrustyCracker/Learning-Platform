@@ -1,0 +1,50 @@
+.pzsp2-groupform-page-cont{
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.pzsp2-groupform-cont{
+    width: 100%;
+    margin-top: 8vh;
+}
+
+.pzsp2-groupform-row{
+    justify-content: center;
+}
+
+.pzsp2-groupform-card{
+    align-items: center;
+    padding: 5%;
+
+}
+
+.pzsp2-groupform-name{
+    text-align: start;
+    width: 70%;
+    margin-bottom: 5%;
+}
+
+.pzsp2-groupform-desc{
+    text-align: start;
+    width: 70%;
+    margin-bottom: 5%;
+}
+
+.pzsp2-groupform-diff{
+    text-align: center;
+    width: 30%;
+    margin-bottom: 15%;
+    white-space: nowrap;
+}
+
+.pzsp2-groupform-select{
+   border-color: black;
+}
+
+.pzsp2-groupform-submit{
+    margin-top: 5%;
+    justify-content: center;
+
+}
+

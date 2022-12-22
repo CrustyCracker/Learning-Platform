@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { NewGroupForm } from "../components/NewGroupForm";
 import { ErrorResponse } from "../types/ErrorResponse";
 import {EditGroupForm} from "../components/EditGroupForm";
 import LoginPage from "./LoginPage";
@@ -16,6 +15,7 @@ import MyGroupsPage from "./MyGroupsPage";
 import GroupPage from "./GroupPage";
 import NewCardPage from "./NewCardPage";
 import EditCardPage from "./EditCardPage";
+import NewGroupPage from "./NewGroupPage";
 
 export default function App() {
     const [, setError] = useState("");
@@ -44,7 +44,7 @@ export default function App() {
                         <Route path="/groups" element={< MyGroupsPage />} />
                         <Route path="/groups/:id" element={<GroupPage />} />
                         <Route path="/groups/:id/edit" element={<EditGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
-                        <Route path="/groups/new" element={<NewGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/groups/new" element={<NewGroupPage />} />
                         <Route path="/login" element={<LoginPage/>} />
                         <Route path="/register" element={<RegisterPage />} />
                     </Routes>

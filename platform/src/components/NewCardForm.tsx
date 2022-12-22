@@ -92,10 +92,10 @@ export function NewCardForm(props: CardFormProps) {
                 </div>
             </div>
         <div className="form-check pzsp2-cardform-pubcheck">
-            <input className="form-check-input pzsp2-cardform-pubcheck-input" type="checkbox" name="isPublic"
+            <input className="form-check-input pzsp2-pubcheck-input" type="checkbox" name="isPublic"
                    checked={newCard.isPublic} id="isPublic" onChange={(e) => {
                                      if (e.target.value) setNewCard({...newCard, isPublic: e.target.checked})}}/>
-                <label className="form-check-label pzsp2-cardform-pubcheck-label" htmlFor="isPublic">
+                <label className="form-check-label" htmlFor="isPublic">
                     Publiczna
                 </label>
         </div>

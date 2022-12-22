@@ -145,7 +145,7 @@ export function Group(props: GroupProps) {
                         <button type="submit" className="btn btn-outline-danger">Usuń</button>
                     </form>
                     <form className="pzsp2-group-edit-button" onSubmit={EditGroup}>
-                        <button type="submit" className="btn btn-outline-info">Edytuj</button>
+                        <button type="submit" className="btn btn-outline-success">Edytuj</button>
                     </form>
                 </div>
             </div>
