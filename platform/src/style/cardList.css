@@ -60,7 +60,7 @@
     word-wrap: break-word
 }
 
-.pzsp2-cardlist-page-cont{
+.pzsp2-mycards-page-cont{
     width: 100%;
     margin-top: 5%;
     margin-bottom: 5%;
@@ -84,8 +84,7 @@
     color: white;
 }
 .container-fluid .rti--container {
-    max-width: 20%;
-    width: 20%;
+    width: 300px;
     font-size: 15px;
     --rti-border: #ccc;
     --rti-tag-remove: #e53e3e;

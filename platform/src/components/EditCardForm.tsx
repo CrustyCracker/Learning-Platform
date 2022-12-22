@@ -1,9 +1,9 @@
 import React, {FormEvent, useEffect, useState} from "react";
 import {Requests} from "../requests/Requests";
-import {CardResponse, NewCard} from "../types/Cards";
+import {CardResponse} from "../types/Cards";
 import {ErrorResponse} from "../types/ErrorResponse";
 import {useNavigate, useParams} from 'react-router-dom';
-import '../style/newCardForm.css';
+import '../style/cardForm.css';
 
 interface EditCardFormProps {
     onSuccess: (response: CardResponse) => void,
@@ -44,7 +44,6 @@ export function EditCardForm(props: EditCardFormProps) {
     }
 
     return (<div className="container-fluid" style={{width: "80%"}}>
-        <form>
         <div className="row gy-3">
             <div className="col-lg-4 col-md-12 col-sm-12">
                 <div className="card text-white bg-dark" style={{paddingBottom: 0}}>
@@ -88,6 +87,7 @@ export function EditCardForm(props: EditCardFormProps) {
                     Publiczna
                 </label>
         </div>
+        <form>
         <div className="row">
             <div className="btn-group" role="group" style={{justifyContent: "center"}}>
                 <div style={{justifyContent: "center", marginTop: "10%"}}>

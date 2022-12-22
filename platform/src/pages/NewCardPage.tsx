@@ -1,18 +1,19 @@
 import {useState} from 'react';
 import '../style/App.css';
-import '../style/groupList.css';
+import '../style/cardForm.css';
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
-import {GroupList} from "../components/GroupList";
+import {NewCardForm} from "../components/NewCardForm";
 import Layout from "../components/Layout/Layout";
 
-export default function GroupListPage() {
+export default function NewCardPage() {
     const [error, setError] = useState("");
+
 
     return (<>
         <Layout>
-            <div className="App container-fluid pzsp2-grouplist-page-cont">
+            <div className="App container-fluid pzsp2-cardform-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
-                <GroupList onSuccess={() => {}} onError={(res) => setError(res.message)}/>
+                <NewCardForm onSuccess={() => {}} onError={(res) => setError(res.message)}/>
             </div>
         </Layout>
     </>);

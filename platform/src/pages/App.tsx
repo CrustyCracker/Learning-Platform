@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { NewCardForm } from "../components/NewCardForm";
 import { NewGroupForm } from "../components/NewGroupForm";
 import { ErrorResponse } from "../types/ErrorResponse";
 import {EditGroupForm} from "../components/EditGroupForm";
@@ -12,10 +11,11 @@ import {EditCardForm} from "../components/EditCardForm";
 import LoginPage from "./LoginPage";
 import RegisterPage from './RegisterPage';
 import CardPage from "./CardPage";
-import CardListPage from "./CardListPage";
+import MyCardsPage from "./MyCardsPage";
 import MainMenuPage from "./MainMenuPage";
-import GroupListPage from "./GroupListPage";
+import MyGroupsPage from "./MyGroupsPage";
 import GroupPage from "./GroupPage";
+import NewCardPage from "./NewCardPage";
 
 export default function App() {
     const [, setError] = useState("");
@@ -37,11 +37,11 @@ export default function App() {
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<MainMenuPage />} />
-                        <Route path="/cards" element={<CardListPage />} />
+                        <Route path="/cards" element={<MyCardsPage />} />
                         <Route path="/cards/:id" element={<CardPage />} />
-                        <Route path="/cards/new" element={<NewCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
+                        <Route path="/cards/new" element={<NewCardPage />} />
                         <Route path="/cards/:id/edit" element={<EditCardForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
-                        <Route path="/groups" element={< GroupListPage />} />
+                        <Route path="/groups" element={< MyGroupsPage />} />
                         <Route path="/groups/:id" element={<GroupPage />} />
                         <Route path="/groups/:id/edit" element={<EditGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />
                         <Route path="/groups/new" element={<NewGroupForm onSuccess={logToConsoleInfo} onError={logToConsoleErr} />} />

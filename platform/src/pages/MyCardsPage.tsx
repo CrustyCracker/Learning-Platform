@@ -5,12 +5,12 @@ import {ErrorAndInfo} from "../components/ErrorAndInfo";
 import {CardList} from "../components/CardList";
 import Layout from "../components/Layout/Layout";
 
-export default function CardListPage() {
+export default function MyCardsPage() {
     const [error, setError] = useState("");
 
     return (<>
         <Layout>
-            <div className="App container-fluid pzsp2-cardlist-page-cont">
+            <div className="App container-fluid pzsp2-mycards-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
                 <CardList onSuccess={() => {}} onError={(res) => setError(res.message)}/>
             </div>

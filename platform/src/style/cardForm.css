@@ -1,0 +1,51 @@
+.pzsp2-cardform-cont{
+    width: 80%;
+    margin-top: 8vh;
+    margin-bottom: 8vh;
+}
+
+.pzsp2-cardform-pubcheck{
+    text-align: start;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.pzsp2-cardform-pubcheck-input{
+    color: #adc178;
+}
+
+.pzsp2-cardform-pubcheck-input:checked{
+    background-color: #adc178;
+    border-color: black;
+}
+
+.pzsp2-cardform-pubcheck-input:checked:focus{
+    box-shadow: 0 0 0 1px white, 0 0 0 0.2rem #adc178;
+    border-color: black;
+}
+.pzsp2-cardform-pubcheck-input:focus{
+    box-shadow: 0 0 0 1px white, 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+    border-color: black;
+}
+.pzsp2-cardform-pubcheck-input:active{
+    background-color: #adc178;
+    border-color: black;
+}
+
+.pzsp2-cardform-buttons{
+    justify-content: center;
+}
+
+.pzsp2-cardform-add-button{
+    float: left;
+    margin-right: 2%;
+}
+
+.pzsp2-cardform-addplus-button{
+    float: right;
+}
+
+.pzsp2-cardform-page-cont{
+    width: 100%;
+    margin-top: 5%;
+}
