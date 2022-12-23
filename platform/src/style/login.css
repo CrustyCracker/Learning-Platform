@@ -1,32 +1,35 @@
-textarea.form-control {
-    min-height: 200px;
-    color: #4a4a4a;
-    border-color: #000;
+.pzsp2-login-page-cont{
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
-textarea.form-control:focus {
-    min-height: 200px;
-    color: black;
-    box-shadow: 0 5px 10px 0 black;
-    outline-color: black;
-    border: 1px solid #555;
+.pzsp2-login-cont{
+    width: 100%;
 }
 
-select.form-select:focus {
-    color: black;
-    box-shadow: 0 5px 10px 0 black;
-    outline-color: black;
-    border: 1px solid #555;
+.pzsp2-login-row{
+    justify-content: center;
 }
 
-input.form-control {
-    color: #4a4a4a;
-    border-color: #000;
+.pzsp2-login-card{
+    align-items: center;
+    padding: 10% 0;
 }
 
-input.form-control:focus {
-    color: black;
-    box-shadow: 0 5px 10px 0 black;
-    outline-color: black;
-    border: 1px solid #555;
+.pzsp2-login-user{
+    margin: 0 0 4%;
+    text-align: start;
+    width: 70%;
+}
+
+.pzsp2-login-pwd{
+    margin: 0 0 4%;
+    text-align: start;
+    width: 70%;
+}
+
+.pzsp2-login-submit{
+    justify-content: center;
+    margin-top: 10%;
 }

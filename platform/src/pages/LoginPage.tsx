@@ -9,10 +9,10 @@ export default function LoginPage() {
     const navigate = useNavigate()
 
     return (
-        <div className="App">
+        <div className="App container-fluid pzsp2-login-page-cont">
             <ErrorAndInfo errorMsg={error} infoMsg={""}/>
             <LoginForm onSuccess={() => navigate("/")} onError={(res) => setError(res.message)}/>
-            <small>Nie masz konta? <Link to="/register">Załóż konto</Link></small>
+            <small>Nie masz konta? <Link className="pzsp2-link" to="/register">Załóż konto</Link></small>
         </div>
     );
 }
