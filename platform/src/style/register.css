@@ -1,32 +1,53 @@
-textarea.form-control {
-    min-height: 200px;
-    color: #4a4a4a;
-    border-color: #000;
+.pzsp2-register-page-cont{
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
-textarea.form-control:focus {
-    min-height: 200px;
-    color: black;
-    box-shadow: 0 5px 10px 0 black;
-    outline-color: black;
-    border: 1px solid #555;
+.pzsp2-register-cont{
+    width: 100%;
 }
 
-select.form-select:focus {
-    color: black;
-    box-shadow: 0 5px 10px 0 black;
-    outline-color: black;
-    border: 1px solid #555;
+.pzsp2-register-row{
+    justify-content: center;
 }
 
-input.form-control {
-    color: #4a4a4a;
-    border-color: #000;
+.pzsp2-register-card{
+    align-items: center;
+    padding: 10% 0;
 }
 
-input.form-control:focus {
-    color: black;
-    box-shadow: 0 5px 10px 0 black;
-    outline-color: black;
-    border: 1px solid #555;
+.pzsp2-register-user{
+    margin: 0 0 4%;
+    text-align: start;
+    width: 70%;
+}
+
+.pzsp2-register-email{
+    margin: 0 0 4%;
+    text-align: start;
+    width: 70%;
+}
+
+.pzsp2-register-pwd{
+    margin: 0 0 4%;
+    text-align: start;
+    width: 70%;
+}
+
+.pzsp2-register-submit{
+    justify-content: center;
+    margin-top: 5%;
+}
+
+/*//pzsp2 ogarnać dlaczego error ma dodatkowy padding-left 5%*/
+.pzsp2-register-error{
+    position: fixed !important;
+    top: 5%;
+    margin: 0;
+    padding-left: 10%;
+    padding-right: 15%;
+    width: 100%;
+    z-index: 1;
+    word-wrap: anywhere;
 }

@@ -1,7 +1,5 @@
 .pzsp2-login-page-cont{
     width: 100%;
-    margin-top: 5%;
-    margin-bottom: 5%;
 }
 
 .pzsp2-login-cont{
@@ -31,5 +29,17 @@
 
 .pzsp2-login-submit{
     justify-content: center;
-    margin-top: 10%;
+    margin-top: 5%;
+}
+
+/*//pzsp2 ogarnać dlaczego error ma dodatkowy padding-left 5%*/
+.pzsp2-login-error{
+    align-items: center;
+    position: fixed !important;
+    top: 5%;
+    margin: 0;
+    padding-left: 10%;
+    padding-right: 15%;
+    width: 100%;
+    z-index: 1;
 }

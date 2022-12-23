@@ -35,7 +35,7 @@ export function LoginForm(props: LoginFormProps) {
     return (
         <div className="container-fluid pzsp2-login-cont">
             <div className="row pzsp2-login-row">
-                <div className="col-lg-3 col-md-12 col-sm-12">
+                <div className="col-lg-3 col-md-6 col-sm-12">
                     <form onSubmit={handleSubmit}>
                         <div className="card text-black bg-light pzsp2-login-card">
                             <label className="pzsp2-login-user">

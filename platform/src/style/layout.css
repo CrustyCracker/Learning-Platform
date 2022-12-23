@@ -1,0 +1,15 @@
+.pzsp2-navbar{
+    min-height: 5%;
+    margin: 0;
+    padding-left: 1%;
+    border-bottom: 2px solid black;
+    background-color: #F0EAD2;
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.pzsp2-navbar-link{
+    font-weight: bold;
+}

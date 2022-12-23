@@ -10,7 +10,9 @@ export default function LoginPage() {
 
     return (
         <div className="App container-fluid pzsp2-login-page-cont">
-            <ErrorAndInfo errorMsg={error} infoMsg={""}/>
+            <div className="pzsp2-login-error">
+                <ErrorAndInfo errorMsg={error} infoMsg={""}/>
+            </div>
             <LoginForm onSuccess={() => navigate("/")} onError={(res) => setError(res.message)}/>
             <small>Nie masz konta? <Link className="pzsp2-link" to="/register">Załóż konto</Link></small>
         </div>

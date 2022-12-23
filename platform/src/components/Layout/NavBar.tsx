@@ -1,9 +1,10 @@
 import {Link} from "react-router-dom";
+import "../../style/layout.css"
 
 const NavBar = () => {
     return (
-        <nav className="navbar navbar-light" style={{ minHeight: "5%", margin: "0", paddingLeft: "1%", borderBottom: "2px solid #000", backgroundColor: "#F0EAD2", position: "fixed", top: 0, width: "100%", zIndex: "1"}}>
-            <Link style={{fontWeight: "bold"}} className="navbar-brand" to="/">PZSP2</Link>
+        <nav className="navbar navbar-light pzsp2-navbar">
+            <Link className="navbar-brand pzsp2-navbar-link" to="/">PZSP2</Link>
         </nav>)
 }
 export default NavBar

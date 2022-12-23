@@ -1,3 +1,5 @@
+import "../../style/layout.css"
+
 const Footer = () => {
     return (<> </>)
 }

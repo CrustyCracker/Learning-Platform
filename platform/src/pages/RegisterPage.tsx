@@ -9,10 +9,12 @@ export default function RegisterPage() {
     const navigate = useNavigate()
 
     return (
-        <div className="App">
-            <ErrorAndInfo errorMsg={error} infoMsg={""}/>
-            <RegisterForm onSuccess={() => navigate("/")} onError={(res) => setError(res.message)}/>
-            <small>Masz już konto? <Link to="/login">Zaloguj się</Link></small>
+        <div className="App container-fluid pzsp2-register-page-cont">
+            <div className="pzsp2-register-error">
+                <ErrorAndInfo errorMsg={error} infoMsg={""}/>
+            </div>
+            <RegisterForm onSuccess={() => navigate("/login")} onError={(res) => setError(res.message)}/>
+            <small>Masz już konto? <Link className="pzsp2-link" to="/login">Zaloguj się</Link></small>
         </div>
     );
 }
