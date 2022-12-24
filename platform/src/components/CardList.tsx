@@ -59,6 +59,8 @@ export function CardList(props: CardListProps) {
         e.preventDefault();
     }
 
+
+    //pzsp2 - dodać animację dla każdego rzędu w tabeli, oddzielny fadeIn z delayem np 100ms
     return <>
         <link
             //pzsp2 -> zrobić ładny import bootstrapa

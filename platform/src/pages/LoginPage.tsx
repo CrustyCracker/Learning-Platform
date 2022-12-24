@@ -14,7 +14,7 @@ export default function LoginPage() {
                 <ErrorAndInfo errorMsg={error} infoMsg={""}/>
             </div>
             <LoginForm onSuccess={() => navigate("/")} onError={(res) => setError(res.message)}/>
-            <small>Nie masz konta? <Link className="pzsp2-link" to="/register">Załóż konto</Link></small>
+            <small className="pzsp2-login-reglink-text">Nie masz konta? <Link className="pzsp2-link pzsp2-login-reglink" to="/register">Załóż konto</Link></small>
         </div>
     );
 }

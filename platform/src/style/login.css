@@ -13,23 +13,41 @@
 .pzsp2-login-card{
     align-items: center;
     padding: 10% 0;
+    animation: fadeIn;
+    animation-duration: 500ms;
 }
 
 .pzsp2-login-user{
     margin: 0 0 4%;
     text-align: start;
     width: 70%;
+    animation: fadeIn;
+    animation-duration: 1000ms;
 }
 
 .pzsp2-login-pwd{
     margin: 0 0 4%;
     text-align: start;
     width: 70%;
+    animation: fadeIn;
+    animation-duration: 1500ms;
 }
 
 .pzsp2-login-submit{
     justify-content: center;
     margin-top: 5%;
+    animation: fadeIn;
+    animation-duration: 2000ms;
+}
+
+.pzsp2-login-reglink-text{
+    animation: fadeIn;
+    animation-duration: 2500ms;
+}
+
+.pzsp2-login-reglink{
+    animation: fadeIn;
+    animation-duration: 3000ms;
 }
 
 /*//pzsp2 ogarnać dlaczego error ma dodatkowy padding-left 5%*/
@@ -42,4 +60,6 @@
     padding-right: 15%;
     width: 100%;
     z-index: 1;
+    /*//pzsp2 - ładna animacja dla erroru, trigger- onError*/
+    /*animation: shakeX;*/
 }

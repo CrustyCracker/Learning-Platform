@@ -52,7 +52,7 @@ export function NewCardForm(props: CardFormProps) {
         <div className="container-fluid pzsp2-cardform-cont">
             <div className="row gy-3">
                 <div className="col-lg-4 col-md-12 col-sm-12">
-                    <div className="card text-white bg-dark">
+                    <div className="card text-white bg-dark pzsp2-cardform-card">
                         <div className="card-header">
                             Pytanie
                         </div>
@@ -65,7 +65,7 @@ export function NewCardForm(props: CardFormProps) {
                     </div>
                 </div>
                 <div className="col-lg-4 col-md-12 col-sm-12">
-                    <div className="card text-white bg-dark" >
+                    <div className="card text-white bg-dark pzsp2-cardform-card" >
                         <div className="card-header">
                             Odpowiedź
                         </div>
@@ -78,7 +78,7 @@ export function NewCardForm(props: CardFormProps) {
                     </div>
                 </div>
                 <div className="col-lg-4 col-md-12 col-sm-12">
-                    <div className="card text-white bg-dark" >
+                    <div className="card text-white bg-dark pzsp2-cardform-card" >
                         <div className="card-header">
                             Źródło
                         </div>

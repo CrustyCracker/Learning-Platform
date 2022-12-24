@@ -14,7 +14,7 @@ export default function RegisterPage() {
                 <ErrorAndInfo errorMsg={error} infoMsg={""}/>
             </div>
             <RegisterForm onSuccess={() => navigate("/login")} onError={(res) => setError(res.message)}/>
-            <small>Masz już konto? <Link className="pzsp2-link" to="/login">Zaloguj się</Link></small>
+            <small className="pzsp2-register-loglink-text">Masz już konto? <Link className="pzsp2-link pzsp2-register-loglink" to="/login">Zaloguj się</Link></small>
         </div>
     );
 }

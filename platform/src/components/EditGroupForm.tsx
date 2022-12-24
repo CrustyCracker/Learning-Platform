@@ -74,7 +74,7 @@ export function EditGroupForm(props: EditGroupFormProps) {
                                     <option key={o.value} value={o.value}>{o.label}</option>))}
                             </select>
                         </label>
-                        <div className="form-check">
+                        <div className="form-check pzsp2-groupform-visibility">
                             <input className="form-check-input pzsp2-pubcheck-input" type="checkbox" name="isPublic" checked={group.isPublic}
                                    id="isPublic" onChange={(e) => {
                                 if (e.target.value) setGroup({...group, isPublic: e.target.checked})

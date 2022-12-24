@@ -62,11 +62,11 @@ export function Card(props: CardProps) {
         </div>
         <div className="row gy-3">
             <div className="col-lg-4 col-md-12 col-sm-12">
-                <div className="card h-100 text-black bg-light" >
+                <div className="card h-100 text-black bg-light pzsp2-card-card" >
                     <div className="card-header">
                         Pytanie
                     </div>
-                    <div className="card-body pzsp2-card-card-body">
+                    <div className="card-body">
                         <small className="card-text pzsp2-card-card-text">
                             {card.question}
                         </small>
@@ -74,11 +74,11 @@ export function Card(props: CardProps) {
                 </div>
             </div>
             <div className="col-lg-4 col-md-12 col-sm-12">
-                <div className="card h-100 text-black bg-light" >
+                <div className="card h-100 text-black bg-light pzsp2-card-card" >
                     <div className="card-header">
                         Odpowiedź
                     </div>
-                    <div className="card-body pzsp2-card-card-body">
+                    <div className="card-body">
                         <small className="card-text pzsp2-card-card-text">
                             {card.answer}
                         </small>
@@ -86,11 +86,11 @@ export function Card(props: CardProps) {
                 </div>
             </div>
             <div className="col-lg-4 col-md-12 col-sm-12">
-                <div className="card h-100 text-black bg-light" >
+                <div className="card h-100 text-black bg-light pzsp2-card-card" >
                     <div className="card-header">
                         Źródło
                     </div>
-                    <div className="card-body pzsp2-card-card-body">
+                    <div className="card-body">
                         <small className="card-text pzsp2-card-card-text">
                             {card.source}
                         </small>

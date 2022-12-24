@@ -7,24 +7,34 @@
 .pzsp2-group-name{
     word-wrap: break-word;
     text-align: center;
+    animation: fadeIn;
+    animation-duration: 1000ms;
 }
 
 .pzsp2-group-user{
     text-align: center;
+    animation: fadeIn;
+    animation-duration: 1000ms;
 }
 
 .pzsp2-group-diff{
     text-align: center;
     margin-bottom: 0;
+    animation: fadeIn;
+    animation-duration: 1000ms;
 }
 
 .pzsp2-group-desc{
     margin-top: 2%;
     margin-bottom: 2%;
+    animation: fadeIn;
+    animation-duration: 1000ms;
 }
 
 .pzsp2-group-desc-body{
     line-height: 1;
+    animation: fadeIn;
+    animation-duration: 2000ms;
 }
 
 .pzsp2-group-desc-text{
@@ -36,11 +46,15 @@
     float: left;
     margin: 0;
     word-wrap: break-word;
+    animation: fadeIn;
+    animation-duration: 2000ms;
 }
 
 .pzsp2-group-test-button{
     float: left;
     margin-left: 1%;
+    animation: fadeIn;
+    animation-duration: 2000ms;
 }
 
 .pzsp2-group-cards-table{
@@ -85,6 +99,8 @@
 
 .pzsp2-group-buttons-col{
     text-align: end;
+    animation: fadeIn;
+    animation-duration: 2000ms;
 }
 
 .pzsp2-group-delete-button{

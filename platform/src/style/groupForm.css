@@ -16,19 +16,24 @@
 .pzsp2-groupform-card{
     align-items: center;
     padding: 5%;
-
+    animation: fadeIn;
+    animation-duration: 500ms;
 }
 
 .pzsp2-groupform-name{
     text-align: start;
     width: 70%;
     margin-bottom: 5%;
+    animation: fadeIn;
+    animation-duration: 1000ms;
 }
 
 .pzsp2-groupform-desc{
     text-align: start;
     width: 70%;
     margin-bottom: 5%;
+    animation: fadeIn;
+    animation-duration: 1500ms;
 }
 
 .pzsp2-groupform-diff{
@@ -36,15 +41,23 @@
     width: 30%;
     margin-bottom: 15%;
     white-space: nowrap;
+    animation: fadeIn;
+    animation-duration: 2000ms;
 }
 
 .pzsp2-groupform-select{
    border-color: black;
 }
 
+.pzsp2-groupform-visibility{
+    animation: fadeIn;
+    animation-duration: 2500ms;
+}
+
 .pzsp2-groupform-submit{
     margin-top: 5%;
     justify-content: center;
-
+    animation: fadeIn;
+    animation-duration: 3000ms;
 }
 

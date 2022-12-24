@@ -10,17 +10,25 @@
 
 .pzsp2-card-owner-text{
     text-align: start;
+    animation: fadeIn;
+    animation-duration: 1500ms;
 }
 
-.pzsp2-card-card-body{
+.pzsp2-card-card{
+    animation: fadeIn;
+    animation-duration: 1000ms;
 }
 
 .pzsp2-card-card-text{
     word-wrap: break-word;
+    animation: fadeIn;
+    animation-duration: 2000ms;
 }
 
 .pzsp2-card-row-tag{
     margin-top: 2%;
+    animation: fadeIn;
+    animation-duration: 1500ms;
 }
 
 .pzsp2-card-tag-text{
@@ -29,6 +37,8 @@
 
 .pzsp2-card-buttons{
     text-align: end;
+    animation: fadeIn;
+    animation-duration: 1500ms;
 }
 
 .pzsp2-card-edit-button{
@@ -43,6 +53,8 @@
 .pzsp2-card-row-grp{
     margin-top: 2%;
     margin-bottom: 2%;
+    animation: fadeIn;
+    animation-duration: 1500ms;
 }
 
 .pzsp2-card-grp-text{

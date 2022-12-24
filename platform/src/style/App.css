@@ -89,3 +89,10 @@ input.form-control:focus {
   color: black;
 }
 
+tr{
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 1000ms;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}

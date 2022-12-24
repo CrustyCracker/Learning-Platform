@@ -15,29 +15,57 @@
 .pzsp2-register-card{
     align-items: center;
     padding: 10% 0;
+    animation: fadeIn;
+    animation-duration: 500ms;
 }
 
 .pzsp2-register-user{
     margin: 0 0 4%;
     text-align: start;
     width: 70%;
+    animation: fadeIn;
+    animation-duration: 1000ms;
 }
 
 .pzsp2-register-email{
     margin: 0 0 4%;
     text-align: start;
     width: 70%;
+    animation: fadeIn;
+    animation-duration: 1500ms;
 }
 
 .pzsp2-register-pwd{
     margin: 0 0 4%;
     text-align: start;
     width: 70%;
+    animation: fadeIn;
+    animation-duration: 2000ms;
+}
+
+.pzsp2-register-pwdconf{
+    margin: 0 0 4%;
+    text-align: start;
+    width: 70%;
+    animation: fadeIn;
+    animation-duration: 2500ms;
 }
 
 .pzsp2-register-submit{
     justify-content: center;
     margin-top: 5%;
+    animation: fadeIn;
+    animation-duration: 3000ms;
+}
+
+.pzsp2-register-loglink-text{
+    animation: fadeIn;
+    animation-duration: 2500ms;
+}
+
+.pzsp2-register-loglink{
+    animation: fadeIn;
+    animation-duration: 3000ms;
 }
 
 /*//pzsp2 ogarnać dlaczego error ma dodatkowy padding-left 5%*/
@@ -50,4 +78,6 @@
     width: 100%;
     z-index: 1;
     word-wrap: anywhere;
+    /*//pzsp2 - ładna animacja dla erroru, trigger- onError*/
+    /*animation: shakeX;*/
 }

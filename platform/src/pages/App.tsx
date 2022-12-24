@@ -3,6 +3,7 @@ import '../style/App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'animate.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ErrorResponse } from "../types/ErrorResponse";
 import LoginPage from "./LoginPage";

@@ -63,7 +63,7 @@ export function RegisterForm(props: RegisterFormProps) {
                                     setCredentials({...credentials, password: e.target.value})
                                 }} />
                             </label>
-                            <label className="pzsp2-register-pwd">
+                            <label className="pzsp2-register-pwdconf">
                             <small>Powtórz hasło</small>
                                 <input className="form-control" type="password" name="password" required onChange={confirmPasswordOnChange} />
                                 {!isConfirmedPassword &&

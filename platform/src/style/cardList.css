@@ -7,16 +7,22 @@
 
 .pzsp2-cardlist-title{
     margin-top: 8vh;
+    animation: fadeIn;
+    animation-duration: 500ms;
 }
 
 .pzsp2-cardlist-tagsearch{
     margin-top: 0.5%;
     text-align: left;
     font-size: 12px;
+    animation: fadeIn;
+    animation-duration: 1000ms;
 }
 
 .pzsp2-cardlist-row-buttons{
     margin-bottom: 1%;
+    animation: fadeIn;
+    animation-duration: 1500ms;
 }
 
 .pzsp2-cardlist-learn-button{
@@ -34,6 +40,8 @@
     margin-right: auto;
     table-layout: fixed;
     display: block;
+    animation: fadeIn;
+    animation-duration: 2500ms;
 }
 
 .pzsp2-cardlist-table-que{

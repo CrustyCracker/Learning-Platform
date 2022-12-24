@@ -13,3 +13,9 @@
 .pzsp2-navbar-link{
     font-weight: bold;
 }
+
+.pzsp2-navbar-link:active{
+    font-weight: bold;
+    animation: pulse;
+    animation-duration: 500ms;
+}
