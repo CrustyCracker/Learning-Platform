@@ -1,0 +1,44 @@
+.pzsp2-cardform-cont{
+    width: 80%;
+    margin-top: 8vh;
+    margin-bottom: 8vh;
+}
+
+.pzsp2-cardform-card{
+    /*animation: backInDown;*/
+    animation: fadeIn;
+    animation-duration: 500ms;
+}
+
+.pzsp2-cardform-pubcheck{
+    text-align: start;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    animation: fadeIn;
+    animation-duration: 1s;
+}
+
+.pzsp2-cardform-buttons{
+    justify-content: center;
+    animation: fadeIn;
+    animation-duration: 1500ms;
+}
+
+
+.pzsp2-cardform-add-button{
+    float: left;
+    margin-right: 2%;
+}
+
+.pzsp2-cardform-addplus-button{
+    float: right;
+}
+
+.pzsp2-cardform-page-cont{
+    width: 100%;
+    margin-top: 5%;
+}
+
+.pzsp2-cardform-edit-button{
+    justify-content: center;
+}

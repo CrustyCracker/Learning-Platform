@@ -34,6 +34,10 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableJpaRepositories(
@@ -116,4 +120,10 @@ public class Config {
 //        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
 //        return new NimbusJwtEncoder(jwks);
 //    }
+
+/*    @Bean
+    public UserDetailsService userDetailsService() {
+        return new AccountService();
+    }
+*/
 }

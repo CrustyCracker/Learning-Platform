@@ -1,12 +1,77 @@
-.table {
+.pzsp2-cardlist-cont{
     width: 80%;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pzsp2-cardlist-title{
+    margin-top: 8vh;
+    animation: fadeIn;
+    animation-duration: 500ms;
+}
+
+.pzsp2-cardlist-tagsearch{
+    margin-top: 0.5%;
+    text-align: left;
+    font-size: 12px;
+    animation: fadeIn;
+    animation-duration: 1000ms;
+}
+
+.pzsp2-cardlist-row-buttons{
+    margin-bottom: 1%;
+    animation: fadeIn;
+    animation-duration: 1500ms;
+}
+
+.pzsp2-cardlist-learn-button{
+    float: left;
+}
+
+.pzsp2-cardlist-test-button{
+    float: left;
+    margin-left: 1%;
+}
+
+.pzsp2-cardlist-table{
+    width: 80% !important;
     margin-left: auto;
     margin-right: auto;
     table-layout: fixed;
+    display: block;
+    animation: fadeIn;
+    animation-duration: 2500ms;
 }
 
-.td {
-    word-wrap: break-word;
+.pzsp2-cardlist-table-que{
+    width: 40%;
+}
+
+.pzsp2-cardlist-table-grp{
+    width: 15%;
+}
+
+.pzsp2-cardlist-table-tag{
+    width: 10%;
+}
+
+.pzsp2-cardlist-table-vis{
+    width: 10%;
+}
+
+.pzsp2-cardlist-table-lin{
+    width: 5%;
+}
+
+.pzsp2-cardlist-td-wrap{
+    word-wrap: break-word
+}
+
+.pzsp2-mycards-page-cont{
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .container-fluid .tag button {
@@ -18,13 +83,12 @@
     color: white;
 }
 .container-fluid .rti--container {
-    max-width: 20%;
-    width: 20%;
+    width: 300px;
     font-size: 15px;
     --rti-border: #ccc;
     --rti-tag-remove: #e53e3e;
     --rti-bg: #fff;
-    --rti-tag: #636363;
+    --rti-tag: #ccd5ae;
 
 }
 
@@ -34,26 +98,5 @@
 }
 
 .container-fluid .rti--input {
-    width: 100%;
-}
-
-.container-fluid{
-    width: 80%;
-}
-
-.pzsp-table{
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    table-layout: fixed
-}
-
-.pzsp-td-wrap{
-    word-wrap: break-word
-}
-
-.pzsp-td-ellipsis{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: 50%;
 }

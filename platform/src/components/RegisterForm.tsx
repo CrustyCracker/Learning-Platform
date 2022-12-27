@@ -39,47 +39,43 @@ export function RegisterForm(props: RegisterFormProps) {
             setConfirmedPassword(true);
     }
 
-    const cardStyle = {
-        // pzsp2 wywalić do css
-        margin: "5% 0",
-        minHeight: '420px',
-        minWidth: '600px',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '5%'
-    }
-    // pzsp2 max długość wpisywanego tesktu
-    return <div>
-        <form onSubmit={handleSubmit}>
-            <div className="card text-white bg-dark" style={cardStyle}>
-                 <label style={{margin: 0, textAlign: 'start', width: "70%"}}>
-                    <small>Nazwa użytkownika</small>
-                    <input className="form-control" type="text" name="username" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
-                        setCredentials({...credentials, username: e.target.value})
-                    }} />
-                </label>
-                <label style={{margin: 0, textAlign: 'start', width: "70%"}}>
-                    <small>Email</small>
-                    <input className="form-control" type="text" name="email" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
-                        setCredentials({...credentials, email: e.target.value})
-                    }} />
-                </label>
-                <label style={{margin: 0, textAlign: 'start', width: "70%"}}>
-                    <small>Hasło</small>
-                    <input className="form-control" type="password" name="password" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
-                        setCredentials({...credentials, password: e.target.value})
-                    }} />
-                </label>
-                <label style={{margin: 0, textAlign: 'start', width: "70%"}}>
-                <small>Powtórz hasło</small>
-                    <input className="form-control" type="password" name="password" required onChange={confirmPasswordOnChange} />
-                    {!isConfirmedPassword &&
-                        <div><small>Hasła się różnią!!!</small></div>
-                    }
-                </label>
-                <div style={{justifyContent: "center", marginTop: "4%"}}></div>
-                <button type="submit" onClick={handleSubmit} className="btn btn-outline-info">Zarejestruj się</button>
+    return (
+        <div className="container-fluid pzsp2-register-cont">
+            <div className="row pzsp2-register-row">
+                <div className="col-lg-3 col-md-6 col-sm-12">
+                    <form onSubmit={handleSubmit}>
+                        <div className="card text-black bg-light pzsp2-register-card">
+                             <label className="pzsp2-register-user">
+                                <small>Nazwa użytkownika</small>
+                                <input className="form-control" type="text" name="username" maxLength={100} required onChange={(e) => {
+                                    setCredentials({...credentials, username: e.target.value})
+                                }} />
+                            </label>
+                            <label className="pzsp2-register-email">
+                                <small>Email</small>
+                                <input className="form-control" type="text" name="email" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
+                                    setCredentials({...credentials, email: e.target.value})
+                                }} />
+                            </label>
+                            <label className="pzsp2-register-pwd">
+                                <small>Hasło</small>
+                                <input className="form-control" type="password" name="password" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
+                                    setCredentials({...credentials, password: e.target.value})
+                                }} />
+                            </label>
+                            <label className="pzsp2-register-pwdconf">
+                            <small>Powtórz hasło</small>
+                                <input className="form-control" type="password" name="password" required onChange={confirmPasswordOnChange} />
+                                {!isConfirmedPassword &&
+                                    <div><small>Hasła się różnią!!!</small></div>
+                                }
+                            </label>
+                            <div className="pzsp2-register-submit">
+                            <button type="submit" onClick={handleSubmit} className="btn btn-outline-success">Zarejestruj się</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
-    </div>
+        </div>)
 }

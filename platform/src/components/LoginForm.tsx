@@ -32,34 +32,30 @@ export function LoginForm(props: LoginFormProps) {
         });
     }
 
-    const cardStyle = {
-        // pzsp2 wywalić do css
-        margin: "5% 0",
-        height: '420px',
-        width: '600px',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '5%'
-    }
-    // pzsp2 max długość wpisywanego tesktu
-    return (<> <link rel="stylesheet" href="../style/login.css"/>
-        <form onSubmit={handleSubmit}>
-            <div className="card text-white bg-dark" style={cardStyle}>
-                <label style={{margin: 0, textAlign: 'start', width: "70%"}}>
-                    <small>Nazwa użytkownika</small>
-                    <input className="form-control" type="text" name="username" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
-                        setCredentials({...credentials, username: e.target.value})
-                    }} />
-                </label>
-                <label style={{margin: 0, textAlign: 'start', width: "70%"}}>
-                    <small>Hasło</small>
-                    <input className="form-control" type="password" name="password" style={{marginBottom: "4%"}} maxLength={100} required onChange={(e) => {
-                        setCredentials({...credentials, password: e.target.value})
-                    }} />
-                </label>
-                <div style={{justifyContent: "center", marginTop: "4%"}}></div>
-                <button type="submit" onClick={handleSubmit} className="btn btn-outline-info">Zaloguj się</button>
+    return (
+        <div className="container-fluid pzsp2-login-cont">
+            <div className="row pzsp2-login-row">
+                <div className="col-lg-3 col-md-6 col-sm-12">
+                    <form onSubmit={handleSubmit}>
+                        <div className="card text-black bg-light pzsp2-login-card">
+                            <label className="pzsp2-login-user">
+                                <small>Nazwa użytkownika</small>
+                                <input className="form-control" type="text" name="username" maxLength={100} required onChange={(e) => {
+                                    setCredentials({...credentials, username: e.target.value})
+                                }} />
+                            </label>
+                            <label className="pzsp2-login-pwd">
+                                <small>Hasło</small>
+                                <input className="form-control" type="password" name="password" maxLength={100} required onChange={(e) => {
+                                    setCredentials({...credentials, password: e.target.value})
+                                }} />
+                            </label>
+                            <div className="pzsp2-login-submit">
+                                <button type="submit" onClick={handleSubmit} className="btn btn-outline-success">Zaloguj się</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
-    </>)
+        </div>)
 }

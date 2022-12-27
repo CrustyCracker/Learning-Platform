@@ -12,6 +12,8 @@
     "@types/react-dom": "^18.0.9",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.2",
+    "animate.css": "^4.1.1",
+    "jquery": "^3.6.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -44,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.14",
     "react-router-dom": "^6.4.5"
   }
 }

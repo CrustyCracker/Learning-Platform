@@ -3,6 +3,7 @@ package mhmd.pzsp.PZSPApp.services;
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.models.User;
+/*import mhmd.pzsp.PZSPApp.models.api.BackendUserPrincipal;*/
 import mhmd.pzsp.PZSPApp.models.api.requests.LoginRequest;
 import mhmd.pzsp.PZSPApp.models.api.requests.RegisterRequest;
 import mhmd.pzsp.PZSPApp.repositories.IUserRepository;
@@ -14,6 +15,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKeyFactory;

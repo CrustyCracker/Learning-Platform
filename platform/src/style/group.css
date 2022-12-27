@@ -1,0 +1,113 @@
+.pzsp2-group-info-cont{
+    width: 80% !important;
+    padding: 0;
+    margin-top: 8vh;
+}
+
+.pzsp2-group-name{
+    word-wrap: break-word;
+    text-align: center;
+    animation: fadeIn;
+    animation-duration: 1000ms;
+}
+
+.pzsp2-group-user{
+    text-align: center;
+    animation: fadeIn;
+    animation-duration: 1000ms;
+}
+
+.pzsp2-group-diff{
+    text-align: center;
+    margin-bottom: 0;
+    animation: fadeIn;
+    animation-duration: 1000ms;
+}
+
+.pzsp2-group-desc{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    animation: fadeIn;
+    animation-duration: 1000ms;
+}
+
+.pzsp2-group-desc-body{
+    line-height: 1;
+    animation: fadeIn;
+    animation-duration: 2000ms;
+}
+
+.pzsp2-group-desc-text{
+    font-size: 15px;
+    word-wrap: break-word;
+}
+
+.pzsp2-group-learn-button{
+    float: left;
+    margin: 0;
+    word-wrap: break-word;
+    animation: fadeIn;
+    animation-duration: 2000ms;
+}
+
+.pzsp2-group-test-button{
+    float: left;
+    margin-left: 1%;
+    animation: fadeIn;
+    animation-duration: 2000ms;
+}
+
+.pzsp2-group-cards-table{
+    width: 80% !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+    table-layout: fixed;
+}
+
+.pzsp2-group-table-que{
+    width: 25%;
+}
+
+.pzsp2-group-table-ans{
+    width: 25%;
+}
+
+.pzsp2-group-table-src{
+    width: 25%;
+}
+
+.pzsp2-group-table-lin{
+    width: 5%;
+}
+
+.pzsp2-group-td-wrap{
+    word-wrap: anywhere;
+}
+
+.pzsp2-group-link{
+    text-decoration: none;
+    color: green;
+}
+.pzsp2-group-buttons-cont{
+    width: 80% !important;
+}
+
+.pzsp2-group-buttons-row{
+    margin-top: 5%;
+}
+
+.pzsp2-group-buttons-col{
+    text-align: end;
+    animation: fadeIn;
+    animation-duration: 2000ms;
+}
+
+.pzsp2-group-delete-button{
+    float: right;
+}
+
+.pzsp2-group-edit-button{
+    float: right;
+    margin-right: 2%;
+}
