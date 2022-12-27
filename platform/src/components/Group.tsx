@@ -5,6 +5,7 @@ import {Link, useParams, useNavigate} from "react-router-dom";
 import {GroupResponse} from "../types/Groups";
 import {CardResponse} from "../types/Cards";
 import '../style/group.css';
+import {isPublicToString} from "../helpers/NameHelpers";
 
 interface GroupProps {
     onSuccess: (response: GroupResponse) => void,
@@ -56,19 +57,6 @@ export function Group(props: GroupProps) {
         e.preventDefault()
     }
 
-    const tableStyle = {
-        // pzsp2 wywalić do css
-        width: "80%",
-        marginLeft: "auto",
-        marginTop: "1%",
-        marginRight: "auto",
-        tableLayout: "fixed" as unknown as undefined
-    }
-
-    const tdStyleWrap = {
-        wordWrap: "break-word" as unknown as undefined
-    }
-
     return (<>
         <link
             //pzsp2 -> zrobić ładny import bootstrapa
@@ -77,59 +65,87 @@ export function Group(props: GroupProps) {
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossOrigin="anonymous"
         />
-        <div className="container-fluid" style={{width: "80%", padding: "0"}}>
-            <div className="row" >
+        <div className="container-fluid pzsp2-group-info-cont">
+            <div className="row align-items-center">
                 <div className="col-lg-6 col-md-12 col-sm-12" >
-                    <h1 style={{wordWrap: "break-word", textAlign: "center"}}> {group.name} </h1>
-                    <h4 style={{textAlign: "center"}}> Właściciel: {group.username} </h4>
-                    <h4 style={{textAlign: "center"}}> Trudność: {group.difficulty} </h4>
+                    <h1 className="pzsp2-group-name">
+                        {group.name}
+                    </h1>
+                    <h4 className="pzsp2-group-user">
+                        Właściciel: {group.username}
+                    </h4>
+                    <h4 className="pzsp2-group-diff">
+                        Trudność: {group.difficulty}
+                    </h4>
+                    <h5 className="pzsp2-group-diff">
+                    {isPublicToString(group.isPublic)}
+                    </h5>
                 </div>
                 <div className="col-lg-6 col-md-12 col-sm-12">
-                    <div className="card text-white bg-dark" style={{marginTop: "2%"}}>
-                        <div className="card-header">Opis</div>
-                        <div className="card-body" style={{maxWidth: "90%", lineHeight: 1}}>
-                            <small className="card-text" style={{wordWrap: "break-word", fontSize: "15px"}}>
+                    <div className="card text-black bg-light pzsp2-group-desc">
+                        <div className="card-header">
+                            Opis
+                        </div>
+                        <div className="card-body pzsp2-group-desc-body">
+                            <small className="card-text pzsp2-group-desc-text">
                                 {group.description}
                             </small>
                         </div>
                     </div>
                 </div>
             </div>
-            <form onSubmit={Learn} style={{float: "left", margin: "0%, 0%, 0%, 0%"}}>
-                <button type="submit" className="btn btn-outline-warning">Ucz się</button>
-            </form>
-            <form onSubmit={Test} style={{float: "left", marginLeft: "1%"}}>
-                <button type="submit" className="btn btn-outline-danger">Test</button>
-            </form>
+            <div className="row">
+                <div className="col-lg-6 col-md-12 col-sm-12" >
+                    <form className="pzsp2-group-learn-button" onSubmit={Learn}>
+                        <button type="submit" className="btn btn-outline-warning">Ucz się</button>
+                    </form>
+                    <form className="pzsp2-group-test-button" onSubmit={Test}>
+                        <button type="submit" className="btn btn-outline-danger">Test</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <table style={tableStyle} className={"table table-dark center"}>
+
+        <table className={"table table-hover table-light pzsp2-group-cards-table"}>
             <thead>
             <tr>
-                <th style={{ width: "25%" }}>Pytanie</th>
-                <th style={{ width: "25%" }}>Odpowiedź</th>
-                <th style={{ width: "25%" }}>Źródło</th>
-                <th style={{ width: "5%" }}> </th>
+                <th className="pzsp2-group-table-que">
+                    Pytanie
+                </th>
+                <th className="pzsp2-group-table-ans">
+                    Odpowiedź
+                </th>
+                <th className="pzsp2-group-table-src">
+                    Źródło
+                </th>
+                <th className="pzsp2-group-table-lin"/>
             </tr>
             </thead>
             <tbody>
             {cards && cards.map(card => {
                 return <tr key={card.id}>
-                    <td style={tdStyleWrap}>{card.question}</td>
-                    <td style={tdStyleWrap}>{card.answer}</td>
-                    <td style={tdStyleWrap}>{card.source}</td>
-                    <td><Link to={`/cards/${card.id}`} style={{ textDecoration: 'none' }}>{">"}</Link></td>
+                    <td className="pzsp2-group-td-wrap">
+                        {card.question}
+                    </td>
+                    <td className="pzsp2-group-td-wrap">
+                        {card.answer}
+                    </td>
+                    <td className="pzsp2-group-td-wrap">
+                        {card.source}
+                    </td>
+                    <td><Link className="pzsp2-group-link" to={`/cards/${card.id}`}>{">"}</Link></td>
                 </tr>
             })}
             </tbody>
         </table>
-        <div className="container-fluid" style={{width: "80%"}}>
-            <div className="row" style={{ marginTop: "5%"}}>
-                <div className="col-lg-12 col-md-12 col-sm-12" style={{textAlign: "end"}}>
-                    <form onSubmit={DeleteGroup} style={{float: "right"}}>
+        <div className="container-fluid pzsp2-group-buttons-cont">
+            <div className="row pzsp2-group-buttons-row">
+                <div className="col-lg-12 col-md-12 col-sm-12 pzsp2-group-buttons-col">
+                    <form className="pzsp2-group-delete-button" onSubmit={DeleteGroup}>
                         <button type="submit" className="btn btn-outline-danger">Usuń</button>
                     </form>
-                    <form onSubmit={EditGroup} style={{float: "right", marginRight: "2%"}}>
-                        <button type="submit" className="btn btn-outline-info">Edytuj</button>
+                    <form className="pzsp2-group-edit-button" onSubmit={EditGroup}>
+                        <button type="submit" className="btn btn-outline-success">Edytuj</button>
                     </form>
                 </div>
             </div>

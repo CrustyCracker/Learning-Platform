@@ -1,0 +1,37 @@
+.pzsp2-mainmenu-cont{
+    width: 80% !important;
+    margin-top: 8vh;
+    margin-bottom: 8vh;
+}
+
+.pzsp2-mainmenu-card{
+    background-color: #adc178 !important;
+    margin: 5% 0;
+    min-height: 100px;
+    justify-content: center;
+    animation: zoomIn;
+    animation-duration: 500ms;
+}
+
+.pzsp2-mainmenu-card:hover{
+    border-color: black;
+}
+
+.pzsp2-mainmenu-card:active{
+    border-color: black;
+    animation: bounceOut;
+    animation-duration: 500ms;
+}
+
+.pzsp2-mainmenu-card-link{
+    text-decoration: none !important;
+    color: white !important;
+}
+
+.pzsp2-mainmenu-page-cont{
+    width: 100%;
+    margin-top: 6%;
+    margin-bottom: 6%;
+}
+
+

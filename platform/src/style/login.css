@@ -1,32 +1,65 @@
-textarea.form-control {
-    min-height: 200px;
-    color: #4a4a4a;
-    border-color: #000;
+.pzsp2-login-page-cont{
+    width: 100%;
 }
 
-textarea.form-control:focus {
-    min-height: 200px;
-    color: black;
-    box-shadow: 0 5px 10px 0 black;
-    outline-color: black;
-    border: 1px solid #555;
+.pzsp2-login-cont{
+    width: 100%;
 }
 
-select.form-select:focus {
-    color: black;
-    box-shadow: 0 5px 10px 0 black;
-    outline-color: black;
-    border: 1px solid #555;
+.pzsp2-login-row{
+    justify-content: center;
 }
 
-input.form-control {
-    color: #4a4a4a;
-    border-color: #000;
+.pzsp2-login-card{
+    align-items: center;
+    padding: 10% 0;
+    animation: fadeIn;
+    animation-duration: 500ms;
 }
 
-input.form-control:focus {
-    color: black;
-    box-shadow: 0 5px 10px 0 black;
-    outline-color: black;
-    border: 1px solid #555;
+.pzsp2-login-user{
+    margin: 0 0 4%;
+    text-align: start;
+    width: 70%;
+    animation: fadeIn;
+    animation-duration: 1000ms;
+}
+
+.pzsp2-login-pwd{
+    margin: 0 0 4%;
+    text-align: start;
+    width: 70%;
+    animation: fadeIn;
+    animation-duration: 1500ms;
+}
+
+.pzsp2-login-submit{
+    justify-content: center;
+    margin-top: 5%;
+    animation: fadeIn;
+    animation-duration: 2000ms;
+}
+
+.pzsp2-login-reglink-text{
+    animation: fadeIn;
+    animation-duration: 2500ms;
+}
+
+.pzsp2-login-reglink{
+    animation: fadeIn;
+    animation-duration: 3000ms;
+}
+
+/*//pzsp2 ogarnać dlaczego error ma dodatkowy padding-left 5%*/
+.pzsp2-login-error{
+    align-items: center;
+    position: fixed !important;
+    top: 5%;
+    margin: 0;
+    padding-left: 10%;
+    padding-right: 15%;
+    width: 100%;
+    z-index: 1;
+    /*//pzsp2 - ładna animacja dla erroru, trigger- onError*/
+    /*animation: shakeX;*/
 }
