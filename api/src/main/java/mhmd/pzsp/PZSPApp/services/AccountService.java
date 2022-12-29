@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
-public class AccountService implements IAccountService/*, UserDetailsService */{
+public class AccountService implements IAccountService/*, UserDetailsService*/ {
     @Autowired
     private IUserRepository userRepository;
 

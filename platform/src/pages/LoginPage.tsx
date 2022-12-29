@@ -12,7 +12,6 @@ export default function LoginPage() {
 
 
     const onLoginSuccess = (res: LoginResponse) => {
-        console.log(res);
         const cookies = new Cookies();
         cookies.set('JWTTOKEN', res.token, { path: '/' });
         navigate("/");

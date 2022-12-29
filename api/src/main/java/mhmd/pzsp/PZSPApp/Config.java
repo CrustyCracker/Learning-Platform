@@ -1,11 +1,5 @@
 package mhmd.pzsp.PZSPApp;
 
-import com.nimbusds.jose.jwk.JWK;
-import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
-import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
-import com.nimbusds.jose.jwk.source.JWKSource;
-import com.nimbusds.jose.proc.SecurityContext;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
 import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
@@ -14,30 +8,19 @@ import mhmd.pzsp.PZSPApp.security.Roles;
 import mhmd.pzsp.PZSPApp.services.AccountService;
 import mhmd.pzsp.PZSPApp.services.CardService;
 import mhmd.pzsp.PZSPApp.services.GroupService;
+import mhmd.pzsp.PZSPApp.security.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableJpaRepositories(
@@ -79,6 +62,17 @@ public class Config {
                                     .permitAll();
                             authorize.requestMatchers(
                                     HttpMethod.POST,
+                                    "/account/login",
+                                    "/account/login/",
+                                    "/account/register",
+                                    "/account/register/"
+                            ).permitAll();
+                            authorize.requestMatchers(
+                                    "/cards/all",
+                                    "/cards/all/"
+                            ).hasAuthority(Roles.USER.toString());
+                            authorize.requestMatchers(
+                                    HttpMethod.POST,
                                     "/cards/create",
                                     "/cards/create/",
                                     "/groups/create",
@@ -88,26 +82,10 @@ public class Config {
                         }
                 )
                 .httpBasic(Customizer.withDefaults())
+                .addFilterBefore(new JwtTokenFilter(getAccountService()), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
-    @Bean
-    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder =
-                http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.authenticationProvider(authenticationProvider);
-        return authenticationManagerBuilder.build();
-    }
-
-//    @Bean
-//    UserDetailsService users() {
-//        return new InMemoryUserDetailsManager(
-//                User.withUsername("user")
-//                        .password("{noop}password")
-//                        .authorities("app")
-//                        .build()
-//        );
-//    }
 
 //    @Bean
 //    JwtDecoder jwtDecoder() {
@@ -120,10 +98,4 @@ public class Config {
 //        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
 //        return new NimbusJwtEncoder(jwks);
 //    }
-
-/*    @Bean
-    public UserDetailsService userDetailsService() {
-        return new AccountService();
-    }
-*/
 }

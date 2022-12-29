@@ -3,10 +3,10 @@ import {Credentials, LoginResponse, RegisterCredentials} from "../types/Credenti
 import {CardResponse, NewCard} from "../types/Cards";
 import {GroupResponse, NewGroup} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
+import {useNavigate} from "react-router-dom";
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
-
 
 function fetchPost(body: any, url: string) {
     return fetch(Global.backendUrl + url, {
@@ -34,7 +34,7 @@ class GenericResponse <T>{
 }
 
 function setResponseOrError(response: any) {
-    if (response.status && response.status !== 200)
+    if (response && response.status && response.status !== 200)
         return {err: response};
     return {res: response};
 }

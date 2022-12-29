@@ -1,10 +1,15 @@
 package mhmd.pzsp.PZSPApp.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewCardRequest;
 import mhmd.pzsp.PZSPApp.models.api.responses.CardResponse;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;

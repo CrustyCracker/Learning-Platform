@@ -1,10 +1,14 @@
 package mhmd.pzsp.PZSPApp.security;
 
 import mhmd.pzsp.PZSPApp.services.AccountService;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +26,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        Logger logger = LogManager.getLogger(CustomAuthenticationProvider.class);
+        logger.log(Level.ERROR, "próba autentykacji");
+        logger.log(Level.ERROR, authentication.isAuthenticated());
         String login = authentication.getName();
         String password = authentication.getCredentials().toString();
 
@@ -37,6 +44,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     }
 
     private List<GrantedAuthority> prepareAuthorities(String login) {
+        Logger logger = LogManager.getLogger(CustomAuthenticationProvider.class);
+        logger.log(Level.ERROR, "LOGIN: "+login);
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(Roles.USER.toString()));
         if (Objects.equals(login, Roles.ADMIN.toString())) {
