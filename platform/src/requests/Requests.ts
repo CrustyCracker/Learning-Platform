@@ -3,13 +3,28 @@ import {Credentials, LoginResponse, RegisterCredentials} from "../types/Credenti
 import {CardResponse, NewCard} from "../types/Cards";
 import {GroupResponse, NewGroup} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 
-function fetchPost(body: any, url: string){
+function fetchPost(body: any, url: string) {
     return fetch(Global.backendUrl + url, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${cookies.get("JWTTOKEN")}`
+        },
         body: JSON.stringify(body)
+    })
+}
+
+function fetchGet(url: string) {
+    return fetch(Global.backendUrl + url, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${cookies.get("JWTTOKEN")}`
+        }
     })
 }
 
@@ -26,7 +41,7 @@ function setResponseOrError(response: any) {
 
 export class Requests {
     static async firstCard(): Promise<GenericResponse<CardResponse>> {
-        const response = await fetch(Global.backendUrl + "/cards/first")
+        const response = await fetchGet("/cards/first")
             .then(res => res.json())
         return setResponseOrError(response);
     }
@@ -57,38 +72,38 @@ export class Requests {
 
     static async myCards(id: number = 1): Promise<GenericResponse<CardResponse[]>> {
         // pzsp2 tutaj powinno być branie id zalogowanego usera a nie sztywne id=1
-        const response = await fetch(Global.backendUrl + "/cards/forUser/" + id)
+        const response = await fetchGet("/cards/forUser/" + id)
             .then(res => res.json())
         return setResponseOrError(response);
     }
 
     static async myGroups(id: number = 1): Promise<GenericResponse<GroupResponse[]>>{
         // pzsp2 to samo co wyżej
-        const response = await fetch(Global.backendUrl + "/groups/forUser/" + id)
+        const response = await fetchGet("/groups/forUser/" + id)
             .then(res => res.json())
         return setResponseOrError(response);
     }
 
     static async allCards(): Promise<GenericResponse<CardResponse[]>> {
-        const response = await fetch(Global.backendUrl + "/cards/all")
+        const response = await fetchGet("/cards/all")
             .then(res => res.json())
         return setResponseOrError(response);
     }
 
     static async CardId(id: number): Promise<GenericResponse<CardResponse>> {
-        const response = await fetch(Global.backendUrl + "/cards/" + id)
+        const response = await fetchGet("/cards/" + id)
             .then(res => res.json())
         return setResponseOrError(response);
     }
 
     static async GroupId(id: number): Promise<GenericResponse<GroupResponse>> {
-        const response = await fetch(Global.backendUrl + "/groups/" + id)
+        const response = await fetchGet("/groups/" + id)
             .then(res => res.json())
         return setResponseOrError(response);
     }
 
     static async CardsByGroupsId(id: number): Promise<GenericResponse<CardResponse[]>> {
-        const response = await fetch(Global.backendUrl + "/cards/group/" + id)
+        const response = await fetchGet("/cards/group/" + id)
             .then(res => res.json())
         return setResponseOrError(response);
     }
@@ -106,7 +121,7 @@ export class Requests {
     }
 
     static async deleteCard(id: number):  Promise<GenericResponse<boolean>> {
-        const response = await fetch(Global.backendUrl + "/cards/delete/" + id)
+        const response = await fetchGet("/cards/delete/" + id)
             .then(res => res.json())
         return setResponseOrError(response);
     }

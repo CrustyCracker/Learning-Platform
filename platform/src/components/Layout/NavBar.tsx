@@ -5,6 +5,7 @@ const NavBar = () => {
     return (
         <nav className="navbar navbar-light pzsp2-navbar">
             <Link className="navbar-brand pzsp2-navbar-link" to="/">PZSP2</Link>
+            <Link className="navbar-brand pzsp2-navbar-link" to="/login">Zaloguj</Link>
         </nav>)
 }
 export default NavBar
