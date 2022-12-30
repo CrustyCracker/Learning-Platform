@@ -29,22 +29,14 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest login, Authentication authentication)
-            throws BackendException {
-        if (accountService.login(login)) {
-            // pzsp2 TODO generowanie JWT
-            return new LoginResponse(true, "token_admin", "Zalogowano");
-        }
-
-        return new LoginResponse(false, null, "Niepoprawne hasło");
-        // pzsp2 narazie tokeny są testowe
+    public LoginResponse login(@RequestBody LoginRequest login) throws BackendException {
+        accountService.login(login);
+        return new LoginResponse(true, accountService.generateToken(login), "Zalogowano");
     }
 
     @PostMapping("/register")
-    public RegisterResponse register(@RequestBody RegisterRequest register, Authentication authentication)
-            throws BackendException {
+    public RegisterResponse register(@RequestBody RegisterRequest register) throws BackendException {
         if (accountService.register(register))
-//            return new RegisterResponse(true, accountService.generateToken(authentication), "Utworzono konto");
             return new RegisterResponse(true, null, "Utworzono konto");
         return new RegisterResponse(false, null, "Nieudana rejestracja");
     }

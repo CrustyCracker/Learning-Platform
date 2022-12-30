@@ -1,9 +1,11 @@
 package mhmd.pzsp.PZSPApp.services;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.impl.TextCodec;
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.models.User;
-/*import mhmd.pzsp.PZSPApp.models.api.BackendUserPrincipal;*/
 import mhmd.pzsp.PZSPApp.models.api.requests.LoginRequest;
 import mhmd.pzsp.PZSPApp.models.api.requests.RegisterRequest;
 import mhmd.pzsp.PZSPApp.repositories.IUserRepository;
@@ -11,34 +13,23 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.SecureRandom;
-import java.time.Instant;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Service
-public class AccountService implements IAccountService/*, UserDetailsService*/ {
+public class AccountService implements IAccountService {
     @Autowired
     private IUserRepository userRepository;
-
-//    @Autowired
-//    JwtEncoder encoder;
+    public static final String secret = "YVFEQU45ZGg0VUxuRUFiUlE5b002OFVJR2VYczRuOVM=";
 
     @Override
-    public boolean login(LoginRequest login) throws BackendException {
+    public void login(LoginRequest login) throws BackendException {
         if (login.password == null || login.password.isBlank())
             throw new BackendException("Hasło nie jest podane lub jest puste");
         if (login.username == null || login.username.isBlank())
@@ -52,7 +43,8 @@ public class AccountService implements IAccountService/*, UserDetailsService*/ {
             var DBSalt = Hex.decodeHex(user.get().getSalt());
             var newHash = Hex.encodeHexString(hashPassword(login.password, DBSalt));
 
-            return newHash.equals(DBHash);
+            if (!newHash.equals(DBHash))
+                throw new BackendException("Niepoprawne dane logowania");
         }
         catch (DecoderException e){
             throw new BackendException("Błąd podczas kodowania/dekodowania hasła");
@@ -137,31 +129,29 @@ public class AccountService implements IAccountService/*, UserDetailsService*/ {
         return admin.get();
     }
 
-//    @Override
-//    public String generateToken(Authentication authentication) {
-//        Instant now = Instant.now();
-//        long expiry = 36000L;
-//
-//        String scope = authentication.getAuthorities().stream()
-//                .map(GrantedAuthority::getAuthority)
-//                .collect(Collectors.joining(" "));
-//        JwtClaimsSet claims = JwtClaimsSet.builder()
-//                .issuer("self")
-//                .issuedAt(now)
-//                .expiresAt(now.plusSeconds(expiry))
-//                .subject(authentication.getName())
-//                .claim("scope", scope)
-//                .build();
-//
-//        return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
-//    }
+    @Override
+    public String generateToken(LoginRequest request) throws BackendException {
+        var user =  userRepository.findByUsername(request.username);
+        if (user.isEmpty())
+            throw new BackendException("Brak użytkownika o tej nazwie");
+
+        var password = Hex.encodeHexString(hashPassword(request.password, user.get().getSalt().getBytes()));
+        return Jwts.builder()
+            .setIssuer("MHMD")
+            .setSubject(request.username)
+            .claim("admin", user.get().isAdmin())
+            .claim("name", request.username)
+            .claim("password", password)
+            .setIssuedAt(new Date())
+            .signWith(
+                SignatureAlgorithm.HS256,
+                TextCodec.BASE64.decode(secret)
+            )
+            .compact();
+    }
 
     @Override
     public Optional<User> loadUserByUsername(String username) {
-        var user = userRepository.findByUsername(username);
-//        if (user.isPresent())
-//            return new BackendUserPrincipal(user.get());
-//        throw new UsernameNotFoundException("test");
-        return user;
+        return userRepository.findByUsername(username);
     }
 }

@@ -3,7 +3,6 @@ import {Credentials, LoginResponse, RegisterCredentials} from "../types/Credenti
 import {CardResponse, NewCard} from "../types/Cards";
 import {GroupResponse, NewGroup} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
-import {useNavigate} from "react-router-dom";
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();

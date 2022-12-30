@@ -5,14 +5,12 @@ import mhmd.pzsp.PZSPApp.models.User;
 import mhmd.pzsp.PZSPApp.models.api.requests.LoginRequest;
 import mhmd.pzsp.PZSPApp.models.api.requests.RegisterRequest;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Optional;
 
 public interface IAccountService {
-    boolean login(LoginRequest login) throws BackendException;
+    void login(LoginRequest login) throws BackendException;
 
     boolean register(RegisterRequest register) throws BackendException;
 
@@ -24,7 +22,7 @@ public interface IAccountService {
 
     User defaultAdmin() throws BackendException;
 
-//    String generateToken(Authentication authentication);
+    String generateToken(LoginRequest login) throws BackendException;
 
     Optional<User> loadUserByUsername(String username) throws UsernameNotFoundException;
 }

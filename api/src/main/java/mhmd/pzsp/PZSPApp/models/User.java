@@ -102,4 +102,8 @@ public class User {
     public String getSalt() {
         return salt;
     }
+
+    public boolean isAdmin() {
+        return admin == '1';
+    }
 }

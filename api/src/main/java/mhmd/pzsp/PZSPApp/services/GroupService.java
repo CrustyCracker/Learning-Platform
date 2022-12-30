@@ -33,7 +33,6 @@ public class GroupService implements IGroupService {
                 if (!card.IsPublic())
                     throw new BackendException("Próba utworzenia publicznej grupy z prywatną fiszką");
 
-
         var group = new Group(request, user, cards);
         return groupRepository.save(group);
     }

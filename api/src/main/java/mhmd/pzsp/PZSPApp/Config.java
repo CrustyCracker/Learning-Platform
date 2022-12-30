@@ -30,12 +30,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 )
 @EnableWebSecurity
 public class Config {
-//    @Value("${jwt.public.key}")
-//    RSAPublicKey key;
-//
-//    @Value("${jwt.private.key}")
-//    RSAPrivateKey priv;
-
     @Bean
     public ICardService getCardService(){
         return new CardService();
@@ -50,52 +44,36 @@ public class Config {
     public IGroupService getGroupService() {
         return new GroupService();
     }
-    @Autowired
-    private CustomAuthenticationProvider authenticationProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
-                .cors().and()
-                .authorizeHttpRequests(authorize -> {
-                            authorize.requestMatchers("/login", "/login/", "/register", "/register/")
-                                    .permitAll();
-                            authorize.requestMatchers(
-                                    HttpMethod.POST,
-                                    "/account/login",
-                                    "/account/login/",
-                                    "/account/register",
-                                    "/account/register/"
-                            ).permitAll();
-                            authorize.requestMatchers(
-                                    "/cards/all",
-                                    "/cards/all/"
-                            ).hasAuthority(Roles.USER.toString());
-                            authorize.requestMatchers(
-                                    HttpMethod.POST,
-                                    "/cards/create",
-                                    "/cards/create/",
-                                    "/groups/create",
-                                    "/groups/create/"
-                            ).hasAuthority(Roles.ADMIN.toString());
-                            authorize.anyRequest().authenticated();
-                        }
-                )
-                .httpBasic(Customizer.withDefaults())
-                .addFilterBefore(new JwtTokenFilter(getAccountService()), UsernamePasswordAuthenticationFilter.class)
-                .build();
+            .cors().and()
+            .authorizeHttpRequests(authorize -> {
+                authorize.requestMatchers("/login", "/login/", "/register", "/register/")
+                        .permitAll();
+                authorize.requestMatchers(
+                        HttpMethod.POST,
+                        "/account/login",
+                        "/account/login/",
+                        "/account/register",
+                        "/account/register/"
+                ).permitAll();
+                authorize.requestMatchers(
+                        "/cards/all",
+                        "/cards/all/"
+                ).hasAuthority(Roles.USER.toString());
+                authorize.requestMatchers(
+                        HttpMethod.POST,
+                        "/cards/create",
+                        "/cards/create/",
+                        "/groups/create",
+                        "/groups/create/"
+                ).hasAuthority(Roles.ADMIN.toString());
+                authorize.anyRequest().authenticated();
+            })
+            .httpBasic(Customizer.withDefaults())
+            .addFilterBefore(new JwtTokenFilter(getAccountService()), UsernamePasswordAuthenticationFilter.class)
+            .build();
     }
-
-
-//    @Bean
-//    JwtDecoder jwtDecoder() {
-//        return NimbusJwtDecoder.withPublicKey(this.key).build();
-//    }
-//
-//    @Bean
-//    JwtEncoder jwtEncoder() {
-//        JWK jwk = new RSAKey.Builder(this.key).privateKey(this.priv).build();
-//        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
-//        return new NimbusJwtEncoder(jwks);
-//    }
 }
