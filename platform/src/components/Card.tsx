@@ -20,8 +20,7 @@ export function Card(props: CardProps) {
         Requests.CardId(Number(id)).then(res => {
             if (res.err) {
                 setCard({} as CardResponse);
-                props.onError({ message: "Nie udało się wyświetlić fiszki",
-                    debugMessage: "", status: 0, timestamp: new Date()});
+                props.onError(res.err);
             }
             else if (res.res){
                 setCard(res.res);

@@ -21,7 +21,6 @@ export function Group(props: GroupProps) {
     useEffect(() => {
         Requests.GroupId(Number(id)).then(res => {
             if (res.err) {
-                // pzsp2 bardzo zły pomysł ze wsadzaniem do GroupResponse komunikatów o błędzie
                 setGroup({} as GroupResponse);
                 props.onError(res.err);
             }

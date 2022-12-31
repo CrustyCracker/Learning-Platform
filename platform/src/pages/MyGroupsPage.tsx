@@ -12,7 +12,7 @@ export default function MyGroupsPage() {
         <Layout>
             <div className="App container-fluid pzsp2-mygroups-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
-                <GroupList onSuccess={() => {}} onError={(res) => setError(res.message)}/>
+                <GroupList onSuccess={() => {}} onError={(res) => setError(res.userMessage)}/>
             </div>
         </Layout>
     </>);

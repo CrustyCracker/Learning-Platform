@@ -20,14 +20,11 @@ export function LoginForm(props: LoginFormProps) {
             if (res?.res?.success){
                 props.onSuccess(res.res);
             }
-            else if (!res?.res?.success){
-                props.onError({ message: "Niepoprawne hasło dla tego użytkownika.", debugMessage: "", status: 0, timestamp: new Date()})
-            }
             else if (res.err) {
                 props.onError(res.err);
             }
             else {
-                props.onError({ message: "Błąd logowania.", debugMessage: "", status: 0, timestamp: new Date()})
+                props.onError({ hiddenMessage: "", userMessage: "Błąd logowania", status: 0, timestamp: new Date()})
             }
         });
     }

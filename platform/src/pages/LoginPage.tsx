@@ -22,7 +22,7 @@ export default function LoginPage() {
             <div className="pzsp2-login-error">
                 <ErrorAndInfo errorMsg={error} infoMsg={""}/>
             </div>
-            <LoginForm onSuccess={(res) => onLoginSuccess(res)} onError={(res) => setError(res.message)}/>
+            <LoginForm onSuccess={(res) => onLoginSuccess(res)} onError={(res) => setError(res.userMessage)}/>
             <small className="pzsp2-login-reglink-text">Nie masz konta? <Link className="pzsp2-link pzsp2-login-reglink" to="/register">Załóż konto</Link></small>
         </div>
     );

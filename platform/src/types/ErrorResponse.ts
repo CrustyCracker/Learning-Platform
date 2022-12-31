@@ -1,6 +1,6 @@
 export type ErrorResponse = {
     status : number
-    message : string
-    debugMessage : string
+    hiddenMessage : string
+    userMessage : string
     timestamp : Date
 }

@@ -13,7 +13,7 @@ export default function EditGroupPage() {
         <Layout>
             <div className="App container-fluid pzsp2-cardform-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
-                <EditGroupForm onSuccess={() => {}} onError={(res) => setError(res.message)}/>
+                <EditGroupForm onSuccess={() => {}} onError={(res) => setError(res.userMessage)}/>
             </div>
         </Layout>
     </>);

@@ -69,16 +69,14 @@ export class Requests {
         return setResponseOrError(response);
     }
 
-    static async myCards(id: number = 1): Promise<GenericResponse<CardResponse[]>> {
-        // pzsp2 tutaj powinno być branie id zalogowanego usera a nie sztywne id=1
-        const response = await fetchGet("/cards/forUser/" + id)
+    static async myCards(): Promise<GenericResponse<CardResponse[]>> {
+        const response = await fetchGet("/cards/owned")
             .then(res => res.json())
         return setResponseOrError(response);
     }
 
-    static async myGroups(id: number = 1): Promise<GenericResponse<GroupResponse[]>>{
-        // pzsp2 to samo co wyżej
-        const response = await fetchGet("/groups/forUser/" + id)
+    static async myGroups(): Promise<GenericResponse<GroupResponse[]>>{
+        const response = await fetchGet("/groups/owned")
             .then(res => res.json())
         return setResponseOrError(response);
     }
