@@ -11,9 +11,8 @@ public class SecurityHelper {
         if (!(principal.getClass() == Optional.of(User.class).getClass()))
             return null;
 
-        if (((Optional<?>) principal).isEmpty())
-            return null;
+        var user = (Optional<?>) principal;
 
-        return (User) ((Optional<?>) principal).get();
+        return (User) user.orElse(null);
     }
 }
