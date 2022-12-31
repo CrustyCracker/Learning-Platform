@@ -66,8 +66,10 @@ public class AccountServiceTests {
             var res = accountService.register(registration);
             assertTrue(res);
 
-            var loginRes = accountService.login(login);
-            assertTrue(loginRes);
+            var user = accountService.login(login);
+            assertNotNull(user);
+            assertEquals(registration.username, user.getUsername());
+            assertEquals(registration.email, user.getEmail());
         }
         catch (Exception ex){
             fail(ex.getMessage());

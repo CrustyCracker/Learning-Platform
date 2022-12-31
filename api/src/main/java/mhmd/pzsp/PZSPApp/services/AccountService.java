@@ -29,7 +29,7 @@ public class AccountService implements IAccountService {
     public static final String secret = "YVFEQU45ZGg0VUxuRUFiUlE5b002OFVJR2VYczRuOVM=";
 
     @Override
-    public void login(LoginRequest login) throws BackendException {
+    public User login(LoginRequest login) throws BackendException {
         if (login.password == null || login.password.isBlank())
             throw new BackendException("Hasło nie jest podane lub jest puste");
         if (login.username == null || login.username.isBlank())
@@ -45,6 +45,8 @@ public class AccountService implements IAccountService {
 
             if (!newHash.equals(DBHash))
                 throw new BackendException("Niepoprawne dane logowania");
+
+            return user.get();
         }
         catch (DecoderException e){
             throw new BackendException("Błąd podczas kodowania/dekodowania hasła");
@@ -130,22 +132,17 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public String generateToken(LoginRequest request) throws BackendException {
-        var user =  userRepository.findByUsername(request.username);
-        if (user.isEmpty())
-            throw new BackendException("Brak użytkownika o tej nazwie");
-
-        var password = Hex.encodeHexString(hashPassword(request.password, user.get().getSalt().getBytes()));
+    public String generateToken(User user) {
         return Jwts.builder()
             .setIssuer("MHMD")
-            .setSubject(request.username)
-            .claim("admin", user.get().isAdmin())
-            .claim("name", request.username)
-            .claim("password", password)
+            .setSubject(user.getUsername())
+            .claim("admin", user.isAdmin())
+            .claim("name", user.getUsername())
+            .claim("password", user.getPassword())
             .setIssuedAt(new Date())
             .signWith(
                 SignatureAlgorithm.HS256,
-                TextCodec.BASE64.decode(secret)
+                secret.getBytes()
             )
             .compact();
     }

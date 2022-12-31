@@ -37,7 +37,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         final String token = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if (token.isBlank()) {
+        if (token.isBlank() || token.equals("undefined")) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -47,7 +47,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
         var chunks = token.split("\\.");
         if (chunks.length != 3) {
-            // pzsp2 porzucać tu jakieś błędy albo coś
             filterChain.doFilter(request, response);
             return;
         }
@@ -60,7 +59,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             return;
         }
 
-        String name, password, role;
+        String name, password;
+        boolean isAdmin;
 
         try {
             var decoder = Base64.getDecoder();
@@ -69,9 +69,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
             name = json.getString("name");
             password = json.getString("password");
-            role = json.getString("admin");
+            isAdmin = json.getBoolean("admin");
 
-            if (name.isBlank() || password.isBlank() || role.isBlank()) {
+            if (name.isBlank() || password.isBlank()) {
                 filterChain.doFilter(request, response);
                 return;
             }
@@ -92,7 +92,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             return;
         }
 
-        if (role.equals("1"))
+        if (isAdmin)
             grantedAuthorityList.add(new SimpleGrantedAuthority(Roles.ADMIN.toString()));
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
