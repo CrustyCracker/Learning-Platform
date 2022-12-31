@@ -1,37 +1,33 @@
 package mhmd.pzsp.PZSPApp.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
-import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
+import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewCardRequest;
 import mhmd.pzsp.PZSPApp.models.api.responses.CardResponse;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static mhmd.pzsp.PZSPApp.security.SecurityHelper.getCurrentUser;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/cards")
 public class CardController {
     private final ICardService cardService;
-    private final IAccountService accountService;
+    private final IGroupService groupService;
 
     @Autowired
-    public CardController(ICardService cardService, IAccountService accountService) {
+    public CardController(ICardService cardService, IGroupService groupService) {
         this.cardService = cardService;
-        this.accountService = accountService;
+        this.groupService = groupService;
     }
 
     @GetMapping("/first")
-    public CardResponse first(Authentication authentication) throws BackendException {
+    public CardResponse first() throws BackendException {
         var cards = cardService.findAllCards();
         if (cards.isEmpty())
             throw new BackendException("Brak kart w bazie danych");
@@ -40,28 +36,35 @@ public class CardController {
 
     @GetMapping("/all")
     // zwraca karty publiczne lub prywatne zalogowanego użytkownika
-    public List<CardResponse> all(Authentication authentication) throws BackendException {
+    public List<CardResponse> all() throws BackendException {
         var simpleCards = new ArrayList<CardResponse>();
-        var user = accountService.defaultAdmin();
+        var user = getCurrentUser();
+        if (user == null)
+            throw new BackendException("Brak zalogowanego użytkownika");
+
         var cards = cardService.findPublicOrUsers(user.getId());
-        // pzsp2 zhardocowane pobieranie kart pierwszego admina, bo dodawanie też jest zhardocowane dla niego
         cards.forEach(card -> simpleCards.add(new CardResponse(card)));
         return simpleCards;
     }
 
-    @GetMapping("/forUser/{id}")
-    // zwraca karty danego użytkownika (można przenieść id na stronę backendu, pobierane z contextu)
-    public List<CardResponse> forUser(@PathVariable Long id, Authentication authentication){
+    @GetMapping("/owned")
+    // zwraca karty danego użytkownika
+    public List<CardResponse> owned() throws BackendException {
+        var user = getCurrentUser();
+        if (user == null)
+            throw new BackendException("Brak zalogowanego użytkownika");
+
         var simpleCards = new ArrayList<CardResponse>();
-        var cards = cardService.findCardsByUser(id);
+        var cards = cardService.findCardsByUser(user.getId());
         cards.forEach(card -> simpleCards.add(new CardResponse(card)));
         return simpleCards;
     }
 
     @PostMapping("/create")
-    public CardResponse create(@RequestBody NewCardRequest request, Authentication authentication) throws BackendException {
-        // pzsp2 tu się powinno brać obecnie zalogowanego usera z security contextu, a nie pierwszego admina
-        var user = accountService.defaultAdmin();
+    public CardResponse create(@RequestBody NewCardRequest request) throws BackendException {
+        var user = getCurrentUser();
+        if (user == null)
+            throw new BackendException("Brak zalogowanego użytkownika");
         return new CardResponse(cardService.create(request, user));
     }
 
@@ -74,9 +77,9 @@ public class CardController {
     }
 
     @GetMapping("group/{id}")
-    public List<CardResponse> cardsByGroupId(@PathVariable Long id) {
-        // pzsp2 dodać sprawdzenie czy grupa publiczna. Jeśli nie, to sprawdzanie czy user zgadza się z zalogowanym
+    public List<CardResponse> cardsByGroupId(@PathVariable Long id) throws BackendException {
         var groupCards = new ArrayList<CardResponse>();
+        groupService.findGroupById(id);
         var cards = cardService.findCardsByGroupsId(id);
         cards.forEach(card -> groupCards.add(new CardResponse(card)));
         return groupCards;

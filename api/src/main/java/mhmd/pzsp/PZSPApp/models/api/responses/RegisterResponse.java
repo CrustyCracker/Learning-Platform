@@ -1,7 +1,11 @@
 package mhmd.pzsp.PZSPApp.models.api.responses;
 
-public class RegisterResponse extends LoginResponse {
-    public RegisterResponse(boolean success, String token, String message) {
-        super(success, token, message);
+public class RegisterResponse {
+    public boolean success;
+    public String message;
+
+    public RegisterResponse(boolean success, String message) {
+        this.success = success;
+        this.message = message;
     }
 }

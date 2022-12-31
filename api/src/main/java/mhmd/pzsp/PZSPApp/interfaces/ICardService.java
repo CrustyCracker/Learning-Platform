@@ -14,7 +14,7 @@ public interface ICardService {
 
     List<Card> findCardsByUser(Long userId);
 
-    Card findCardById(Long cardId);
+    Card findCardById(Long cardId) throws BackendException;
 
     Card create(NewCardRequest request, User user) throws BackendException;
 

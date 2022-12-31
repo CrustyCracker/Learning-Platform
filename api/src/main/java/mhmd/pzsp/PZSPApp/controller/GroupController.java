@@ -1,42 +1,44 @@
 package mhmd.pzsp.PZSPApp.controller;
 
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
-import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewGroupRequest;
 import mhmd.pzsp.PZSPApp.models.api.responses.GroupResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static mhmd.pzsp.PZSPApp.security.SecurityHelper.getCurrentUser;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/groups")
 public class GroupController {
     private final IGroupService groupService;
-    private final IAccountService accountService;
 
     @Autowired
-    public GroupController(IAccountService accountService, IGroupService groupService) {
-        this.accountService = accountService;
+    public GroupController(IGroupService groupService) {
         this.groupService = groupService;
     }
 
-    @GetMapping("/forUser/{id}")
-    public List<GroupResponse> forUser(@PathVariable Long id, Authentication authentication) {
+    @GetMapping("/owned")
+    public List<GroupResponse> owned() throws BackendException {
         var response = new ArrayList<GroupResponse>();
-        groupService.findGroupsByUser(id).forEach(group ->  response.add(new GroupResponse(group)));
+        var user = getCurrentUser();
+        if (user == null)
+            throw new BackendException("Brak zalogowanego użytkownika");
+
+        groupService.findGroupsByUser(user.getId()).forEach(group ->  response.add(new GroupResponse(group)));
         return response;
     }
 
     @PostMapping("/create")
-    public GroupResponse create(@RequestBody NewGroupRequest request, Authentication authentication) throws BackendException {
-        // tu się powinno brać obecnie zalogowanego usera z security contextu, a nie pierwszego admina
-        // ta sama historia co dla
-        var user = accountService.defaultAdmin();
+    public GroupResponse create(@RequestBody NewGroupRequest request) throws BackendException {
+        var user = getCurrentUser();
+        if (user == null)
+            throw new BackendException("Brak zalogowanego użytkownika");
         return new GroupResponse(groupService.create(request, user));
     }
 

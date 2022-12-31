@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.util.Optional;
 
 public interface IAccountService {
-    void login(LoginRequest login) throws BackendException;
+    User login(LoginRequest login) throws BackendException;
 
     boolean register(RegisterRequest register) throws BackendException;
 
@@ -22,7 +22,7 @@ public interface IAccountService {
 
     User defaultAdmin() throws BackendException;
 
-    String generateToken(LoginRequest login) throws BackendException;
+    String generateToken(User user);
 
     Optional<User> loadUserByUsername(String username) throws UsernameNotFoundException;
 }

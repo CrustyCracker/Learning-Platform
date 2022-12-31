@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import static mhmd.pzsp.PZSPApp.security.SecurityHelper.getCurrentUser;
 
 @Service
 public class CardService implements ICardService {
@@ -61,7 +64,14 @@ public class CardService implements ICardService {
     }
 
     @Override
-    public Card findCardById(Long cardId) { return cardRepository.findCardById(cardId); }
+    public Card findCardById(Long cardId) throws BackendException {
+        var card = cardRepository.findCardById(cardId);
+        if (Objects.equals(card.getUser().getId(), Objects.requireNonNull(getCurrentUser()).getId())
+                || card.IsPublic() || Objects.requireNonNull(getCurrentUser()).isAdmin()) {
+            return card;
+        }
+        throw new BackendException("Nie można zobaczyć prywatnej karty innego użytkownika");
+    }
 
     @Override
     public List<Card> findCardsByGroupsId(Long groupId) {
@@ -72,9 +82,14 @@ public class CardService implements ICardService {
     public boolean delete(Long id) throws BackendException {
         if (cardRepository.existsById(id)) {
             var card = cardRepository.findCardById(id);
-            // if (card.getUser() == weź obecnego usera)
-            cardRepository.deleteById(id);
-            return true;
+
+            if (Objects.equals(card.getUser().getId(), Objects.requireNonNull(getCurrentUser()).getId())
+                    || getCurrentUser().isAdmin()) {
+
+                cardRepository.deleteById(id);
+                return true;
+            }
+            throw new BackendException("Nie można usunąć karty innego użytkownika");
         }
         throw new BackendException("Nie istnieje karta o podanym id");
     }
