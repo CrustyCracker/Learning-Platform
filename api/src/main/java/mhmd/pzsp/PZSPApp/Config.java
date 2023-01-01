@@ -56,7 +56,7 @@ public class Config {
                 ).permitAll();
                 authorize.requestMatchers(
                         "/cards/**",
-                        "/cards/**"
+                        "/groups/**"
                 ).hasAuthority(Roles.USER.toString());
                 authorize.requestMatchers(
                         HttpMethod.POST,

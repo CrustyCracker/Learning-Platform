@@ -3,17 +3,16 @@ import '../style/App.css';
 import {Link, useNavigate} from "react-router-dom";
 import { LoginForm } from "../components/LoginForm";
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
-import {Credentials, LoginResponse} from "../types/Credentials";
+import {LoginResponse} from "../types/Credentials";
 import Cookies from 'universal-cookie';
 
 export default function LoginPage() {
     const [error, setError] = useState("");
     const navigate = useNavigate()
 
-
     const onLoginSuccess = (res: LoginResponse) => {
         const cookies = new Cookies();
-        cookies.set('JWTTOKEN', res.token, { path: '/' });
+        cookies.set('JWTTOKEN', res.token, { path: '/', maxAge: 3600 });
         navigate("/");
     }
 
