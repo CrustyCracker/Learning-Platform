@@ -9,7 +9,8 @@ import java.util.List;
 @Table(name = "FISZKI")
 public class Card {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "FISZKI_GEN", sequenceName = "FISZKI_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FISZKI_GEN")
     @Column(name = "ID_FISZKI", nullable = false)
     private Long id;
 
