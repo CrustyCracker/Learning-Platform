@@ -1,8 +1,8 @@
 package mhmd.pzsp.PZSPApp.models;
 
+import jakarta.persistence.*;
 import org.apache.commons.codec.binary.Hex;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +11,8 @@ import java.util.List;
 @Table(name = "UZYTKOWNICY")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "UZYTKOWNICY_GEN", sequenceName = "UZYTKOWNICY_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "UZYTKOWNICY_GEN")
     @Column(name = "ID_UZYTKOWNIKA", nullable = false)
     private Long id;
 
@@ -101,5 +102,9 @@ public class User {
 
     public String getSalt() {
         return salt;
+    }
+
+    public boolean isAdmin() {
+        return admin == '1';
     }
 }

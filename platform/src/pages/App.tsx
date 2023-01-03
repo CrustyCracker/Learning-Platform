@@ -24,7 +24,7 @@ export default function App() {
     const logToConsoleErr = useCallback((o: ErrorResponse) => {
         console.log("error");
         console.log(o);
-        setError(o.message)
+        setError(o.userMessage)
     }, [])
     const logToConsoleInfo = useCallback((o: any) => {
         console.log("info");

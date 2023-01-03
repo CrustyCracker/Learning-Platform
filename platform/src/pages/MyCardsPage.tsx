@@ -12,7 +12,7 @@ export default function MyCardsPage() {
         <Layout>
             <div className="App container-fluid pzsp2-mycards-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
-                <CardList onSuccess={() => {}} onError={(res) => setError(res.message)}/>
+                <CardList onSuccess={() => {}} onError={(res) => setError(res.userMessage)}/>
             </div>
         </Layout>
     </>);

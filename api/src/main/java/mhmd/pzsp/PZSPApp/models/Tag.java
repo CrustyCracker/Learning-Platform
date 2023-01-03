@@ -1,13 +1,14 @@
 package mhmd.pzsp.PZSPApp.models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "TAGI")
 public class Tag {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "TAGI_GEN", sequenceName = "TAGI_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TAGI_GEN")
     @Column(name = "ID_TAGU", nullable = false)
     private Long id;
 

@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import static mhmd.pzsp.PZSPApp.security.SecurityHelper.getCurrentUser;
 
 @Service
 public class GroupService implements IGroupService {
@@ -33,7 +36,6 @@ public class GroupService implements IGroupService {
                 if (!card.IsPublic())
                     throw new BackendException("Próba utworzenia publicznej grupy z prywatną fiszką");
 
-
         var group = new Group(request, user, cards);
         return groupRepository.save(group);
     }
@@ -44,5 +46,15 @@ public class GroupService implements IGroupService {
     }
 
     @Override
-    public Group findGroupById(Long groupId) { return groupRepository.findGroupById(groupId); }
+    public Group findGroupById(Long groupId) throws BackendException {
+        var group = groupRepository.findGroupById(groupId);
+        if (group == null)
+            return null;
+
+        if (group.isPublic() || Objects.requireNonNull(getCurrentUser()).isAdmin() ||
+                Objects.equals(group.getUser().getId(), Objects.requireNonNull(getCurrentUser()).getId()))
+            return group;
+
+        throw new BackendException(String.format("Nie masz uprawień do grupy %d", group.getId()));
+    }
 }

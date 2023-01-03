@@ -2,14 +2,15 @@ package mhmd.pzsp.PZSPApp.models;
 
 import mhmd.pzsp.PZSPApp.models.api.requests.NewCardRequest;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "FISZKI")
 public class Card {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "FISZKI_GEN", sequenceName = "FISZKI_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FISZKI_GEN")
     @Column(name = "ID_FISZKI", nullable = false)
     private Long id;
 

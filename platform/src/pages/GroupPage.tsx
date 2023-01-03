@@ -12,7 +12,7 @@ export default function GroupPage() {
         <Layout>
         <div className="App container-fluid pzsp2-card-page-cont">
             <ErrorAndInfo errorMsg={error} infoMsg={""} />
-            <Group onSuccess={() => {}} onError={(res) => setError(res.message)}/>
+            <Group onSuccess={() => {}} onError={(res) => setError(res.userMessage)}/>
         </div>
         </Layout>
     </>);

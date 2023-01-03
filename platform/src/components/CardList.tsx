@@ -18,7 +18,7 @@ export function CardList(props: CardListProps) {
     const [tags, ] = useState<string[]>([]);
 
     useEffect(() => {
-        Requests.allCards().then(res => {
+        Requests.myCards().then(res => {
             if (res.err) {
                 setCards([]);
                 setCurrCards([])

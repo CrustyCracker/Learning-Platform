@@ -13,7 +13,7 @@ export default function EditCardPage() {
         <Layout>
             <div className="App container-fluid pzsp2-cardform-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
-                <EditCardForm onSuccess={() => {}} onError={(res) => setError(res.message)}/>
+                <EditCardForm onSuccess={() => {}} onError={(res) => setError(res.userMessage)}/>
             </div>
         </Layout>
     </>);

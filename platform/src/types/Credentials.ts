@@ -14,4 +14,7 @@ export type LoginResponse = {
     message : string
 }
 
-export type RegisterResponse = LoginResponse
+export type RegisterResponse = {
+    success : boolean
+    message : string
+}

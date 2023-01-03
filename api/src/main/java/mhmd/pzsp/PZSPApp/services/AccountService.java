@@ -1,33 +1,35 @@
 package mhmd.pzsp.PZSPApp.services;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.impl.TextCodec;
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.models.User;
-/*import mhmd.pzsp.PZSPApp.models.api.BackendUserPrincipal;*/
 import mhmd.pzsp.PZSPApp.models.api.requests.LoginRequest;
 import mhmd.pzsp.PZSPApp.models.api.requests.RegisterRequest;
 import mhmd.pzsp.PZSPApp.repositories.IUserRepository;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
-/*import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.SecureRandom;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Pattern;
 
 @Service
-public class AccountService implements IAccountService/*, UserDetailsService */{
+public class AccountService implements IAccountService {
     @Autowired
     private IUserRepository userRepository;
+    public static final String secret = "YVFEQU45ZGg0VUxuRUFiUlE5b002OFVJR2VYczRuOVM=";
 
     @Override
-    public boolean login(LoginRequest login) throws BackendException {
+    public User login(LoginRequest login) throws BackendException {
         if (login.password == null || login.password.isBlank())
             throw new BackendException("Hasło nie jest podane lub jest puste");
         if (login.username == null || login.username.isBlank())
@@ -41,7 +43,10 @@ public class AccountService implements IAccountService/*, UserDetailsService */{
             var DBSalt = Hex.decodeHex(user.get().getSalt());
             var newHash = Hex.encodeHexString(hashPassword(login.password, DBSalt));
 
-            return newHash.equals(DBHash);
+            if (!newHash.equals(DBHash))
+                throw new BackendException("Niepoprawne dane logowania");
+
+            return user.get();
         }
         catch (DecoderException e){
             throw new BackendException("Błąd podczas kodowania/dekodowania hasła");
@@ -126,11 +131,24 @@ public class AccountService implements IAccountService/*, UserDetailsService */{
         return admin.get();
     }
 
-/*    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = userRepository.findByUsername(username);
-        if (user.isPresent())
-            return new BackendUserPrincipal(user.get());
-        throw new UsernameNotFoundException("test");
-    }*/
+    @Override
+    public String generateToken(User user) {
+        return Jwts.builder()
+            .setIssuer("MHMD")
+            .setSubject(user.getUsername())
+            .claim("admin", user.isAdmin())
+            .claim("name", user.getUsername())
+            .claim("password", user.getPassword())
+            .setIssuedAt(new Date())
+            .signWith(
+                SignatureAlgorithm.HS256,
+                secret.getBytes()
+            )
+            .compact();
+    }
+
+    @Override
+    public Optional<User> loadUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }

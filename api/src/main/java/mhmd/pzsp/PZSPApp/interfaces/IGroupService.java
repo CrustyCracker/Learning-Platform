@@ -12,6 +12,6 @@ public interface IGroupService {
 
     List<Group> findGroupsByUser(Long userId);
 
-    Group findGroupById(Long groupId);
+    Group findGroupById(Long groupId) throws BackendException;
 
 }

@@ -2,14 +2,15 @@ package mhmd.pzsp.PZSPApp.models;
 
 import mhmd.pzsp.PZSPApp.models.api.requests.NewGroupRequest;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "GRUPY")
 public class Group {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "GRUPY_GEN", sequenceName = "GRUPY_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GRUPY_GEN")
     @Column(name = "ID_GRUPY", nullable = false)
     private Long id;
 

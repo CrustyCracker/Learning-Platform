@@ -13,7 +13,7 @@ export default function NewGroupPage() {
         <Layout>
             <div className="App container-fluid pzsp2-groupform-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
-                <NewGroupForm onSuccess={() => {}} onError={(res) => setError(res.message)}/>
+                <NewGroupForm onSuccess={() => {}} onError={(res) => setError(res.userMessage)}/>
             </div>
         </Layout>
     </>);
