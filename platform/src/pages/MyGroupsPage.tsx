@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import '../style/App.css';
 import '../style/groupList.css';
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
@@ -21,6 +21,7 @@ export default function MyGroupsPage() {
         <Layout>
             <div className="App container-fluid pzsp2-mygroups-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
+                <h1 className="pzsp2-grouplist-title">Moje grupy</h1>
                 <GroupList onSuccess={() => {}} onError={(res) => setError(res.userMessage)}/>
             </div>
         </Layout>

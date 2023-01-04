@@ -17,6 +17,7 @@ import NewCardPage from "./NewCardPage";
 import EditCardPage from "./EditCardPage";
 import NewGroupPage from "./NewGroupPage";
 import EditGroupPage from "./EditGroupPage";
+import PubCardsPage from "./PubCardsPage"
 
 export default function App() {
     const [, setError] = useState("");
@@ -39,6 +40,7 @@ export default function App() {
                     <Routes>
                         <Route path="/" element={<MainMenuPage />} />
                         <Route path="/cards" element={<MyCardsPage />} />
+                        <Route path="/cards/pub" element={<PubCardsPage />} />
                         <Route path="/cards/:id" element={<CardPage />} />
                         <Route path="/cards/new" element={<NewCardPage />} />
                         <Route path="/cards/:id/edit" element={<EditCardPage />} />

@@ -15,7 +15,7 @@ export default function MyCardsPage() {
     const [cards, setCards] = useState<CardResponse[]>([]);
 
     useEffect(() => {
-        Requests.myCards().then(res => {
+        Requests.allCards().then(res => {
             if (res.err) {
                 setCards([]);
                 setError(res.err.userMessage);
@@ -31,13 +31,13 @@ export default function MyCardsPage() {
 
     return <>
         <Helmet>
-            <title>Inżynierka w tydzień ∙ Moje fiszki</title>
+            <title>Inżynierka w tydzień ∙ Publiczne fiszki</title>
         </Helmet>
         <Layout>
             <div className="App container-fluid pzsp2-mycards-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
-                <h1 className="pzsp2-cardlist-title">Moje fiszki</h1>
-                <CardList cards={cards} pub={false} />
+                <h1 className="pzsp2-cardlist-title">Publiczne fiszki</h1>
+                <CardList cards={cards} pub={true}/>
             </div>
         </Layout>
     </>;
