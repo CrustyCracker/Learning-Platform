@@ -4,10 +4,14 @@ import '../style/cardForm.css';
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
 import {EditCardForm} from "../components/EditCardForm";
 import Layout from "../components/Layout/Layout";
+import {TokenHelper} from "../helpers/TokenHelper";
+import {Navigate} from "react-router-dom";
 
 export default function EditCardPage() {
     const [error, setError] = useState("");
 
+    if(!TokenHelper.amILogged())
+        return <Navigate to="/login" />
 
     return (<>
         <Layout>

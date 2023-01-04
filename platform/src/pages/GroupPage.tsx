@@ -4,9 +4,14 @@ import '../style/card.css';
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
 import {Group} from "../components/Group";
 import Layout from "../components/Layout/Layout";
+import {TokenHelper} from "../helpers/TokenHelper";
+import {Navigate} from "react-router-dom";
 
 export default function GroupPage() {
     const [error, setError] = useState("");
+
+    if(!TokenHelper.amILogged())
+        return <Navigate to="/login" />
 
     return (<>
         <Layout>

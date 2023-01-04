@@ -5,9 +5,14 @@ import '../style/mainMenu.css';
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
 import {MainMenu} from "../components/MainMenu";
 import Layout from "../components/Layout/Layout";
+import {Navigate} from "react-router-dom";
+import {TokenHelper} from "../helpers/TokenHelper";
 
 export default function MainMenuPage() {
-    const [error, setError] = useState("");
+    const [error] = useState("");
+
+    if(!TokenHelper.amILogged())
+        return <Navigate to="/login" />
 
     return (<>
         <Layout>

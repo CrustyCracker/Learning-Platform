@@ -3,16 +3,15 @@ import {Credentials, LoginResponse, RegisterCredentials} from "../types/Credenti
 import {CardResponse, NewCard} from "../types/Cards";
 import {GroupResponse, NewGroup} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
-import Cookies from 'universal-cookie';
+import {TokenHelper} from "../helpers/TokenHelper";
 
-const cookies = new Cookies();
 
 function fetchPost(body: any, url: string) {
     return fetch(Global.backendUrl + url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${cookies.get("JWTTOKEN")}`
+            'Authorization': `${TokenHelper.getToken()}`
         },
         body: JSON.stringify(body)
     })
@@ -22,7 +21,7 @@ function fetchGet(url: string) {
     return fetch(Global.backendUrl + url, {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${cookies.get("JWTTOKEN")}`
+            'Authorization': `${TokenHelper.getToken()}`
         }
     })
 }
