@@ -15,7 +15,7 @@ export default function MyGroupsPage() {
     const [groups, setGroups] = useState<GroupResponse[]>([]);
 
     useEffect(() => {
-        Requests.myGroups().then(res => {
+        Requests.allGroups().then(res => {
             if (res.err) {
                 setGroups([]);
                 setError(res.err.userMessage);
@@ -31,13 +31,13 @@ export default function MyGroupsPage() {
 
     return <>
         <Helmet>
-            <title>Inżynierka w tydzień ∙ Moje grupy</title>
+            <title>Inżynierka w tydzień ∙ Publiczne grupy</title>
         </Helmet>
         <Layout>
             <div className="App container-fluid pzsp2-mygroups-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
-                <h1 className="pzsp2-grouplist-title">Moje grupy</h1>
-                <GroupList groups={groups} pub={false} />
+                <h1 className="pzsp2-grouplist-title">Publiczne grupy</h1>
+                <GroupList groups={groups} pub={true} />
             </div>
         </Layout>
     </>;

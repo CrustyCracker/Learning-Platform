@@ -48,8 +48,6 @@ export function CardList(props: CardListProps) {
 
     //pzsp2 - dodać animację dla każdego rzędu w tabeli, oddzielny fadeIn z delayem np 100ms
     return <>
-
-
         <div className="pzsp2-cardlist-cont">
         <TagsInput
             value={tags}
@@ -74,7 +72,7 @@ export function CardList(props: CardListProps) {
             </div>
         </div>
 
-        {/*//pzsp2 - dodać paginację i zaokrąglone kąty tabeli*/}
+        {/*//pzsp2 - dodać paginację*/}
         <table className={"table table-hover table-light pzsp2-cardlist-table"}>
             <thead>
                 <tr>

@@ -23,6 +23,19 @@ public class GroupController {
         this.groupService = groupService;
     }
 
+
+    @GetMapping("/all")
+    public List<GroupResponse> all() throws BackendException {
+        var response = new ArrayList<GroupResponse>();
+        var user = getCurrentUser();
+        if (user == null)
+            throw new BackendException("Brak zalogowanego użytkownika");
+
+        var groups = groupService.findPublicOrUsers(user.getId());
+        groups.forEach(group -> response.add(new GroupResponse(group)));
+        return response;
+    }
+
     @GetMapping("/owned")
     public List<GroupResponse> owned() throws BackendException {
         var response = new ArrayList<GroupResponse>();

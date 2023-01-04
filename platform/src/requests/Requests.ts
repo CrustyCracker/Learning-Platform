@@ -86,6 +86,12 @@ export class Requests {
         return setResponseOrError(response);
     }
 
+    static async allGroups(): Promise<GenericResponse<GroupResponse[]>>{
+        const response = await fetchGet("/groups/all")
+            .then(res => res.json())
+        return setResponseOrError(response);
+    }
+
     static async CardId(id: number): Promise<GenericResponse<CardResponse>> {
         const response = await fetchGet("/cards/" + id)
             .then(res => res.json())

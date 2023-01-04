@@ -14,4 +14,6 @@ public interface IGroupService {
 
     Group findGroupById(Long groupId) throws BackendException;
 
+    List<Group> findPublicOrUsers(Long userId);
+
 }
