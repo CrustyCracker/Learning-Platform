@@ -7,6 +7,7 @@ import {MainMenu} from "../components/MainMenu";
 import Layout from "../components/Layout/Layout";
 import {Navigate} from "react-router-dom";
 import {TokenHelper} from "../helpers/TokenHelper";
+import {Helmet} from "react-helmet";
 
 export default function MainMenuPage() {
     const [error] = useState("");
@@ -14,12 +15,15 @@ export default function MainMenuPage() {
     if(!TokenHelper.amILogged())
         return <Navigate to="/login" />
 
-    return (<>
+    return <>
+        <Helmet>
+            <title>Inżynierka w tydzień ∙ Strona główna</title>
+        </Helmet>
         <Layout>
             <div className="App container-fluid pzsp2-mainmenu-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
                 <MainMenu/>
             </div>
         </Layout>
-    </>);
+    </>;
 }

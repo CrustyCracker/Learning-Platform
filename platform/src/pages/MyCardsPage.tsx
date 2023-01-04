@@ -6,6 +6,7 @@ import {CardList} from "../components/CardList";
 import Layout from "../components/Layout/Layout";
 import {TokenHelper} from "../helpers/TokenHelper";
 import {Navigate} from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 export default function MyCardsPage() {
     const [error, setError] = useState("");
@@ -13,12 +14,15 @@ export default function MyCardsPage() {
     if(!TokenHelper.amILogged())
         return <Navigate to="/login" />
 
-    return (<>
+    return <>
+        <Helmet>
+            <title>Inżynierka w tydzień ∙ Moje fiszki</title>
+        </Helmet>
         <Layout>
             <div className="App container-fluid pzsp2-mycards-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
                 <CardList onSuccess={() => {}} onError={(res) => setError(res.userMessage)}/>
             </div>
         </Layout>
-    </>);
+    </>;
 }

@@ -6,6 +6,7 @@ import {ErrorAndInfo} from "../components/ErrorAndInfo";
 import {LoginResponse} from "../types/Credentials";
 import Cookies from 'universal-cookie';
 import {TokenHelper} from "../helpers/TokenHelper";
+import {Helmet} from "react-helmet";
 
 export default function LoginPage() {
     const [error, setError] = useState("");
@@ -20,7 +21,10 @@ export default function LoginPage() {
     if(TokenHelper.amILogged())
         return <Navigate to="/" />
 
-    return (
+    return <>
+        <Helmet>
+            <title>Inżynierka w tydzień ∙ Zaloguj się</title>
+        </Helmet>
         <div className="App container-fluid pzsp2-login-page">
             <div className="App pzsp2-login-page-cont">
                 <div className="pzsp2-login-error">
@@ -30,5 +34,6 @@ export default function LoginPage() {
                 <small className="pzsp2-login-reglink-text">Nie masz konta? <Link className="pzsp2-link pzsp2-login-reglink" to="/register">Załóż konto</Link></small>
             </div>
         </div>
-    );
+    </>
+    ;
 }

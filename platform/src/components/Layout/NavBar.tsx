@@ -9,7 +9,7 @@ const NavBar = () => {
         <nav className="navbar navbar-dark pzsp2-navbar">
             <ul className="navbar-nav pzsp2-navbar-nav">
                 <li className="nav-item pzsp2-nav-item">
-                    <Link className="nav-link pzsp2-navbar-link-main" to="/">PZSP2</Link>
+                    <Link className="nav-link pzsp2-navbar-link-main" to="/">IWT</Link>
                 </li>
             </ul>
             <ul className="navbar-nav pzsp2-navbar-nav ms-auto">
