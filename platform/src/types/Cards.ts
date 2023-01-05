@@ -3,17 +3,16 @@ export type NewCard = {
     answer : string
     source : string
     isPublic : boolean
-    groupIds : []
-    tagIds : []
+    groupsIds : number[]
+    tagIds : number[]
 }
 
-export type CardResponse = {
-    question : string
-    answer : string
-    source : string
-    username : string
+export type EditCard = NewCard & {
     id : number
-    isPublic : boolean
-    groups : string[]
-    tags : string[]
+}
+
+export type CardResponse = EditCard & {
+    username : string
+    tagNames : string[]
+    groupNames : string[]
 }

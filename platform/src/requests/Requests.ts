@@ -1,6 +1,6 @@
 import {Global} from "../Config";
 import {Credentials, LoginResponse, RegisterCredentials} from "../types/Credentials";
-import {CardResponse, NewCard} from "../types/Cards";
+import {CardResponse, EditCard, NewCard} from "../types/Cards";
 import {GroupResponse, NewGroup} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
 import {TokenHelper} from "../helpers/TokenHelper";
@@ -116,7 +116,7 @@ export class Requests {
         return setResponseOrError(response);
     }
 
-    static async editCard(cardData: CardResponse): Promise<GenericResponse<CardResponse>> {
+    static async editCard(cardData: EditCard): Promise<GenericResponse<CardResponse>> {
         const response = await fetchPost(cardData, "/cards/edit")
             .then(res => res.json())
         return setResponseOrError(response);
