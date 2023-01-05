@@ -3,14 +3,14 @@ import '../style/App.css';
 import {Link, Navigate, useNavigate} from "react-router-dom";
 import { RegisterForm } from "../components/RegisterForm";
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
-import {TokenHelper} from "../helpers/TokenHelper";
+import {SecurityHelper} from "../helpers/SecurityHelper";
 import {Helmet} from "react-helmet";
 
 export default function RegisterPage() {
     const [error, setError] = useState("");
     const navigate = useNavigate()
 
-    if(TokenHelper.amILogged())
+    if(SecurityHelper.amILogged())
         return <Navigate to="/" />
 
     return (<>

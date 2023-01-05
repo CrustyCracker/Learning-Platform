@@ -6,6 +6,7 @@ import {GroupResponse} from "../types/Groups";
 import {CardResponse} from "../types/Cards";
 import '../style/group.css';
 import {isPublicToString} from "../helpers/NameHelpers";
+import {SecurityHelper} from "../helpers/SecurityHelper";
 
 interface GroupProps {
     onSuccess: (response: GroupResponse) => void,
@@ -137,7 +138,8 @@ export function Group(props: GroupProps) {
             })}
             </tbody>
         </table>
-        <div className="container-fluid pzsp2-group-buttons-cont">
+        {(SecurityHelper.amIAdmin() || group.username === SecurityHelper.getContext()?.username) &&
+            <div className="container-fluid pzsp2-group-buttons-cont">
             <div className="row pzsp2-group-buttons-row">
                 <div className="col-lg-12 col-md-12 col-sm-12 pzsp2-group-buttons-col">
                     <form className="pzsp2-group-delete-button" onSubmit={DeleteGroup}>
@@ -148,6 +150,6 @@ export function Group(props: GroupProps) {
                     </form>
                 </div>
             </div>
-        </div>
+        </div>}
     </>)
 }

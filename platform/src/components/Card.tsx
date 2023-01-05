@@ -5,6 +5,7 @@ import {ErrorResponse} from "../types/ErrorResponse";
 import {useNavigate, useParams} from "react-router-dom";
 import '../style/card.css';
 import {isPublicToString} from "../helpers/NameHelpers";
+import {SecurityHelper} from "../helpers/SecurityHelper";
 
 interface CardProps {
     onSuccess: (response: CardResponse) => void,
@@ -27,7 +28,7 @@ export function Card(props: CardProps) {
                 props.onSuccess(res.res);
             }
         });
-    }, [id])
+    }, [id, props])
 
     const EditCard = (e: FormEvent) => {
         e.preventDefault()
@@ -103,7 +104,8 @@ export function Card(props: CardProps) {
                 Tagi: {card.tagNames}
                 </h3>
             </div>
-            <div className="col-lg-6 col-md-6 col-sm-6 pzsp2-card-buttons">
+            {(SecurityHelper.amIAdmin() || card.username === SecurityHelper.getContext()?.username) &&
+                <div className="col-lg-6 col-md-6 col-sm-6 pzsp2-card-buttons">
                 <form  className ="pzsp2-card-delete-button" onSubmit={DeleteCard}>
                     <button type="submit" className="btn btn-outline-danger">
                         Usuń
@@ -114,13 +116,13 @@ export function Card(props: CardProps) {
                         Edytuj
                     </button>
                 </form>
-            </div>
+            </div>}
         </div>
         <div className="row pzsp2-card-row-grp">
             <div className="col-lg-6 col-md-12 col-sm-12 pzsp2-card-grp-text">
-            <h3>
-                Grupy: {card.groupNames}
-            </h3>
+                <h3>
+                    Grupy: {card.groupNames}
+                </h3>
             </div>
         </div>
     </div>

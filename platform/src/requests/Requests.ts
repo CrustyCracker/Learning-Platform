@@ -3,25 +3,27 @@ import {Credentials, LoginResponse, RegisterCredentials} from "../types/Credenti
 import {CardResponse, EditCard, NewCard} from "../types/Cards";
 import {GroupResponse, NewGroup} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
-import {TokenHelper} from "../helpers/TokenHelper";
+import {SecurityHelper} from "../helpers/SecurityHelper";
 
 
 function fetchPost(body: any, url: string) {
+    const token = SecurityHelper.getContext()?.token;
     return fetch(Global.backendUrl + url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${TokenHelper.getToken()}`
+            'Authorization': `${token ?? ""}`
         },
         body: JSON.stringify(body)
     })
 }
 
 function fetchGet(url: string) {
+    const token = SecurityHelper.getContext()?.token;
     return fetch(Global.backendUrl + url, {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${TokenHelper.getToken()}`
+            'Authorization': `${token ?? ""}`
         }
     })
 }
