@@ -3,6 +3,7 @@ package mhmd.pzsp.PZSPApp.controller;
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
 import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
+import mhmd.pzsp.PZSPApp.models.api.requests.EditCardRequest;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewCardRequest;
 import mhmd.pzsp.PZSPApp.models.api.responses.CardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +89,13 @@ public class CardController {
     @GetMapping("delete/{id}")
     public boolean delete(@PathVariable Long id) throws BackendException {
         return cardService.delete(id);
+    }
+
+    @PostMapping("/edit")
+    public CardResponse edit(@RequestBody EditCardRequest request) throws BackendException {
+        var user = getCurrentUser();
+        if (user == null)
+            throw new BackendException("Brak zalogowanego użytkownika");
+        return new CardResponse(cardService.edit(request, user));
     }
 }
