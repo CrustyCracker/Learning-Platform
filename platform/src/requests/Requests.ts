@@ -1,18 +1,17 @@
 import {Global} from "../Config";
 import {Credentials, LoginResponse, RegisterCredentials} from "../types/Credentials";
-import {CardResponse, NewCard} from "../types/Cards";
+import {CardResponse, EditCard, NewCard} from "../types/Cards";
 import {GroupResponse, NewGroup} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
-import Cookies from 'universal-cookie';
+import {TokenHelper} from "../helpers/TokenHelper";
 
-const cookies = new Cookies();
 
 function fetchPost(body: any, url: string) {
     return fetch(Global.backendUrl + url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${cookies.get("JWTTOKEN")}`
+            'Authorization': `${TokenHelper.getToken()}`
         },
         body: JSON.stringify(body)
     })
@@ -22,7 +21,7 @@ function fetchGet(url: string) {
     return fetch(Global.backendUrl + url, {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${cookies.get("JWTTOKEN")}`
+            'Authorization': `${TokenHelper.getToken()}`
         }
     })
 }
@@ -87,6 +86,12 @@ export class Requests {
         return setResponseOrError(response);
     }
 
+    static async allGroups(): Promise<GenericResponse<GroupResponse[]>>{
+        const response = await fetchGet("/groups/all")
+            .then(res => res.json())
+        return setResponseOrError(response);
+    }
+
     static async CardId(id: number): Promise<GenericResponse<CardResponse>> {
         const response = await fetchGet("/cards/" + id)
             .then(res => res.json())
@@ -111,7 +116,7 @@ export class Requests {
         return setResponseOrError(response);
     }
 
-    static async editCard(cardData: CardResponse): Promise<GenericResponse<CardResponse>> {
+    static async editCard(cardData: EditCard): Promise<GenericResponse<CardResponse>> {
         const response = await fetchPost(cardData, "/cards/edit")
             .then(res => res.json())
         return setResponseOrError(response);

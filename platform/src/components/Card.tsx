@@ -100,7 +100,7 @@ export function Card(props: CardProps) {
         <div className="row pzsp2-card-row-tag">
             <div className="col-lg-6 col-md-6 col-sm-6 pzsp2-card-tag-text">
                 <h3>
-                Tagi: {card.tags}
+                Tagi: {card.tagNames}
                 </h3>
             </div>
             <div className="col-lg-6 col-md-6 col-sm-6 pzsp2-card-buttons">
@@ -119,7 +119,7 @@ export function Card(props: CardProps) {
         <div className="row pzsp2-card-row-grp">
             <div className="col-lg-6 col-md-12 col-sm-12 pzsp2-card-grp-text">
             <h3>
-                Grupy: {card.groups}
+                Grupy: {card.groupNames}
             </h3>
             </div>
         </div>

@@ -41,8 +41,8 @@ export function NewCardForm(props: CardFormProps) {
                 props.onSuccess(res.res)
             }
             if(!newCard.isPublic){
-            setNewCard({question: "", answer: "", source: "",isPublic: false, groupIds: [], tagIds: []})}
-            else{setNewCard({question: "", answer: "", source: "",isPublic: true, groupIds: [], tagIds: []})}
+            setNewCard({question: "", answer: "", source: "",isPublic: false, groupsIds: [], tagIds: []})}
+            else{setNewCard({question: "", answer: "", source: "",isPublic: true, groupsIds: [], tagIds: []})}
         });
     }
 

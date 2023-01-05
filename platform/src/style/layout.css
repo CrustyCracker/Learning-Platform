@@ -1,21 +1,54 @@
 .pzsp2-navbar{
-    min-height: 5%;
     margin: 0;
+    padding-top: 0 !important;
     padding-left: 1%;
-    border-bottom: 2px solid black;
-    background-color: #F0EAD2;
+    border-bottom: 2px solid white;
+    background-color: black;
     position: fixed !important;
     top: 0;
     width: 100%;
     z-index: 1;
 }
 
+.pzsp2-nav-item{
+    display:inline-block !important;
+}
+
+.pzsp2-navbar-nav{
+    display:inline-block !important;
+}
+
+li > .pzsp2-navbar-link {
+    display: inline-block !important;
+}
+
 .pzsp2-navbar-link{
-    font-weight: bold;
+    font-size: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .pzsp2-navbar-link:active{
+    animation: pulse;
+    animation-duration: 500ms;
+}
+
+.pzsp2-navbar-link-main{
+    font-size: 25px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.pzsp2-navbar-link-main:active{
     font-weight: bold;
     animation: pulse;
     animation-duration: 500ms;
+}
+
+.pzsp2-navbar-link-main:hover{
+    font-weight: bold;
+}
+
+.pzsp2-navbar-link-main:focus{
+    font-weight: bold;
 }

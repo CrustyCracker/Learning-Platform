@@ -6,11 +6,15 @@
 
 .pzsp2-mainmenu-card{
     background-color: #adc178 !important;
-    margin: 5% 0;
-    min-height: 100px;
+    margin: 40px 0;
+    min-height: 100px !important;
     justify-content: center;
     animation: zoomIn;
     animation-duration: 500ms;
+}
+
+.pzsp2-mainmenu-row{
+    padding-top: 3%;
 }
 
 .pzsp2-mainmenu-card:hover{

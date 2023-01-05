@@ -6,6 +6,7 @@ import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.Group;
 import mhmd.pzsp.PZSPApp.models.Tag;
 import mhmd.pzsp.PZSPApp.models.User;
+import mhmd.pzsp.PZSPApp.models.api.requests.EditCardRequest;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewCardRequest;
 import mhmd.pzsp.PZSPApp.repositories.ICardRepository;
 import mhmd.pzsp.PZSPApp.repositories.IGroupRepository;
@@ -45,21 +46,7 @@ public class CardService implements ICardService {
 
     @Override
     public Card create(NewCardRequest request, User user) throws BackendException {
-        List<Tag> tags = new ArrayList<>();
-        List<Group> groups = new ArrayList<>();
-
-        if (request.tagIds != null && !request.tagIds.isEmpty())
-            tags = tagRepository.findByIdIn(request.tagIds);
-
-        if (request.groupIds != null && !request.groupIds.isEmpty())
-            groups = groupRepository.findByIdIn(request.groupIds);
-
-        for (Group group : groups) {
-            if (group.isPublic() && !request.isPublic)
-                throw new BackendException(String.format("Próba dodania prywatnej fiszki do niepublicznej grupy %s", group.getName()));
-        }
-
-        var card = new Card(request, user, groups, tags);
+        var card = createCard(request, user);
         return cardRepository.save(card);
     }
 
@@ -92,5 +79,39 @@ public class CardService implements ICardService {
             throw new BackendException("Nie można usunąć karty innego użytkownika");
         }
         throw new BackendException("Nie istnieje karta o podanym id");
+    }
+
+    @Override
+    public Card edit(EditCardRequest request, User user) throws BackendException {
+        if (request.id == null)
+            throw new BackendException("Nie podano id edytowanej fiszki");
+
+        var editedCard = cardRepository.findCardById(request.id);
+
+        if (!editedCard.getUser().getId().equals(user.getId()) && !user.isAdmin())
+            throw new BackendException("Nie masz uprawnień do edycji tej fiszki");
+
+        var card = createCard(request, user);
+        card.setId(editedCard.getId());
+
+        return cardRepository.save(card);
+    }
+
+    private Card createCard(NewCardRequest request, User user) throws BackendException {
+        List<Tag> tags = new ArrayList<>();
+        List<Group> groups = new ArrayList<>();
+
+        if (request.tagIds != null && !request.tagIds.isEmpty())
+            tags = tagRepository.findByIdIn(request.tagIds);
+
+        if (request.groupIds != null && !request.groupIds.isEmpty())
+            groups = groupRepository.findByIdIn(request.groupIds);
+
+        for (Group group : groups) {
+            if (group.isPublic() && !request.isPublic)
+                throw new BackendException(String.format("Próba dodania prywatnej fiszki do niepublicznej grupy %s", group.getName()));
+        }
+
+        return new Card(request, user, groups, tags);
     }
 }

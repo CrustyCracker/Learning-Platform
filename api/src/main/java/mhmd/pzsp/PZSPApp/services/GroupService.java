@@ -57,4 +57,9 @@ public class GroupService implements IGroupService {
 
         throw new BackendException(String.format("Nie masz uprawień do grupy %d", group.getId()));
     }
+
+    @Override
+    public List<Group> findPublicOrUsers(Long userId) {
+        return groupRepository.findByUserIdOrPublic(userId, 'G');
+    }
 }

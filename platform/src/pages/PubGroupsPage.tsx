@@ -1,27 +1,27 @@
 import React, {useEffect, useState} from 'react';
 import '../style/App.css';
-import '../style/cardList.css';
+import '../style/groupList.css';
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
-import {CardList} from "../components/CardList";
+import {GroupList} from "../components/GroupList";
 import Layout from "../components/Layout/Layout";
 import {TokenHelper} from "../helpers/TokenHelper";
 import {Navigate} from "react-router-dom";
 import {Helmet} from "react-helmet";
+import {GroupResponse} from "../types/Groups";
 import {Requests} from "../requests/Requests";
-import {CardResponse} from "../types/Cards";
 
-export default function MyCardsPage() {
+export default function MyGroupsPage() {
     const [error, setError] = useState("");
-    const [cards, setCards] = useState<CardResponse[]>([]);
+    const [groups, setGroups] = useState<GroupResponse[]>([]);
 
     useEffect(() => {
-        Requests.myCards().then(res => {
+        Requests.allGroups().then(res => {
             if (res.err) {
-                setCards([]);
+                setGroups([]);
                 setError(res.err.userMessage);
             }
             else if (res.res){
-                setCards(res.res);
+                setGroups(res.res);
             }
         });
     }, [])
@@ -31,13 +31,13 @@ export default function MyCardsPage() {
 
     return <>
         <Helmet>
-            <title>Inżynierka w tydzień ∙ Moje fiszki</title>
+            <title>Inżynierka w tydzień ∙ Publiczne grupy</title>
         </Helmet>
         <Layout>
-            <div className="App container-fluid pzsp2-mycards-page-cont">
+            <div className="App container-fluid pzsp2-mygroups-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
-                <h1 className="pzsp2-cardlist-title">Moje fiszki</h1>
-                <CardList cards={cards} pub={false} />
+                <h1 className="pzsp2-grouplist-title">Publiczne grupy</h1>
+                <GroupList groups={groups} pub={true} />
             </div>
         </Layout>
     </>;

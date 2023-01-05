@@ -4,17 +4,25 @@ import '../style/cardForm.css';
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
 import {NewCardForm} from "../components/NewCardForm";
 import Layout from "../components/Layout/Layout";
+import {TokenHelper} from "../helpers/TokenHelper";
+import {Navigate} from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 export default function NewCardPage() {
     const [error, setError] = useState("");
 
+    if(!TokenHelper.amILogged())
+        return <Navigate to="/login" />
 
-    return (<>
+    return <>
+        <Helmet>
+            <title>Inżynierka w tydzień ∙ Dodaj fiszkę</title>
+        </Helmet>
         <Layout>
             <div className="App container-fluid pzsp2-cardform-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
                 <NewCardForm onSuccess={() => {}} onError={(res) => setError(res.userMessage)}/>
             </div>
         </Layout>
-    </>);
+    </>;
 }

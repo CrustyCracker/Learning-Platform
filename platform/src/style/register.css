@@ -1,3 +1,15 @@
+.pzsp2-register-page{
+    height: 100vh;
+    background: url(../assets/auth-bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .pzsp2-register-page-cont{
     width: 100%;
     margin-top: 5%;
@@ -61,6 +73,8 @@
 .pzsp2-register-loglink-text{
     animation: fadeIn;
     animation-duration: 2500ms;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .pzsp2-register-loglink{
