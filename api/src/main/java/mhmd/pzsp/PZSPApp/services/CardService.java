@@ -98,6 +98,12 @@ public class CardService implements ICardService {
     }
 
     private Card createCard(NewCardRequest request, User user) throws BackendException {
+        if (request.question == null)
+            throw new BackendException("Nie podano pytania");
+
+        if (request.answer == null)
+            throw new BackendException("Nie podano odpowiedzi");
+
         List<Tag> tags = new ArrayList<>();
         List<Group> groups = new ArrayList<>();
 
