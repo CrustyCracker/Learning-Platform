@@ -1,7 +1,10 @@
 package mhmd.pzsp.PZSPApp.models.api.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.Group;
+
+import java.util.List;
 
 public class GroupResponse {
     public Long id;
@@ -16,6 +19,8 @@ public class GroupResponse {
 
     public boolean isPublic;
 
+    public List<Long> cardIds;
+
     @JsonIgnore
     public GroupResponse(Group group){
         id = group.getId();
@@ -24,5 +29,6 @@ public class GroupResponse {
         description = group.getDescription();
         username = group.getUser().getUsername();
         isPublic = group.isPublic();
+        cardIds = group.cards.stream().map(Card::getId).toList();
     }
 }

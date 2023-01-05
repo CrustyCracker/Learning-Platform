@@ -5,6 +5,7 @@ import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
 import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.Group;
 import mhmd.pzsp.PZSPApp.models.User;
+import mhmd.pzsp.PZSPApp.models.api.requests.EditGroupRequest;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewGroupRequest;
 import mhmd.pzsp.PZSPApp.repositories.ICardRepository;
 import mhmd.pzsp.PZSPApp.repositories.IGroupRepository;
@@ -26,17 +27,7 @@ public class GroupService implements IGroupService {
 
     @Override
     public Group create(NewGroupRequest request, User user) throws BackendException {
-        List<Card> cards = new ArrayList<>();
-
-        if (request.cardIds != null && !request.cardIds.isEmpty())
-            cards = cardRepository.findByIdIn(request.cardIds);
-
-        if (request.isPublic)
-            for (var card : cards)
-                if (!card.IsPublic())
-                    throw new BackendException("Próba utworzenia publicznej grupy z prywatną fiszką");
-
-        var group = new Group(request, user, cards);
+        var group = createGroup(request, user);
         return groupRepository.save(group);
     }
 
@@ -61,5 +52,57 @@ public class GroupService implements IGroupService {
     @Override
     public List<Group> findPublicOrUsers(Long userId) {
         return groupRepository.findByUserIdOrPublic(userId, 'G');
+    }
+
+    @Override
+    public Group edit(EditGroupRequest request, User user) throws BackendException {
+        if (request.id == null)
+            throw new BackendException("Nie podano id edytowanej fiszki");
+
+        var editedGroup = groupRepository.findGroupById(request.id);
+
+        if (!editedGroup.getUser().getId().equals(user.getId()) && !user.isAdmin())
+            throw new BackendException("Nie masz uprawnień do edycji tej grupy");
+
+        var group = createGroup(request, user);
+        group.setId(editedGroup.getId());
+
+        return groupRepository.save(group);
+    }
+
+    @Override
+    public boolean delete(Long groupId) throws BackendException {
+        if (groupRepository.existsById(groupId)) {
+            var group = groupRepository.findGroupById(groupId);
+
+            if (Objects.equals(group.getUser().getId(), Objects.requireNonNull(getCurrentUser()).getId())
+                    || getCurrentUser().isAdmin()) {
+
+                groupRepository.deleteById(groupId);
+                return true;
+            }
+            throw new BackendException("Nie można usunąć grupy innego użytkownika");
+        }
+        throw new BackendException("Nie istnieje grupa o podanym id");
+    }
+
+    private Group createGroup(NewGroupRequest request, User user) throws BackendException {
+        if (request.name == null)
+            throw new BackendException("Nie podano nazwy");
+
+        if (request.difficulty == null)
+            throw new BackendException("Nie podano trudności");
+
+        List<Card> cards = new ArrayList<>();
+
+        if (request.cardIds != null && !request.cardIds.isEmpty())
+            cards = cardRepository.findByIdIn(request.cardIds);
+
+        if (request.isPublic)
+            for (var card : cards)
+                if (!card.IsPublic())
+                    throw new BackendException("Próba utworzenia publicznej grupy z prywatną fiszką");
+
+        return new Group(request, user, cards);
     }
 }

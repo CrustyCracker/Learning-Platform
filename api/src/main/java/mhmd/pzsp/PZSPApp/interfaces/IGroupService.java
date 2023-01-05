@@ -3,6 +3,7 @@ package mhmd.pzsp.PZSPApp.interfaces;
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.models.Group;
 import mhmd.pzsp.PZSPApp.models.User;
+import mhmd.pzsp.PZSPApp.models.api.requests.EditGroupRequest;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewGroupRequest;
 
 import java.util.List;
@@ -16,4 +17,7 @@ public interface IGroupService {
 
     List<Group> findPublicOrUsers(Long userId);
 
+    Group edit(EditGroupRequest request, User user) throws BackendException;
+
+    boolean delete(Long groupId) throws BackendException;
 }

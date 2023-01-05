@@ -2,6 +2,7 @@ package mhmd.pzsp.PZSPApp.controller;
 
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
+import mhmd.pzsp.PZSPApp.models.api.requests.EditGroupRequest;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewGroupRequest;
 import mhmd.pzsp.PZSPApp.models.api.responses.GroupResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,18 @@ public class GroupController {
         if (group == null)
             throw new BackendException("Brak grupy o danym id w bazie danych");
         return new GroupResponse(group);
+    }
+
+    @PostMapping("/edit")
+    public GroupResponse edit(@RequestBody EditGroupRequest request) throws BackendException {
+        var user = getCurrentUser();
+        if (user == null)
+            throw new BackendException("Brak zalogowanego użytkownika");
+        return new GroupResponse(groupService.edit(request, user));
+    }
+
+    @GetMapping("delete/{id}")
+    public boolean delete(@PathVariable Long id) throws BackendException {
+        return groupService.delete(id);
     }
 }
