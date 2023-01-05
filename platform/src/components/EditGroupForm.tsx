@@ -3,6 +3,7 @@ import {Requests} from "../requests/Requests";
 import {GroupResponse} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
 import {useNavigate, useParams} from "react-router-dom";
+import {SecurityHelper} from "../helpers/SecurityHelper";
 
 interface EditGroupFormProps {
     onSuccess: (response: GroupResponse) => void
@@ -83,13 +84,13 @@ export function EditGroupForm(props: EditGroupFormProps) {
                                 Publiczna
                             </label>
                         </div>
-                        <form>
+                        {(SecurityHelper.amIAdmin() || group.username === SecurityHelper.getContext()?.username) && <form>
                             <div className="pzsp2-groupform-submit">
                                 <button type="submit" onClick={handleSubmit} className="btn btn-outline-success">
                                     Edytuj grupę
                                 </button>
                             </div>
-                        </form>
+                        </form>}
                     </div>
                 </div>
             </div>

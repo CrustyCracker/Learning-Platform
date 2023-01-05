@@ -4,6 +4,7 @@ import {CardResponse} from "../types/Cards";
 import {ErrorResponse} from "../types/ErrorResponse";
 import {useNavigate, useParams} from 'react-router-dom';
 import '../style/cardForm.css';
+import {SecurityHelper} from "../helpers/SecurityHelper";
 
 interface EditCardFormProps {
     onSuccess: (response: CardResponse) => void,
@@ -26,7 +27,7 @@ export function EditCardForm(props: EditCardFormProps) {
                 props.onSuccess(res.res);
             }
         });
-    }, [id])
+    }, [id, props])
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -95,11 +96,11 @@ export function EditCardForm(props: EditCardFormProps) {
                 </label>
             </div>
         <form>
-        <div className="row">
+            {(SecurityHelper.amIAdmin() || card.username === SecurityHelper.getContext()?.username) && <div className="row">
                 <div className="pzsp2-cardform-edit-button">
                     <button type="submit" onClick={handleSubmit} className="btn btn-outline-success">Edytuj fiszkę</button>
                 </div>
-        </div>
+            </div>}
         </form>
     </div>)
 }

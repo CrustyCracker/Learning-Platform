@@ -1,27 +1,29 @@
 import {Global} from "../Config";
 import {Credentials, LoginResponse, RegisterCredentials} from "../types/Credentials";
 import {CardResponse, EditCard, NewCard} from "../types/Cards";
-import {GroupResponse, NewGroup} from "../types/Groups";
+import {EditGroup, GroupResponse, NewGroup} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
-import {TokenHelper} from "../helpers/TokenHelper";
+import {SecurityHelper} from "../helpers/SecurityHelper";
 
 
 function fetchPost(body: any, url: string) {
+    const token = SecurityHelper.getContext()?.token;
     return fetch(Global.backendUrl + url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${TokenHelper.getToken()}`
+            'Authorization': `${token ?? ""}`
         },
         body: JSON.stringify(body)
     })
 }
 
 function fetchGet(url: string) {
+    const token = SecurityHelper.getContext()?.token;
     return fetch(Global.backendUrl + url, {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${TokenHelper.getToken()}`
+            'Authorization': `${token ?? ""}`
         }
     })
 }
@@ -110,7 +112,7 @@ export class Requests {
         return setResponseOrError(response);
     }
 
-    static async editGroup(groupData: GroupResponse): Promise<GenericResponse<GroupResponse>> {
+    static async editGroup(groupData: EditGroup): Promise<GenericResponse<GroupResponse>> {
         const response = await fetchPost(groupData, "/groups/edit")
             .then(res => res.json())
         return setResponseOrError(response);
@@ -124,6 +126,12 @@ export class Requests {
 
     static async deleteCard(id: number):  Promise<GenericResponse<boolean>> {
         const response = await fetchGet("/cards/delete/" + id)
+            .then(res => res.json())
+        return setResponseOrError(response);
+    }
+
+    static async deleteGroup(id: number):  Promise<GenericResponse<boolean>> {
+        const response = await fetchGet("/groups/delete/" + id)
             .then(res => res.json())
         return setResponseOrError(response);
     }

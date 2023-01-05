@@ -3,7 +3,11 @@ export type NewGroup = {
     difficulty : number
     description : string
     isPublic : boolean
-    cardIds : []
+    cardIds : number[]
+}
+
+export type EditGroup = NewGroup & {
+    id : number
 }
 
 export type GroupResponse = {
@@ -13,4 +17,5 @@ export type GroupResponse = {
     description : string
     username : string
     isPublic : boolean
+    cardIds : number[]
 }

@@ -4,7 +4,7 @@ import '../style/cardList.css';
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
 import {CardList} from "../components/CardList";
 import Layout from "../components/Layout/Layout";
-import {TokenHelper} from "../helpers/TokenHelper";
+import {SecurityHelper} from "../helpers/SecurityHelper";
 import {Navigate} from "react-router-dom";
 import {Helmet} from "react-helmet";
 import {Requests} from "../requests/Requests";
@@ -26,7 +26,7 @@ export default function MyCardsPage() {
         });
     }, [])
 
-    if(!TokenHelper.amILogged())
+    if(!SecurityHelper.amILogged())
         return <Navigate to="/login" />
 
     return <>

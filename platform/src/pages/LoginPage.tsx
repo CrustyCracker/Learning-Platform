@@ -4,8 +4,7 @@ import {Link, Navigate, useNavigate} from "react-router-dom";
 import { LoginForm } from "../components/LoginForm";
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
 import {LoginResponse} from "../types/Credentials";
-import Cookies from 'universal-cookie';
-import {TokenHelper} from "../helpers/TokenHelper";
+import {SecurityHelper} from "../helpers/SecurityHelper";
 import {Helmet} from "react-helmet";
 
 export default function LoginPage() {
@@ -13,12 +12,11 @@ export default function LoginPage() {
     const navigate = useNavigate()
 
     const onLoginSuccess = (res: LoginResponse) => {
-        const cookies = new Cookies();
-        cookies.set('JWTTOKEN', res.token, { path: '/', maxAge: 3600 });
+        SecurityHelper.setContext({...res, validTo: new Date()});
         navigate("/");
     }
 
-    if(TokenHelper.amILogged())
+    if(SecurityHelper.amILogged())
         return <Navigate to="/" />
 
     return <>

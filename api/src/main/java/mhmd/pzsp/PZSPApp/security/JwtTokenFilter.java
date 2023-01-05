@@ -37,8 +37,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         final String token = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if (token == null || token.isBlank() || token.equals("undefined")) {
-            filterChain.doFilter(request, response);
+
+        if (request.getRequestURI().startsWith("/account/")) {
+            doFilter(request, response, filterChain);
             return;
         }
 
@@ -47,7 +48,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
         var chunks = token.split("\\.");
         if (chunks.length != 3) {
-            filterChain.doFilter(request, response);
+            return401(response);
             return;
         }
 
@@ -55,7 +56,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         var validator = new DefaultJwtSignatureValidator(SignatureAlgorithm.HS256, secretKeySpec);
 
         if (!validator.isValid(chunks[0] + '.' + chunks[1], chunks[2])){
-            filterChain.doFilter(request, response);
+            return401(response);
             return;
         }
 
@@ -72,23 +73,23 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             isAdmin = json.getBoolean("admin");
 
             if (name.isBlank() || password.isBlank()) {
-                filterChain.doFilter(request, response);
+                return401(response);
                 return;
             }
         }
         catch (JSONException e) {
-            filterChain.doFilter(request, response);
+            return401(response);
             return;
         }
 
         var user = accountService.loadUserByUsername(name);
         if (user.isEmpty()) {
-            filterChain.doFilter(request, response);
+            return401(response);
             return;
         }
 
         if (!password.equals(user.get().getPassword())) {
-            filterChain.doFilter(request, response);
+            return401(response);
             return;
         }
 
@@ -100,5 +101,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
+    }
+
+    private void return401(HttpServletResponse response) {
+        response.setStatus(401);
     }
 }

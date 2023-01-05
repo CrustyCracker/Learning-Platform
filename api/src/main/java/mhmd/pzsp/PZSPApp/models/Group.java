@@ -85,4 +85,8 @@ public class Group {
     public void setIsPublic(boolean isPublic){
         visibility = isPublic ? 'G' : 'P';
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
