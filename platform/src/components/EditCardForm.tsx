@@ -27,7 +27,7 @@ export function EditCardForm(props: EditCardFormProps) {
                 props.onSuccess(res.res);
             }
         });
-    }, [id])
+    }, [id, props])
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();

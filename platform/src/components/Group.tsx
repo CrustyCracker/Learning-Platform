@@ -38,7 +38,7 @@ export function Group(props: GroupProps) {
                 setCards(res.res);
             }
         });
-    }, [id])
+    }, [id, props])
 
     const EditGroup = (e: FormEvent) => {
         e.preventDefault()
@@ -47,6 +47,16 @@ export function Group(props: GroupProps) {
 
     const DeleteGroup= (e: FormEvent) => {
         e.preventDefault()
+        Requests.deleteGroup(group.id).then(res => {
+            if (res.err) {
+                props.onError(res.err)
+            }
+            else if (res.res){
+                navigate(-1);
+                // pzsp2 powinno jeszcze wyświetlić komunikat, że usunięto,
+                // ten navigate(-1) to może nie być idealne rozwiązanie
+            }
+        })
     }
 
     const Learn = (e: FormEvent) => {
