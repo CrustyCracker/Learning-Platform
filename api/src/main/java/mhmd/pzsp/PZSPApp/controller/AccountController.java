@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/account")
 public class AccountController {
+    // te endopinty są dostępne bez autoryzacji
     private final IAccountService accountService;
 
     @Autowired
@@ -23,7 +24,8 @@ public class AccountController {
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest login) throws BackendException {
         var user = accountService.login(login);
-        return new LoginResponse(true, accountService.generateToken(user), "Zalogowano");
+        return new LoginResponse(true, accountService.generateToken(user),
+                "Zalogowano", user.getUsername(), user.isAdmin());
     }
 
     @PostMapping("/register")

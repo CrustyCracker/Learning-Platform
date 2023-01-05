@@ -12,6 +12,8 @@ export type LoginResponse = {
     success : boolean
     token : string
     message : string
+    username : string
+    isAdmin : boolean
 }
 
 export type RegisterResponse = {
