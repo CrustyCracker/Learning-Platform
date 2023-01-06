@@ -4,6 +4,7 @@ import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
 import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
 import mhmd.pzsp.PZSPApp.models.api.requests.EditCardRequest;
+import mhmd.pzsp.PZSPApp.models.api.requests.IdRequestBase;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewCardRequest;
 import mhmd.pzsp.PZSPApp.models.api.responses.CardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,9 +87,9 @@ public class CardController {
         return groupCards;
     }
 
-    @GetMapping("delete/{id}")
-    public boolean delete(@PathVariable Long id) throws BackendException {
-        return cardService.delete(id);
+    @DeleteMapping("delete")
+    public boolean delete(@RequestBody IdRequestBase request) throws BackendException {
+        return cardService.delete(request.id);
     }
 
     @PostMapping("/edit")

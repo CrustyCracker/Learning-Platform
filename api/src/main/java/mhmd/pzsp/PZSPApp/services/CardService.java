@@ -67,6 +67,8 @@ public class CardService implements ICardService {
 
     @Override
     public boolean delete(Long id) throws BackendException {
+        if (id == null)
+            throw new BackendException("Nie podano id");
         if (cardRepository.existsById(id)) {
             var card = cardRepository.findCardById(id);
 

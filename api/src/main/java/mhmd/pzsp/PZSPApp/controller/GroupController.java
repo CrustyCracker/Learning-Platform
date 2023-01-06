@@ -3,6 +3,7 @@ package mhmd.pzsp.PZSPApp.controller;
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
 import mhmd.pzsp.PZSPApp.models.api.requests.EditGroupRequest;
+import mhmd.pzsp.PZSPApp.models.api.requests.IdRequestBase;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewGroupRequest;
 import mhmd.pzsp.PZSPApp.models.api.responses.GroupResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,8 +73,8 @@ public class GroupController {
         return new GroupResponse(groupService.edit(request, user));
     }
 
-    @GetMapping("delete/{id}")
-    public boolean delete(@PathVariable Long id) throws BackendException {
-        return groupService.delete(id);
+    @DeleteMapping("delete")
+    public boolean delete(@RequestBody IdRequestBase request) throws BackendException {
+        return groupService.delete(request.id);
     }
 }

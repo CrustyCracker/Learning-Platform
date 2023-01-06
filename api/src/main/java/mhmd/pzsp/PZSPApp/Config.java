@@ -63,6 +63,10 @@ public class Config {
                         "/cards/**",
                         "/groups/**"
                 ).hasAuthority(Roles.USER.toString());
+                authorize.requestMatchers(
+                        HttpMethod.DELETE,
+                        "**/delete"
+                ).hasAuthority(Roles.USER.toString());
                 authorize.anyRequest().authenticated();
             })
             .httpBasic(Customizer.withDefaults())

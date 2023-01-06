@@ -72,6 +72,8 @@ public class GroupService implements IGroupService {
 
     @Override
     public boolean delete(Long groupId) throws BackendException {
+        if (groupId == null)
+            throw new BackendException("Nie podano id");
         if (groupRepository.existsById(groupId)) {
             var group = groupRepository.findGroupById(groupId);
 
