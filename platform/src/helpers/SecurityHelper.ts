@@ -20,8 +20,9 @@ export class SecurityHelper {
             return null;
 
         let parsed = JSON.parse(data) as UserContext;
+        parsed.validTo = new Date(parsed.validTo);
 
-        if (parsed.validTo > new Date()) {
+        if (parsed.validTo < new Date()) {
             SecurityHelper.clearContext();
             return null;
         }

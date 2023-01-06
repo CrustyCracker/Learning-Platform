@@ -1,12 +1,12 @@
-import {Navigate} from 'react-router-dom'
+import {Navigate, Outlet} from 'react-router-dom'
 import {SecurityHelper} from "../helpers/SecurityHelper";
-import React, {FC} from "react";
+import React from "react";
 
-export const RequireLogin: FC<{ children: React.ReactElement }> = ({ children}) => {
+export const RequireLogin = () => {
     if (!SecurityHelper.amILogged()) {
         return <Navigate to="/login"/>;
     }
-    return children;
+    return <Outlet/>;
 };
 
 

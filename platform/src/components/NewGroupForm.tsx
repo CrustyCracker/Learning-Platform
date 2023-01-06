@@ -22,7 +22,7 @@ export function NewGroupForm(props: NewGroupFormProps) {
         e.preventDefault();
         if (!newGroup)
             return;
-        if (newGroup.difficulty == undefined)
+        if (newGroup.difficulty === undefined)
             newGroup.difficulty = 1;
         Requests.createGroup(newGroup).then(res => {
             if (res.err) {

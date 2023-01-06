@@ -26,7 +26,7 @@ export function EditGroupForm(props: EditGroupFormProps) {
                 props.onSuccess(res.res);
             }
         });
-    }, [id])
+    }, [id, props])
 
 
     let options = []
