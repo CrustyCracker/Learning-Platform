@@ -16,3 +16,7 @@ export type CardResponse = EditCard & {
     tagNames : string[]
     groupNames : string[]
 }
+
+export type DeleteCard = {
+    id : number
+}

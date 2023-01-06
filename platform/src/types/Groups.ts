@@ -19,3 +19,7 @@ export type GroupResponse = {
     isPublic : boolean
     cardIds : number[]
 }
+
+export type DeleteGroup = {
+    id : number
+}

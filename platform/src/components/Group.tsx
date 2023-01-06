@@ -47,7 +47,7 @@ export function Group(props: GroupProps) {
 
     const DeleteGroup= (e: FormEvent) => {
         e.preventDefault()
-        Requests.deleteGroup(group.id).then(res => {
+        Requests.deleteGroup({id: group.id}).then(res => {
             if (res.err) {
                 props.onError(res.err)
             }

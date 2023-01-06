@@ -1,7 +1,7 @@
 import {Global} from "../Config";
 import {Credentials, LoginResponse, RegisterCredentials} from "../types/Credentials";
-import {CardResponse, EditCard, NewCard} from "../types/Cards";
-import {EditGroup, GroupResponse, NewGroup} from "../types/Groups";
+import {CardResponse, DeleteCard, EditCard, NewCard} from "../types/Cards";
+import {DeleteGroup, EditGroup, GroupResponse, NewGroup} from "../types/Groups";
 import {ErrorResponse} from "../types/ErrorResponse";
 import {SecurityHelper} from "../helpers/SecurityHelper";
 
@@ -10,6 +10,18 @@ function fetchPost(body: any, url: string) {
     const token = SecurityHelper.getContext()?.token;
     return fetch(Global.backendUrl + url, {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${token ?? ""}`
+        },
+        body: JSON.stringify(body)
+    })
+}
+
+function fetchDelete(body: any, url: string) {
+    const token = SecurityHelper.getContext()?.token;
+    return fetch(Global.backendUrl + url, {
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `${token ?? ""}`
@@ -124,14 +136,14 @@ export class Requests {
         return setResponseOrError(response);
     }
 
-    static async deleteCard(id: number):  Promise<GenericResponse<boolean>> {
-        const response = await fetchGet("/cards/delete/" + id)
+    static async deleteCard(id: DeleteCard):  Promise<GenericResponse<boolean>> {
+        const response = await fetchDelete(id, "/cards/delete")
             .then(res => res.json())
         return setResponseOrError(response);
     }
 
-    static async deleteGroup(id: number):  Promise<GenericResponse<boolean>> {
-        const response = await fetchGet("/groups/delete/" + id)
+    static async deleteGroup(id: DeleteGroup):  Promise<GenericResponse<boolean>> {
+        const response = await fetchDelete(id, "/groups/delete")
             .then(res => res.json())
         return setResponseOrError(response);
     }

@@ -37,7 +37,7 @@ export function Card(props: CardProps) {
 
     const DeleteCard = (e: FormEvent) => {
         e.preventDefault()
-        Requests.deleteCard(card.id).then(res => {
+        Requests.deleteCard({id: card.id}).then(res => {
             if (res.err) {
                 props.onError(res.err)
             }
