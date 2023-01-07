@@ -34,7 +34,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>8</dataTypePrecision>
-<ownDataTypeParameters>,8,</ownDataTypeParameters>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
@@ -56,13 +56,13 @@
 <colUsage columnID="E624A178-8112-9EE3-9AA4-4D3A3557A7B2"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="211280D1-3A84-6A80-A270-ECF81A090ACB" name="OTAG_FISZ_FK_IDX">
+<ind_PK_UK id="211280D1-3A84-6A80-A270-ECF81A090ACB" name="OTAG_TAG_FK_IDX">
 <createdBy>mrsli</createdBy>
 <createdTime>2022-11-21 12:12:03 UTC</createdTime>
 <ownerDesignName>pzsp2erd</ownerDesignName>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="1E0AA43B-A252-3423-2CF0-2AEDB1D4171E"/>
+<colUsage columnID="E624A178-8112-9EE3-9AA4-4D3A3557A7B2"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="466AAFE8-2A5F-57FE-6077-F08E249CA67F" name="OTAG_FISZ_FK">

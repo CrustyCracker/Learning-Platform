@@ -5,7 +5,7 @@
 <generatorID>A6296F82-A1DC-4D75-D20B-7147A8B0A1DF</generatorID>
 <ownerDesignName>pzsp2erd</ownerDesignName>
 <referredTableLongName>UZYTKOWNICY</referredTableLongName>
-<deleteRule>CASCADE</deleteRule>
+<deleteRule>NO ACTION</deleteRule>
 <referredTableID>21D97D6D-7A92-0411-3F4E-4658B2CAD4BB</referredTableID>
 <keyObject>E3A6DBD9-8617-6E75-D350-2F99BCC8436C</keyObject>
 <referredKeyID>E3A6DBD9-8617-6E75-D350-2F99BCC8436C</referredKeyID>
