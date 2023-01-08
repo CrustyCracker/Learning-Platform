@@ -45,6 +45,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             return;
         }
 
+        if (token == null || token.isBlank()){
+            return401(response);
+            return;
+        }
+
         List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
         grantedAuthorityList.add(new SimpleGrantedAuthority(Roles.USER.toString()));
 
