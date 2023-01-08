@@ -2,11 +2,11 @@ import {useState} from 'react';
 import '../style/App.css';
 import '../style/cardForm.css';
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
-import {EditCardForm} from "../components/EditCardForm";
 import Layout from "../components/Layout/Layout";
 import {SecurityHelper} from "../helpers/SecurityHelper";
 import {Navigate} from "react-router-dom";
 import {Helmet} from "react-helmet";
+import {CardForm} from "../components/CardForm";
 
 export default function EditCardPage() {
     const [error, setError] = useState("");
@@ -21,7 +21,7 @@ export default function EditCardPage() {
         <Layout>
             <div className="App container-fluid pzsp2-cardform-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
-                <EditCardForm onSuccess={() => {}} onError={(res) => setError(res.userMessage)}/>
+                <CardForm edit={true} onSuccess={() => {}} onError={(res) => setError(res.userMessage)}/>
             </div>
         </Layout>
     </>;
