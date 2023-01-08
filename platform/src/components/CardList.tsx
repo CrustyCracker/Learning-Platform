@@ -24,7 +24,7 @@ export function CardList(props: CardListProps) {
 
             currCards.forEach((card) => {
                 tags.forEach((tag) => {
-                    if(card.tagNames.some(x => x.toLowerCase() === tag.toLowerCase())){
+                    if(card.tags.some(x => x.toLowerCase() === tag.toLowerCase())){
                         newCards.push(card)
                     }
                 })
@@ -88,8 +88,8 @@ export function CardList(props: CardListProps) {
                 {currCards && currCards.map(card => {
                     return <tr key={card.id}>
                         <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
-                        <td className="pzsp2-cardlist-td-wrap">{card.groupNames}</td>
-                        <td className="pzsp2-cardlist-td-wrap">{card.tagNames}</td>
+                        <td className="pzsp2-cardlist-td-wrap"><small>{card.groups.join(', ')}</small></td>
+                        <td className="pzsp2-cardlist-td-wrap"><small>{card.tags.join(', ')}</small></td>
                         {!props.pub && <td className="hide-on-small">{isPublicToString(card.isPublic)}</td>}
                         {props.pub && <td className="hide-on-small">{card.username}</td>}
                         <td><Link className="pzsp2-link" to={`/cards/${card.id}`}>{">"}</Link></td>

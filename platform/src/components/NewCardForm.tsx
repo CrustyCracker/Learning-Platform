@@ -31,13 +31,13 @@ export function NewCardForm(props: CardFormProps) {
     }, [])
 
     const updateGroups = (group: GroupResponse) => {
-        if (!addedgroups.some(group_ => group === group_))
-            setAddedGroups(addedgroups.concat(group))
-        let groupIds = addedgroups.map(group => group.id)
-        setNewCard({...newCard, groupsIds: groupIds})
+        if (!addedgroups.some(group_ => group.id === group_.id)) {
+            let tempAdded: GroupResponse[] = addedgroups.concat(group)
+            let groupIds = tempAdded.map(group => group.id)
+            setAddedGroups(tempAdded)
+            setNewCard({...newCard, groupIds: groupIds})
+        }
     }
-
-
 
     const AddCard = (e: FormEvent) => {
         e.preventDefault();
@@ -66,12 +66,10 @@ export function NewCardForm(props: CardFormProps) {
                 props.onSuccess(res.res)
             }
             if(!newCard.isPublic){
-            setNewCard({question: "", answer: "", source: "",isPublic: false, groupsIds: [], tagIds: []})}
-            else{setNewCard({question: "", answer: "", source: "",isPublic: true, groupsIds: [], tagIds: []})}
+            setNewCard({question: "", answer: "", source: "",isPublic: false, groupIds: [], tagIds: []})}
+            else{setNewCard({question: "", answer: "", source: "",isPublic: true, groupIds: [], tagIds: []})}
         });
     }
-
-    // pzsp2 error handling i walidacja
 
     return (
         <div className="container-fluid pzsp2-cardform-cont">
@@ -142,7 +140,7 @@ export function NewCardForm(props: CardFormProps) {
                 <div>
                     <p className="pzsp2-cardform-groups-header">
                         Grupy: {addedgroups && addedgroups.map(group => {
-                            return <span className="pzsp2-cardform-groups">{`${group.name}, `}</span>}
+                            return <span key={group.id} className="pzsp2-cardform-groups">{`${group.name}, `}</span>}
                     )}
                     </p>
                 </div>

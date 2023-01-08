@@ -31,7 +31,7 @@ export function NewGroupForm(props: NewGroupFormProps) {
             else if (res.res){
                 props.onSuccess(res.res)
             }
-            navigate('/')
+            navigate(-1)
         });
     }
 

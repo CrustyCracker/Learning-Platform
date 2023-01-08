@@ -119,7 +119,12 @@ public class CardService implements ICardService {
             if (group.isPublic() && !request.isPublic)
                 throw new BackendException(String.format("Próba dodania prywatnej fiszki do niepublicznej grupy %s", group.getName()));
         }
-
-        return new Card(request, user, groups, tags);
+        var card = new Card(request, user, groups, tags);
+        if (!groups.isEmpty()){
+            for (Group group: groups) {
+                group.cards.add(card);
+            }
+        }
+        return card;
     }
 }

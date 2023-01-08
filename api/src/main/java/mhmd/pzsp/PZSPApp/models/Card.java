@@ -42,7 +42,6 @@ public class Card {
         this.source = request.source;
         this.user = user;
         setIsPublic(request.isPublic);
-
         this.groups = groups;
         this.tags = tags;
     }
