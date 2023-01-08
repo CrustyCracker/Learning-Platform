@@ -45,106 +45,106 @@ class GenericResponse <T>{
     err?: ErrorResponse = undefined
 }
 
-function setResponseOrError(response: any) {
-    if (response && response.status && response.status !== 200)
-        return {err: response};
-    return {res: response};
+async function handleResponse(response: Response) {
+    console.log(response);
+    SecurityHelper.refreshContext()
+
+    if (response.status === 401){
+        if (response.bodyUsed) {
+            const json = await response.json()
+            return {err: json};
+        }
+        else
+            return {err: {status: response.status, infoMessage: "Brak uprawnień", timestamp: new Date(), message: ""}};
+    }
+
+    const json = await response.json()
+
+    if (response.status === 200)
+        return {res: json};
+    return {err: json};
 }
 
 export class Requests {
     static async firstCard(): Promise<GenericResponse<CardResponse>> {
         const response = await fetchGet("/cards/first")
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async login(cred: Credentials): Promise<GenericResponse<LoginResponse>> {
         const response = await fetchPost(cred, "/account/login")
-            .then(res => res.json())
-        return setResponseOrError(response);
+        if (response.status !== 200)
+            SecurityHelper.clearContext();
+        return handleResponse(response);
     }
 
     static async register(cred: RegisterCredentials): Promise<GenericResponse<LoginResponse>> {
         const response = await fetchPost(cred, "/account/register")
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async createCard(cardData: NewCard): Promise<GenericResponse<CardResponse>> {
         const response = await fetchPost(cardData, "/cards/create")
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async createGroup(groupData: NewGroup): Promise<GenericResponse<GroupResponse>> {
         const response = await fetchPost(groupData, "/groups/create")
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async myCards(): Promise<GenericResponse<CardResponse[]>> {
         const response = await fetchGet("/cards/owned")
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async myGroups(): Promise<GenericResponse<GroupResponse[]>>{
         const response = await fetchGet("/groups/owned")
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async allCards(): Promise<GenericResponse<CardResponse[]>> {
         const response = await fetchGet("/cards/all")
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async allGroups(): Promise<GenericResponse<GroupResponse[]>>{
         const response = await fetchGet("/groups/all")
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async CardId(id: number): Promise<GenericResponse<CardResponse>> {
         const response = await fetchGet("/cards/" + id)
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async GroupId(id: number): Promise<GenericResponse<GroupResponse>> {
         const response = await fetchGet("/groups/" + id)
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async CardsByGroupsId(id: number): Promise<GenericResponse<CardResponse[]>> {
         const response = await fetchGet("/cards/group/" + id)
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async editGroup(groupData: EditGroup): Promise<GenericResponse<GroupResponse>> {
         const response = await fetchPost(groupData, "/groups/edit")
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async editCard(cardData: EditCard): Promise<GenericResponse<CardResponse>> {
         const response = await fetchPost(cardData, "/cards/edit")
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async deleteCard(id: DeleteCard):  Promise<GenericResponse<boolean>> {
         const response = await fetchDelete(id, "/cards/delete")
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 
     static async deleteGroup(id: DeleteGroup):  Promise<GenericResponse<boolean>> {
         const response = await fetchDelete(id, "/groups/delete")
-            .then(res => res.json())
-        return setResponseOrError(response);
+        return handleResponse(response);
     }
 }

@@ -18,4 +18,10 @@ public class ApiError {
         this.hiddenMessage = hiddenMessage;
         this.userMessage = ex.getLocalizedMessage();
     }
+
+    public ApiError(HttpStatus status, String hiddenMessage){
+        timestamp = LocalDateTime.now();
+        this.status = status;
+        this.hiddenMessage = hiddenMessage;
+    }
 }
