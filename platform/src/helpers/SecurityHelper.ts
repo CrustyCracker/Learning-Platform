@@ -1,4 +1,5 @@
 import {Global} from "../Config";
+import secureLocalStorage from "react-secure-storage";
 
 export class SecurityHelper {
     static key = "userData";
@@ -7,19 +8,19 @@ export class SecurityHelper {
     static setContext(response: UserContext) {
         response.validTo = new Date()
         response.validTo.setMinutes(response.validTo.getMinutes() + this.validMinutes);
-        localStorage.setItem(SecurityHelper.key, JSON.stringify((response)));
+        secureLocalStorage.setItem(SecurityHelper.key, JSON.stringify((response)));
     }
 
     static clearContext() {
-        localStorage.clear();
+        secureLocalStorage.clear();
     }
 
     static getContext() : UserContext | null {
-        const data = localStorage.getItem(SecurityHelper.key);
+        const data = secureLocalStorage.getItem(SecurityHelper.key);
         if (!data)
             return null;
 
-        let parsed = JSON.parse(data) as UserContext;
+        let parsed = JSON.parse(data as string) as UserContext;
         parsed.validTo = new Date(parsed.validTo);
 
         if (parsed.validTo < new Date()) {
