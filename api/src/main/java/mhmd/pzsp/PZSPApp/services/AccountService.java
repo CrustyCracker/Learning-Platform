@@ -2,7 +2,6 @@ package mhmd.pzsp.PZSPApp.services;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.TextCodec;
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.models.User;
@@ -12,8 +11,6 @@ import mhmd.pzsp.PZSPApp.repositories.IUserRepository;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKeyFactory;
@@ -27,6 +24,7 @@ public class AccountService implements IAccountService {
     @Autowired
     private IUserRepository userRepository;
     public static final String secret = "YVFEQU45ZGg0VUxuRUFiUlE5b002OFVJR2VYczRuOVM=";
+    public static final long jwtExpireTimeInMs = 3600000;
 
     @Override
     public User login(LoginRequest login) throws BackendException {
@@ -144,6 +142,7 @@ public class AccountService implements IAccountService {
                 SignatureAlgorithm.HS256,
                 secret.getBytes()
             )
+            .setExpiration(new Date(System.currentTimeMillis() + jwtExpireTimeInMs))
             .compact();
     }
 
