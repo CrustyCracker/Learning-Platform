@@ -6,11 +6,13 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import mhmd.pzsp.PZSPApp.handlers.ApiError;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.services.AccountService;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -103,7 +105,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private void return401(HttpServletResponse response) {
+    private void return401(HttpServletResponse response) throws IOException {
         response.setStatus(401);
+        response.getWriter().write(
+           new JSONObject(new ApiError(HttpStatus.UNAUTHORIZED, "Brak uprawnień")).toString()
+        );
+        response.getWriter().flush();
     }
 }
