@@ -25,6 +25,8 @@ public class CardResponse {
 
     public List<String> groups;
 
+    public CardResponse() { }
+
     @JsonIgnore
     public CardResponse(Card card){
         id = card.getId();

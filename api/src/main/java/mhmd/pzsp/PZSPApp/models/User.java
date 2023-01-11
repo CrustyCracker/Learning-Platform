@@ -72,6 +72,20 @@ public class User {
         this.groups = new ArrayList<>();
     }
 
+    public User(long id, String username, String password, String email, String salt) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.salt = salt;
+
+        this.admin = '0';
+        this.dateJoined = new Date();
+        this.cards = new ArrayList<>();
+        this.tags = new ArrayList<>();
+        this.groups = new ArrayList<>();
+    }
+
     public User() {
     }
 
