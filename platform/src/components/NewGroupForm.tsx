@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { Requests } from "../requests/Requests";
 import { GroupResponse, NewGroup } from "../types/Groups";
 import { ErrorResponse } from "../types/ErrorResponse";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import '../style/groupForm.css';
 import { CardResponse } from "../types/Cards";
 import { isPublicToString } from "../helpers/NameHelpers";
+import {GetListItemColor} from "../helpers/StyleHelpers";
 
 interface NewGroupFormProps {
     onSuccess: (response: GroupResponse) => void
@@ -52,8 +53,6 @@ export function NewGroupForm(props: NewGroupFormProps) {
             setNewGroup({ ...newGroup, cardIds: newGroup.cardIds.filter((id) => id !== Number(value)) })
         }
     }
-
-    // pzsp2 error handling i walidacja
 
     return (
         <div className="row">
@@ -119,9 +118,16 @@ export function NewGroupForm(props: NewGroupFormProps) {
                     </thead>
                     <tbody>
                         {currCards && currCards.map(card => {
+                            const checked = newGroup?.cardIds.some((id) => id === card.id) ?? false;
 
-                            return (card.isPublic || !card.isPublic && !newGroup.isPublic) && < tr key={card.id} >
-                                < td className="pzsp2-cardlist-td-wrap"> <input className="pzsp2-groupform-checkbox" type="checkbox" value={card.id} id={card.id.toString()} onChange={handleCheckboxChange} checked={newGroup?.cardIds.some((id) => id == card.id) ?? false} /></td>
+                            return (!newGroup.isPublic || card.isPublic) && <tr key={card.id}
+                                    className={GetListItemColor(card.isPublic, checked)}>
+                                <td className="pzsp2-cardlist-td-wrap">
+                                    <input className="pzsp2-groupform-checkbox" type="checkbox" value={card.id}
+                                           id={card.id.toString()} onChange={handleCheckboxChange}
+                                           checked={checked}
+                                    />
+                                </td>
                                 <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
                                 <td className="pzsp2-cardlist-td-wrap">{card.groupNames}</td>
                                 <td className="pzsp2-cardlist-td-wrap">{card.tagNames}</td>

@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { SecurityHelper } from "../helpers/SecurityHelper";
 import { CardResponse } from "../types/Cards";
 import { isPublicToString } from "../helpers/NameHelpers";
+import {GetListItemColor} from "../helpers/StyleHelpers";
 
 interface EditGroupFormProps {
     onSuccess: (response: GroupResponse) => void
@@ -125,9 +126,16 @@ export function EditGroupForm(props: EditGroupFormProps) {
                     </thead>
                     <tbody>
                         {currCards && currCards.map(card => {
+                            const checked = group?.cardIds.some((id) => id === card.id) ?? false;
 
-                            return (card.isPublic || !card.isPublic && !group.isPublic) && < tr key={card.id} >
-                                < td className="pzsp2-cardlist-td-wrap"> <input className="pzsp2-groupform-checkbox" type="checkbox" value={card.id} id={card.id.toString()} onChange={handleCheckboxChange} checked={group.cardIds.some(id => id === card.id)} /></td>
+                            return (!group.isPublic || card.isPublic) && < tr key={card.id}
+                                      className={GetListItemColor(card.isPublic, checked)}>
+                                <td className="pzsp2-cardlist-td-wrap">
+                                    <input className="pzsp2-groupform-checkbox" type="checkbox" value={card.id}
+                                           id={card.id.toString()} onChange={handleCheckboxChange}
+                                           checked={checked}
+                                    />
+                                </td>
                                 <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
                                 <td className="pzsp2-cardlist-td-wrap">{card.groupNames}</td>
                                 <td className="pzsp2-cardlist-td-wrap">{card.tagNames}</td>

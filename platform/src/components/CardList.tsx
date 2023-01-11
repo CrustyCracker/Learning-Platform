@@ -4,6 +4,7 @@ import { TagsInput } from "react-tag-input-component";
 import '../style/cardList.css';
 import {Link} from "react-router-dom";
 import { isPublicToString } from "../helpers/NameHelpers";
+import {GetListItemColor} from "../helpers/StyleHelpers";
 
 interface CardListProps {
     cards: CardResponse[],
@@ -74,7 +75,6 @@ export function CardList(props: CardListProps) {
             </div>
         </div>
 
-        {/*//pzsp2 - dodać paginację*/}
         <table className={"table table-hover table-light pzsp2-cardlist-table"}>
             <thead>
                 <tr>
@@ -88,7 +88,7 @@ export function CardList(props: CardListProps) {
             </thead>
             <tbody>
                 {currCards && currCards.map(card => {
-                    return <tr key={card.id}>
+                    return <tr key={card.id} className={GetListItemColor(card.isPublic, false)}>
                         <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
                         <td className="pzsp2-cardlist-td-wrap">{card.groupNames}</td>
                         <td className="pzsp2-cardlist-td-wrap">{card.tagNames}</td>

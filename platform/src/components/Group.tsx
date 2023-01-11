@@ -7,6 +7,7 @@ import {CardResponse} from "../types/Cards";
 import '../style/group.css';
 import {isPublicToString} from "../helpers/NameHelpers";
 import {SecurityHelper} from "../helpers/SecurityHelper";
+import {GetListItemColor} from "../helpers/StyleHelpers";
 
 interface GroupProps {
     onSuccess: (response: GroupResponse) => void,
@@ -53,8 +54,7 @@ export function Group(props: GroupProps) {
             }
             else if (res.res){
                 navigate(-1);
-                // pzsp2 powinno jeszcze wyświetlić komunikat, że usunięto,
-                // ten navigate(-1) to może nie być idealne rozwiązanie
+                // pzsp2 powinno jeszcze wyświetlić komunikat, że usunięto
             }
         })
     }
@@ -133,7 +133,7 @@ export function Group(props: GroupProps) {
             </thead>
             <tbody>
             {cards && cards.map(card => {
-                return <tr key={card.id}>
+                return <tr key={card.id} className={GetListItemColor(card.isPublic, false)}>
                     <td className="pzsp2-group-td-wrap">
                         {card.question}
                     </td>
