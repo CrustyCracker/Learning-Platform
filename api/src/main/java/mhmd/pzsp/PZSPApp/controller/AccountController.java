@@ -1,6 +1,7 @@
 package mhmd.pzsp.PZSPApp.controller;
 
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
+import mhmd.pzsp.PZSPApp.exceptions.BackendSqlException;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.models.api.requests.LoginRequest;
 import mhmd.pzsp.PZSPApp.models.api.requests.RegisterRequest;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/account")
 public class AccountController {
-    // te endopinty są dostępne bez autoryzacji
+    // te endpointy są dostępne bez autoryzacji
     private final IAccountService accountService;
 
     @Autowired
@@ -29,7 +30,7 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public RegisterResponse register(@RequestBody RegisterRequest register) throws BackendException {
+    public RegisterResponse register(@RequestBody RegisterRequest register) throws BackendException, BackendSqlException {
         if (accountService.register(register))
             return new RegisterResponse(true, "Utworzono konto");
         return new RegisterResponse(false, "Nieudana rejestracja");

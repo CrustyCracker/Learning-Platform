@@ -2,8 +2,8 @@ package mhmd.pzsp.PZSPApp.services;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.TextCodec;
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
+import mhmd.pzsp.PZSPApp.exceptions.BackendSqlException;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.models.User;
 import mhmd.pzsp.PZSPApp.models.api.requests.LoginRequest;
@@ -12,8 +12,6 @@ import mhmd.pzsp.PZSPApp.repositories.IUserRepository;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKeyFactory;
@@ -27,6 +25,7 @@ public class AccountService implements IAccountService {
     @Autowired
     private IUserRepository userRepository;
     public static final String secret = "YVFEQU45ZGg0VUxuRUFiUlE5b002OFVJR2VYczRuOVM=";
+    public static final long jwtExpireTimeInMs = 3600000;
 
     @Override
     public User login(LoginRequest login) throws BackendException {
@@ -54,13 +53,13 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public boolean register(RegisterRequest register) throws BackendException {
+    public boolean register(RegisterRequest register) throws BackendException, BackendSqlException {
         if (register.password == null || register.password.isBlank())
             throw new BackendException("Hasło nie jest podane lub jest puste");
         if (register.email == null || register.email.isBlank())
             throw new BackendException("Email nie jest podany lub jest pusty");
         if (register.username == null || register.username.isBlank())
-            throw new BackendException("Login inie jest podany lub jest pusty");
+            throw new BackendException("Login nie jest podany lub jest pusty");
         if (!Objects.equals(register.confirmPassword, register.password))
             throw new BackendException("Hasła się nie zgadzają");
         if (register.username.length() > 30)
@@ -77,7 +76,13 @@ public class AccountService implements IAccountService {
         var hash = hashPassword(register.password, salt);
         var newUser = new User(register.username, hash, register.email, salt);
 
-        userRepository.save(newUser);
+        try {
+            userRepository.save(newUser);
+        }
+        catch (Exception e) {
+            throw new BackendSqlException("Błąd podczas zapisywania użytkownika");
+        }
+
         return true;
     }
 
@@ -144,6 +149,7 @@ public class AccountService implements IAccountService {
                 SignatureAlgorithm.HS256,
                 secret.getBytes()
             )
+            .setExpiration(new Date(System.currentTimeMillis() + jwtExpireTimeInMs))
             .compact();
     }
 

@@ -4,10 +4,13 @@ import { TagsInput } from "react-tag-input-component";
 import '../style/cardList.css';
 import {Link} from "react-router-dom";
 import { isPublicToString } from "../helpers/NameHelpers";
+import {GetListItemColor} from "../helpers/StyleHelpers";
 
 interface CardListProps {
     cards: CardResponse[],
-    pub: boolean
+    pub: boolean,
+    learn?: boolean
+
 }
 
 export function CardList(props: CardListProps) {
@@ -61,18 +64,17 @@ export function CardList(props: CardListProps) {
         </div>
         <div className="pzsp2-cardlist-cont">
             <div className="row pzsp2-cardlist-row-buttons">
-                <div>
+                {props.learn && <div>
                     <form className="pzsp2-cardlist-learn-button" onSubmit={Learn}>
                         <button type="submit" className="btn btn-outline-warning">Ucz się</button>
                     </form>
                     <form className="pzsp2-cardlist-test-button" onSubmit={Test}>
                         <button type="submit" className="btn btn-outline-danger">Test</button>
                     </form>
-                </div>
+                </div>}
             </div>
         </div>
 
-        {/*//pzsp2 - dodać paginację*/}
         <table className={"table table-hover table-light pzsp2-cardlist-table"}>
             <thead>
                 <tr>
@@ -86,7 +88,7 @@ export function CardList(props: CardListProps) {
             </thead>
             <tbody>
                 {currCards && currCards.map(card => {
-                    return <tr key={card.id}>
+                    return <tr key={card.id} className={GetListItemColor(card.isPublic, false)}>
                         <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
                         <td className="pzsp2-cardlist-td-wrap"><small>{card.groups.join(', ')}</small></td>
                         <td className="pzsp2-cardlist-td-wrap"><small>{card.tags.join(', ')}</small></td>

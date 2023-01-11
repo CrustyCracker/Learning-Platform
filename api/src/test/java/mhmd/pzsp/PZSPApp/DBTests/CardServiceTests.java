@@ -1,6 +1,7 @@
 package mhmd.pzsp.PZSPApp.DBTests;
 
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
+import mhmd.pzsp.PZSPApp.exceptions.BackendSqlException;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
 import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.Tag;
@@ -21,8 +22,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class CardServiceTests {
-
-    // pzsp2 dodać podobne testy tylko do GroupService
     @Autowired
     private IUserRepository userRepository;
     @Autowired
@@ -66,7 +65,7 @@ public class CardServiceTests {
         Card created = null;
         try {
             created = cardService.create(request, user);
-        } catch (BackendException e) {
+        } catch (BackendException | BackendSqlException e) {
             fail();
         }
         assertEquals(created.getQuestion(), question);
@@ -94,7 +93,7 @@ public class CardServiceTests {
         Card created = null;
         try {
             created = cardService.create(request, user);
-        } catch (BackendException e) {
+        } catch (BackendException | BackendSqlException e) {
             fail();
         }
         assertEquals(created.getQuestion(), question);

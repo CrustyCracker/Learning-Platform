@@ -7,6 +7,8 @@ import {CardResponse} from "../types/Cards";
 import '../style/group.css';
 import {isPublicToString} from "../helpers/NameHelpers";
 import {SecurityHelper} from "../helpers/SecurityHelper";
+import {GetListItemColor} from "../helpers/StyleHelpers";
+import {BackButton} from "./BackButton";
 
 interface GroupProps {
     onSuccess: (response: GroupResponse) => void,
@@ -53,8 +55,7 @@ export function Group(props: GroupProps) {
             }
             else if (res.res){
                 navigate(-1);
-                // pzsp2 powinno jeszcze wyświetlić komunikat, że usunięto,
-                // ten navigate(-1) to może nie być idealne rozwiązanie
+                // pzsp2 powinno jeszcze wyświetlić komunikat, że usunięto
             }
         })
     }
@@ -133,7 +134,7 @@ export function Group(props: GroupProps) {
             </thead>
             <tbody>
             {cards && cards.map(card => {
-                return <tr key={card.id}>
+                return <tr key={card.id} className={GetListItemColor(card.isPublic, false)}>
                     <td className="pzsp2-group-td-wrap">
                         {card.question}
                     </td>
@@ -148,18 +149,20 @@ export function Group(props: GroupProps) {
             })}
             </tbody>
         </table>
-        {(SecurityHelper.amIAdmin() || group.username === SecurityHelper.getContext()?.username) &&
-            <div className="container-fluid pzsp2-group-buttons-cont">
-            <div className="row pzsp2-group-buttons-row">
-                <div className="col-lg-12 col-md-12 col-sm-12 pzsp2-group-buttons-col">
-                    <form className="pzsp2-group-delete-button" onSubmit={DeleteGroup}>
-                        <button type="submit" className="btn btn-outline-danger">Usuń</button>
-                    </form>
-                    <form className="pzsp2-group-edit-button" onSubmit={EditGroup}>
-                        <button type="submit" className="btn btn-outline-success">Edytuj</button>
-                    </form>
+        <div className="container-fluid pzsp2-group-buttons-cont">
+            {(SecurityHelper.amIAdmin() || group.username === SecurityHelper.getContext()?.username) && <>
+                <div className="row pzsp2-group-buttons-row">
+                    <div className="col-lg-12 col-md-12 col-sm-12 pzsp2-group-buttons-col">
+                        <form className="pzsp2-group-delete-button" onSubmit={DeleteGroup}>
+                            <button type="submit" className="btn btn-outline-danger">Usuń</button>
+                        </form>
+                        <form className="pzsp2-group-edit-button" onSubmit={EditGroup}>
+                            <button type="submit" className="btn btn-outline-success">Edytuj</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </div>}
+            </>}
+            <BackButton/>
+        </div>
     </>)
 }

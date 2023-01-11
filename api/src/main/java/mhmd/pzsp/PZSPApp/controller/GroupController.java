@@ -1,6 +1,7 @@
 package mhmd.pzsp.PZSPApp.controller;
 
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
+import mhmd.pzsp.PZSPApp.exceptions.BackendSqlException;
 import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
 import mhmd.pzsp.PZSPApp.models.api.requests.EditGroupRequest;
 import mhmd.pzsp.PZSPApp.models.api.requests.IdRequestBase;
@@ -50,7 +51,7 @@ public class GroupController {
     }
 
     @PostMapping("/create")
-    public GroupResponse create(@RequestBody NewGroupRequest request) throws BackendException {
+    public GroupResponse create(@RequestBody NewGroupRequest request) throws BackendException, BackendSqlException {
         var user = getCurrentUser();
         if (user == null)
             throw new BackendException("Brak zalogowanego użytkownika");
@@ -66,7 +67,7 @@ public class GroupController {
     }
 
     @PostMapping("/edit")
-    public GroupResponse edit(@RequestBody EditGroupRequest request) throws BackendException {
+    public GroupResponse edit(@RequestBody EditGroupRequest request) throws BackendException, BackendSqlException {
         var user = getCurrentUser();
         if (user == null)
             throw new BackendException("Brak zalogowanego użytkownika");

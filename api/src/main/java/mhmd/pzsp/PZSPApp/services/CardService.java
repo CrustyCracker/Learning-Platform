@@ -1,6 +1,7 @@
 package mhmd.pzsp.PZSPApp.services;
 
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
+import mhmd.pzsp.PZSPApp.exceptions.BackendSqlException;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
 import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.Group;
@@ -46,9 +47,14 @@ public class CardService implements ICardService {
     }
 
     @Override
-    public Card create(NewCardRequest request, User user) throws BackendException {
+    public Card create(NewCardRequest request, User user) throws BackendException, BackendSqlException {
         var card = createCard(request, user);
-        return cardRepository.save(card);
+        try {
+            return cardRepository.save(card);
+        }
+        catch (Exception e) {
+            throw new BackendSqlException("Błąd podczas zapisywania fiszki");
+        }
     }
 
     @Override
@@ -85,7 +91,7 @@ public class CardService implements ICardService {
     }
 
     @Override
-    public Card edit(EditCardRequest request, User user) throws BackendException {
+    public Card edit(EditCardRequest request, User user) throws BackendException, BackendSqlException {
         if (request.id == null)
             throw new BackendException("Nie podano id edytowanej fiszki");
 
@@ -124,7 +130,18 @@ public class CardService implements ICardService {
         editedCard.setSource(request.source);
         editedCard.setIsPublic(request.isPublic);
 
-        return cardRepository.save(editedCard);
+        try {
+            return cardRepository.save(card);
+        }
+        catch (Exception e) {
+            throw new BackendSqlException("Błąd podczas zapisywania fiszki");
+        }
+        try {
+            return cardRepository.save(card);
+        }
+        catch (Exception e) {
+            throw new BackendSqlException("Błąd podczas zapisywania fiszki");
+        }
     }
 
     private Card createCard(NewCardRequest request, User user) throws BackendException {
