@@ -6,6 +6,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import '../style/card.css';
 import {isPublicToString} from "../helpers/NameHelpers";
 import {SecurityHelper} from "../helpers/SecurityHelper";
+import {BackButton} from "./BackButton";
 
 interface CardProps {
     onSuccess: (response: CardResponse) => void,
@@ -103,19 +104,20 @@ export function Card(props: CardProps) {
                 Tagi: {card.tagNames}
                 </h3>
             </div>
-            {(SecurityHelper.amIAdmin() || card.username === SecurityHelper.getContext()?.username) &&
-                <div className="col-lg-6 col-md-6 col-sm-6 pzsp2-card-buttons">
-                <form  className ="pzsp2-card-delete-button" onSubmit={DeleteCard}>
-                    <button type="submit" className="btn btn-outline-danger">
-                        Usuń
-                    </button>
-                </form>
-                <form className ="pzsp2-card-edit-button" onSubmit={EditCard}>
-                    <button type="submit" className="btn btn-outline-success">
-                        Edytuj
-                    </button>
-                </form>
-            </div>}
+            <div className="col-lg-6 col-md-6 col-sm-6 pzsp2-card-buttons">
+                {(SecurityHelper.amIAdmin() || card.username === SecurityHelper.getContext()?.username) && <>
+                    <form className ="pzsp2-card-delete-button" onSubmit={DeleteCard}>
+                        <button type="submit" className="btn btn-outline-danger">
+                            Usuń
+                        </button>
+                    </form>
+                    <form className ="pzsp2-card-edit-button" onSubmit={EditCard}>
+                        <button type="submit" className="btn btn-outline-success">
+                            Edytuj
+                        </button>
+                    </form>
+                </>}
+            </div>
         </div>
         <div className="row pzsp2-card-row-grp">
             <div className="col-lg-6 col-md-12 col-sm-12 pzsp2-card-grp-text">
@@ -124,5 +126,6 @@ export function Card(props: CardProps) {
                 </h3>
             </div>
         </div>
+        <BackButton/>
     </div>
 }
