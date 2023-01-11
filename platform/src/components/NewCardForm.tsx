@@ -46,8 +46,6 @@ export function NewCardForm(props: CardFormProps) {
         });
     }
 
-    // pzsp2 error handling i walidacja
-
     return (
         <div className="container-fluid pzsp2-cardform-cont">
             <div className="row gy-3">

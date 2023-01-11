@@ -43,8 +43,7 @@ export function Card(props: CardProps) {
             }
             else if (res.res){
                 navigate(-1);
-                // pzsp2 powinno jeszcze wyświetlić komunikat, że usunięto,
-                // ten navigate(-1) to może nie być idealne rozwiązanie
+                // pzsp2 powinno jeszcze wyświetlić komunikat, że usunięto
             }
         })
     }
