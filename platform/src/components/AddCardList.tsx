@@ -1,32 +1,33 @@
-import React, {FormEvent, useEffect, useState} from "react";
-import {CardResponse} from "../types/Cards";
+import React, { FormEvent, useEffect, useState } from "react";
+import { CardResponse } from "../types/Cards";
 import { TagsInput } from "react-tag-input-component";
 import '../style/cardList.css';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { isPublicToString } from "../helpers/NameHelpers";
 
-interface CardListProps {
+interface AddCardListProps {
     cards: CardResponse[],
     pub: boolean,
-    learn?: boolean
-
+    add?: boolean,
+    learn?: boolean,
+    groupId?: String
 }
 
-export function CardList(props: CardListProps) {
+export function AddCardList(props: AddCardListProps) {
     const [currCards, setCurrCards] = useState<CardResponse[]>([]);
-    const [tags, ] = useState<string[]>([]);
+    const [tags,] = useState<string[]>([]);
 
     useEffect(() => {
         setCurrCards(props.cards)
     }, [props])
 
     const filterByTags = (tags: string[]) => {
-        if(tags.length) {
-            let newCards:CardResponse[] = [];
+        if (tags.length) {
+            let newCards: CardResponse[] = [];
 
             currCards.forEach((card) => {
                 tags.forEach((tag) => {
-                    if(card.tagNames.some(x => x.toLowerCase() === tag.toLowerCase())){
+                    if (card.tagNames.some(x => x.toLowerCase() === tag.toLowerCase())) {
                         newCards.push(card)
                     }
                 })
@@ -51,15 +52,15 @@ export function CardList(props: CardListProps) {
     //pzsp2 - dodać animację dla każdego rzędu w tabeli, oddzielny fadeIn z delayem np 100ms
     return <>
         <div className="pzsp2-cardlist-cont">
-        <TagsInput
-            value={tags}
-            onChange={e => filterByTags(e || [])}
-            name="tagi"
-            placeHolder="Dodaj tag..."
-        />
-        <p className="pzsp2-cardlist-tagsearch">
-            <em>Wyszukaj po tagu... Kilknij ENTER, aby dodać nowy tag.</em>
-        </p>
+            <TagsInput
+                value={tags}
+                onChange={e => filterByTags(e || [])}
+                name="tagi"
+                placeHolder="Dodaj tag..."
+            />
+            <p className="pzsp2-cardlist-tagsearch">
+                <em>Wyszukaj po tagu... Kilknij ENTER, aby dodać nowy tag.</em>
+            </p>
         </div>
         <div className="pzsp2-cardlist-cont">
             <div className="row pzsp2-cardlist-row-buttons">
@@ -78,6 +79,7 @@ export function CardList(props: CardListProps) {
         <table className={"table table-hover table-light pzsp2-cardlist-table"}>
             <thead>
                 <tr>
+                    <th className="pzsp2-cardlist-table-tag">Checked?</th> {/*//pzsp2 - zmienić className*/}
                     <th className="pzsp2-cardlist-table-que">Pytanie</th>
                     <th className="pzsp2-cardlist-table-grp">Grupy</th>
                     <th className="pzsp2-cardlist-table-tag">Tagi</th>
@@ -89,6 +91,7 @@ export function CardList(props: CardListProps) {
             <tbody>
                 {currCards && currCards.map(card => {
                     return <tr key={card.id}>
+                        {props.groupId && <td><input type="checkbox" /></td>}
                         <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
                         <td className="pzsp2-cardlist-td-wrap">{card.groupNames}</td>
                         <td className="pzsp2-cardlist-td-wrap">{card.tagNames}</td>
