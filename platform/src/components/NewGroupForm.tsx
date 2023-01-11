@@ -129,8 +129,8 @@ export function NewGroupForm(props: NewGroupFormProps) {
                                     />
                                 </td>
                                 <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
-                                <td className="pzsp2-cardlist-td-wrap">{card.groupNames}</td>
-                                <td className="pzsp2-cardlist-td-wrap">{card.tagNames}</td>
+                                <td className="pzsp2-cardlist-td-wrap">{card.groups}</td>
+                                <td className="pzsp2-cardlist-td-wrap">{card.tags}</td>
                                 <td className="hide-on-small">{isPublicToString(card.isPublic)}</td>
                                 <td className="hide-on-small">{card.username}</td>
                             </tr>

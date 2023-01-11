@@ -7,6 +7,8 @@ import '../style/cardForm.css';
 import {GroupResponse} from "../types/Groups";
 import {Link} from "react-router-dom";
 import {SecurityHelper} from "../helpers/SecurityHelper";
+import {BackButton} from "./BackButton";
+import {RenderGroupNames} from "./RenderGroupNames";
 
 interface CardFormProps {
     onSuccess: (response: CardResponse) => void,
@@ -52,7 +54,7 @@ export function CardForm(props: CardFormProps) {
                 }
             }
         });
-    }, [])
+    }, [id, props])
 
     const updateGroups = (group: GroupResponse) => {
         if (!addedgroups.some(group_ => group.id === group_.id)) {
@@ -195,21 +197,22 @@ export function CardForm(props: CardFormProps) {
                     <button type="button" className="btn btn-secondary btn-lg dropdown-toggle dropdown-toggle-split"
                             data-bs-toggle="dropdown"/>
                     <ul className="dropdown-menu dropdown-menu-dark">
-                        {groups && groups.map(group => {
-                            return <li key={group.id} ><div className="dropdown-item pzsp2-cardform-dropdown-item"
-                                                            onClick={() => updateGroups(group)}>{group.name}</div></li>})}
+                        {groups &&  groups.map(group => <li key={group.id}>
+                            <div className="dropdown-item pzsp2-cardform-dropdown-item"
+                                 onClick={() => updateGroups(group)}>
+                                {group.name}
+                            </div>
+                        </li>)}
                         <li>
                             <hr className="dropdown-divider"/>
                         </li>
-                        <li><Link className="dropdown-item" to="/groups/new"><i className="bi bi-plus-circle"/> Dodaj grupę</Link></li>
+                        <li>
+                            <Link className="dropdown-item" to="/groups/new"><i className="bi bi-plus-circle"/> Dodaj grupę</Link>
+                        </li>
                     </ul>
                 </div>
-                <div>
-                    <p className="pzsp2-cardform-groups-header">
-                        Grupy: {addedgroups && addedgroups.map(group => {
-                            return <span key={group.id} className="pzsp2-cardform-groups">{`${group.name}, `}</span>}
-                    )}
-                    </p>
+                <div> {/* pzsp2 tutaj prośba o zinlinowanie tego*/}
+                    {RenderGroupNames(addedgroups)}
                 </div>
             </div>
             <form>
@@ -229,5 +232,6 @@ export function CardForm(props: CardFormProps) {
                     </div>
                 </div>}
             </form>
+            <BackButton/>
         </div>)
 }

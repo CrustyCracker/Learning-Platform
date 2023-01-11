@@ -100,8 +100,7 @@ public class CardService implements ICardService {
         if (!editedCard.getUser().getId().equals(user.getId()) && !user.isAdmin())
             throw new BackendException("Nie masz uprawnień do edycji tej fiszki");
 
-        var editedCardGroupIds = editedCard.groups.stream().map(Group::getId)
-                .collect(Collectors.toList());
+        var editedCardGroupIds = editedCard.groups.stream().map(Group::getId).toList();
 
         // Grupy, z których trzeba usunąć fiszkę
         List<Long> idDiff = new ArrayList<> (editedCardGroupIds);
@@ -131,13 +130,7 @@ public class CardService implements ICardService {
         editedCard.setIsPublic(request.isPublic);
 
         try {
-            return cardRepository.save(card);
-        }
-        catch (Exception e) {
-            throw new BackendSqlException("Błąd podczas zapisywania fiszki");
-        }
-        try {
-            return cardRepository.save(card);
+            return cardRepository.save(editedCard);
         }
         catch (Exception e) {
             throw new BackendSqlException("Błąd podczas zapisywania fiszki");
