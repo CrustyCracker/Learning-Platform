@@ -15,19 +15,20 @@ interface CardListProps {
 
 export function CardList(props: CardListProps) {
     const [currCards, setCurrCards] = useState<CardResponse[]>([]);
-    const [tags, ] = useState<string[]>([]);
+    const [searchPhrases, ] = useState<string[]>([]);
 
     useEffect(() => {
         setCurrCards(props.cards)
     }, [props])
 
-    const filterByTags = (tags: string[]) => {
-        if(tags.length) {
+    const filterByTagsAndGroup = (searchPhrases: string[]) => {
+        if(searchPhrases.length) {
             let newCards:CardResponse[] = [];
 
             currCards.forEach((card) => {
-                tags.forEach((tag) => {
-                    if(card.tags.some(x => x.toLowerCase() === tag.toLowerCase())){
+                searchPhrases.forEach((searchPhrase) => {
+                    if(card.tags.some(x => x.toLowerCase() === searchPhrase.toLowerCase())
+                    || card.groups.some(x => x.toLowerCase() === searchPhrase.toLowerCase())){
                         newCards.push(card)
                     }
                 })
@@ -53,13 +54,13 @@ export function CardList(props: CardListProps) {
     return <>
         <div className="pzsp2-cardlist-cont">
         <TagsInput
-            value={tags}
-            onChange={e => filterByTags(e || [])}
+            value={searchPhrases}
+            onChange={e => filterByTagsAndGroup(e || [])}
             name="tagi"
-            placeHolder="Dodaj tag..."
+            placeHolder="Wyszukaj..."
         />
         <p className="pzsp2-cardlist-tagsearch">
-            <em>Wyszukaj po tagu... Kilknij ENTER, aby dodać nowy tag.</em>
+            <em>Wyszukaj po tagu lub nazwie grupy... Kilknij ENTER, aby dodać nową frazę.</em>
         </p>
         </div>
         <div className="pzsp2-cardlist-cont">
