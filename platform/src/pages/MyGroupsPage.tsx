@@ -3,7 +3,7 @@ import '../style/App.css';
 import '../style/groupList.css';
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
 import {GroupList} from "../components/GroupList";
-import Layout from "../components/Layout/Layout";
+import Layout from "../components/layout/Layout";
 import {SecurityHelper} from "../helpers/SecurityHelper";
 import {Navigate} from "react-router-dom";
 import {Helmet} from "react-helmet";
