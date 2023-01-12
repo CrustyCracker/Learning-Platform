@@ -7,7 +7,7 @@ import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.User;
 import mhmd.pzsp.PZSPApp.models.api.requests.IdRequestBase;
 import mhmd.pzsp.PZSPApp.models.api.responses.CardResponse;
-import mhmd.pzsp.PZSPApp.security.JwtTokenFilter;
+import mhmd.pzsp.PZSPApp.services.AccountService;
 import mhmd.pzsp.PZSPApp.services.CardService;
 import mhmd.pzsp.PZSPApp.services.GroupService;
 import org.junit.jupiter.api.Test;
@@ -37,6 +37,11 @@ public class CardControllerTests {
     private MockMvc mockMvc;
     @MockBean
     private CardService cardService;
+    @MockBean
+    private GroupService groupService;
+    @MockBean
+    private AccountService accountService;
+
     final ObjectMapper objectMapper = new ObjectMapper();
     @Test
     public void testGetFirst() throws Exception {
