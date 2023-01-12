@@ -3,7 +3,7 @@ import '../style/App.css';
 import '../style/groupForm.css';
 import { ErrorAndInfo } from "../components/ErrorAndInfo";
 import { NewGroupForm } from "../components/NewGroupForm";
-import Layout from "../components/Layout/Layout";
+import Layout from "../components/layout/Layout";
 import { SecurityHelper } from "../helpers/SecurityHelper";
 import { Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
