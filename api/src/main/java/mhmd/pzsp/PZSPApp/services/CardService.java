@@ -120,10 +120,10 @@ public class CardService implements ICardService {
     }
 
     private Card createCard(NewCardRequest request, User user) throws BackendException, BackendSqlException {
-        if (request.question == null)
+        if (request.question == null || request.question.isBlank())
             throw new BackendException("Nie podano pytania");
 
-        if (request.answer == null)
+        if (request.answer == null || request.answer.isBlank())
             throw new BackendException("Nie podano odpowiedzi");
 
         List<Tag> tags = new ArrayList<>();
@@ -154,7 +154,7 @@ public class CardService implements ICardService {
     }
 
     private void updateGroups(Card card, List<Long> groupIds) {
-        var cardGroupIds = card.groups.stream().map(Group::getId).collect(Collectors.toList());
+        var cardGroupIds = card.groups.stream().map(Group::getId).toList();
 
         // Grupy, z których trzeba usunąć fiszkę
         List<Long> groupIdDiff = new ArrayList<> (cardGroupIds);
@@ -180,7 +180,7 @@ public class CardService implements ICardService {
     }
 
     private void updateTags(Card card, List<String> tagNames) throws BackendException, BackendSqlException {
-        var editedCardTagNames = card.tags.stream().map(Tag::getName).collect(Collectors.toList());
+        var editedCardTagNames = card.tags.stream().map(Tag::getName).toList();
 
         // Tagi, z których trzeba usunąć fiszkę
         List<String> tagNameDiff = new ArrayList<> (editedCardTagNames);

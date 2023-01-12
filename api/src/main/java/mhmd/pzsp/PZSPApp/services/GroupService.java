@@ -100,7 +100,7 @@ public class GroupService implements IGroupService {
     }
 
     private Group createGroup(NewGroupRequest request, User user) throws BackendException {
-        if (request.name == null)
+        if (request.name == null || request.name.isBlank())
             throw new BackendException("Nie podano nazwy");
 
         if (request.difficulty == null)

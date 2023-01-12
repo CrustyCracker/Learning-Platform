@@ -25,12 +25,11 @@ public class TagService implements ITagService {
         if (!tagNames.isEmpty()){
             for (String name: tagNames) {
                 var tag = tagRepository.findByName(name);
-                if (tag.isPresent()){
+
+                if (tag.isPresent())
                     tags.add(tag.get());
-                } else {
-                    var newTag = createTag(name);
-                    tags.add(newTag);
-                }
+                else
+                    tags.add(createTag(name));
             }
         }
         return tags;
@@ -40,7 +39,9 @@ public class TagService implements ITagService {
         var user = getCurrentUser();
         if (user == null)
             throw new BackendException("Brak zalogowanego użytkownika");
-        var tag = new Tag (name, user);
+
+        var tag = new Tag(name, user);
+
         try {
             return tagRepository.save(tag);
         }
@@ -48,8 +49,4 @@ public class TagService implements ITagService {
             throw new BackendSqlException("Błąd podczas zapisywania tagu");
         }
     }
-
-
-
 }
-
