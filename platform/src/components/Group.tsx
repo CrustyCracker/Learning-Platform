@@ -61,10 +61,16 @@ export function Group(props: GroupProps) {
 
     const Learn = (e: FormEvent) => {
         e.preventDefault()
+        navigate("/mode", {
+            state: {cards: cards, isBrowsing: true}
+        })
     }
 
     const Test = (e: FormEvent) => {
         e.preventDefault()
+        navigate("/mode", {
+            state: {cards: cards, isBrowsing: false}
+        })
     }
 
     return (<>
