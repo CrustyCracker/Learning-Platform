@@ -1,7 +1,26 @@
 .pzsp2-next-button {
-    margin: 1%;
+    float: right;
 }
 
 .pzsp2-prev-button {
-    margin: 1%;
+    float: left;
+}
+
+.pzsp2-loop-button {
+    float: right;
+}
+
+.pzsp2-browse-buttons{
+    animation: fadeIn;
+    animation-duration: 1500ms;
+    min-width: 260px;
+    width: 20%;
+}
+
+.pzsp2-browse-count{
+}
+
+.pzsp2-browse-cont{
+    justify-content: center;
+    display: flex;
 }
