@@ -8,6 +8,7 @@ import {GroupResponse} from "../types/Groups";
 import {Link} from "react-router-dom";
 import {SecurityHelper} from "../helpers/SecurityHelper";
 import {RenderGroupNames} from "./RenderGroupNames";
+import {TagsInput} from "react-tag-input-component";
 
 interface CardFormProps {
     onSuccess: (response: CardResponse) => void,
@@ -75,6 +76,13 @@ export function CardForm(props: CardFormProps) {
         }
     }
 
+    const updateTags = (tags: string[]) => {
+    if (!props.edit)
+        setNewCard({...newCard, tags: tags})
+    else
+        setCard({...card, tags: tags})
+    }
+
     const AddCard = (e: FormEvent) => {
         e.preventDefault();
         if (!newCard)
@@ -102,8 +110,8 @@ export function CardForm(props: CardFormProps) {
                 props.onSuccess(res.res)
             }
             if(!newCard.isPublic){
-            setNewCard({question: "", answer: "", source: "",isPublic: false, groupIds: [], tagIds: []})}
-            else{setNewCard({question: "", answer: "", source: "",isPublic: true, groupIds: [], tagIds: []})}
+            setNewCard({question: "", answer: "", source: "",isPublic: false, groupIds: [], tags: []})}
+            else{setNewCard({question: "", answer: "", source: "",isPublic: true, groupIds: [], tags: []})}
         });
     }
 
@@ -190,10 +198,24 @@ export function CardForm(props: CardFormProps) {
 
                     </label>
             </div>
+            <div className="pzsp2-cardform-tags">
+                {props.edit && <TagsInput
+                    value={card.tags}
+                    onChange={e => updateTags(e || [])}
+                    name="tagi"
+                    placeHolder="Dodaj tag..."
+                />}
+                {!props.edit && <TagsInput
+                    value={newCard.tags}
+                    onChange={e => updateTags(e || [])}
+                    name="tagi"
+                    placeHolder="Dodaj tag..."
+                />}
+            </div>
             <div className="pzsp2-cardform-group-dropdown">
                 <div className="btn-group">
-                    <button type="button" className="btn btn-secondary btn-lg">Wybierz grupy</button>
-                    <button type="button" className="btn btn-secondary btn-lg dropdown-toggle dropdown-toggle-split"
+                    <button type="button" className="btn btn-dark btn-lg">Wybierz grupy</button>
+                    <button type="button" className="btn btn-dark btn-lg dropdown-toggle dropdown-toggle-split"
                             data-bs-toggle="dropdown"/>
                     <ul className="dropdown-menu dropdown-menu-dark">
                         {groups &&  groups.map(group => <li key={group.id}>
@@ -214,6 +236,7 @@ export function CardForm(props: CardFormProps) {
                     {RenderGroupNames(addedgroups)}
                 </div>
             </div>
+
             <form>
                 {!props.edit && <div className="row">
                     <div className="btn-group pzsp2-cardform-buttons" role="group">

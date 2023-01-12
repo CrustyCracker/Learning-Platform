@@ -19,6 +19,7 @@
 }
 
 .pzsp2-cardform-buttons{
+    padding-top: 2%;
     justify-content: center;
     animation: fadeIn;
     animation-duration: 1500ms;
@@ -59,4 +60,45 @@
 }
 .pzsp2-cardform-dropdown-item {
     cursor: pointer;
+}
+
+.pzsp2-cardform-tags .rti--container {
+    width: 50%;
+    font-size: 15px;
+    --rti-border: black;
+    --rti-tag-remove: #e53e3e;
+    --rti-bg: dimgray;
+    --rti-tag: #121212;
+    color: white;
+}
+
+.pzsp2-cardform-tags .rti--tag button {
+    padding-left: 0.5rem;
+    padding-right: 0.1rem;
+    color: white !important;
+}
+
+.pzsp2-cardform-tags .rti--input {
+    width: 50%;
+    background-color: dimgrey;
+    color: white;
+}
+
+.pzsp2-cardform-tags .rti--input:focus {
+    color: white;
+}
+
+.pzsp2-cardform-tags .rti--input::placeholder {
+    color: white;
+}
+
+.rti--container:focus-within {
+    border-color: black;
+    box-shadow: black 0 0 0 1px;
+}
+
+.pzsp2-cardform-tags{
+    animation: fadeIn;
+    animation-duration: 1s;
+    margin-bottom: 2%;
 }

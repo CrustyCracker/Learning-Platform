@@ -3,6 +3,7 @@ package mhmd.pzsp.PZSPApp.services;
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
 import mhmd.pzsp.PZSPApp.exceptions.BackendSqlException;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
+import mhmd.pzsp.PZSPApp.interfaces.ITagService;
 import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.Group;
 import mhmd.pzsp.PZSPApp.models.Tag;
@@ -30,6 +31,8 @@ public class CardService implements ICardService {
     private IGroupRepository groupRepository;
     @Autowired
     private ITagRepository tagRepository;
+    @Autowired
+    private ITagService tagService;
 
     @Override
     public List<Card> findAllCards(){
@@ -100,29 +103,8 @@ public class CardService implements ICardService {
         if (!editedCard.getUser().getId().equals(user.getId()) && !user.isAdmin())
             throw new BackendException("Nie masz uprawnień do edycji tej fiszki");
 
-        var editedCardGroupIds = editedCard.groups.stream().map(Group::getId).toList();
-
-        // Grupy, z których trzeba usunąć fiszkę
-        List<Long> idDiff = new ArrayList<> (editedCardGroupIds);
-        idDiff.removeAll(request.groupIds);
-
-        if (!idDiff.isEmpty()){
-            var groups = groupRepository.findByIdIn(idDiff);
-            for (Group group: groups) {
-                group.cards.remove(editedCard);
-            }
-        }
-
-        // Grupy, do których trzeba dodać fiszkę
-        idDiff = request.groupIds;
-        idDiff.removeAll(editedCardGroupIds);
-
-        if (!idDiff.isEmpty()){
-            var groups = groupRepository.findByIdIn(idDiff);
-            for (Group group: groups) {
-                group.cards.add(editedCard);
-            }
-        }
+        updateGroups(editedCard, request.groupIds);
+        updateTags(editedCard, request.tags);
 
         editedCard.setQuestion(request.question);
         editedCard.setAnswer(request.answer);
@@ -137,7 +119,7 @@ public class CardService implements ICardService {
         }
     }
 
-    private Card createCard(NewCardRequest request, User user) throws BackendException {
+    private Card createCard(NewCardRequest request, User user) throws BackendException, BackendSqlException {
         if (request.question == null)
             throw new BackendException("Nie podano pytania");
 
@@ -147,8 +129,8 @@ public class CardService implements ICardService {
         List<Tag> tags = new ArrayList<>();
         List<Group> groups = new ArrayList<>();
 
-        if (request.tagIds != null && !request.tagIds.isEmpty())
-            tags = tagRepository.findByIdIn(request.tagIds);
+        if (request.tags != null && !request.tags.isEmpty())
+            tags = tagService.findOrCreateTag(request.tags);
 
         if (request.groupIds != null && !request.groupIds.isEmpty())
             groups = groupRepository.findByIdIn(request.groupIds);
@@ -163,6 +145,63 @@ public class CardService implements ICardService {
                 group.cards.add(card);
             }
         }
+        if (!tags.isEmpty()){
+            for (Tag tag: tags) {
+                tag.cards.add(card);
+            }
+        }
         return card;
+    }
+
+    private void updateGroups(Card card, List<Long> groupIds) {
+        var cardGroupIds = card.groups.stream().map(Group::getId).collect(Collectors.toList());
+
+        // Grupy, z których trzeba usunąć fiszkę
+        List<Long> groupIdDiff = new ArrayList<> (cardGroupIds);
+        groupIdDiff.removeAll(groupIds);
+
+        if (!groupIdDiff.isEmpty()){
+            var groups = groupRepository.findByIdIn(groupIdDiff);
+            for (Group group: groups) {
+                group.cards.remove(card);
+            }
+        }
+
+        // Grupy, do których trzeba dodać fiszkę
+        groupIdDiff = groupIds;
+        groupIdDiff.removeAll(cardGroupIds);
+
+        if (!groupIdDiff.isEmpty()){
+            var groups = groupRepository.findByIdIn(groupIdDiff);
+            for (Group group: groups) {
+                group.cards.add(card);
+            }
+        }
+    }
+
+    private void updateTags(Card card, List<String> tagNames) throws BackendException, BackendSqlException {
+        var editedCardTagNames = card.tags.stream().map(Tag::getName).collect(Collectors.toList());
+
+        // Tagi, z których trzeba usunąć fiszkę
+        List<String> tagNameDiff = new ArrayList<> (editedCardTagNames);
+        tagNameDiff.removeAll(tagNames);
+
+        if (!tagNameDiff.isEmpty()){
+            var tags = tagRepository.findByNameIn(tagNameDiff);
+            for (Tag tag: tags) {
+                tag.cards.remove(card);
+            }
+        }
+
+        // Tagi, do których trzeba dodać fiszkę
+        tagNameDiff = tagNames;
+        tagNameDiff.removeAll(editedCardTagNames);
+
+        if (!tagNameDiff.isEmpty()){
+            var tags = tagService.findOrCreateTag(tagNameDiff);
+            for (Tag tag: tags) {
+                tag.cards.add(card);
+            }
+        }
     }
 }

@@ -88,7 +88,7 @@ public class CardServiceTests {
         var user = addUser();
         var tag = addTag();
 
-        var request = new NewCardRequest(question, "b", false, "c", null, List.of(tag.getId()));
+        var request = new NewCardRequest(question, "b", false, "c", null, List.of(tag.getName()));
 
         Card created = null;
         try {

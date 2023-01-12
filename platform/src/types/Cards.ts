@@ -4,7 +4,7 @@ export type NewCard = {
     source : string
     isPublic : boolean
     groupIds : number[]
-    tagIds : number[]
+    tags : string[]
 }
 
 export type EditCard = NewCard & {
@@ -13,7 +13,6 @@ export type EditCard = NewCard & {
 
 export type CardResponse = EditCard & {
     username : string
-    tags : string[]
     groups : string[]
 }
 
