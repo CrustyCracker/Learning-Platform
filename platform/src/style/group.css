@@ -91,10 +91,11 @@
 }
 .pzsp2-group-buttons-cont{
     width: 80% !important;
+    margin-bottom: 8vh;
 }
 
 .pzsp2-group-buttons-row{
-    margin-top: 5%;
+    margin-top: 1%;
 }
 
 .pzsp2-group-buttons-col{
