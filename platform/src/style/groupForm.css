@@ -7,6 +7,7 @@
 .pzsp2-groupform-cont {
     width: 100%;
     margin-top: 8vh;
+    margin-bottom: 8vh;
 }
 
 .pzsp2-groupform-row {
@@ -65,4 +66,8 @@
     width: 30px;
     height: 24px;
 
+}
+
+.pzsp2-groupform-table {
+    font-size: calc(5px + 2vmin);
 }

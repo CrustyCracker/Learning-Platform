@@ -7,7 +7,6 @@ import '../style/cardForm.css';
 import {GroupResponse} from "../types/Groups";
 import {Link} from "react-router-dom";
 import {SecurityHelper} from "../helpers/SecurityHelper";
-import {BackButton} from "./BackButton";
 import {RenderGroupNames} from "./RenderGroupNames";
 
 interface CardFormProps {
@@ -232,6 +231,5 @@ export function CardForm(props: CardFormProps) {
                     </div>
                 </div>}
             </form>
-            <BackButton/>
         </div>)
 }

@@ -55,6 +55,7 @@
 }
 .pzsp2-cardform-groups{
     font-weight: 400;
+    cursor: pointer;
 }
 .pzsp2-cardform-dropdown-item {
     cursor: pointer;

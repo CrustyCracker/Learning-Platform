@@ -8,7 +8,6 @@ import '../style/group.css';
 import {isPublicToString} from "../helpers/NameHelpers";
 import {SecurityHelper} from "../helpers/SecurityHelper";
 import {GetListItemColor} from "../helpers/StyleHelpers";
-import {BackButton} from "./BackButton";
 
 interface GroupProps {
     onSuccess: (response: GroupResponse) => void,
@@ -69,13 +68,6 @@ export function Group(props: GroupProps) {
     }
 
     return (<>
-        <link
-            //pzsp2 -> zrobić ładny import bootstrapa
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-            crossOrigin="anonymous"
-        />
         <div className="container-fluid pzsp2-group-info-cont">
             <div className="row align-items-center">
                 <div className="col-lg-6 col-md-12 col-sm-12" >
@@ -162,7 +154,6 @@ export function Group(props: GroupProps) {
                     </div>
                 </div>
             </>}
-            <BackButton/>
         </div>
     </>)
 }

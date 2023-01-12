@@ -54,9 +54,9 @@ export function NewGroupForm(props: NewGroupFormProps) {
         }
     }
 
-    return (
-        <div className="row">
-            <div className="col-lg-3 col-md-6 col-lg-3 p-3">
+    return <div className="container pzsp2-groupform-cont">
+        <div className="row justify-content-center">
+            <div className="col-lg-4 col-md-6 col-sm-8 p-3">
                 <div className="card text-black bg-light pzsp2-groupform-card">
                     <label className="pzsp2-groupform-name">
                         <small> Nazwa </small>
@@ -103,17 +103,16 @@ export function NewGroupForm(props: NewGroupFormProps) {
                     </form>
                 </div>
             </div>
-
-            <div className="col-lg-3 col-md-6 col-lg-9 p-3">
-                <table className={"table table-hover table-light"}>
+            <div className="col-lg-8 col-md-12 col-sm-12 p-3">
+                <table className="table table-hover table-light pzsp2-groupform-table">
                     <thead>
                         <tr>
                             <th className="pzsp2-cardlist-table-tag">Fiszka</th>
                             <th className="pzsp2-cardlist-table-que">Pytanie</th>
                             <th className="pzsp2-cardlist-table-grp">Grupy</th>
                             <th className="pzsp2-cardlist-table-tag">Tagi</th>
-                            <th className="pzsp2-cardlist-table-vis hide-on-small">Widoczność</th>
-                            <th className="pzsp2-cardlist-table-vis hide-on-small">Właściciel</th>
+                            <th className="pzsp2-cardlist-table-vis hide-on-large">Widoczność</th>
+                            <th className="pzsp2-cardlist-table-vis hide-on-medium">Właściciel</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -131,13 +130,13 @@ export function NewGroupForm(props: NewGroupFormProps) {
                                 <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
                                 <td className="pzsp2-cardlist-td-wrap">{card.groups}</td>
                                 <td className="pzsp2-cardlist-td-wrap">{card.tags}</td>
-                                <td className="hide-on-small">{isPublicToString(card.isPublic)}</td>
-                                <td className="hide-on-small">{card.username}</td>
+                                <td className="hide-on-large">{isPublicToString(card.isPublic)}</td>
+                                <td className="hide-on-medium">{card.username}</td>
                             </tr>
                         })}
                     </tbody>
-                </table >
+                </table>
             </div>
         </div>
-    )
+    </div>
 }

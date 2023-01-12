@@ -6,7 +6,6 @@ import {useNavigate, useParams} from "react-router-dom";
 import '../style/card.css';
 import {isPublicToString} from "../helpers/NameHelpers";
 import {SecurityHelper} from "../helpers/SecurityHelper";
-import {BackButton} from "./BackButton";
 
 interface CardProps {
     onSuccess: (response: CardResponse) => void,
@@ -122,6 +121,5 @@ export function Card(props: CardProps) {
                 {card.groups && <h3> Grupy: {card.groups.join(', ')} </h3>}
             </div>
         </div>
-        <BackButton/>
     </div>
 }
