@@ -7,7 +7,6 @@ import { SecurityHelper } from "../helpers/SecurityHelper";
 import { CardResponse } from "../types/Cards";
 import { isPublicToString } from "../helpers/NameHelpers";
 import {GetListItemColor} from "../helpers/StyleHelpers";
-import {BackButton} from "./BackButton";
 
 interface EditGroupFormProps {
     onSuccess: (response: GroupResponse) => void
@@ -64,88 +63,89 @@ export function EditGroupForm(props: EditGroupFormProps) {
         }
     }
 
-    return (<div className="row">
-        <div className="col-lg-3 col-md-6 col-lg-3 p-3">
-            <div className="card text-black bg-light pzsp2-groupform-card">
-                <label className="pzsp2-groupform-name">
-                    <small> Nazwa </small>
-                    <input className="form-control" type="text" name="name" value={group.name} maxLength={100}
-                        onChange={(e) => {
-                            setGroup({ ...group, name: e.target.value })
-                        }} />
-                </label>
-                <label className="pzsp2-groupform-desc">
-                    <small> Opis </small>
-                    <textarea className="form-control" id="description" name="description" value={group.description}
-                        maxLength={1000} spellCheck="false" required onChange={(e) => {
-                            setGroup({ ...group, description: e.target.value })
-                        }}>
-                    </textarea>
-                </label>
-                <label className="pzsp2-groupform-diff">
-                    <small> Trudność </small>
-                    <select className="form-select form-select-sm pzsp2-groupform-select" id="difficulty" name="difficulty"
-                        value={group.difficulty} onChange={(e) =>
-                            setGroup({ ...group, difficulty: Number(e.target.value) })}>
-                        {options.map((o) => (
-                            <option key={o.value} value={o.value}>{o.label}</option>))}
-                    </select>
-                </label>
-                <div className="form-check pzsp2-groupform-visibility">
-                    <input className="form-check-input pzsp2-pubcheck-input" type="checkbox" name="isPublic" checked={group.isPublic}
-                        id="isPublic" onChange={(e) => {
-                            if (e.target.value) {
-                                setGroup({ ...group, isPublic: e.target.checked })
-                                if (e.target.checked) { setGroup({ ...group, isPublic: e.target.checked, cardIds: group.cardIds.filter((id) => currCards.some(card => card.id === id && card.isPublic)) }) }
-                            }
-                        }} />
-                    <label className="form-check-label" htmlFor="isPublic" >
-                        Publiczna
+    return <div className="container">
+        <div className="row justify-content-center">
+            <div className="col-lg-4 col-md-6 col-sm-8 p-3">
+                <div className="card text-black bg-light pzsp2-groupform-card">
+                    <label className="pzsp2-groupform-name">
+                        <small> Nazwa </small>
+                        <input className="form-control" type="text" name="name" value={group.name} maxLength={100}
+                            onChange={(e) => {
+                                setGroup({ ...group, name: e.target.value })
+                            }} />
                     </label>
-                </div>
-                {(SecurityHelper.amIAdmin() || group.username === SecurityHelper.getContext()?.username) && <form>
-                    <div className="pzsp2-groupform-submit">
-                        <button type="submit" onClick={handleSubmit} className="btn btn-outline-success">
-                            Edytuj grupę
-                        </button>
+                    <label className="pzsp2-groupform-desc">
+                        <small> Opis </small>
+                        <textarea className="form-control" id="description" name="description" value={group.description}
+                            maxLength={1000} spellCheck="false" required onChange={(e) => {
+                                setGroup({ ...group, description: e.target.value })
+                            }}>
+                        </textarea>
+                    </label>
+                    <label className="pzsp2-groupform-diff">
+                        <small> Trudność </small>
+                        <select className="form-select form-select-sm pzsp2-groupform-select" id="difficulty" name="difficulty"
+                            value={group.difficulty} onChange={(e) =>
+                                setGroup({ ...group, difficulty: Number(e.target.value) })}>
+                            {options.map((o) => (
+                                <option key={o.value} value={o.value}>{o.label}</option>))}
+                        </select>
+                    </label>
+                    <div className="form-check pzsp2-groupform-visibility">
+                        <input className="form-check-input pzsp2-pubcheck-input" type="checkbox" name="isPublic" checked={group.isPublic}
+                            id="isPublic" onChange={(e) => {
+                                if (e.target.value) {
+                                    setGroup({ ...group, isPublic: e.target.checked })
+                                    if (e.target.checked) { setGroup({ ...group, isPublic: e.target.checked, cardIds: group.cardIds.filter((id) => currCards.some(card => card.id === id && card.isPublic)) }) }
+                                }
+                            }} />
+                        <label className="form-check-label" htmlFor="isPublic" >
+                            Publiczna
+                        </label>
                     </div>
-                </form>}
+                    {(SecurityHelper.amIAdmin() || group.username === SecurityHelper.getContext()?.username) && <form>
+                        <div className="pzsp2-groupform-submit">
+                            <button type="submit" onClick={handleSubmit} className="btn btn-outline-success">
+                                Edytuj grupę
+                            </button>
+                        </div>
+                    </form>}
+                </div>
             </div>
-            <BackButton/>
-        </div>
-        <div className="col-lg-3 col-md-6 col-lg-9 p-3">
-            <table className={"table table-hover table-light"}>
-                <thead>
-                    <tr>
-                        <th className="pzsp2-cardlist-table-tag">Fiszka</th>
-                        <th className="pzsp2-cardlist-table-que">Pytanie</th>
-                        <th className="pzsp2-cardlist-table-grp">Grupy</th>
-                        <th className="pzsp2-cardlist-table-tag">Tagi</th>
-                        <th className="pzsp2-cardlist-table-vis hide-on-small">Widoczność</th>
-                        <th className="pzsp2-cardlist-table-vis hide-on-small">Właściciel</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {currCards && currCards.map(card => {
-                        const checked = group?.cardIds.some((id) => id === card.id) ?? false;
-
-                        return (!group.isPublic || card.isPublic) && < tr key={card.id}
-                                  className={GetListItemColor(card.isPublic, checked)}>
-                            <td className="pzsp2-cardlist-td-wrap">
-                                <input className="pzsp2-groupform-checkbox" type="checkbox" value={card.id}
-                                       id={card.id.toString()} onChange={handleCheckboxChange}
-                                       checked={checked}
-                                />
-                            </td>
-                            <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
-                            <td className="pzsp2-cardlist-td-wrap">{card.groupNames}</td>
-                            <td className="pzsp2-cardlist-td-wrap">{card.tagNames}</td>
-                            <td className="hide-on-small">{isPublicToString(card.isPublic)}</td>
-                            <td className="hide-on-small">{card.username}</td>
+            <div className="col-lg-8 col-md-12 col-sm-12 p-3">
+                <table className="table table-hover table-light pzsp2-groupform-table">
+                    <thead>
+                        <tr>
+                            <th className="pzsp2-cardlist-table-tag">Fiszka</th>
+                            <th className="pzsp2-cardlist-table-que">Pytanie</th>
+                            <th className="pzsp2-cardlist-table-grp">Grupy</th>
+                            <th className="pzsp2-cardlist-table-tag">Tagi</th>
+                            <th className="pzsp2-cardlist-table-vis hide-on-large">Widoczność</th>
+                            <th className="pzsp2-cardlist-table-vis hide-on-medium">Właściciel</th>
                         </tr>
-                    })}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {currCards && currCards.map(card => {
+                            const checked = group?.cardIds.some((id) => id === card.id) ?? false;
+
+                            return (!group.isPublic || card.isPublic) && < tr key={card.id}
+                                      className={GetListItemColor(card.isPublic, checked)}>
+                                <td className="pzsp2-cardlist-td-wrap">
+                                    <input className="pzsp2-groupform-checkbox" type="checkbox" value={card.id}
+                                           id={card.id.toString()} onChange={handleCheckboxChange}
+                                           checked={checked}
+                                    />
+                                </td>
+                                <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
+                                <td className="pzsp2-cardlist-td-wrap">{card.groups}</td>
+                                <td className="pzsp2-cardlist-td-wrap">{card.tags}</td>
+                                <td className="hide-on-large">{isPublicToString(card.isPublic)}</td>
+                                <td className="hide-on-medium">{card.username}</td>
+                            </tr>
+                        })}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>)
+    </div>
 }

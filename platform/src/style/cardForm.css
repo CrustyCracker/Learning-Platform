@@ -42,3 +42,21 @@
 .pzsp2-cardform-edit-button{
     justify-content: center;
 }
+
+.pzsp2-cardform-group-dropdown{
+    text-align: start;
+    margin-bottom: 2%;
+    animation: fadeIn;
+    animation-duration: 1s;
+}
+
+.pzsp2-cardform-groups-header{
+    font-weight: 600;
+}
+.pzsp2-cardform-groups{
+    font-weight: 400;
+    cursor: pointer;
+}
+.pzsp2-cardform-dropdown-item {
+    cursor: pointer;
+}

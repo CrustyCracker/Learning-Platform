@@ -7,6 +7,6 @@ export function BackButton() {
             e.preventDefault();
             navigate(-1)}
         }>
-        <button className="btn btn-danger">&laquo; Powrót</button>
+        <button className="btn btn-outline-secondary pzsp2-backbutton">&laquo; Powrót</button>
     </form>
 }

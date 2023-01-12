@@ -52,3 +52,10 @@ li > .pzsp2-navbar-link {
 .pzsp2-navbar-link-main:focus{
     font-weight: bold;
 }
+
+.pzsp2-backbutton{
+    position: fixed !important;
+    top: 8%;
+    left: 1%;
+    z-index: 1;
+}

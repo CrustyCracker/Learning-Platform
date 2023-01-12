@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static mhmd.pzsp.PZSPApp.security.SecurityHelper.getCurrentUser;
 
@@ -99,11 +100,37 @@ public class CardService implements ICardService {
         if (!editedCard.getUser().getId().equals(user.getId()) && !user.isAdmin())
             throw new BackendException("Nie masz uprawnień do edycji tej fiszki");
 
-        var card = createCard(request, user);
-        card.setId(editedCard.getId());
+        var editedCardGroupIds = editedCard.groups.stream().map(Group::getId).toList();
+
+        // Grupy, z których trzeba usunąć fiszkę
+        List<Long> idDiff = new ArrayList<> (editedCardGroupIds);
+        idDiff.removeAll(request.groupIds);
+
+        if (!idDiff.isEmpty()){
+            var groups = groupRepository.findByIdIn(idDiff);
+            for (Group group: groups) {
+                group.cards.remove(editedCard);
+            }
+        }
+
+        // Grupy, do których trzeba dodać fiszkę
+        idDiff = request.groupIds;
+        idDiff.removeAll(editedCardGroupIds);
+
+        if (!idDiff.isEmpty()){
+            var groups = groupRepository.findByIdIn(idDiff);
+            for (Group group: groups) {
+                group.cards.add(editedCard);
+            }
+        }
+
+        editedCard.setQuestion(request.question);
+        editedCard.setAnswer(request.answer);
+        editedCard.setSource(request.source);
+        editedCard.setIsPublic(request.isPublic);
 
         try {
-            return cardRepository.save(card);
+            return cardRepository.save(editedCard);
         }
         catch (Exception e) {
             throw new BackendSqlException("Błąd podczas zapisywania fiszki");
@@ -130,7 +157,12 @@ public class CardService implements ICardService {
             if (group.isPublic() && !request.isPublic)
                 throw new BackendException(String.format("Próba dodania prywatnej fiszki do niepublicznej grupy %s", group.getName()));
         }
-
-        return new Card(request, user, groups, tags);
+        var card = new Card(request, user, groups, tags);
+        if (!groups.isEmpty()){
+            for (Group group: groups) {
+                group.cards.add(card);
+            }
+        }
+        return card;
     }
 }
