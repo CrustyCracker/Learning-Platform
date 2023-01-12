@@ -47,10 +47,9 @@ export function EditGroupForm(props: EditGroupFormProps) {
             }
             else if (res.res) {
                 props.onSuccess(res.res)
+                navigate('/groups/' + group.id)
             }
-            navigate('/groups/' + group.id)
         });
-
     }
 
     const handleCheckboxChange = (e: any) => {

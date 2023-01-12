@@ -40,8 +40,8 @@ export function NewGroupForm(props: NewGroupFormProps) {
             }
             else if (res.res) {
                 props.onSuccess(res.res)
+                navigate(-1)
             }
-            navigate(-1)
         });
     }
     const handleCheckboxChange = (e: any) => {

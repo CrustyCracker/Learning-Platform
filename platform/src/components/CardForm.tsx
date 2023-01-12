@@ -93,8 +93,8 @@ export function CardForm(props: CardFormProps) {
             }
             else if (res.res){
                 props.onSuccess(res.res)
+                navigate('/')
             }
-            navigate('/')
         });
     }
 
@@ -125,8 +125,8 @@ export function CardForm(props: CardFormProps) {
             }
             else if (res.res){
                 props.onSuccess(res.res)
+                navigate('/cards/'+ card.id)
             }
-            navigate('/cards/'+ card.id)
         });
     }
 
