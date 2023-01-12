@@ -21,6 +21,8 @@ public class GroupResponse {
 
     public List<Long> cardIds;
 
+    public GroupResponse() { }
+
     @JsonIgnore
     public GroupResponse(Group group){
         id = group.getId();
