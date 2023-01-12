@@ -1,5 +1,5 @@
 import {Navigate, Outlet} from 'react-router-dom'
-import {SecurityHelper} from "../helpers/SecurityHelper";
+import {SecurityHelper} from "./SecurityHelper";
 import React from "react";
 
 export const RequireLogin = () => {

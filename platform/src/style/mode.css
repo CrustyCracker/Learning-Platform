@@ -1,0 +1,44 @@
+.pzsp2-next-button {
+    float: right;
+}
+
+.pzsp2-prev-button {
+    float: left;
+}
+
+.pzsp2-loop-button {
+    float: right;
+}
+
+.pzsp2-browse-buttons{
+    animation: fadeIn;
+    animation-duration: 1500ms;
+    min-width: 260px;
+    width: 20%;
+}
+
+.pzsp2-browse-count{
+}
+
+.pzsp2-browse-cont{
+    justify-content: center;
+    display: flex;
+}
+
+.pzsp2-item-button {
+    margin: 3%;
+}
+
+.top-question {
+    margin-bottom: 2%;
+}
+
+.test-mode-color {
+    color: darkslategray;
+}
+
+.pzsp2-next-testing{
+    text-align: center;
+    animation: fadeIn;
+    animation-duration: 1500ms;
+}
