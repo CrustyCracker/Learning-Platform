@@ -88,4 +88,25 @@ public class AccountControllerTest {
         RegisterResponse registerResponse = objectMapper.readValue(response, new TypeReference<>() {});
         assertThat(registerResponse.message).isEqualTo("Utworzono konto");
     }
+
+    @Test
+    public void testRegisterFail() throws Exception {
+        RegisterRequest registerRequest = new RegisterRequest(
+                "testowyusername",
+                "testowehasło",
+                "testowehasło",
+                "test@pzsp2.mhmd"
+        );
+        when(accountService.register(any())).thenReturn(false);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post("/account/register")
+                .content(objectMapper.writeValueAsString(registerRequest))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8");
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        String response = result.getResponse().getContentAsString();
+        RegisterResponse registerResponse = objectMapper.readValue(response, new TypeReference<>() {});
+        assertThat(registerResponse.message).isEqualTo("Nieudana rejestracja");
+    }
 }
