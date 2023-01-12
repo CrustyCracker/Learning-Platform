@@ -20,6 +20,7 @@ import EditGroupPage from "./EditGroupPage";
 import PubCardsPage from "./PubCardsPage"
 import PubGroupsPage from "./PubGroupsPage"
 import ModePage from "./ModePage";
+import SummaryPage from "./SummaryPage";
 
 export default function App() {
     const [, setError] = useState("");
@@ -54,6 +55,7 @@ export default function App() {
                         <Route path="/login" element={<LoginPage/>} />
                         <Route path="/register" element={<RegisterPage />} />
                         <Route path="/mode" element={<ModePage/>} />
+                        <Route path="/summary" element={<SummaryPage/>} />
                     </Routes>
                 </BrowserRouter>
             </header>
