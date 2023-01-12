@@ -1,6 +1,7 @@
 package mhmd.pzsp.PZSPApp.interfaces;
 
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
+import mhmd.pzsp.PZSPApp.exceptions.BackendSqlException;
 import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.User;
 import mhmd.pzsp.PZSPApp.models.api.requests.EditCardRequest;
@@ -17,11 +18,11 @@ public interface ICardService {
 
     Card findCardById(Long cardId) throws BackendException;
 
-    Card create(NewCardRequest request, User user) throws BackendException;
+    Card create(NewCardRequest request, User user) throws BackendException, BackendSqlException;
 
     List<Card> findCardsByGroupsId(Long groupId);
 
     boolean delete(Long cardId) throws BackendException;
 
-    Card edit(EditCardRequest request, User user) throws BackendException;
+    Card edit(EditCardRequest request, User user) throws BackendException, BackendSqlException;
 }

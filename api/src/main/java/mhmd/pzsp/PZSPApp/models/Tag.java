@@ -1,6 +1,8 @@
 package mhmd.pzsp.PZSPApp.models;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,6 +35,13 @@ public class Tag {
         this.colour = colour;
         this.cards = cards;
         this.user = user;
+    }
+
+    public Tag(String name, User user) {
+        this.name = name;
+        this.colour = "000000";    //pzsp2 - hardcode na czarny
+        this.user = user;
+        this.cards = new ArrayList<>();
     }
 
     public Tag() {

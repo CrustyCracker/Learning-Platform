@@ -3,8 +3,8 @@ export type NewCard = {
     answer : string
     source : string
     isPublic : boolean
-    groupsIds : number[]
-    tagIds : number[]
+    groupIds : number[]
+    tags : string[]
 }
 
 export type EditCard = NewCard & {
@@ -13,8 +13,7 @@ export type EditCard = NewCard & {
 
 export type CardResponse = EditCard & {
     username : string
-    tagNames : string[]
-    groupNames : string[]
+    groups : string[]
 }
 
 export type DeleteCard = {

@@ -3,12 +3,13 @@ import '../style/App.css';
 import '../style/groupList.css';
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
 import {GroupList} from "../components/GroupList";
-import Layout from "../components/Layout/Layout";
+import Layout from "../components/layout/Layout";
 import {SecurityHelper} from "../helpers/SecurityHelper";
 import {Navigate} from "react-router-dom";
 import {Helmet} from "react-helmet";
 import {GroupResponse} from "../types/Groups";
 import {Requests} from "../requests/Requests";
+import {BackButton} from "../components/BackButton";
 
 export default function MyGroupsPage() {
     const [error, setError] = useState("");
@@ -34,6 +35,7 @@ export default function MyGroupsPage() {
             <title>Inżynierka w tydzień ∙ Publiczne grupy</title>
         </Helmet>
         <Layout>
+            <BackButton/>
             <div className="App container-fluid pzsp2-mygroups-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
                 <h1 className="pzsp2-grouplist-title">Publiczne grupy</h1>
