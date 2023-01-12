@@ -5,6 +5,18 @@
     margin-right: auto;
 }
 
+.pzsp2-cardlist-item-public {
+    color: darkblue;
+}
+
+.pzsp2-cardlist-item-private {
+    color: darkred;
+}
+
+.pzsp2-active {
+    filter: brightness(1.1);
+}
+
 .pzsp2-cardlist-title{
     margin-top: 8vh;
     animation: fadeIn;
@@ -89,7 +101,6 @@
     --rti-tag-remove: #e53e3e;
     --rti-bg: #fff;
     --rti-tag: #ccd5ae;
-
 }
 
 .container-fluid .rti--tag button {

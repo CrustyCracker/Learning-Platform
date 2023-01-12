@@ -16,5 +16,5 @@ public interface ITagRepository extends JpaRepository<Tag, Long> {
 
     Optional<Tag> findById(Long id);
 
-    List<Tag> findByIdIn(Collection<Long> ids);
+    List<Tag> findByNameIn(Collection<String> names);
 }

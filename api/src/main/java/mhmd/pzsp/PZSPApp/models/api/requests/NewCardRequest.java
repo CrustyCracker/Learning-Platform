@@ -18,14 +18,14 @@ public class NewCardRequest {
 
     public List<Long> groupIds;
 
-    public List<Long> tagIds;
+    public List<String> tags;
 
-    public NewCardRequest(String question, String answer, boolean isPublic, String source, List<Long> groupIds, List<Long> tagIds) {
+    public NewCardRequest(String question, String answer, boolean isPublic, String source, List<Long> groupIds, List<String> tags) {
         this.question = question;
         this.answer = answer;
         this.isPublic = isPublic;
         this.source = source;
         this.groupIds = groupIds;
-        this.tagIds = tagIds;
+        this.tags = tags;
     }
 }

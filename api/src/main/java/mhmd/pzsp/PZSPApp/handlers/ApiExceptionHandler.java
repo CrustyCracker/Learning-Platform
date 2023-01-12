@@ -1,6 +1,7 @@
 package mhmd.pzsp.PZSPApp.handlers;
 
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
+import mhmd.pzsp.PZSPApp.exceptions.BackendSqlException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -15,8 +16,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BackendException.class)
     protected ResponseEntity<Object> handleBackendException(BackendException ex) {
         var error = "Błąd logiki aplikacji. Wyjątek: " + ex.getClass().getName();
-        var status = HttpStatus.I_AM_A_TEAPOT;
-        //pzsp2 to ostatecznie nie jest dobre rozwiązanie, trzeba więcej errorów i zależnie od nich kod odpowiedzi
+        var status = HttpStatus.BAD_REQUEST;
+        return new ResponseEntity<>( new ApiError(status, error, ex), status);
+    }
+
+    @ExceptionHandler(BackendSqlException.class)
+    protected ResponseEntity<Object> handleBackendException(BackendSqlException ex) {
+        var error = "Błąd logiki bazy danych. Wyjątek: " + ex.getClass().getName();
+        var status = HttpStatus.CONFLICT;
         return new ResponseEntity<>( new ApiError(status, error, ex), status);
     }
 }

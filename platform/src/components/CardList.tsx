@@ -4,6 +4,7 @@ import { TagsInput } from "react-tag-input-component";
 import '../style/cardList.css';
 import {Link} from "react-router-dom";
 import { isPublicToString } from "../helpers/NameHelpers";
+import {GetListItemColor} from "../helpers/StyleHelpers";
 
 interface CardListProps {
     cards: CardResponse[],
@@ -14,19 +15,20 @@ interface CardListProps {
 
 export function CardList(props: CardListProps) {
     const [currCards, setCurrCards] = useState<CardResponse[]>([]);
-    const [tags, ] = useState<string[]>([]);
+    const [searchPhrases, ] = useState<string[]>([]);
 
     useEffect(() => {
         setCurrCards(props.cards)
     }, [props])
 
-    const filterByTags = (tags: string[]) => {
-        if(tags.length) {
+    const filterByTagsAndGroup = (searchPhrases: string[]) => {
+        if(searchPhrases.length) {
             let newCards:CardResponse[] = [];
 
             currCards.forEach((card) => {
-                tags.forEach((tag) => {
-                    if(card.tagNames.some(x => x.toLowerCase() === tag.toLowerCase())){
+                searchPhrases.forEach((searchPhrase) => {
+                    if(card.tags.some(x => x.toLowerCase() === searchPhrase.toLowerCase())
+                    || card.groups.some(x => x.toLowerCase() === searchPhrase.toLowerCase())){
                         newCards.push(card)
                     }
                 })
@@ -52,13 +54,13 @@ export function CardList(props: CardListProps) {
     return <>
         <div className="pzsp2-cardlist-cont">
         <TagsInput
-            value={tags}
-            onChange={e => filterByTags(e || [])}
+            value={searchPhrases}
+            onChange={e => filterByTagsAndGroup(e || [])}
             name="tagi"
-            placeHolder="Dodaj tag..."
+            placeHolder="Wyszukaj..."
         />
         <p className="pzsp2-cardlist-tagsearch">
-            <em>Wyszukaj po tagu... Kilknij ENTER, aby dodać nowy tag.</em>
+            <em>Wyszukaj po tagu lub nazwie grupy... Kilknij ENTER, aby dodać nową frazę.</em>
         </p>
         </div>
         <div className="pzsp2-cardlist-cont">
@@ -74,7 +76,6 @@ export function CardList(props: CardListProps) {
             </div>
         </div>
 
-        {/*//pzsp2 - dodać paginację*/}
         <table className={"table table-hover table-light pzsp2-cardlist-table"}>
             <thead>
                 <tr>
@@ -88,10 +89,10 @@ export function CardList(props: CardListProps) {
             </thead>
             <tbody>
                 {currCards && currCards.map(card => {
-                    return <tr key={card.id}>
+                    return <tr key={card.id} className={GetListItemColor(card.isPublic, false)}>
                         <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
-                        <td className="pzsp2-cardlist-td-wrap">{card.groupNames}</td>
-                        <td className="pzsp2-cardlist-td-wrap">{card.tagNames}</td>
+                        <td className="pzsp2-cardlist-td-wrap"><small>{card.groups.join(', ')}</small></td>
+                        <td className="pzsp2-cardlist-td-wrap"><small>{card.tags.join(', ')}</small></td>
                         {!props.pub && <td className="hide-on-small">{isPublicToString(card.isPublic)}</td>}
                         {props.pub && <td className="hide-on-small">{card.username}</td>}
                         <td><Link className="pzsp2-link" to={`/cards/${card.id}`}>{">"}</Link></td>

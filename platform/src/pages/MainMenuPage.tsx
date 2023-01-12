@@ -4,7 +4,7 @@ import '../style/card.css';
 import '../style/mainMenu.css';
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
 import {MainMenu} from "../components/MainMenu";
-import Layout from "../components/Layout/Layout";
+import Layout from "../components/layout/Layout";
 import {Navigate} from "react-router-dom";
 import {SecurityHelper} from "../helpers/SecurityHelper";
 import {Helmet} from "react-helmet";

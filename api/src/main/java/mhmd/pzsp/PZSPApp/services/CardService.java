@@ -1,7 +1,9 @@
 package mhmd.pzsp.PZSPApp.services;
 
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
+import mhmd.pzsp.PZSPApp.exceptions.BackendSqlException;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
+import mhmd.pzsp.PZSPApp.interfaces.ITagService;
 import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.Group;
 import mhmd.pzsp.PZSPApp.models.Tag;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static mhmd.pzsp.PZSPApp.security.SecurityHelper.getCurrentUser;
 
@@ -28,6 +31,8 @@ public class CardService implements ICardService {
     private IGroupRepository groupRepository;
     @Autowired
     private ITagRepository tagRepository;
+    @Autowired
+    private ITagService tagService;
 
     @Override
     public List<Card> findAllCards(){
@@ -45,9 +50,14 @@ public class CardService implements ICardService {
     }
 
     @Override
-    public Card create(NewCardRequest request, User user) throws BackendException {
+    public Card create(NewCardRequest request, User user) throws BackendException, BackendSqlException {
         var card = createCard(request, user);
-        return cardRepository.save(card);
+        try {
+            return cardRepository.save(card);
+        }
+        catch (Exception e) {
+            throw new BackendSqlException("Błąd podczas zapisywania fiszki");
+        }
     }
 
     @Override
@@ -84,7 +94,7 @@ public class CardService implements ICardService {
     }
 
     @Override
-    public Card edit(EditCardRequest request, User user) throws BackendException {
+    public Card edit(EditCardRequest request, User user) throws BackendException, BackendSqlException {
         if (request.id == null)
             throw new BackendException("Nie podano id edytowanej fiszki");
 
@@ -93,24 +103,34 @@ public class CardService implements ICardService {
         if (!editedCard.getUser().getId().equals(user.getId()) && !user.isAdmin())
             throw new BackendException("Nie masz uprawnień do edycji tej fiszki");
 
-        var card = createCard(request, user);
-        card.setId(editedCard.getId());
+        updateGroups(editedCard, request.groupIds);
+        updateTags(editedCard, request.tags);
 
-        return cardRepository.save(card);
+        editedCard.setQuestion(request.question);
+        editedCard.setAnswer(request.answer);
+        editedCard.setSource(request.source);
+        editedCard.setIsPublic(request.isPublic);
+
+        try {
+            return cardRepository.save(editedCard);
+        }
+        catch (Exception e) {
+            throw new BackendSqlException("Błąd podczas zapisywania fiszki");
+        }
     }
 
-    private Card createCard(NewCardRequest request, User user) throws BackendException {
-        if (request.question == null)
+    private Card createCard(NewCardRequest request, User user) throws BackendException, BackendSqlException {
+        if (request.question == null || request.question.isBlank())
             throw new BackendException("Nie podano pytania");
 
-        if (request.answer == null)
+        if (request.answer == null || request.answer.isBlank())
             throw new BackendException("Nie podano odpowiedzi");
 
         List<Tag> tags = new ArrayList<>();
         List<Group> groups = new ArrayList<>();
 
-        if (request.tagIds != null && !request.tagIds.isEmpty())
-            tags = tagRepository.findByIdIn(request.tagIds);
+        if (request.tags != null && !request.tags.isEmpty())
+            tags = tagService.findOrCreateTag(request.tags);
 
         if (request.groupIds != null && !request.groupIds.isEmpty())
             groups = groupRepository.findByIdIn(request.groupIds);
@@ -119,7 +139,69 @@ public class CardService implements ICardService {
             if (group.isPublic() && !request.isPublic)
                 throw new BackendException(String.format("Próba dodania prywatnej fiszki do niepublicznej grupy %s", group.getName()));
         }
+        var card = new Card(request, user, groups, tags);
+        if (!groups.isEmpty()){
+            for (Group group: groups) {
+                group.cards.add(card);
+            }
+        }
+        if (!tags.isEmpty()){
+            for (Tag tag: tags) {
+                tag.cards.add(card);
+            }
+        }
+        return card;
+    }
 
-        return new Card(request, user, groups, tags);
+    private void updateGroups(Card card, List<Long> groupIds) {
+        var cardGroupIds = card.groups.stream().map(Group::getId).toList();
+
+        // Grupy, z których trzeba usunąć fiszkę
+        List<Long> groupIdDiff = new ArrayList<> (cardGroupIds);
+        groupIdDiff.removeAll(groupIds);
+
+        if (!groupIdDiff.isEmpty()){
+            var groups = groupRepository.findByIdIn(groupIdDiff);
+            for (Group group: groups) {
+                group.cards.remove(card);
+            }
+        }
+
+        // Grupy, do których trzeba dodać fiszkę
+        groupIdDiff = groupIds;
+        groupIdDiff.removeAll(cardGroupIds);
+
+        if (!groupIdDiff.isEmpty()){
+            var groups = groupRepository.findByIdIn(groupIdDiff);
+            for (Group group: groups) {
+                group.cards.add(card);
+            }
+        }
+    }
+
+    private void updateTags(Card card, List<String> tagNames) throws BackendException, BackendSqlException {
+        var editedCardTagNames = card.tags.stream().map(Tag::getName).toList();
+
+        // Tagi, z których trzeba usunąć fiszkę
+        List<String> tagNameDiff = new ArrayList<> (editedCardTagNames);
+        tagNameDiff.removeAll(tagNames);
+
+        if (!tagNameDiff.isEmpty()){
+            var tags = tagRepository.findByNameIn(tagNameDiff);
+            for (Tag tag: tags) {
+                tag.cards.remove(card);
+            }
+        }
+
+        // Tagi, do których trzeba dodać fiszkę
+        tagNameDiff = tagNames;
+        tagNameDiff.removeAll(editedCardTagNames);
+
+        if (!tagNameDiff.isEmpty()){
+            var tags = tagService.findOrCreateTag(tagNameDiff);
+            for (Tag tag: tags) {
+                tag.cards.add(card);
+            }
+        }
     }
 }

@@ -3,12 +3,13 @@ import '../style/App.css';
 import '../style/cardList.css';
 import {ErrorAndInfo} from "../components/ErrorAndInfo";
 import {CardList} from "../components/CardList";
-import Layout from "../components/Layout/Layout";
+import Layout from "../components/layout/Layout";
 import {SecurityHelper} from "../helpers/SecurityHelper";
 import {Navigate} from "react-router-dom";
 import {Helmet} from "react-helmet";
 import {Requests} from "../requests/Requests";
 import {CardResponse} from "../types/Cards";
+import {BackButton} from "../components/BackButton";
 
 export default function MyCardsPage() {
     const [error, setError] = useState("");
@@ -34,6 +35,7 @@ export default function MyCardsPage() {
             <title>Inżynierka w tydzień ∙ Moje fiszki</title>
         </Helmet>
         <Layout>
+            <BackButton/>
             <div className="App container-fluid pzsp2-mycards-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
                 <h1 className="pzsp2-cardlist-title">Moje fiszki</h1>
