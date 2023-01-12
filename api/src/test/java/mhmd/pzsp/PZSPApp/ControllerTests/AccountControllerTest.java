@@ -2,6 +2,7 @@ package mhmd.pzsp.PZSPApp.ControllerTests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import mhmd.pzsp.PZSPApp.controller.AccountController;
 import mhmd.pzsp.PZSPApp.controller.CardController;
 import mhmd.pzsp.PZSPApp.models.User;
 import mhmd.pzsp.PZSPApp.models.api.requests.LoginRequest;
@@ -25,10 +26,11 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(CardController.class)
+@WebMvcTest(AccountController.class)
 @AutoConfigureMockMvc(addFilters = false)
 public class AccountControllerTest {
     @Autowired
@@ -51,7 +53,7 @@ public class AccountControllerTest {
     public void testLogin() throws Exception {
         User user = new User(1, "usertestowy", "hasłotestowe", "emailtestowy", "pepper");
         LoginRequest loginRequest = new LoginRequest("user", "pass");
-        when(accountService.login(loginRequest)).thenReturn(user);
+        when(accountService.login(any())).thenReturn(user);
         when(accountService.generateToken(user)).thenReturn("token");
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .post("/account/login")
