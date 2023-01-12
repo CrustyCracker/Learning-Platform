@@ -35,14 +35,8 @@ import static org.mockito.Mockito.when;
 public class CardControllerTests {
     @Autowired
     private MockMvc mockMvc;
-
-    @MockBean
-    private JwtTokenFilter jwtTokenFilter;
     @MockBean
     private CardService cardService;
-
-    @MockBean
-    private GroupService groupService;
     final ObjectMapper objectMapper = new ObjectMapper();
     @Test
     public void testGetFirst() throws Exception {
@@ -60,23 +54,6 @@ public class CardControllerTests {
         assertThat(cardResponse.answer).isEqualTo(card.getAnswer());
         assertThat(cardResponse.source).isEqualTo(card.getSource());
     }
-
-//    @Test
-//    @WithMockUser(value = "user")
-//    public void testGetAll() throws Exception {
-//        User user = new User(1, "user", "abcd", "email@test.mhmd", "pepper");
-//        List<Card> cards = new ArrayList<>();
-//        for (int i = 1; i <= 5; i++)
-//            cards.add(new Card("pytanietestowe", "odpowiedztestowa", "zrodlotestowe", user, false));
-//        List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
-//        grantedAuthorityList.add(new SimpleGrantedAuthority(Roles.USER.toString()));
-//        when(cardService.findPublicOrUsers(user.getId())).thenReturn(cards);
-//        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/cards/all");
-//        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-//        String response = result.getResponse().getContentAsString();
-//        List<CardResponse> cardResponses = objectMapper.readValue(response, new TypeReference<List<CardResponse>>() {});
-//        Assertions.assertThat(cardResponses.size()).isEqualTo(cards.size()).isEqualTo(5);
-//    }
 
     @Test
     public void testGetCardById() throws Exception {

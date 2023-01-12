@@ -40,15 +40,6 @@ public class AccountControllerTest {
     @MockBean
     private AccountService accountService;
 
-    @MockBean
-    private CardService cardService;
-
-    @MockBean
-    private GroupService groupService;
-
-    @MockBean
-    private JwtTokenFilter jwtTokenFilter;
-
     @Test
     public void testLogin() throws Exception {
         User user = new User(1, "usertestowy", "hasłotestowe", "emailtestowy", "pepper");
