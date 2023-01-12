@@ -88,7 +88,7 @@ public class CardController {
         return groupCards;
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("/delete")
     public boolean delete(@RequestBody IdRequestBase request) throws BackendException {
         return cardService.delete(request.id);
     }

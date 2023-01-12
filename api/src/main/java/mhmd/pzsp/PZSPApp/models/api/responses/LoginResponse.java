@@ -7,6 +7,7 @@ public class LoginResponse {
     public String username;
     public boolean isAdmin;
 
+    public LoginResponse() {};
     public LoginResponse(boolean success, String token, String message, String username, boolean isAdmin){
         this.success = success;
         this.token = token;

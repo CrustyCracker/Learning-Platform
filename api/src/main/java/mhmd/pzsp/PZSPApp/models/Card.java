@@ -3,6 +3,8 @@ package mhmd.pzsp.PZSPApp.models;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewCardRequest;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -52,6 +54,19 @@ public class Card {
         this.source = source;
         this.user = user;
         setIsPublic(isPublic);
+        this.tags = new ArrayList<>();
+        this.groups = new ArrayList<>();
+    }
+
+    public Card(long id, String question, String answer, String source, User user, boolean isPublic){
+        this.id = id;
+        this.question = question;
+        this.answer = answer;
+        this.source = source;
+        this.user = user;
+        setIsPublic(isPublic);
+        this.tags = new ArrayList<>();
+        this.groups = new ArrayList<>();
     }
 
     public Card() {

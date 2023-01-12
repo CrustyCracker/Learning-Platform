@@ -36,6 +36,16 @@ public class Group {
             inverseJoinColumns = @JoinColumn(name = "ID_FISZKI"))
     public List<Card> cards;
 
+    public Group(long id, String name, User user, Integer diff, boolean isPublic, String description, List<Card> card){
+        this.id = id;
+        this.name = name;
+        this.difficulty = diff;
+        this.setIsPublic(isPublic);
+        this.description = description;
+        this.cards = cards;
+        this.user = user;
+    }
+
     public Group(NewGroupRequest request, User user, List<Card> cards){
         this.name = request.name;
         this.difficulty = request.difficulty;
