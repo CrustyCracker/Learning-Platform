@@ -3,6 +3,7 @@ package mhmd.pzsp.PZSPApp.services;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
+import mhmd.pzsp.PZSPApp.exceptions.BackendSqlException;
 import mhmd.pzsp.PZSPApp.interfaces.IAccountService;
 import mhmd.pzsp.PZSPApp.models.User;
 import mhmd.pzsp.PZSPApp.models.api.requests.LoginRequest;
@@ -52,13 +53,13 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public boolean register(RegisterRequest register) throws BackendException {
+    public boolean register(RegisterRequest register) throws BackendException, BackendSqlException {
         if (register.password == null || register.password.isBlank())
             throw new BackendException("Hasło nie jest podane lub jest puste");
         if (register.email == null || register.email.isBlank())
             throw new BackendException("Email nie jest podany lub jest pusty");
         if (register.username == null || register.username.isBlank())
-            throw new BackendException("Login inie jest podany lub jest pusty");
+            throw new BackendException("Login nie jest podany lub jest pusty");
         if (!Objects.equals(register.confirmPassword, register.password))
             throw new BackendException("Hasła się nie zgadzają");
         if (register.username.length() > 30)
@@ -75,7 +76,13 @@ public class AccountService implements IAccountService {
         var hash = hashPassword(register.password, salt);
         var newUser = new User(register.username, hash, register.email, salt);
 
-        userRepository.save(newUser);
+        try {
+            userRepository.save(newUser);
+        }
+        catch (Exception e) {
+            throw new BackendSqlException("Błąd podczas zapisywania użytkownika");
+        }
+
         return true;
     }
 

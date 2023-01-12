@@ -1,6 +1,7 @@
 package mhmd.pzsp.PZSPApp.services;
 
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
+import mhmd.pzsp.PZSPApp.exceptions.BackendSqlException;
 import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
 import mhmd.pzsp.PZSPApp.models.Card;
 import mhmd.pzsp.PZSPApp.models.Group;
@@ -26,9 +27,14 @@ public class GroupService implements IGroupService {
     private ICardRepository cardRepository;
 
     @Override
-    public Group create(NewGroupRequest request, User user) throws BackendException {
+    public Group create(NewGroupRequest request, User user) throws BackendException, BackendSqlException {
         var group = createGroup(request, user);
-        return groupRepository.save(group);
+        try {
+            return groupRepository.save(group);
+        }
+        catch (Exception e) {
+            throw new BackendSqlException("Błąd podczas zapisywania grupy");
+        }
     }
 
     @Override
@@ -55,7 +61,7 @@ public class GroupService implements IGroupService {
     }
 
     @Override
-    public Group edit(EditGroupRequest request, User user) throws BackendException {
+    public Group edit(EditGroupRequest request, User user) throws BackendException, BackendSqlException {
         if (request.id == null)
             throw new BackendException("Nie podano id edytowanej fiszki");
 
@@ -67,7 +73,12 @@ public class GroupService implements IGroupService {
         var group = createGroup(request, user);
         group.setId(editedGroup.getId());
 
-        return groupRepository.save(group);
+        try {
+            return groupRepository.save(group);
+        }
+        catch (Exception e) {
+            throw new BackendSqlException("Błąd podczas zapisywania grupy");
+        }
     }
 
     @Override

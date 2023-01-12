@@ -9,6 +9,7 @@ import { Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { Requests } from "../requests/Requests";
 import { CardResponse } from "../types/Cards";
+import {BackButton} from "../components/BackButton";
 
 export default function MyCardsPage() {
     const [error, setError] = useState("");
@@ -34,6 +35,7 @@ export default function MyCardsPage() {
             <title>Inżynierka w tydzień ∙ Publiczne fiszki</title>
         </Helmet>
         <Layout>
+            <BackButton/>
             <div className="App container-fluid pzsp2-mycards-page-cont">
                 <ErrorAndInfo errorMsg={error} infoMsg={""} />
                 <h1 className="pzsp2-cardlist-title">Publiczne fiszki</h1>

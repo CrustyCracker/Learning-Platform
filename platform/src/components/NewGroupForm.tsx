@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { Requests } from "../requests/Requests";
 import { GroupResponse, NewGroup } from "../types/Groups";
 import { ErrorResponse } from "../types/ErrorResponse";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import '../style/groupForm.css';
 import { CardResponse } from "../types/Cards";
 import { isPublicToString } from "../helpers/NameHelpers";
+import {GetListItemColor} from "../helpers/StyleHelpers";
 
 interface NewGroupFormProps {
     onSuccess: (response: GroupResponse) => void
@@ -40,7 +41,7 @@ export function NewGroupForm(props: NewGroupFormProps) {
             else if (res.res) {
                 props.onSuccess(res.res)
             }
-            navigate('/')
+            navigate(-1)
         });
     }
     const handleCheckboxChange = (e: any) => {
@@ -53,11 +54,9 @@ export function NewGroupForm(props: NewGroupFormProps) {
         }
     }
 
-    // pzsp2 error handling i walidacja
-
-    return (
-        <div className="row">
-            <div className="col-lg-3 col-md-6 col-lg-3 p-3">
+    return <div className="container pzsp2-groupform-cont">
+        <div className="row justify-content-center">
+            <div className="col-lg-4 col-md-6 col-sm-8 p-3">
                 <div className="card text-black bg-light pzsp2-groupform-card">
                     <label className="pzsp2-groupform-name">
                         <small> Nazwa </small>
@@ -104,34 +103,40 @@ export function NewGroupForm(props: NewGroupFormProps) {
                     </form>
                 </div>
             </div>
-
-            <div className="col-lg-3 col-md-6 col-lg-9 p-3">
-                <table className={"table table-hover table-light"}>
+            <div className="col-lg-8 col-md-12 col-sm-12 p-3">
+                <table className="table table-hover table-light pzsp2-groupform-table">
                     <thead>
                         <tr>
                             <th className="pzsp2-cardlist-table-tag">Fiszka</th>
                             <th className="pzsp2-cardlist-table-que">Pytanie</th>
                             <th className="pzsp2-cardlist-table-grp">Grupy</th>
                             <th className="pzsp2-cardlist-table-tag">Tagi</th>
-                            <th className="pzsp2-cardlist-table-vis hide-on-small">Widoczność</th>
-                            <th className="pzsp2-cardlist-table-vis hide-on-small">Właściciel</th>
+                            <th className="pzsp2-cardlist-table-vis hide-on-large">Widoczność</th>
+                            <th className="pzsp2-cardlist-table-vis hide-on-medium">Właściciel</th>
                         </tr>
                     </thead>
                     <tbody>
                         {currCards && currCards.map(card => {
+                            const checked = newGroup?.cardIds.some((id) => id === card.id) ?? false;
 
-                            return (card.isPublic || !card.isPublic && !newGroup.isPublic) && < tr key={card.id} >
-                                < td className="pzsp2-cardlist-td-wrap"> <input className="pzsp2-groupform-checkbox" type="checkbox" value={card.id} id={card.id.toString()} onChange={handleCheckboxChange} checked={newGroup?.cardIds.some((id) => id == card.id) ?? false} /></td>
+                            return (!newGroup.isPublic || card.isPublic) && <tr key={card.id}
+                                    className={GetListItemColor(card.isPublic, checked)}>
+                                <td className="pzsp2-cardlist-td-wrap">
+                                    <input className="pzsp2-groupform-checkbox" type="checkbox" value={card.id}
+                                           id={card.id.toString()} onChange={handleCheckboxChange}
+                                           checked={checked}
+                                    />
+                                </td>
                                 <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
-                                <td className="pzsp2-cardlist-td-wrap">{card.groupNames}</td>
-                                <td className="pzsp2-cardlist-td-wrap">{card.tagNames}</td>
-                                <td className="hide-on-small">{isPublicToString(card.isPublic)}</td>
-                                <td className="hide-on-small">{card.username}</td>
+                                <td className="pzsp2-cardlist-td-wrap">{card.groups}</td>
+                                <td className="pzsp2-cardlist-td-wrap">{card.tags}</td>
+                                <td className="hide-on-large">{isPublicToString(card.isPublic)}</td>
+                                <td className="hide-on-medium">{card.username}</td>
                             </tr>
                         })}
                     </tbody>
-                </table >
+                </table>
             </div>
         </div>
-    )
+    </div>
 }

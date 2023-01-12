@@ -1,6 +1,7 @@
 package mhmd.pzsp.PZSPApp.controller;
 
 import mhmd.pzsp.PZSPApp.exceptions.BackendException;
+import mhmd.pzsp.PZSPApp.exceptions.BackendSqlException;
 import mhmd.pzsp.PZSPApp.interfaces.ICardService;
 import mhmd.pzsp.PZSPApp.interfaces.IGroupService;
 import mhmd.pzsp.PZSPApp.models.api.requests.EditCardRequest;
@@ -63,7 +64,7 @@ public class CardController {
     }
 
     @PostMapping("/create")
-    public CardResponse create(@RequestBody NewCardRequest request) throws BackendException {
+    public CardResponse create(@RequestBody NewCardRequest request) throws BackendException, BackendSqlException {
         var user = getCurrentUser();
         if (user == null)
             throw new BackendException("Brak zalogowanego użytkownika");
@@ -93,7 +94,7 @@ public class CardController {
     }
 
     @PostMapping("/edit")
-    public CardResponse edit(@RequestBody EditCardRequest request) throws BackendException {
+    public CardResponse edit(@RequestBody EditCardRequest request) throws BackendException, BackendSqlException {
         var user = getCurrentUser();
         if (user == null)
             throw new BackendException("Brak zalogowanego użytkownika");

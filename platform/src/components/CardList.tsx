@@ -4,6 +4,7 @@ import { TagsInput } from "react-tag-input-component";
 import '../style/cardList.css';
 import {Link} from "react-router-dom";
 import { isPublicToString } from "../helpers/NameHelpers";
+import {GetListItemColor} from "../helpers/StyleHelpers";
 
 interface CardListProps {
     cards: CardResponse[],
@@ -26,7 +27,7 @@ export function CardList(props: CardListProps) {
 
             currCards.forEach((card) => {
                 tags.forEach((tag) => {
-                    if(card.tagNames.some(x => x.toLowerCase() === tag.toLowerCase())){
+                    if(card.tags.some(x => x.toLowerCase() === tag.toLowerCase())){
                         newCards.push(card)
                     }
                 })
@@ -74,7 +75,6 @@ export function CardList(props: CardListProps) {
             </div>
         </div>
 
-        {/*//pzsp2 - dodać paginację*/}
         <table className={"table table-hover table-light pzsp2-cardlist-table"}>
             <thead>
                 <tr>
@@ -88,10 +88,10 @@ export function CardList(props: CardListProps) {
             </thead>
             <tbody>
                 {currCards && currCards.map(card => {
-                    return <tr key={card.id}>
+                    return <tr key={card.id} className={GetListItemColor(card.isPublic, false)}>
                         <td className="pzsp2-cardlist-td-wrap">{card.question}</td>
-                        <td className="pzsp2-cardlist-td-wrap">{card.groupNames}</td>
-                        <td className="pzsp2-cardlist-td-wrap">{card.tagNames}</td>
+                        <td className="pzsp2-cardlist-td-wrap"><small>{card.groups.join(', ')}</small></td>
+                        <td className="pzsp2-cardlist-td-wrap"><small>{card.tags.join(', ')}</small></td>
                         {!props.pub && <td className="hide-on-small">{isPublicToString(card.isPublic)}</td>}
                         {props.pub && <td className="hide-on-small">{card.username}</td>}
                         <td><Link className="pzsp2-link" to={`/cards/${card.id}`}>{">"}</Link></td>

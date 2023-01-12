@@ -43,8 +43,7 @@ export function Card(props: CardProps) {
             }
             else if (res.res){
                 navigate(-1);
-                // pzsp2 powinno jeszcze wyświetlić komunikat, że usunięto,
-                // ten navigate(-1) to może nie być idealne rozwiązanie
+                // pzsp2 powinno jeszcze wyświetlić komunikat, że usunięto
             }
         })
     }
@@ -100,29 +99,26 @@ export function Card(props: CardProps) {
         </div>
         <div className="row pzsp2-card-row-tag">
             <div className="col-lg-6 col-md-6 col-sm-6 pzsp2-card-tag-text">
-                <h3>
-                Tagi: {card.tagNames}
-                </h3>
+                {card.tags && <h3>Tagi: {card.tags.join(', ')}</h3>}
             </div>
-            {(SecurityHelper.amIAdmin() || card.username === SecurityHelper.getContext()?.username) &&
-                <div className="col-lg-6 col-md-6 col-sm-6 pzsp2-card-buttons">
-                <form  className ="pzsp2-card-delete-button" onSubmit={DeleteCard}>
-                    <button type="submit" className="btn btn-outline-danger">
-                        Usuń
-                    </button>
-                </form>
-                <form className ="pzsp2-card-edit-button" onSubmit={EditCard}>
-                    <button type="submit" className="btn btn-outline-success">
-                        Edytuj
-                    </button>
-                </form>
-            </div>}
+            <div className="col-lg-6 col-md-6 col-sm-6 pzsp2-card-buttons">
+                {(SecurityHelper.amIAdmin() || card.username === SecurityHelper.getContext()?.username) && <>
+                    <form className ="pzsp2-card-delete-button" onSubmit={DeleteCard}>
+                        <button type="submit" className="btn btn-outline-danger">
+                            Usuń
+                        </button>
+                    </form>
+                    <form className ="pzsp2-card-edit-button" onSubmit={EditCard}>
+                        <button type="submit" className="btn btn-outline-success">
+                            Edytuj
+                        </button>
+                    </form>
+                </>}
+            </div>
         </div>
         <div className="row pzsp2-card-row-grp">
             <div className="col-lg-6 col-md-12 col-sm-12 pzsp2-card-grp-text">
-                <h3>
-                    Grupy: {card.groupNames}
-                </h3>
+                {card.groups && <h3> Grupy: {card.groups.join(', ')} </h3>}
             </div>
         </div>
     </div>
