@@ -210,7 +210,7 @@ export function CardForm(props: CardFormProps) {
                         </li>
                     </ul>
                 </div>
-                <div> {/* pzsp2 tutaj prośba o zinlinowanie tego*/}
+                <div>
                     {RenderGroupNames(addedgroups)}
                 </div>
             </div>
