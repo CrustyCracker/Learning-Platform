@@ -7,7 +7,6 @@ import TestingMode from "../components/modes/testing/TestingMode";
 import {Helmet} from "react-helmet";
 import {BackButton} from "../components/BackButton";
 import Layout from "../components/layout/Layout";
-import {ErrorAndInfo} from "../components/ErrorAndInfo";
 
 export type ModePageState = {
     isBrowsing: boolean,
@@ -15,7 +14,6 @@ export type ModePageState = {
 }
 
 export default function ModePage () {
-    const [error, ] = useState("");
     const [state, setState] = useState({} as ModePageState);
     const location = useLocation();
     const navigate = useNavigate();
@@ -36,10 +34,11 @@ export default function ModePage () {
             <title>Inżynierka w tydzień ∙ Tryb {state.isBrowsing ? "Przeglądania" : "Testowy"}</title>
         </Helmet>
         <Layout>
-            <h2>Tryb {state.isBrowsing ? "Przeglądania" : "Testowy"}</h2>
+            <h2 className="pzsp2-cardlist-title">Tryb {state.isBrowsing ? "Przeglądania" : "Testowy"}</h2>
             <div className="App container-fluid pzsp2-mainmenu-page-cont">
-                <ErrorAndInfo errorMsg={error} infoMsg={""} />
-                {state.isBrowsing ? <BrowsingMode cards={state.cards}/> : <TestingMode cards={state.cards}/>}
+                {state.isBrowsing !== undefined && <>
+                    {state.isBrowsing ? <BrowsingMode cards={state.cards}/> : <TestingMode cards={state.cards}/>}
+                </>}
             </div>
             <BackButton/>
         </Layout>

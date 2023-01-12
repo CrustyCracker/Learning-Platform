@@ -5,3 +5,21 @@
 .pzsp2-prev-button {
     margin: 1%;
 }
+
+.pzsp2-item-button {
+    margin: 3%;
+}
+
+.top-question {
+    margin-bottom: 2%;
+}
+
+.test-mode-color {
+    color: darkslategray;
+}
+
+.pzsp2-next-testing{
+    text-align: center;
+    animation: fadeIn;
+    animation-duration: 1500ms;
+}

@@ -1,5 +1,5 @@
 import {CardResponse} from "../../../types/Cards";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import CardInBrowsing from "./CardInBrowsing";
 
 type BrowsingModeProps = {
