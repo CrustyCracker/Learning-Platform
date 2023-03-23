@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.util.AssertionErrors.fail;
 
 @SpringBootTest
-public class AccountServiceTests {
+public class AccountServiceIntegrationTests {
     // testy, które sięgają do DB
     @Autowired
     private IAccountService accountService;

@@ -3,6 +3,8 @@ package mhmd.pzsp.PZSPApp.models;
 import mhmd.pzsp.PZSPApp.models.api.requests.NewGroupRequest;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -44,6 +46,7 @@ public class Group {
         this.description = description;
         this.cards = cards;
         this.user = user;
+        this.cards = new ArrayList<>();
     }
 
     public Group(NewGroupRequest request, User user, List<Card> cards){
